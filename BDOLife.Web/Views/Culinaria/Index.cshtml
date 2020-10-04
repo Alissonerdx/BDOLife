@@ -1,0 +1,231 @@
+﻿@{
+    Layout = "_LayoutTemplate";
+
+    var receitas = ViewBag.ReceitasCulinaria as List<ItemViewModel>;
+}
+
+<div class="card div-custom-color">
+    <div class="card-body">
+        <form class="form" id="consultarForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="receitaSelect" class="texto-custom-color">Receita</label>
+                            <select class="form-control" id="receitaSelect">
+                                <option>Selecione a receita</option>
+                                @if (receitas != null)
+                                {
+                                    foreach (var receita in receitas)
+                                    {
+                                        <option value="@receita.ReferenciaId">
+                                            <span style="color: black;"><img src="@(!string.IsNullOrEmpty(receita.ImagemUrl) ? $"Content/Image?referenciaId={receita.ReferenciaId}" : "")" class="img-flag" />@receita.Nome</span>
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="quantidade" class="texto-custom-color">Quantidade</label>
+                            <input type="text" class="form-control mask-quantidade" id="quantidade" min="0" value="0" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="maestria" class="texto-custom-color">Maestria</label>
+                            <select class="form-control" id="maestriaSelect"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="proc" class="texto-custom-color">Proc Normal</label>
+                            <input type="text" class="form-control mask-proc" id="proc-normal" min="0" value="2.5" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="proc-especial" class="texto-custom-color">Proc Raro</label>
+                            <input type="text" class="form-control mask-proc" id="proc-raro" min="0" value="0.30" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="calcular">&nbsp;</label>
+                            <button type="submit" class="btn button-custom-color square" style="width: 100% !important;">Calcular</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-diamond warning font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 id="lucroBruto">0</h3>
+                            <span>Lucro Bruto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-basket-loaded danger font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 id="custoTotal">0</h3>
+                            <span class="texto-custom-color">Custo Total dos Ingredientes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-calculator success font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 id="lucroComPctEconomico">0</h3>
+                            <span>Lucro Liq. C/Pct. Eco. (84.5%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <i class="icon-wallet info font-large-2 float-left"></i>
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 id="lucroSemPctEconomico">0</h3>
+                            <span>Lucro Liq. S/Pct. Eco. (65%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row ">
+        <div class="card col-md-9 div-custom-color">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="tab-ingredientes" data-toggle="tab" aria-controls="ingredientes" href="#ingredientes" aria-expanded="true">Ingredientes</a>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="nav-link" id="tab-usado-em" data-toggle="tab" aria-controls="usado-em" href="#usado-em" aria-expanded="false">Usado Em</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-estatisticas" data-toggle="tab" aria-controls="estatisticas" href="#estatisticas" aria-expanded="false">Estatísticas</a>
+                            </li>*@
+                        </ul>
+                        <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top">
+                            <div role="tabpanel" class="tab-pane active show" id="ingredientes" aria-expanded="true" aria-labelledby="tab-ingredientes">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="ingredientesGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                            @*<div class="tab-pane" id="estatisticas" aria-labelledby="tab-estatisticas">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>*@
+
+                            @*<div class="tab-pane" id="usado-em" aria-labelledby="tab-usado-em">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="culinariaItensReceitaTbMicro"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="tab-resultados" data-toggle="tab" aria-controls="resultados" href="#resultados" aria-expanded="true">Resultados</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top">
+                            <div role="tabpanel" class="tab-pane active show" id="resultados" aria-expanded="true" aria-labelledby="tab-resultados">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="resultadosGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" id="treeView">
+            <div class="col-md-12">
+                <fieldset class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ft-search"></i></span>
+                        </div>
+                        <input type="text" class="form-control ac-default ui-autocomplete-input" id="treeview-search" autocomplete="off">
+                    </div>
+                </fieldset>
+                <div class="col-md-12" id="treeViewContent">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Culinaria/Culinaria.js" asp-append-version="true"></script>
+}

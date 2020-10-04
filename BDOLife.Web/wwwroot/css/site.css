@@ -1,0 +1,76 @@
+﻿.icheckbox_square-red, .iradio_square-red {
+    display: block !important;
+}
+
+
+.jstree-anchor {
+    color: #E2E2E1 !important;
+}
+
+.selection span {
+    color: black !important;
+}
+
+.select2-results span {
+    color: black !important;
+}
+
+h3, span, label {
+    color: #E2E2E1 !important;
+}
+
+div.card {
+    background-color: #494C56 !important;
+}
+
+button {
+    border-color: #F0A748 !important;
+    background-color: transparent !important;
+    color: #F0A748 !important;
+}
+
+    button:hover {
+        color: #fff !important;
+        background-color: #F0A748 !important;
+        border-color: #F0A748 !important;
+    }
+
+
+i {
+    color: black !important;
+}
+
+.nav-link.active.show {
+    color: black !important;
+}
+
+.nav-link {
+    color: #E2E2E1 !important;
+}
+
+tr.jsgrid-header-row {
+    color: #E2E2E1 !important;
+}
+
+th.jsgrid-header-cell {
+    background-color: #2B2C33 !important;
+}
+
+
+
+.total-row {
+    font-weight: bold;
+    background: #f5f5f5;
+}
+
+.total-row td {
+    border-top: 2px solid #efefef;
+}
+
+.jstree-default .jstree-hovered {
+    background: #834f0b !important;
+}
+
+.jstree-default .jstree-clicked {
+    background: #834f0b !important;
+}
