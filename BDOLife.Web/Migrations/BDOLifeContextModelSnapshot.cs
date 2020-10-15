@@ -213,6 +213,9 @@ namespace BDOLife.Web.Migrations
                     b.Property<int>("Grau")
                         .HasColumnType("int");
 
+                    b.Property<string>("Grupo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImagemUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,8 +248,6 @@ namespace BDOLife.Web.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AgrupamentoId");
 
                     b.HasIndex("ReferenciaId");
 
@@ -302,6 +303,132 @@ namespace BDOLife.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Maestrias");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.MaestriaAlquimia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("ChanceRareItems")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ChanceRegularItems")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ChanceSpecialItems")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ImperialBonus")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Mastery")
+                        .HasColumnType("int");
+
+                    b.Property<double>("MaxProcChance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RareProc")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RegularProc")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaestriasAlquimia");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.MaestriaCulinaria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("Crafts")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ImperialBonus")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MassProduceChance")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Mastery")
+                        .HasColumnType("int");
+
+                    b.Property<double>("RareAddChance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RareMaxProcChance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RareProc")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RegularMaxProcChance")
+                        .HasColumnType("float");
+
+                    b.Property<double>("RegularProc")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaestriasCulinaria");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.NivelProfissao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ExperienciaProximoLevel")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ExperienciaTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Maestria")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Nivel")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NiveisProfissoes");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.PedraAlquimia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BonusProcessamento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PedrasAlquimia");
                 });
 
             modelBuilder.Entity("BDOLife.Core.Entities.RankingCulinaria", b =>
@@ -416,6 +543,9 @@ namespace BDOLife.Web.Migrations
                     b.Property<string>("ResultadoReferenciaId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("Tier")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ReceitaReferenciaId");
@@ -423,6 +553,48 @@ namespace BDOLife.Web.Migrations
                     b.HasIndex("ResultadoReferenciaId");
 
                     b.ToTable("ReceitasResultados");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.TipoProcesso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Descricao")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposProcessos");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.TipoProcessoExperiencia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MediaXpPorCraft")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("QtdMaterialAPorCraft")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("QtdMaterialBPorCraft")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TiposProcessosExperiencia");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -663,13 +835,6 @@ namespace BDOLife.Web.Migrations
                         .HasPrincipalKey("ReferenciaId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BDOLife.Core.Entities.Item", b =>
-                {
-                    b.HasOne("BDOLife.Core.Entities.Agrupamento", "Agrupamento")
-                        .WithMany()
-                        .HasForeignKey("AgrupamentoId");
                 });
 
             modelBuilder.Entity("BDOLife.Core.Entities.RankingCulinaria", b =>

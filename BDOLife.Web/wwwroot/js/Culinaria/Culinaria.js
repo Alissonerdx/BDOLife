@@ -1,10 +1,155 @@
-﻿$(document).ready(function () {
+﻿var maestriaImperialSelecionada = 0;
+var ingredienteNodeSelecionado = null;
+
+$(document).ready(function () {
     Tabelas();
     Selects();
     Eventos();
     TreeView();
     EventTimer();
+    Modal();
 
+    function Modal() {
+        $('#trocarIngrediente').iziModal({
+            title: 'Alterar ingrediente',
+            background: '#494C56',
+            headerColor: '#33363F',
+            width: '80%',
+            radius: 20,
+            top: 50,
+            closeOnEscape: false,
+            overlayClose: false,
+            onOpening: function () {
+                let ingredienteSelecionado = $('#treeViewContent').jstree("get_selected")[0];
+                let node = $("#treeViewContent").jstree("get_node", ingredienteSelecionado);
+
+                let idsParent = node.parent.split('-');
+                let parentId = idsParent[idsParent.length - 1];
+                let parentNode = $("#treeViewContent").jstree("get_node", node.parent);
+
+                while ((parentId.includes('PCH') || parentId.includes('PDE') || parentId.includes('RFI') || parentId.includes('PMO')) && parentNode.original.grupo !== null && parentNode.original.grupo !== undefined && parentNode.original.grupo !== "") {
+                    node = parentNode;
+                    idsParent = parentNode.parent.split('-');
+                    parentId = idsParent[idsParent.length - 1];
+                    parentNode = $("#treeViewContent").jstree("get_node", parentNode.parent);
+                }
+
+                ingredienteNodeSelecionado = node;
+                $('#trocarIngrediente').find('#grupoItemTrocaSelecionado').val(node.original.grupo);
+
+                //let nodeParent = $("#treeViewContent").jstree("get_node", node.parent);
+                //let idsNode = node.original.id.split('-');
+                //let nodeReferenciaId = idsNode[idsNode.length - 1];
+
+                //let idsNodeParent = nodeParent.original.id.split('-');
+                //let parentReferenciaId = idsNodeParent[idsNodeParent.length - 1];
+
+                //while ((parentReferenciaId.includes('PCH') || parentReferenciaId.includes('PDE') || parentReferenciaId.includes('RFI') || parentReferenciaId.includes('PMO')) && nodeParent.original.grupo !== null && nodeParent.original.grupo !== "") {
+                //    let parentId = nodeParent.parent;
+                //    nodeParent = $("#treeViewContent").jstree("get_node", parentId);
+                //    idsNodeParent = nodeParent.original.id.split('-');
+                //    parentReferenciaId = idsNodeParent[idsNodeParent.length - 1];
+
+                //    let parentParentId = nodeParent.Parent;
+                //    let nodeParentParent = $("#treeViewContent").jstree("get_node", parentParentId);
+                //    let idsNodeParentParent = nodeParentParent.original.id.split('-');
+                //    let parenParentReferenciaId = idsNodeParentParent[idsNodeParentParent.length - 1];
+                //    parentReferenciaId = parenParentReferenciaId;
+                //}
+
+
+                //if (nodeParent.original.grupo !== null && nodeParent.original.grupo !== "" && nodeParent.children.length === 1) {
+
+                //}
+                //else {
+                //    $('#trocarIngrediente').find('#grupoItemTrocaSelecionado').val(node.original.grupo);
+                //}
+            },
+            afterRender: function () {
+
+                $('#quantidadeIngrediente').inputmask({
+                    alias: "integer",
+                    allowMinus: false,
+                    mask: "9999999",
+                });
+
+                $('#precoUnitario').inputmask({
+                    alias: "prata",
+                });
+
+                if ($('#trocarIngrediente').find('#ingredienteAlternativo').data('select2'))
+                    $('#trocarIngrediente').find('#ingredienteAlternativo').val('').trigger('change');
+
+                $('#ingredienteAlternativo').select2({
+                    placeholder: 'Selecione o ingrediente',
+                    language: "pt-BR",
+                    width: '100%',
+                    dropdownCssClass: "increasedzindexclass",
+                    templateResult: formatState,
+                    templateSelection: formatState,
+                    ajax: {
+                        url: "/Item/SelectItensPorGrupo",
+                        type: "GET",
+                        data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                grupo: $('#trocarIngrediente').find('#grupoItemTrocaSelecionado').val()
+                            };
+
+                            return query;
+                        },
+                        processResults: function (data) {
+                            return { results: data };
+                        },
+
+                    }
+                });
+
+                $('#ingredienteAlternativo').on('select2:select', function (e) {
+                    let selecionado = $(this).select2('data')[0];
+                    let precoUnitario = selecionado.valor;
+
+                    $('#precoUnitario').val(precoUnitario);
+                });
+            }
+        });
+
+        $('#configuracaoMaestria').iziModal({
+            title: 'Configuração da Maestria',
+            background: '#494C56',
+            headerColor: '#33363F',
+            radius: 20,
+            top: 50,
+            afterRender: function () {
+                $('#maestriaImperialSelect').select2({
+                    placeholder: 'Selecione a maestria (Entrega Imperial)',
+                    language: "pt-BR",
+                    width: '100%',
+                    dropdownCssClass: "increasedzindexclass",
+                    templateResult: formatState,
+                    templateSelection: formatState,
+                    allowClear: true,
+                    ajax: {
+                        url: "/Maestria/SelectMaestriasCulinaria",
+                        type: "GET",
+                        data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                            };
+
+                            return query;
+                        },
+                        processResults: function (data) {
+                            return data;
+                        },
+
+                    }
+                });
+            },
+        });
+    }
 
     function EventTimer() {
         setInterval(AtualizarTotais, 1000);
@@ -50,14 +195,14 @@
             width: '100%',
             templateResult: formatState,
             templateSelection: formatState,
+            allowClear: true,
             ajax: {
-                url: "/Maestria/SelectMaestriasPorTipo",
+                url: "/Maestria/SelectMaestriasCulinaria",
                 type: "GET",
                 data: function (params) {
                     var query = {
                         search: params.term,
                         page: params.page || 1,
-                        tipo: 1
                     };
 
                     return query;
@@ -68,6 +213,8 @@
 
             }
         });
+
+
     }
 
     function TreeView() {
@@ -78,6 +225,7 @@
 
         $('#treeViewContent').jstree({
             "core": {
+                "dblclick_toggle": false,
                 "animation": 0,
                 //"check_callback": true,
                 "themes": { /*"stripes": true */ "responsive": true },
@@ -106,22 +254,31 @@
             ],
             "search": {
                 "case_insensitive": true,
-                "show_only_matches": true
+                "show_only_matches": true,
+                //"search_callback": function (search, node) {
+                //    console.log(node);
+                //    return !($("#treeViewContent").jstree("is_closed", node));
+                //}
             },
             "contextmenu": {
                 "items": function ($node) {
-                    var tree = $("#tree").jstree(true);
-                    return {
-                        "TrocarIngrediente": {
-                            "separator_before": false,
-                            "separator_after": false,
-                            "label": "Trocar Ingrediente",
-                            "action": function (obj) {
-                                $node = tree.create_node($node);
-                                tree.edit($node);
+                    let grupo = $node.original.grupo;
+                    if (grupo !== null && grupo !== "") {
+
+                        return {
+                            "TrocarIngrediente": {
+                                "separator_before": false,
+                                "separator_after": false,
+                                "label": "Trocar Ingrediente",
+                                "action": function (obj) {
+                                    $('#trocarIngrediente').iziModal('open');
+                                    //$node = tree.create_node($node);
+                                    //tree.edit($node);
+                                }
                             }
-                        },
-                    };
+                        };
+                    }
+                    return null;
                 }
             }
         });
@@ -142,9 +299,7 @@
             if (item === null || item === undefined) {
                 let total = Inputmask.format(`${parseInt(node.original.quantidade) * parseInt(node.original.valor)}`, { alias: "prata" });
 
-                $('#ingredientesGrid').jsGrid("insertItem", { id: id, img: node.original.icon, item: node.original.nomeItem, quantidadeTotal: node.original.quantidade, precoMarket: node.original.valor, precoTotal: total, ignorar: false }).done(function () {
-                    console.log("inserido");
-                });
+                $('#ingredientesGrid').jsGrid("insertItem", { id: id, img: node.original.icon, item: node.original.nomeItem, quantidadeTotal: node.original.quantidade, precoMarket: node.original.valor, precoTotal: total, ignorar: false });
             }
             else {
                 item.quantidadeTotal += parseInt(node.original.quantidade);
@@ -153,45 +308,51 @@
         }
 
         $("#treeViewContent").on("open_node.jstree", function (e, data) {
+
             let node = data.node.original;
             let ids = node.id.split('-');
             let id = ids[ids.length - 1];
-            let item = BuscarIngredientePorId(id);
-
-            let stack = [];
 
             let childrens = $("#treeViewContent").jstree("get_children_dom", node);
-            childrens.each(function (index, value) {
-                stack.push($("#treeViewContent").jstree("get_node", value));
-            })
 
-            while (stack.length > 0) {
-                let nodeChild = stack.pop();
-                if ($("#treeViewContent").jstree("is_leaf", nodeChild)) {
-                    let idsTemp = nodeChild.original.id.split('-');
-                    let idTemp = idsTemp[idsTemp.length - 1];
+            if ($('#treeViewContent').jstree(true).get_parent(data.node) !== '#') {
 
-                    AdicionarQuantidade(nodeChild);
+                let item = BuscarIngredientePorId(id);
+
+                let stack = [];
+
+                childrens.each(function (index, value) {
+                    stack.push($("#treeViewContent").jstree("get_node", value));
+                })
+
+                while (stack.length > 0) {
+                    let nodeChild = stack.pop();
+                    if ($("#treeViewContent").jstree("is_leaf", nodeChild)) {
+                        let idsTemp = nodeChild.original.id.split('-');
+                        let idTemp = idsTemp[idsTemp.length - 1];
+
+                        AdicionarQuantidade(nodeChild);
+                    }
+                    else {
+                        let childs = $("#treeViewContent").jstree("get_children_dom", nodeChild);
+                        childs.each(function (index, value) {
+                            stack.push($("#treeViewContent").jstree("get_node", value));
+                        });
+                    }
                 }
-                else {
-                    let childs = $("#treeViewContent").jstree("get_children_dom", nodeChild);
-                    childs.each(function (index, value) {
-                        stack.push($("#treeViewContent").jstree("get_node", value));
-                    });
+
+                if (item !== null && item !== undefined) {
+                    let quantidadeTotal = Inputmask.unmask(`${item.quantidadeTotal}`, { alias: "prata" });
+                    let quantidade = parseInt(quantidadeTotal) - parseInt(node.quantidade);
+                    if (quantidade === 0) {
+                        $('#ingredientesGrid').jsGrid("deleteItem", item);
+                    }
+                    else {
+                        item.quantidadeTotal = quantidade;
+                        $('#ingredientesGrid').jsGrid("updateItem", item);
+                    }
                 }
             }
-
-            if (item !== null && item !== undefined) {
-                let quantidade = parseInt(item.quantidadeTotal) - parseInt(node.quantidade);
-                if (quantidade === 0) {
-                    $('#ingredientesGrid').jsGrid("deleteItem", item);
-                }
-                else {
-                    item.quantidadeTotal = quantidade;
-                    $('#ingredientesGrid').jsGrid("updateItem", item);
-                }
-            }
-            
         });
 
         $("#treeViewContent").bind('selected_node.jstree', function (node, data) {
@@ -205,7 +366,8 @@
             let item = BuscarIngredientePorId(id);
 
             if (item !== null && item !== undefined) {
-                let quantidade = parseInt(item.quantidadeTotal) - parseInt(qtd);
+                let quantidadeTotal = Inputmask.unmask(`${item.quantidadeTotal}`, { alias: "prata" });
+                let quantidade = parseInt(quantidadeTotal) - parseInt(qtd);
                 if (quantidade === 0) {
                     $('#ingredientesGrid').jsGrid("deleteItem", item);
                 }
@@ -216,56 +378,100 @@
             }
         }
 
-        $("#treeViewContent").on("close_node.jstree", function (e, data) {
 
-            BlockElement($("#ingredientesGrid"));
+
+
+        $("#treeViewContent").on("close_node.jstree", function (e, data) {
 
             let node = data.node.original;
             let ids = node.id.split('-');
             let id = ids[ids.length - 1];
-
-            let stack = []; 
-
             let childrens = $("#treeViewContent").jstree("get_children_dom", node);
-            childrens.each(function (index, value) {
-                stack.push($("#treeViewContent").jstree("get_node", value));
-            })
 
-            while (stack.length > 0) {
-                let nodeChild = stack.pop();
-                if ($("#treeViewContent").jstree("is_leaf", nodeChild)) {
-                    let idsTemp = nodeChild.original.id.split('-');
-                    let idTemp = idsTemp[idsTemp.length - 1];
+            if ($('#treeViewContent').jstree(true).get_parent(data.node) !== '#') {
 
-                    SubtrairQuantidade(idTemp, nodeChild.original.quantidade);
+                let stack = [];
+
+                childrens.each(function (index, value) {
+                    stack.push($("#treeViewContent").jstree("get_node", value));
+                })
+
+                while (stack.length > 0) {
+                    let nodeChild = stack.pop();
+                    if ($("#treeViewContent").jstree("is_leaf", nodeChild)) {
+                        let idsTemp = nodeChild.original.id.split('-');
+                        let idTemp = idsTemp[idsTemp.length - 1];
+
+                        SubtrairQuantidade(idTemp, nodeChild.original.quantidade);
+                    }
+                    else {
+                        $("#treeViewContent").jstree("open_all", nodeChild);
+                        let childs = $("#treeViewContent").jstree("get_children_dom", nodeChild);
+                        childs.each(function (index, value) {
+                            stack.push($("#treeViewContent").jstree("get_node", value));
+                        });
+                    }
+                }
+
+                let item = BuscarIngredientePorId(id);
+
+                if (item === null || item === undefined) {
+                    let total = Inputmask.format(`${parseInt(node.quantidade) * parseInt(node.valor)}`, { alias: "prata" });
+
+                    var currentNode = data.node;
+
+                    $('#ingredientesGrid').jsGrid("insertItem", { id: id, img: node.icon, item: node.nomeItem, quantidadeTotal: node.quantidade, precoMarket: node.valor, precoTotal: total, ignorar: false });
                 }
                 else {
-                    $("#treeViewContent").jstree("open_all", nodeChild);
-                    let childs = $("#treeViewContent").jstree("get_children_dom", nodeChild);
-                    childs.each(function (index, value) {
-                        stack.push($("#treeViewContent").jstree("get_node", value));
-                    });
+                    item.quantidadeTotal += parseInt(node.quantidade);
+                    $('#ingredientesGrid').jsGrid("updateItem", item);
                 }
             }
 
-            let item = BuscarIngredientePorId(id);
-
-            if (item === null || item === undefined) {
-                let total = Inputmask.format(`${parseInt(node.quantidade) * parseInt(node.valor)}`, { alias: "prata" });
-
-                var currentNode = data.node;
-
-                $('#ingredientesGrid').jsGrid("insertItem", { id: id, img: node.icon, item: node.nomeItem, quantidadeTotal: node.quantidade, precoMarket: node.valor, precoTotal: total, ignorar: false }).done(function () {
-                    console.log("inserido");
-                });
-            }
-            else {
-                item.quantidadeTotal += parseInt(node.quantidade);
-                $('#ingredientesGrid').jsGrid("updateItem", item);
-            }
-
-            UnblockElement($("#ingredientesGrid"));
         });
+
+        $("#treeViewContent").on('expandir', function (e) {
+            e.preventDefault();
+
+            let root = $("#treeViewContent").jstree('get_node', 'raiz_anchor');
+            let childrens = root.children;
+            for (var i = 0; i < childrens.length; i++) {
+                $("#treeViewContent").jstree('open_node', childrens[i]);
+            }
+        });
+
+        $("#treeViewContent").on('agrupar', function (e) {
+            e.preventDefault();
+
+            let root = $("#treeViewContent").jstree('get_node', 'raiz_anchor');
+            let childrens = root.children;
+
+            let allNodeClosed = childrens.every(function (child) {
+                let node = $("#treeViewContent").jstree('get_node', child);
+                return node.state.opened === false;
+            });
+
+            if (!allNodeClosed) {
+                $("#ingredientesGrid").jsGrid("option", "data", []);
+
+                for (var i = 0; i < childrens.length; i++) {
+                    let node = $("#treeViewContent").jstree('get_node', childrens[i]);
+                    $("#treeViewContent").jstree('close_node', node);
+                }
+            }
+        });
+
+
+        //$("#treeViewContent").on('open_all.jstree', function (e) {
+        //    e.preventDefault();
+        //    e.stopPropagation();
+
+        //});
+
+        //$("#treeViewContent").on('close_all.jstree', function () {
+        //    e.preventDefault();
+        //    e.stopPropagation();
+        //});
 
         $('#ingredientesGrid').off().on('keydown', 'input[type=text], input[type=number], select', (event) => {
             if (event.which === 13) {
@@ -291,18 +497,39 @@
             selecting: false,
             pageLoading: false,
             confirmDeleting: false,
-            //onInit: function (args) {
-            //    AtualizarTotais();
-            //},
-            //onDataLoaded: function (args) {
-            //    AtualizarTotais();
-            //},
-            //onRefreshed: function (args) {
+            onItemUpdated: function (args) {
+                $("#ingredientesGrid").jsGrid("refresh");
+            },
+            onRefreshed: function (args) {
+                var items = args.grid.option("data");
 
-            //},
-            //onItemUpdated: function (args) {
-            //    AtualizarTotais();
-            //},
+                var total = { Id: "", Img: "", Item: "", QuantidadeTotal: 0, PrecoMarket: 0, PrecoTotal: 0, IsTotal: true };
+
+                items.forEach(function (item) {
+                    let preco = 0;
+                    let quantidade = 0;
+
+                    if (typeof item.precoMarket === 'string')
+                        preco = parseInt(Inputmask.unmask(item.precoMarket, { alias: "prata" }))
+                    else
+                        preco = item.precoMarket;
+
+                    if (typeof item.quantidadeTotal === 'string')
+                        quantidade = parseInt(Inputmask.unmask(item.quantidadeTotal, { alias: "prata" }))
+                    else
+                        quantidade = item.quantidadeTotal;
+
+                    if (item.ignorar === false) {
+                        total.PrecoTotal += (quantidade * preco);
+                    }
+                });
+
+                var $totalRow = $("<tr>").addClass("total-row");
+
+                args.grid._renderCells($totalRow, total);
+
+                args.grid._content.append($totalRow);
+            },
             fields: [
                 {
                     name: "id",
@@ -314,35 +541,63 @@
                     title: "",
                     width: 80,
                     itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return "Totais";
+
                         if (item.img !== null && item.img !== undefined && item.img !== "") {
                             return `<img src="${item.img}" style="max-width: 44px;"/>`;
                         }
                         return `<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsBAMAAADsqkcyAAAAFVBMVEXr6+sAAABYWFiSkpKwsLDNzc11dXVUvnWIAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAOElEQVQokWNgGAUjAjABITINBcZAyMLgAKYRgCWYJRgkB6HhgNnN2Q2kFEIjiQMhyBAQPQoGPQAAoJ4FT0msjZwAAAAASUVORK5CYII=" style="max-width: 44px;"/>`;
                     }
                 },
-                { name: "item", title: "Ingrediente", type: "text", width: 160, editing: false, inserting: false },
+                {
+                    name: "item", title: "Ingrediente", type: "text", width: 160, editing: false, inserting: false,
+                    itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return "";
+
+                        return value;
+                    }
+                },
                 //{ name: "comprarOuFazer", title: "Comprar/Fazer", type: "text", width: 120, editing: false, inserting: false },
                 {
                     name: "quantidadeTotal", type: "prataField", title: "Quantidade Necessária", width: 180,
                     itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return "";
+
                         return Inputmask.format(`${value}`, { alias: "prata" });
                     }
                 },
                 {
                     name: "precoMarket", type: "prataField", title: "Custo no Mercado (UN)", width: 180,
                     itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return "";
+
                         return Inputmask.format(`${value}`, { alias: "prata" });
                     }
                 },
                 {
                     name: "precoTotal", type: "prataField", title: "Custo Total", width: 120, editing: false, inserting: false,
                     itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return Inputmask.format(`${item.PrecoTotal}`, { alias: "prata" });
+
                         let preco = parseInt(Inputmask.unmask(`${item.precoMarket}`, { alias: "prata" }));
                         let quantidade = parseInt(Inputmask.unmask(`${item.quantidadeTotal}`, { alias: "prata" }));
                         return Inputmask.format(`${quantidade * preco}`, { alias: "prata" });
                     }
                 },
-                { name: "ignorar", type: "checkbox", title: "Ignorar", width: 120 },
+                {
+                    name: "ignorar", type: "checkbox", title: "Ignorar", width: 120,
+                    itemTemplate: function (value, item) {
+                        if (item.IsTotal)
+                            return "";
+
+                        return $('<input>').prop('type', 'checkbox').attr('checked', value).attr('disabled', true);
+                    }
+                },
                 {
                     type: "control",
                     deleteButton: false,
@@ -454,7 +709,7 @@
                     itemTemplate: function (value, item) {
                         if (item.IsTotal)
                             return "";
-                        return parseInt(Inputmask.unmask(`${value}`, { alias: "prata" }));
+                        return Inputmask.format(`${value}`, { alias: "prata" });
                     }
                 },
                 {
@@ -462,7 +717,7 @@
                     itemTemplate: function (value, item) {
                         if (item.IsTotal)
                             return "";
-                        return parseInt(Inputmask.unmask(`${value}`, { alias: "prata" }));
+                        return Inputmask.format(`${value}`, { alias: "prata" });
                     }
                 },
                 {
@@ -563,7 +818,8 @@
                             quantidade: parseInt($('#quantidade').inputmask('unmaskedvalue')),
                             procNormal: $('#proc-normal').val(),
                             procRaro: $('#proc-raro').val(),
-                            maestria: $('#maestriaSelect').val()
+                            maestria: $('#maestriaSelect').val(),
+                            maestriaImperial: maestriaImperialSelecionada
                         },
                         dataType: "json"
                     }).done(function (response) {
@@ -630,24 +886,81 @@ function CalcularTotais(itens, resultados) {
     }
 
 
-    let lucroComPacoteEconomico = (lucroBruto * 0.845) - custoTotal;
-    let lucroSemPacoteEconomico = (lucroBruto * 0.65) - custoTotal;
+    let lucroComPacoteEconomico = parseInt((lucroBruto - custoTotal) * 0.845);
+    let lucroSemPacoteEconomico = parseInt((lucroBruto - custoTotal) * 0.65);
 
-    if (lucroBruto < custoTotal) {
-        $('#lucroSemPctEconomico').removeClass('success');
-        $('#lucroComPctEconomico').removeClass('success');
-        $('#lucroSemPctEconomico').addClass('danger');
-        $('#lucroComPctEconomico').addClass('danger');
-        $('#lucroSemPctEconomico').html("-" + Inputmask.format(`${lucroSemPacoteEconomico}`, { alias: "prata" }));
+    if (lucroComPacoteEconomico < 0) {
+        lucroComPacoteEconomico = parseInt((lucroBruto - custoTotal) * 1.155);
+        $('#lucroComPctEconomico').removeClass('valor-positivo');
+        $('#lucroComPctEconomico').addClass('valor-negativo');
         $('#lucroComPctEconomico').html("-" + Inputmask.format(`${lucroComPacoteEconomico}`, { alias: "prata" }));
     }
     else {
-
-        $('#lucroSemPctEconomico').removeClass('danger');
-        $('#lucroComPctEconomico').removeClass('danger');
-        $('#lucroSemPctEconomico').addClass('success');
-        $('#lucroComPctEconomico').addClass('success');
-        $('#lucroSemPctEconomico').html(Inputmask.format(`${lucroSemPacoteEconomico}`, { alias: "prata" }));
+        $('#lucroComPctEconomico').removeClass('valor-negativo');
+        $('#lucroComPctEconomico').addClass('valor-positivo');
         $('#lucroComPctEconomico').html(Inputmask.format(`${lucroComPacoteEconomico}`, { alias: "prata" }));
     }
+
+    if (lucroSemPacoteEconomico < 0) {
+        lucroSemPacoteEconomico = parseInt((lucroBruto - custoTotal) * 1.35);
+        $('#lucroSemPctEconomico').removeClass('valor-positivo');
+        $('#lucroSemPctEconomico').addClass('valor-negativo');
+        $('#lucroSemPctEconomico').html("-" + Inputmask.format(`${lucroSemPacoteEconomico}`, { alias: "prata" }));
+    }
+    else {
+        $('#lucroSemPctEconomico').removeClass('valor-negativo');
+        $('#lucroSemPctEconomico').addClass('valor-positivo');
+        $('#lucroSemPctEconomico').html(Inputmask.format(`${lucroSemPacoteEconomico}`, { alias: "prata" }));
+    }
+}
+
+function ConfigurarMaestriaImperial() {
+    $('#configuracaoMaestria').iziModal('open');
+}
+
+function SalvarMaestriaImperial() {
+    maestriaImperialSelecionada = parseInt($('#maestriaImperialSelect').val());
+    $('#configuracaoMaestria').iziModal('close');
+}
+
+function AlterarIngrediente() {
+    if (ingredienteNodeSelecionado !== null) {
+
+        let novoIngrediente = $('#trocarIngrediente').find('#ingredienteAlternativo').select2('data')[0];
+        let quantidade = $('#trocarIngrediente').find('#quantidadeIngrediente').val();
+        let precoUnitario = $('#trocarIngrediente').find('#precoUnitario').val();
+
+        let parentId = ingredienteNodeSelecionado.parent;
+        let parentNode = $("#treeViewContent").jstree("get_node", parentId);
+        let quantidadeTotalParent = parentNode.original.quantidade;
+
+        if (parentNode.id === "raiz") {
+
+            let novaQuantidadeTotal = quantidadeTotalParent * quantidade;
+
+            BuscarTreeView(novoIngrediente.id, $('#proc-normal').val(), novaQuantidadeTotal).then(function (data) {
+                console.log(data)
+            });
+        }
+        else {
+
+        }
+        console.log(parentNode);
+    }
+}
+
+function BuscarTreeView(referenciaId, proc, quantidade) {
+    BlockElement('#treeView');
+    return $.ajax({
+        "type": "POST",
+        "url": "/Culinaria/TreeViewSubReceita",
+        "data": {
+            receitaReferenciaId: referenciaId,
+            quantidade: quantidade,
+            procNormal: proc
+        },
+        "success": function (data) {
+            UnblockElement('#treeView');
+        }
+    });
 }

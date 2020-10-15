@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.7" />
@@ -32,6 +33,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Alquimia\" />
+    <Folder Include="wwwroot\imagens\imperial\" />
   </ItemGroup>
 
 </Project>

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BDOLife.Application.Interfaces;
+using BDOLife.Application.ViewModels;
+using BDOLife.Core.Enums;
 using BDOLife.Core.Repositories;
+using BDOLife.Web.Util;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BDOLife.Web.Controllers
 {
     public class ImperialController : Controller
     {
         private readonly IImperialService _imperialService;
-        private readonly IItemService _itemService;
         private readonly IMaestriaService _maestriaService;
 
         public ImperialController(IImperialService imperialService, IMaestriaService maestriaService)
@@ -20,34 +23,23 @@ namespace BDOLife.Web.Controllers
             _maestriaService = maestriaService;
         }
 
-
-        private long CalcularPrecoImperial(long valor, int imperialBonus, decimal maestriaBonus)
-        {
-            valor = valor * (imperialBonus / 100);
-            return valor + (long)(valor * (maestriaBonus / 100));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Caixas(string receitaReferenciaId, int maestriaId)
-        {
-            var result = await _imperialService.ListarImperiaisPorReceitaReferenciaId(receitaReferenciaId);
-            var maestria = await _maestriaService.ObterPorId(maestriaId);
-
-            return Json(result?.Select(c => new {
-                Img = "",
-                Caixa = c.Imperial.Nome,
-                Quantidade = c.Quantidade,
-                Preco = CalcularPrecoImperial(c.Imperial.Valor, c.Imperial.PorcentagemBonus, maestria != null ? maestria.ImperialBonus.Value : 0),
-                ItemReferenciaId = c.ItemReferenciaId,
-                QuantidadeDeCaixas = "",
-                Lucro = "",
-                Total = ""
-            }));
-        }
-
-        public IActionResult Index()
+        public IActionResult Culinaria()
         {
             return View();
+        }
+
+        public async Task<IActionResult> CaixasCulinaria(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
+        {
+            var imperiaisResultados = await _imperialService.ListarImperiaisCulinaria(nivel, maestriaId, contribuicao);
+
+            foreach(var imperial in imperiaisResultados)
+            {
+                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", new Tuple<ItemViewModel, List<Tuple<ItemViewModel, long, bool>>>(imperial.Receita, imperial.ItensQuantidadesNecessarias));
+                imperial.Receita = null;
+                imperial.ItensQuantidadesNecessarias = null;
+            }
+
+            return Json(imperiaisResultados);
         }
     }
 }

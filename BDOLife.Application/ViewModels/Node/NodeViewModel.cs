@@ -15,5 +15,6 @@ namespace BDOLife.Application.ViewModels
         public string nomeItem { get; set; }
         public long quantidade { get; set; }
         public long valor { get; set; }
+        public string grupo { get; set; }
     }
 }

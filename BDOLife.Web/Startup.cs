@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using AspnetRun.Core.Repositories.Base;
@@ -12,12 +14,15 @@ using BDOLife.Infra.Data;
 using BDOLife.Infra.Logging;
 using BDOLife.Infra.Repositories.Base;
 using BDOLife.Infra.Repository;
+using BDOLife.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +43,16 @@ namespace BDOLife.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             ConfigureBDOLifeServices(services);
+
+            services.AddResponseCompression();
+
+            services.Configure<BrotliCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -46,6 +60,7 @@ namespace BDOLife.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
+
 
             services.AddMvcCore(options =>
             {
@@ -56,6 +71,26 @@ namespace BDOLife.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseMiddleware<AdminSafeListMiddleware>(Configuration["AdminSafeList"]);
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Frame-Options", "AllowAll");
+                await next();
+            });
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
+
+            app.UseResponseCompression();
+
+            var supportedCultures = new[] { new CultureInfo("pt-BR") };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(culture: "pt-BR", uiCulture: "pt-BR"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -109,12 +144,21 @@ namespace BDOLife.Web
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IMaestriaService, MaestriaService>();
             services.AddScoped<IImperialService, ImperialService>();
+            services.AddScoped<ITipoProcessoService, TipoProcessoService>();
+            services.AddScoped<ITipoProcessoExperienciaService, TipoProcessoExperienciaService>();
+
 
 
             // Add Repository Layer
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IMaestriaRepository, MaestriaRepository>();
             services.AddScoped<IImperialRepository, ImperialRepository>();
+            services.AddScoped<ITipoProcessoRepository, TipoProcessoRepository>();
+            services.AddScoped<ITipoProcessoExperienciaRepository, TipoProcessoExperienciaRepository>();
+            services.AddScoped<IMaestriaCulinariaRepository, MaestriaCulinariaRepository>();
+            services.AddScoped<IMaestriaAlquimiaRepository, MaestriaAlquimiaRepository>();
+
+
 
         }
 
@@ -126,7 +170,7 @@ namespace BDOLife.Web
 
             // use real database
             services.AddDbContext<BDOLifeContext>(c =>
-                c.UseSqlServer(Configuration.GetConnectionString("BDOLifeConnection"), x => x.MigrationsAssembly("BDOLife.Web")).UseLazyLoadingProxies(true));
+                c.UseSqlServer(Configuration.GetConnectionString("BDOLifeConnection"), x => x.MigrationsAssembly("BDOLife.Web")).UseLazyLoadingProxies(false));
         }
 
         public void ConfigureIdentity(IServiceCollection services)

@@ -34,12 +34,12 @@ $(document).ready(function () {
     jsGrid.locale("pt-br");
     CamposCustomizadosJsGrid();
 
-    $(".switchBootstrap").bootstrapSwitch();
+    //$(".switchBootstrap").bootstrapSwitch();
 
-    $('.icheckbox-custom').iCheck({
-        checkboxClass: "icheckbox_square-red",
-        radioClass: "iradio_square-red"
-    });
+    //$('.icheckbox-custom').iCheck({
+    //    checkboxClass: "icheckbox_square-red",
+    //    radioClass: "iradio_square-red"
+    //});
 
     Inputmask.extendAliases({
         'integer': {
@@ -688,6 +688,10 @@ $('.mask-quantidade').inputmask({
     mask: "9999999",
 });
 
+$('.mask-prata').inputmask({
+    alias: "prata",
+});
+
 $('.mask-proc').inputmask({
     mask: "9[,99]",
     greedy: false,
@@ -703,3 +707,18 @@ $('.mask-proc').inputmask({
     },
     rightAlign: true
 });
+
+function resize() {
+    var height = document.getElementsByTagName("html")[0].scrollHeight;
+    window.parent.postMessage(["setHeight", height], "*");
+}
+
+function getCookie(c_name) {
+    return localStorage.getItem(c_name);
+}
+
+function setCookie(c_name, value, expiredays) {
+    return localStorage.setItem(c_name, value);
+}
+
+setInterval(resize, 1000);

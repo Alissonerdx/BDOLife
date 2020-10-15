@@ -10,25 +10,18 @@ namespace BDOLife.Application.Services
 {
     public class MaestriaService : IMaestriaService
     {
-        private readonly IMaestriaRepository _maestriaRepository;
-        public MaestriaService(IMaestriaRepository maestriaRepository)
+        private readonly IMaestriaCulinariaRepository _maestriaCulinariaRepository;
+        private readonly IMaestriaAlquimiaRepository _maestriaAlquimiaRepository;
+
+        public MaestriaService(IMaestriaRepository maestriaRepository, IMaestriaCulinariaRepository maestriaCulinariaRepository, IMaestriaAlquimiaRepository maestriaAlquimiaRepository)
         {
-            _maestriaRepository = maestriaRepository;
+            _maestriaCulinariaRepository = maestriaCulinariaRepository;
+            _maestriaAlquimiaRepository = maestriaAlquimiaRepository;
         }
 
-        public async Task<ServiceResponse<IList<MaestriaViewModel>>> ListarPorTipoReceita(TipoMaestriaEnum tipo)
+        public async Task<IList<MaestriaCulinariaViewModel>> ListarMaestriasCulinaria()
         {
-            var data = await _maestriaRepository.ListarPorTipoReceita(tipo);
-            return new ServiceResponse<IList<MaestriaViewModel>>
-            {
-                Data = ObjectMapper.Mapper.Map<IList<MaestriaViewModel>>(data)
-            };
-        }
-
-        public async Task<MaestriaViewModel> ObterPorId(int maestriaId)
-        {
-            var maestria = await _maestriaRepository.GetByIdAsync(maestriaId);
-            return ObjectMapper.Mapper.Map<MaestriaViewModel>(maestria);
+            return ObjectMapper.Mapper.Map<List<MaestriaCulinariaViewModel>>(await _maestriaCulinariaRepository.GetAllAsync());
         }
     }
 }

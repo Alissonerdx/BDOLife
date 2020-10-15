@@ -1,0 +1,26 @@
+﻿@model Tuple<ItemViewModel, List<Tuple<ItemViewModel, long, bool>>>
+
+
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Item1 != null)
+{
+    var itensDisponibilidades = Model.Item2;
+    @foreach (var sub in Model.Item1.Itens)
+    {
+        var item = itensDisponibilidades.SingleOrDefault(i => i.Item1.ReferenciaId == sub.ItemReferenciaId);
+        var disponivel = item.Item3;
+
+        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="@sub.Item.Valor" data-empacotar="@item.Item2" data-disponivel="@sub.Item.QuantidadeDisponivel" data-nome="@sub.Item.Nome" data-atualizado="@sub.Item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")" data-referencia="">
+            <a href="#" class="qtooltip" data-id="@sub.ItemReferenciaId">
+                <div class="icone-wrapper">
+
+                    <img src="@($"/Content/Image?referenciaId={sub.ItemReferenciaId}")" alt="icon" class="icone-medio" style="@(!disponivel ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)">
+                </div>
+                <div class="quantidade-pequeno nowrap">@sub.Quantidade</div>
+            </a>
+        </div>
+    }
+}

@@ -16,20 +16,20 @@ namespace BDOLife.Web.Controllers
             _maestriaService = maestriaService;
         }
 
-
         [HttpGet]
-        public async Task<JsonResult> SelectMaestriasPorTipo(TipoMaestriaEnum tipo, string search, int page)
+        public async Task<JsonResult> SelectMaestriasCulinaria(string search, int page)
         {
-            var result = await _maestriaService.ListarPorTipoReceita(tipo);
-            var response = result.Data;
+            var response = await _maestriaService.ListarMaestriasCulinaria();
             return Json(new
             {
                 results = response.Select(r => new
                 {
                     id = r.Id,
-                    text = r.Valor,
-                    procNormal = r.ProcNormal,
-                    procRaro = r.ProcRaro
+                    text = r.Mastery,
+                    procNormal = Math.Round(r.RegularProc, 2),
+                    procRaro = Math.Round(r.RareProc, 2),
+                    regularMaxProcChance = r.RegularMaxProcChance,
+                    rareMaxProcChance = r.RareMaxProcChance
                 })
             });
         }

@@ -19,6 +19,23 @@ namespace BDOLife.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<JsonResult> SelectItensPorGrupo(string grupo, string search, int page)
+        {
+            if (string.IsNullOrEmpty(grupo))
+                return Json(null);
+
+            var result = await _itemService.ListarPorGrupo(grupo);
+            var response = result.Data;
+            return Json(response.Select(r => new
+            {
+                id = r.ReferenciaId,
+                text = $"{r.Nome} ({(r.Tipo == TipoEnum.Receita ? "Receita" : r.Tipo == TipoEnum.Item || r.Tipo == TipoEnum.Material ? "Item" : "")})",
+                valor = r.Valor,
+                Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"Content/Image?referenciaId={r.ReferenciaId}" : ""
+            }));
+        }
+
+        [HttpGet]
         public async Task<JsonResult> SelectReceitasPorTipo(TipoReceitaEnum tipo, string search, int page)
         {
             var result = await _itemService.ListarPorTipoReceita(tipo);

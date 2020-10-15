@@ -10,7 +10,6 @@ namespace BDOLife.Application.Interfaces
 {
     public interface IMaestriaService
     {
-        Task<ServiceResponse<IList<MaestriaViewModel>>> ListarPorTipoReceita(TipoMaestriaEnum tipo);
-        Task<MaestriaViewModel> ObterPorId(int maestriaId);
+        Task<IList<MaestriaCulinariaViewModel>> ListarMaestriasCulinaria();
     }
 }

@@ -16,10 +16,55 @@ namespace BDOLife.Application.Services
     {
         private readonly IItemRepository _itemRepository;
         private readonly IMaestriaRepository _maestriaRepository;
-        public ItemService(IItemRepository itemRepository, IMaestriaRepository maestriaRepository)
+        private readonly IMaestriaCulinariaRepository _maestriaCulinariaRepository;
+        private readonly IMaestriaAlquimiaRepository _maestriaAlquimiaRepository;
+
+        public ItemService(IItemRepository itemRepository, 
+            IMaestriaRepository maestriaRepository,
+            IMaestriaCulinariaRepository maestriaCulinariaRepository,
+            IMaestriaAlquimiaRepository maestriaAlquimiaRepository)
         {
             _itemRepository = itemRepository;
             _maestriaRepository = maestriaRepository;
+            _maestriaAlquimiaRepository = maestriaAlquimiaRepository;
+            _maestriaCulinariaRepository = maestriaCulinariaRepository;
+        }
+
+        private decimal RecalcularProcNormalCulinaria(Item receita, decimal procNormal, MaestriaCulinaria maestria)
+        {
+            if (receita.ProcNormalExcessao != null && maestria != null)
+            {
+                switch (receita.ReferenciaId)
+                {
+                    case "R_C_174":
+                        return receita.ProcNormalExcessao.Value + (decimal)(1 * maestria.RegularMaxProcChance);
+                    case "R_C_175":
+                        return receita.ProcNormalExcessao.Value + (decimal)(1 * maestria.RegularMaxProcChance);
+                    default:
+                        return receita.ProcNormalExcessao.Value;
+                }
+
+            }
+
+            return Math.Round(procNormal, 2);
+        }
+
+        private decimal RecalcularProcRaroCulinaria(Item receita, decimal procRaro, MaestriaCulinaria maestria)
+        {
+            if (receita.ProcRaroExcessao != null && maestria != null)
+            {
+                switch (receita.ReferenciaId)
+                {
+                    case "R_C_168":
+                        return receita.ProcRaroExcessao.Value + (decimal)maestria.RareAddChance;
+                    case "R_C_187":
+                        return receita.ProcRaroExcessao.Value + (decimal)maestria.RareAddChance;
+                    default:
+                        return receita.ProcRaroExcessao.Value;
+                }
+            }
+
+            return Math.Round(procRaro, 2);
         }
 
         public async Task<ServiceResponse<IList<ItemViewModel>>> ListarPorTipoReceita(TipoReceitaEnum tipo)
@@ -79,7 +124,7 @@ namespace BDOLife.Application.Services
 
             var ingredientesBase = new Dictionary<Item, long>();
 
-            procNormal = procNormal == 0 ? 1m : procNormal;
+            procNormal = procNormal == 0 ? 2.5m : procNormal;
 
             if (receita != null && receita.Itens != null && receita.Itens.Count > 0)
             {
@@ -196,7 +241,8 @@ namespace BDOLife.Application.Services
                     state = new { opened = true },
                     nomeItem = receita.Nome,
                     quantidade = quantidade,
-                    valor = receita.Valor
+                    valor = receita.Valor,
+                    grupo = receita.Grupo
                 });
 
                 foreach (var subReceita in receita.Itens)
@@ -213,7 +259,8 @@ namespace BDOLife.Application.Services
                             state = new { opened = true },
                             nomeItem = subReceita.Item.Nome,
                             quantidade = (long)subReceitaProc,
-                            valor = subReceita.Item.Valor
+                            valor = subReceita.Item.Valor,
+                            grupo = subReceita.Item.Grupo
                         });
 
                         if (subReceita.Item.Itens != null && subReceita.Item.Itens.Count > 0)
@@ -235,7 +282,8 @@ namespace BDOLife.Application.Services
                                         state = new { opened = true },
                                         nomeItem = sub1.Item.Nome,
                                         quantidade = (long)sub1Proc,
-                                        valor = sub1.Item.Valor
+                                        valor = sub1.Item.Valor,
+                                        grupo = sub1.Item.Grupo
                                     });
 
                                     if (sub1.Item.Itens != null && sub1.Item.Itens.Count > 0)
@@ -257,7 +305,8 @@ namespace BDOLife.Application.Services
                                                     state = new { opened = true },
                                                     nomeItem = sub2.Item.Nome,
                                                     quantidade = (long)sub2Proc,
-                                                    valor = sub2.Item.Valor
+                                                    valor = sub2.Item.Valor,
+                                                    grupo = sub2.Item.Grupo
                                                 });
 
                                                 if (sub2.Item.Itens != null && sub2.Item.Itens.Count > 0)
@@ -279,7 +328,8 @@ namespace BDOLife.Application.Services
                                                                 state = new { opened = true },
                                                                 nomeItem = sub3.Item.Nome,
                                                                 quantidade = (long)sub3Proc,
-                                                                valor = sub3.Item.Valor
+                                                                valor = sub3.Item.Valor,
+                                                                grupo = sub3.Item.Grupo
                                                             });
 
                                                             if (sub3.Item.Itens != null && sub3.Item.Itens.Count > 0)
@@ -301,7 +351,8 @@ namespace BDOLife.Application.Services
                                                                             state = new { opened = true },
                                                                             nomeItem = sub4.Item.Nome,
                                                                             quantidade = (long)sub4Proc,
-                                                                            valor = sub4.Item.Valor
+                                                                            valor = sub4.Item.Valor,
+                                                                            grupo = sub4.Item.Grupo
                                                                         });
 
                                                                         if (sub4.Item.Itens != null && sub4.Item.Itens.Count > 0)
@@ -323,7 +374,188 @@ namespace BDOLife.Application.Services
                                                                                         state = new { opened = true },
                                                                                         nomeItem = sub5.Item.Nome,
                                                                                         quantidade = (long)sub5Proc,
-                                                                                        valor = sub5.Item.Valor
+                                                                                        valor = sub5.Item.Valor,
+                                                                                        grupo = sub5.Item.Grupo
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return tree;
+        }
+
+        public async Task<IList<NodeViewModel>> TreeViewSubReceita(string referenciaId, int quantidade, decimal procNormal, bool semDetalhes = false)
+        {
+            procNormal = procNormal == 0 ? 2.5m : procNormal;
+
+            var tree = new List<NodeViewModel>();
+
+            var receita = await _itemRepository.ObterPorReferenciaId(referenciaId);
+
+            if (receita != null && receita.Itens != null && receita.Itens.Count > 0 && receita.Excluido == false)
+            {
+                receita.Itens = receita.Itens.OrderBy(i => i.Item.Nome).ToList();
+                tree.Add(new NodeViewModel
+                {
+                    id = "raiz",
+                    parent = "#",
+                    text = $" {(!semDetalhes ? $"({quantidade})" : "")} {receita.Nome}",
+                    icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"Content/Image?referenciaId={receita.ReferenciaId}" : "",
+                    state = new { opened = true },
+                    nomeItem = receita.Nome,
+                    quantidade = quantidade,
+                    valor = receita.Valor,
+                    grupo = receita.Grupo
+                });
+
+                foreach (var subReceita in receita.Itens)
+                {
+                    if (subReceita.Visivel && subReceita.Excluido == false)
+                    {
+                        var procNormalReceita = subReceita.Item.ProcNormalExcessao != null ? subReceita.Item.ProcNormalExcessao.Value : EhProcesso(subReceita.Item) ? 2.5m : procNormal;
+                        var receitaProc = Math.Ceiling(quantidade / procNormalReceita);
+                        receitaProc = receitaProc < 1 && quantidade > 0 ? 1 : receitaProc;
+                        tree.Add(new NodeViewModel
+                        {
+                            id = $"{subReceita.ItemReferenciaId}",
+                            parent = "raiz",
+                            text = $"{subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)receitaProc})" : "")}",
+                            icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
+                            state = new { opened = true },
+                            nomeItem = subReceita.Item.Nome,
+                            quantidade = (long)receitaProc,
+                            valor = subReceita.Item.Valor,
+                            grupo = subReceita.Item.Grupo
+                        });
+
+                        if (subReceita.Item.Itens != null && subReceita.Item.Itens.Count > 0)
+                        {
+                            subReceita.Item.Itens = subReceita.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                            foreach (var sub1 in subReceita.Item.Itens)
+                            {
+                                if (sub1.Visivel && sub1.Excluido == false)
+                                {
+                                    var procNormalSub1 = subReceita.Item.ProcNormalExcessao != null ? subReceita.Item.ProcNormalExcessao.Value : EhProcesso(subReceita.Item) ? 2.5m : procNormal;
+                                    var sub1Proc = Math.Ceiling(receitaProc / procNormalSub1) * sub1.Quantidade;
+                                    sub1Proc = sub1Proc < 1 && quantidade > 0 ? 1 : sub1Proc;
+                                    tree.Add(new NodeViewModel
+                                    {
+                                        id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
+                                        parent = $"{subReceita.ItemReferenciaId}",
+                                        text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
+                                        icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
+                                        state = new { opened = true },
+                                        nomeItem = sub1.Item.Nome,
+                                        quantidade = (long)sub1Proc,
+                                        valor = sub1.Item.Valor,
+                                        grupo = sub1.Item.Grupo
+                                    });
+
+                                    if (sub1.Item.Itens != null && sub1.Item.Itens.Count > 0)
+                                    {
+                                        sub1.Item.Itens = sub1.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                        foreach (var sub2 in sub1.Item.Itens)
+                                        {
+                                            if (sub2.Visivel && sub2.Excluido == false)
+                                            {
+                                                var procNormalSub2 = sub1.Item.ProcNormalExcessao != null ? sub1.Item.ProcNormalExcessao.Value : EhProcesso(sub1.Item) ? 2.5m : procNormal;
+                                                var sub2Proc = Math.Ceiling(sub1Proc / procNormalSub2) * sub2.Quantidade;
+                                                sub2Proc = sub2Proc < 1 && quantidade > 0 ? 1 : sub2Proc;
+                                                tree.Add(new NodeViewModel
+                                                {
+                                                    id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
+                                                    parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
+                                                    text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
+                                                    icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
+                                                    state = new { opened = true },
+                                                    nomeItem = sub2.Item.Nome,
+                                                    quantidade = (long)sub2Proc,
+                                                    valor = sub2.Item.Valor,
+                                                    grupo = sub2.Item.Grupo
+                                                });
+
+                                                if (sub2.Item.Itens != null && sub2.Item.Itens.Count > 0)
+                                                {
+                                                    sub2.Item.Itens = sub2.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                    foreach (var sub3 in sub2.Item.Itens)
+                                                    {
+                                                        if (sub3.Visivel && sub3.Excluido == false)
+                                                        {
+                                                            var procNormalSub3 = sub2.Item.ProcNormalExcessao != null ? sub2.Item.ProcNormalExcessao.Value : EhProcesso(sub2.Item) ? 2.5m : procNormal;
+                                                            var sub3Proc = Math.Ceiling(sub2Proc / procNormalSub3) * sub3.Quantidade;
+                                                            sub3Proc = sub3Proc < 1 && quantidade > 0 ? 1 : sub3Proc;
+                                                            tree.Add(new NodeViewModel
+                                                            {
+                                                                id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
+                                                                parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
+                                                                text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
+                                                                icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
+                                                                state = new { opened = true },
+                                                                nomeItem = sub3.Item.Nome,
+                                                                quantidade = (long)sub3Proc,
+                                                                valor = sub3.Item.Valor,
+                                                                grupo = sub3.Item.Grupo
+                                                            });
+
+                                                            if (sub3.Item.Itens != null && sub3.Item.Itens.Count > 0)
+                                                            {
+                                                                sub3.Item.Itens = sub3.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                                foreach (var sub4 in sub3.Item.Itens)
+                                                                {
+                                                                    if (sub4.Visivel && sub4.Excluido == false)
+                                                                    {
+                                                                        var procNormalSub4 = sub3.Item.ProcNormalExcessao != null ? sub3.Item.ProcNormalExcessao.Value : EhProcesso(sub3.Item) ? 2.5m : procNormal;
+                                                                        var sub4Proc = Math.Ceiling(sub3Proc / procNormalSub4) * sub4.Quantidade;
+                                                                        sub4Proc = sub4Proc < 1 && quantidade > 0 ? 1 : sub4Proc;
+                                                                        tree.Add(new NodeViewModel
+                                                                        {
+                                                                            id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
+                                                                            parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
+                                                                            text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
+                                                                            icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
+                                                                            state = new { opened = true },
+                                                                            nomeItem = sub4.Item.Nome,
+                                                                            quantidade = (long)sub4Proc,
+                                                                            valor = sub4.Item.Valor,
+                                                                            grupo = sub4.Item.Grupo
+                                                                        });
+
+                                                                        if (sub4.Item.Itens != null && sub4.Item.Itens.Count > 0)
+                                                                        {
+                                                                            sub4.Item.Itens = sub4.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                                            foreach (var sub5 in sub4.Item.Itens)
+                                                                            {
+                                                                                if (sub5.Visivel && sub5.Excluido == false)
+                                                                                {
+                                                                                    var procNormalSub5 = sub4.Item.ProcNormalExcessao != null ? sub4.Item.ProcNormalExcessao.Value : EhProcesso(sub4.Item) ? 2.5m : procNormal;
+                                                                                    var sub5Proc = Math.Ceiling(sub4Proc / procNormalSub5) * sub5.Quantidade;
+                                                                                    sub5Proc = sub5Proc < 1 && quantidade > 0 ? 1 : sub5Proc;
+                                                                                    tree.Add(new NodeViewModel
+                                                                                    {
+                                                                                        id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}",
+                                                                                        parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
+                                                                                        text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
+                                                                                        icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
+                                                                                        state = new { opened = true },
+                                                                                        nomeItem = sub5.Item.Nome,
+                                                                                        quantidade = (long)sub5Proc,
+                                                                                        valor = sub5.Item.Valor,
+                                                                                        grupo = sub5.Item.Grupo
                                                                                     });
                                                                                 }
                                                                             }
@@ -364,13 +596,13 @@ namespace BDOLife.Application.Services
             return imperialReceita != null ? imperialReceita.Imperial.Nome + $" ({imperialReceita.Quantidade})": string.Empty;
         }
 
-        private long CalcularPrecoImperial(ImperialReceita imperialReceita, Maestria maestria)
+        private long CalcularPrecoImperial(ImperialReceita imperialReceita, double? bonusImperial)
         {
-            if (imperialReceita != null && maestria != null)
+            if (imperialReceita != null && bonusImperial.HasValue)
             {
-                var bonus = maestria != null ? maestria.ImperialBonus.Value : 0;
-                var valor = imperialReceita.Imperial.Valor * (imperialReceita.Imperial.PorcentagemBonus / 100);
-                return valor + (long)(valor * (maestria.ImperialBonus / 100));
+                var bonus = bonusImperial.HasValue ? bonusImperial.Value : 0;
+                decimal valor = imperialReceita.Imperial.Valor * (imperialReceita.Imperial.PorcentagemBonus / 100m);
+                return (long)(valor + (decimal)(imperialReceita.Imperial.Valor * bonus));
             }
 
             return 0;
@@ -381,7 +613,70 @@ namespace BDOLife.Application.Services
             return imperialReceita.Imperial;
         }
 
-        public async Task<IList<ResultadoCalculadoViewModel>> Resultados(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestria)
+        private async Task<IList<ResultadoCalculadoViewModel>> ResultadosCulinaria(Item receita, int quantidade, decimal procNormal, decimal procRaro, int maestria, int maestriaImperial)
+        {
+            var maestriaSelecionada = maestria > 0 ? await _maestriaCulinariaRepository.GetByIdAsync(maestria) : await _maestriaCulinariaRepository.GetByIdAsync(1);
+            MaestriaCulinaria maestriaImperialSelecionada = null;
+
+
+            if (maestriaImperial == 0)
+                maestriaImperialSelecionada = maestriaSelecionada;
+            else
+                maestriaImperialSelecionada = await _maestriaCulinariaRepository.GetByIdAsync(maestriaImperial);
+
+            var resultados = receita.Resultados
+                  .Where(r => r.Resultado.Excluido == false)
+                  .OrderBy(i => i.Resultado.Nome)
+                  .Select(i => new ResultadoCalculadoViewModel
+                  {
+                      Id = i.Resultado.ReferenciaId,
+                      Item = i.Resultado.Nome,
+                      Preco = i.Resultado.Valor,
+                      Quantidade = i.ProcRaro ? (long)(quantidade * RecalcularProcRaroCulinaria(receita, procRaro, maestriaSelecionada)) : (long)(quantidade * RecalcularProcNormalCulinaria(receita, procNormal, maestriaSelecionada)),
+                      Total = i.ProcRaro ? (long)(quantidade * RecalcularProcRaroCulinaria(receita, procRaro, maestriaSelecionada)) * i.Resultado.Valor : (long)(quantidade * RecalcularProcNormalCulinaria(receita, procNormal, maestriaSelecionada)) * i.Resultado.Valor,
+                      Img = !string.IsNullOrEmpty(i.Resultado.ImagemUrl) ? $"Content/Image?referenciaId={i.Resultado.ReferenciaId}" : "",
+                      QuantidadePorCaixa = QuantidadePorCaixa(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
+                      QuantidadeImperial = QuantidadeImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), i.ProcRaro ? (long)(quantidade * RecalcularProcRaroCulinaria(receita, procRaro, maestriaSelecionada)) : (long)(quantidade * RecalcularProcNormalCulinaria(receita, procNormal, maestriaSelecionada))),
+                      CaixaImperial = NomeCaixaImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
+                      PrecoPorCaixa = CalcularPrecoImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), maestriaImperialSelecionada.ImperialBonus),
+                      Ignorar = false
+                  }).ToList();
+
+            return resultados;
+        }
+
+        private async Task<IList<ResultadoCalculadoViewModel>> ResultadosAlquimia(Item receita, int quantidade, decimal procNormal, decimal procRaro, int maestria, int maestriaImperial)
+        {
+            var maestriaSelecionada = await _maestriaAlquimiaRepository.GetByIdAsync(maestria);
+            MaestriaAlquimia maestriaImperialSelecionada = null;
+
+            if (maestriaImperial == 0)
+                maestriaImperialSelecionada = maestriaSelecionada;
+            else
+                maestriaImperialSelecionada = await _maestriaAlquimiaRepository.GetByIdAsync(maestriaImperial);
+
+            var resultados = receita.Resultados
+                  .Where(r => r.Resultado.Excluido == false)
+                  .OrderBy(i => i.Resultado.Nome)
+                  .Select(i => new ResultadoCalculadoViewModel
+                  {
+                      Id = i.Resultado.ReferenciaId,
+                      Item = i.Resultado.Nome,
+                      Preco = i.Resultado.Valor,
+                      Quantidade = i.ProcRaro ? (long)(quantidade * procRaro) : (long)(quantidade * procNormal),
+                      Total = i.ProcRaro ? (long)(quantidade * procRaro) * i.Resultado.Valor : (long)(quantidade * procNormal) * i.Resultado.Valor,
+                      Img = !string.IsNullOrEmpty(i.Resultado.ImagemUrl) ? $"Content/Image?referenciaId={i.Resultado.ReferenciaId}" : "",
+                      QuantidadePorCaixa = QuantidadePorCaixa(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
+                      QuantidadeImperial = QuantidadeImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), i.ProcRaro ? (long)(quantidade * procRaro) : (long)(quantidade * procNormal)),
+                      CaixaImperial = NomeCaixaImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
+                      PrecoPorCaixa = CalcularPrecoImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), maestriaImperialSelecionada.ImperialBonus),
+                      Ignorar = false
+                  }).ToList();
+
+            return resultados;
+        }
+
+        public async Task<IList<ResultadoCalculadoViewModel>> Resultados(TipoReceitaEnum tipo, string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestria, int maestriaImperial)
         {
             var receita = await _itemRepository.ObterPorReferenciaId(referenciaId);
 
@@ -389,27 +684,11 @@ namespace BDOLife.Application.Services
             {
                 procNormal = receita.ProcNormalExcessao != null ? receita.ProcNormalExcessao.Value : EhProcesso(receita) ? 2.5m : procNormal;
                 procRaro = receita.ProcRaroExcessao != null ? receita.ProcRaroExcessao.Value : procRaro;
-                var maestriaSelecionada = await _maestriaRepository.GetByIdAsync(maestria);
 
-                var resultados = receita.Resultados
-                      .Where(r => r.Resultado.Excluido == false)
-                      .OrderBy(i => i.Resultado.Nome)
-                      .Select(i => new ResultadoCalculadoViewModel
-                      {
-                          Id = i.Resultado.ReferenciaId,
-                          Item = i.Resultado.Nome,
-                          Preco = i.Resultado.Valor,
-                          Quantidade = i.ProcRaro ? (long)(quantidade * procRaro) : (long)(quantidade * procNormal),
-                          Total = i.ProcRaro ? (long)(quantidade * procRaro) * i.Resultado.Valor : (long)(quantidade * procNormal) * i.Resultado.Valor,
-                          Img = !string.IsNullOrEmpty(i.Resultado.ImagemUrl) ? $"Content/Image?referenciaId={i.Resultado.ReferenciaId}" : "",
-                          QuantidadePorCaixa = QuantidadePorCaixa(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
-                          QuantidadeImperial = QuantidadeImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), i.ProcRaro ? (long)(quantidade * procRaro) : (long)(quantidade * procNormal)),
-                          CaixaImperial = NomeCaixaImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
-                          PrecoPorCaixa = CalcularPrecoImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), maestriaSelecionada),
-                          Ignorar = false
-                      }).ToList();
-
-                return resultados;
+                if (tipo == TipoReceitaEnum.Culinaria)
+                    return await ResultadosCulinaria(receita, quantidade, procNormal, procRaro, maestria, maestriaImperial);
+                else if(tipo == TipoReceitaEnum.Alquimia)
+                    return await ResultadosAlquimia(receita, quantidade, procNormal, procRaro, maestria, maestriaImperial);
             }
 
             return null;
@@ -425,6 +704,15 @@ namespace BDOLife.Application.Services
             }
 
             return null;
+        }
+
+        public async Task<ServiceResponse<IList<ItemViewModel>>> ListarPorGrupo(string grupo)
+        {
+            var data = await _itemRepository.ListarPorGrupo(grupo);
+            return new ServiceResponse<IList<ItemViewModel>>
+            {
+                Data = ObjectMapper.Mapper.Map<IList<ItemViewModel>>(data)
+            };
         }
     }
 }

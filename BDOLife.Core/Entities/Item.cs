@@ -30,9 +30,9 @@ namespace BDOLife.Core.Entities
         public virtual List<AgrupamentoItem> AgrupadoEm { get; set; }
         public virtual List<RankingCulinaria> RankingsCulinaria { get; set; }
         public virtual List<ImperialReceita> ImperiaisReceitas { get; set; }
-        public virtual Agrupamento Agrupamento { get; set; }
         public bool Excluido { get; set; }
         public decimal? ProcNormalExcessao { get; set; }
         public decimal? ProcRaroExcessao { get; set; }
+        public string Grupo { get; set; }
     }
 }

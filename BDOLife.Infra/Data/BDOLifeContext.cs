@@ -26,6 +26,14 @@ namespace BDOLife.Infra.Data
         public DbSet<RankingCulinaria> RankingsCulinaria { get; set; }
         public DbSet<Imperial> Imperiais { get; set; }
         public DbSet<ImperialReceita> ImperiaisReceitas { get; set; }
+        public DbSet<TipoProcesso> TiposProcessos { get; set; }
+        public DbSet<TipoProcessoExperiencia> TiposProcessosExperiencia { get; set; }
+        public DbSet<PedraAlquimia> PedrasAlquimia { get; set; }
+        public DbSet<NivelProfissao> NiveisProfissoes { get; set; }
+        public DbSet<MaestriaCulinaria> MaestriasCulinaria { get; set; }
+        public DbSet<MaestriaAlquimia> MaestriasAlquimia { get; set; }
+
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

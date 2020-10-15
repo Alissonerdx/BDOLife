@@ -2,7 +2,6 @@
     display: block !important;
 }
 
-
 .jstree-anchor {
     color: #E2E2E1 !important;
 }
@@ -15,9 +14,27 @@
     color: black !important;
 }
 
+.select2-results__option {
+    color: black;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #F0A748 !important;
+}
+
+.select2-container--default .select2-results__options .select2-results__option[aria-selected=true] {
+    background-color: #F0A748 !important;
+}
+
+.select2-container--default .select2-selection--single {
+    border-radius: 0px !important;
+}
+
 h3, span, label {
     color: #E2E2E1 !important;
 }
+
+
 
 div.card {
     background-color: #494C56 !important;
@@ -25,13 +42,13 @@ div.card {
 
 button {
     border-color: #F0A748 !important;
-    background-color: transparent !important;
-    color: #F0A748 !important;
+    background-color: #F0A748 !important;
+    color: #33363F !important;
 }
 
     button:hover {
-        color: #fff !important;
-        background-color: #F0A748 !important;
+        color: black !important;
+        background-color: #FFC67C !important;
         border-color: #F0A748 !important;
     }
 
@@ -41,11 +58,17 @@ i {
 }
 
 .nav-link.active.show {
-    color: black !important;
+    color: #33363F !important;
 }
 
 .nav-link {
     color: #E2E2E1 !important;
+    border-radius: 0px !important;
+}
+
+.search-input {
+   border: 0px !important;
+   border-radius: 0px !important;
 }
 
 tr.jsgrid-header-row {
@@ -63,9 +86,9 @@ th.jsgrid-header-cell {
     background: #f5f5f5;
 }
 
-.total-row td {
-    border-top: 2px solid #efefef;
-}
+    .total-row td {
+        border-top: 2px solid #efefef;
+    }
 
 .jstree-default .jstree-hovered {
     background: #834f0b !important;
@@ -73,4 +96,152 @@ th.jsgrid-header-cell {
 
 .jstree-default .jstree-clicked {
     background: #834f0b !important;
+}
+
+.shepherd-text {
+    color: white !important;
+    padding: 2.10em !important;
+}
+
+.shepherd-element {
+    background: #33363F !important;
+}
+
+button.shepherd-cancel-icon:hover {
+    background: none !important;
+}
+
+button.shepherd-cancel-icon > span {
+    color: #F0A748 !important;
+}
+
+button.shepherd-cancel-icon {
+    background-color: transparent !important;
+}
+
+.shepherd-button {
+    border-radius: 30px !important;
+}
+
+.card {
+    border-radius: 0px !important;
+}
+
+.font-label-poppins, [data-toggle="tab"] {
+    font-family: 'Poppins' !important;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.font-sm-label-poppins {
+    font-family: 'Poppins' !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.media {
+    align-items: center !important;
+}
+
+.background-e2e2e1 {
+    background: #E2E2E1 !important;
+    background-color: #E2E2E1 !important;
+    border-color: #e2e2e1 !important;
+}
+
+.valor-negativo {
+    font-family: 'Poppins' !important;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    color: #f0a748 !important;
+}
+
+.valor-positivo {
+    font-family: 'Poppins' !important;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e2e2e1 !important;
+}
+
+.form-control {
+    height: calc(2.0em + .75rem + 2px) !important;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.select2-dropdown.increasedzindexclass {
+    z-index: 999999;
+}
+
+.icone-medio {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.icone-wrapper {
+    width: 30px;
+    height: 30px;
+}
+
+.quantidade-pequeno {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 15px;
+    margin-bottom: 2px;
+    margin-right: 3px;
+    color: white;
+    text-shadow: 2px 1px 2px rgba(21,47,79,1), -2px 1px 2px rgba(21,47,79,1), 1px 2px 2px rgba(21,47,79,1), 1px -2px 2px rgba(21,47,79,1);
+    font-weight: bold;
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.inlinediv {
+    display: inline-block;
+}
+
+.iconset_wrapper_medium {
+    position: relative;
+    padding-top: 2px;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    vertical-align: middle;
+    margin: auto;
+}
+
+.popover {
+    background: #494C56 !important;
+}
+
+.popover-header {
+    font-family: 'Poppins' !important;
+    background-color: #F0A748 !important;
+    color: #33363F !important;
+    text-transform: uppercase;
+}
+
+.popover-body {
+    color: white !important;
+    text-transform: uppercase;
+    font-family: 'Poppins' !important;
+    font-weight: 600;
 }

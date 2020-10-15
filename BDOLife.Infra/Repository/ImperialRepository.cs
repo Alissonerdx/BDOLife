@@ -1,4 +1,5 @@
 ﻿using BDOLife.Core.Entities;
+using BDOLife.Core.Enums;
 using BDOLife.Core.Repositories;
 using BDOLife.Core.Specifications.Base;
 using BDOLife.Infra.Data;
@@ -24,6 +25,22 @@ namespace BDOLife.Infra.Repository
             return await _dbContext.ImperiaisReceitas
                 .Include(i => i.Imperial)
                 .Where(i => referenciasIds.Contains(i.ItemReferenciaId)).ToListAsync();
+        }
+
+
+        public async Task<IList<Imperial>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel)
+        {
+            var query = _dbContext.Imperiais
+                .Include(i => i.Receitas)
+                .ThenInclude(i => i.Item.ResultadosEm)
+                .ThenInclude(i => i.Receita.Itens)
+                .ThenInclude(i => i.Item)
+                .AsQueryable();
+
+            if (nivel != null)
+                return await query.Where(i => i.Habilidade == nivel.Value).ToListAsync();
+
+            return await query.ToListAsync();
         }
     }
 }

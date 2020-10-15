@@ -28,5 +28,12 @@ namespace BDOLife.Web.Controllers
             var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\itens\{referenciaId}.png");
             return File(image, "image/png");
         }
+
+        [ResponseCache(CacheProfileName = "Monthly")]
+        public IActionResult Imperial(int nivel)
+        {
+            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{nivel}.png");
+            return File(image, "image/png");
+        }
     }
 }
