@@ -34,5 +34,8 @@ namespace BDOLife.Core.Entities
         public decimal? ProcNormalExcessao { get; set; }
         public decimal? ProcRaroExcessao { get; set; }
         public string Grupo { get; set; }
+        public AdquiridoEnum Adquirido { get; set; }
+        public long? ValorNPC { get; set; }
+        public string LocalizacaoNPC { get; set; }
     }
 }

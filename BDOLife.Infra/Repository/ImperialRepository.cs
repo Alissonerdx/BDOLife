@@ -28,19 +28,49 @@ namespace BDOLife.Infra.Repository
         }
 
 
-        public async Task<IList<Imperial>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel)
+        //public async Task<IList<Imperial>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel)
+        //{
+        //    var query = _dbContext.Imperiais
+        //        .Include(i => i.Receitas)
+        //        .ThenInclude(i => i.Item.ResultadosEm)
+        //        .ThenInclude(i => i.Receita.Itens)
+        //        .ThenInclude(i => i.Item)
+        //        .AsQueryable();
+
+        //    if (nivel != null)
+        //        return await query.Where(i => i.Habilidade == nivel.Value).ToListAsync();
+
+        //    return await query.ToListAsync();
+        //}
+
+        public async Task<IList<ImperialReceita>> ListarReceitasImperiaisCulinaria(NivelHabilidadeEnum? nivel)
         {
-            var query = _dbContext.Imperiais
-                .Include(i => i.Receitas)
-                .ThenInclude(i => i.Item.ResultadosEm)
+            var query = _dbContext.ImperiaisReceitas
+                .Include(i => i.Imperial)
+                .Include(i => i.Item.ResultadosEm)
                 .ThenInclude(i => i.Receita.Itens)
                 .ThenInclude(i => i.Item)
                 .AsQueryable();
 
             if (nivel != null)
-                return await query.Where(i => i.Habilidade == nivel.Value).ToListAsync();
+                return await query.Where(i => i.Imperial.Habilidade == nivel.Value && i.Imperial.Tipo == TipoReceitaEnum.ProcessoCulinariaImperial).ToListAsync();
 
-            return await query.ToListAsync();
+            return await query.Where(i => i.Imperial.Tipo == TipoReceitaEnum.ProcessoCulinariaImperial).ToListAsync();
+        }
+
+        public async Task<IList<ImperialReceita>> ListarReceitasImperiaisAlquimia(NivelHabilidadeEnum? nivel)
+        {
+            var query = _dbContext.ImperiaisReceitas
+                .Include(i => i.Imperial)
+                .Include(i => i.Item.ResultadosEm)
+                .ThenInclude(i => i.Receita.Itens)
+                .ThenInclude(i => i.Item)
+                .AsQueryable();
+
+            if (nivel != null)
+                return await query.Where(i => i.Imperial.Habilidade == nivel.Value && i.Imperial.Tipo == TipoReceitaEnum.ProcessoAlquimiaImperial).ToListAsync();
+
+            return await query.Where(i => i.Imperial.Tipo == TipoReceitaEnum.ProcessoAlquimiaImperial).ToListAsync();
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />
+<link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
+<link href="~/componentes/izitoast/css/iziToast.css" rel="stylesheet" />
+
+@Html.PartialAsync("_ReceitaPartial", "Receita de Alquimia").Result
+
+@section Scripts {
+    <script src="~/componentes/shepherd/shepherd.js"></script>
+    <script src="~/componentes/izimodal/js/iziModal.min.js"></script>
+    <script src="~/componentes/izitoast/js/iziToast.js"></script>
+    <script src="~/js/Receita/Receita.js" asp-append-version="true"></script>
+    <script src="~/js/Alquimia/alquimia.min.js" asp-append-version="true"></script>
+    @*<script src="~/js/Culinaria/CulinariaEnc.js" asp-append-version="true"></script>*@
+    @*<script src="~/js/Culinaria/culinaria.min.js" asp-append-version="true"></script>*@
+    @*<script src="~/js/Alquimia/Alquimia.js" asp-append-version="true"></script>*@
+    @*<script src="~/js/Culinaria/CulinariaTour.js" asp-append-version="true"></script>*@
+}

@@ -190,6 +190,11 @@ namespace BDOLife.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Adquirido")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<int?>("AgrupamentoId")
                         .HasColumnType("int");
 
@@ -219,6 +224,9 @@ namespace BDOLife.Web.Migrations
                     b.Property<string>("ImagemUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LocalizacaoNPC")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,6 +253,9 @@ namespace BDOLife.Web.Migrations
                         .HasColumnType("int");
 
                     b.Property<long>("Valor")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ValorNPC")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");

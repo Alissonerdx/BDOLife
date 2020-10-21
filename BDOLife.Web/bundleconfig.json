@@ -8,7 +8,41 @@
   {
     "outputFileName": "wwwroot/js/Culinaria/culinaria.min.js",
     "inputFiles": [
-      "wwwroot/js/Culinaria/culinaria.js"
+      "wwwroot/js/Culinaria/culinariaTour.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/Alquimia/alquimia.min.js",
+    "inputFiles": [
+      "wwwroot/js/Alquimia/alquimiaTour.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/Imperial/imperial.min.js",
+    "inputFiles": [
+      "wwwroot/js/Imperial/imperial.js",
+      "wwwroot/js/Imperial/imperialTour.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/Receita/receita.min.js",
+    "inputFiles": [
+      "wwwroot/js/Receita/receita.js"
     ],
     "minify": {
       "enabled": true,

@@ -19,6 +19,11 @@ namespace BDOLife.Application.Services
             _maestriaAlquimiaRepository = maestriaAlquimiaRepository;
         }
 
+        public async Task<IList<MaestriaAlquimiaViewModel>> ListarMaestriasAlquimia()
+        {
+            return ObjectMapper.Mapper.Map<List<MaestriaAlquimiaViewModel>>(await _maestriaAlquimiaRepository.GetAllAsync());
+        }
+
         public async Task<IList<MaestriaCulinariaViewModel>> ListarMaestriasCulinaria()
         {
             return ObjectMapper.Mapper.Map<List<MaestriaCulinariaViewModel>>(await _maestriaCulinariaRepository.GetAllAsync());

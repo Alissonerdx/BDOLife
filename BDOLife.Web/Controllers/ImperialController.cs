@@ -23,7 +23,7 @@ namespace BDOLife.Web.Controllers
             _maestriaService = maestriaService;
         }
 
-        public IActionResult Culinaria()
+        public IActionResult Index()
         {
             return View();
         }
@@ -34,8 +34,20 @@ namespace BDOLife.Web.Controllers
 
             foreach(var imperial in imperiaisResultados)
             {
-                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", new Tuple<ItemViewModel, List<Tuple<ItemViewModel, long, bool>>>(imperial.Receita, imperial.ItensQuantidadesNecessarias));
-                imperial.Receita = null;
+                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", imperial.ItensQuantidadesNecessarias);
+                imperial.ItensQuantidadesNecessarias = null;
+            }
+
+            return Json(imperiaisResultados);
+        }
+
+        public async Task<IActionResult> CaixasAlquimia(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
+        {
+            var imperiaisResultados = await _imperialService.ListarImperiaisAlquimia(nivel, maestriaId, contribuicao);
+
+            foreach (var imperial in imperiaisResultados)
+            {
+                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", imperial.ItensQuantidadesNecessarias);
                 imperial.ItensQuantidadesNecessarias = null;
             }
 

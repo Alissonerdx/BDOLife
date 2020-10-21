@@ -230,18 +230,31 @@ button.shepherd-cancel-icon {
 
 .popover {
     background: #494C56 !important;
+    border: none !important;
 }
 
 .popover-header {
     font-family: 'Poppins' !important;
     background-color: #F0A748 !important;
     color: #33363F !important;
-    text-transform: uppercase;
+    border-radius: 0.3rem 0.3rem 0px 0px !important;
+    border-bottom: none !important;
 }
 
 .popover-body {
     color: white !important;
-    text-transform: uppercase;
+    text-transform: none !important;
     font-family: 'Poppins' !important;
-    font-weight: 600;
+    font-weight: 500 !important;
+    padding: 24px !important;
 }
+
+
+i.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
+    background-size: 26px !important;
+}
+
+.jsgrid-cell {
+    overflow: hidden;
+}
+

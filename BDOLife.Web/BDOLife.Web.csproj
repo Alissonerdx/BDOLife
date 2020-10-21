@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Alquimia\" />
     <Folder Include="wwwroot\imagens\imperial\" />
   </ItemGroup>
 

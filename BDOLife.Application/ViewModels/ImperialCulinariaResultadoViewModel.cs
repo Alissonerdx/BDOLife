@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BDOLife.Application.ViewModels
 {
-    public class ImperialCulinariaResultadoViewModel
+    public class ImperialResultadoViewModel
     {
         public int Id { get; set; }
         public string Img { get; set; }
@@ -23,8 +23,7 @@ namespace BDOLife.Application.ViewModels
         public long LucroLiquidoPrimaria { get; set; }
         public long LucroLiquidoSecundaria { get; set; }
         public bool PossuiSubItens { get; set; }
-        public ItemViewModel Receita { get; set; }
-        public List<Tuple<ItemViewModel, long, bool>> ItensQuantidadesNecessarias { get; set; }
+        public List<Tuple<ItemViewModel, long, bool, long>> ItensQuantidadesNecessarias { get; set; }
         public string SubItensInline { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BDOLife.Core.Entities;
+using BDOLife.Core.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,9 @@ namespace BDOLife.Infra.Data
             builder.HasIndex(m => m.ReferenciaId);
 
             builder.Property(e => e.Excluido).HasDefaultValue(false);
+
+            builder.Property(e => e.Adquirido).HasDefaultValue(AdquiridoEnum.Mercado);
+
         }
         private static void ConfigureMaestria(EntityTypeBuilder<Maestria> builder)
         {

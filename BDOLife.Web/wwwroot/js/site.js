@@ -391,7 +391,55 @@ $(document).ready(function () {
             }
         });
 
-        jsGrid.fields.quantidadeField = quantidadeField;
+        //var checkField = function (config) {
+        //    jsGrid.Field.call(this, config);
+        //};
+
+        //quantidadeField.prototype = new jsGrid.Field({
+        //    itemTemplate: function (value, item) {
+        //        return $('<input type="checkbox">').attr("checked", value);
+                    
+
+        //        //return Inputmask.format(`${value}`, { alias: "integer" });
+        //    },
+        //    insertTemplate: function (value) {
+        //        this._insertPicker = $('<input type="checkbox">').attr("checked", value);
+        //        return this._insertPicker;
+        //    },
+        //    editTemplate: function (value) {
+        //        if (!this.editing) {
+        //            return this.itemTemplate.apply(this, arguments);
+        //        }
+
+        //        this._editPicker = $('<input type="checkbox">').attr("checked", value);
+        //        //this._editPicker.inputmask("integer");
+        //        return this._editPicker;
+        //    },
+        //    //filterTemplate: function () {
+        //    //    if (!this.filtering) return "";
+
+        //    //    var grid = this._grid,
+        //    //        $result = $('<input type="text">').val(0);
+        //    //    if (this.autosearch) {
+        //    //        $result.on("change", function (e) {
+        //    //            grid.search();
+        //    //        });
+        //    //    }
+
+        //    //    return $result;
+        //    //},
+        //    filterValue: function () {
+        //        return this._insertPicker.val();
+        //    },
+        //    insertValue: function () {
+        //        return this._insertPicker.val();
+        //    },
+        //    editValue: function () {
+        //        return this._editPicker.val();
+        //    }
+        //});
+
+        //jsGrid.fields.checkField = checkField;
 
         var NumberField = jsGrid.NumberField;
 

@@ -11,6 +11,9 @@ namespace BDOLife.Core.Repositories
     public interface IImperialRepository : IRepository<Imperial>
     {
         Task<IList<ImperialReceita>> ListarImperiaisPorReferenciasIds(List<string> referenciasIds);
-        Task<IList<Imperial>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel);
+        //Task<IList<Imperial>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel);
+        //Task<IList<Imperial>> ListarImperiaisAlquimia(NivelHabilidadeEnum? nivel);
+        Task<IList<ImperialReceita>> ListarReceitasImperiaisCulinaria(NivelHabilidadeEnum? nivel);
+        Task<IList<ImperialReceita>> ListarReceitasImperiaisAlquimia(NivelHabilidadeEnum? nivel);
     }
 }

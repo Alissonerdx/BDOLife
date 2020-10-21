@@ -16,5 +16,12 @@ namespace BDOLife.Application.ViewModels
         public long quantidade { get; set; }
         public long valor { get; set; }
         public string grupo { get; set; }
+        public long quantidadeDisponivel { get; set; }
+        public string dataAtualizacao { get; set; }
+        public bool disponivel { get; set; }
+        public bool vendeNPC { get; set; }
+        public string localNPC { get; set; }
+        public long? valorNPC { get; set; }
+        public int tipo { get; set; }
     }
 }

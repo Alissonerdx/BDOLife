@@ -11,5 +11,7 @@ namespace BDOLife.Application.Interfaces
     public interface IMaestriaService
     {
         Task<IList<MaestriaCulinariaViewModel>> ListarMaestriasCulinaria();
+        Task<IList<MaestriaAlquimiaViewModel>> ListarMaestriasAlquimia();
+
     }
 }

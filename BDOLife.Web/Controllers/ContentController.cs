@@ -30,9 +30,9 @@ namespace BDOLife.Web.Controllers
         }
 
         [ResponseCache(CacheProfileName = "Monthly")]
-        public IActionResult Imperial(int nivel)
+        public IActionResult Imperial(string caixa)
         {
-            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{nivel}.png");
+            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{caixa}.png");
             return File(image, "image/png");
         }
     }

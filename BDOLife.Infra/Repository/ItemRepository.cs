@@ -23,7 +23,7 @@ namespace BDOLife.Infra.Repository
 
         public async Task<IList<Item>> ListarPorTipoReceita(TipoReceitaEnum tipo)
         {
-            return await _dbContext.Itens.Where(i => i.TipoReceita == tipo).OrderBy(i => i.Nome).ToListAsync();
+            return await _dbContext.Itens.Where(i => i.TipoReceita == tipo && i.Excluido == false).OrderBy(i => i.Nome).ToListAsync();
         }
 
         public async Task<Item> ObterPorReferenciaId(string referenciaId)
@@ -39,6 +39,11 @@ namespace BDOLife.Infra.Repository
                 .ThenInclude(i => i.Resultado.ImperiaisReceitas)
                 .ThenInclude(i => i.Imperial)
                 .SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId) && !i.Excluido);
+        }
+
+        public async Task<IList<Item>> ObterPorListaReferenciasIds(List<string> referenciasIds)
+        {
+            return await _dbContext.Itens.Where(i => referenciasIds.Contains(i.ReferenciaId) && !i.Excluido).ToListAsync();
         }
     }
 }

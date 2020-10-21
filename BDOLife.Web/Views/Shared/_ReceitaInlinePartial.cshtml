@@ -1,25 +1,21 @@
-﻿@model Tuple<ItemViewModel, List<Tuple<ItemViewModel, long, bool>>>
+﻿@model List<Tuple<ItemViewModel, long, bool, long>>
 
 
 @{
     Layout = null;
 }
 
-@if (Model != null && Model.Item1 != null)
+@if (Model != null && Model != null)
 {
-    var itensDisponibilidades = Model.Item2;
-    @foreach (var sub in Model.Item1.Itens)
+    @foreach (var sub in Model)
     {
-        var item = itensDisponibilidades.SingleOrDefault(i => i.Item1.ReferenciaId == sub.ItemReferenciaId);
-        var disponivel = item.Item3;
-
-        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="@sub.Item.Valor" data-empacotar="@item.Item2" data-disponivel="@sub.Item.QuantidadeDisponivel" data-nome="@sub.Item.Nome" data-atualizado="@sub.Item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")" data-referencia="">
-            <a href="#" class="qtooltip" data-id="@sub.ItemReferenciaId">
+        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="@sub.Item1.Valor" data-empacotar="@sub.Item2" data-disponivel="@sub.Item1.QuantidadeDisponivel" data-nome="@sub.Item1.Nome" data-atualizado="@sub.Item1.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")" data-referencia="">
+            <a href="#" class="qtooltip" data-id="@sub.Item1.ReferenciaId">
                 <div class="icone-wrapper">
 
-                    <img src="@($"/Content/Image?referenciaId={sub.ItemReferenciaId}")" alt="icon" class="icone-medio" style="@(!disponivel ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)">
+                    <img src="@($"/Content/Image?referenciaId={sub.Item1.ReferenciaId}")" alt="icon" class="icone-medio" style="@(!sub.Item3 ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)">
                 </div>
-                <div class="quantidade-pequeno nowrap">@sub.Quantidade</div>
+                <div class="quantidade-pequeno nowrap">@sub.Item4</div>
             </a>
         </div>
     }
