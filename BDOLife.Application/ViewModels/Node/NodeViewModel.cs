@@ -23,5 +23,8 @@ namespace BDOLife.Application.ViewModels
         public string localNPC { get; set; }
         public long? valorNPC { get; set; }
         public int tipo { get; set; }
+        public long custoProducao { get; set; }
+        public long custoCompra { get; set; }
+        public string produzirOuComprar { get; set; }
     }
 }

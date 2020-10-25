@@ -38,7 +38,7 @@ namespace BDOLife.Web.Controllers
                 imperial.ItensQuantidadesNecessarias = null;
             }
 
-            return Json(imperiaisResultados);
+            return Json(imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria));
         }
 
         public async Task<IActionResult> CaixasAlquimia(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
@@ -51,7 +51,7 @@ namespace BDOLife.Web.Controllers
                 imperial.ItensQuantidadesNecessarias = null;
             }
 
-            return Json(imperiaisResultados);
+            return Json(imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria));
         }
     }
 }

@@ -35,6 +35,7 @@ namespace BDOLife.Web.Controllers
                     QuantidadeTotal = i.Value,
                     PrecoMarket = i.Key.Valor,
                     PrecoTotal = (i.Key.Valor * i.Value),
+                    PrecoProducao = i.Key.Valor,
                     Img = !string.IsNullOrEmpty(i.Key.ImagemUrl) ? $"Content/Image?referenciaId={i.Key.ReferenciaId}" : "",
                     QuantidadeDisponivel = i.Key.QuantidadeDisponivel,
                     DataAtualizacao = i.Key.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
@@ -47,16 +48,16 @@ namespace BDOLife.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> TreeView(string receitaReferenciaId, int quantidade, decimal procNormal)
+        public async Task<JsonResult> TreeView(string receitaReferenciaId, TipoReceitaEnum tipo, int maestriaId, int quantidade, decimal procNormal, decimal procRaro)
         {
-            var result = await _itemService.TreeView(receitaReferenciaId, quantidade, procNormal);
+            var result = await _itemService.TreeViewRefatorado(receitaReferenciaId, quantidade, maestriaId, tipo, procNormal, procRaro);
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int quantidade, int quantidadePorReceita, decimal procNormal)
+        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro)
         {
-            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, quantidade, quantidadePorReceita, procNormal);
+            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, quantidade, quantidadePorReceita, procNormal, procRaro);
             return Json(result);
         }
 
@@ -67,10 +68,16 @@ namespace BDOLife.Web.Controllers
             return Json(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AlterarIngrediente(string refereciaNovoIngrediente, int quantidade, long precoUnitario, string referenciaIngredienteAntigo)
+        [HttpPost]
+        public async Task<IActionResult> DadosGrafico(string receitaReferenciaId)
         {
-            return Json(null);
+            var resultados = await _itemService.GerarGraficoMercado(receitaReferenciaId);
+
+            return Json(new
+            {
+                graficoItemNormal = resultados.Item1,
+                graficoItemRaro = resultados.Item2
+            });
         }
     }
 }

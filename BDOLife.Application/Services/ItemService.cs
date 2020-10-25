@@ -1,6 +1,7 @@
 ﻿using BDOLife.Application.Interfaces;
 using BDOLife.Application.Mapper;
 using BDOLife.Application.ViewModels;
+using BDOLife.Application.ViewModels.Grafico;
 using BDOLife.Core.Entities;
 using BDOLife.Core.Enums;
 using BDOLife.Core.Repositories;
@@ -74,6 +75,163 @@ namespace BDOLife.Application.Services
             }
         }
 
+        public async Task<GraficoViewModel> ProcessarHistoricoPrecos(Item item, List<HistoricoPreco> dados)
+        {
+            double crescimentoProcura = 0.0;
+            double crescimentoOferta = 0.0;
+            double crescimentoPreco = 0.0;
+            var decisaoMercadoComprar = "";
+            var decisaoMercadoVender = "";
+            long melhorPrecoCompra = 0;
+            long melhorPrecoVenda = 0;
+            var melhorDataCompra = DateTime.MinValue;
+            var melhorDataVenda = DateTime.MinValue;
+
+            if (dados.Count >= 2)
+            {
+                var dadosTemp = dados.Take(120).ToList();
+
+                var ultimaAtt = dadosTemp[0];
+                double mediaProcura = 0.0;
+                double mediaOferta = 0.0;
+                double mediaPreco = 0.0;
+
+                for (int i = 1; i < dadosTemp.Count; i++)
+                {
+                    mediaProcura += dadosTemp[i].QuantidadeTotalVenda;
+                    mediaOferta += dadosTemp[i].QuantidadeDisponivel;
+                    mediaPreco += dadosTemp[i].Valor;
+                }
+
+                mediaProcura /= (dadosTemp.Count - 1);
+                mediaOferta /= (dadosTemp.Count - 1);
+                mediaPreco /= (dadosTemp.Count - 1);
+
+                crescimentoProcura = ((double)(ultimaAtt.QuantidadeTotalVenda - mediaProcura) / (mediaProcura == 0 ? 1 : mediaProcura)) * 100.0;
+                crescimentoOferta = ((double)(ultimaAtt.QuantidadeDisponivel - mediaOferta) / (mediaOferta == 0 ? 1 : mediaOferta)) * 100.0;
+                crescimentoPreco = ((double)(ultimaAtt.Valor - mediaPreco) / (mediaPreco == 0 ? 1 : mediaPreco)) * 100.0;
+
+                dados = dados.Take(120).ToList();
+                dados = dados.OrderBy(h => h.Data).ToList();
+
+                var precoAtual = ultimaAtt.Valor;
+                var dataAtual = ultimaAtt.Data;
+                var maiorPreco = precoAtual;
+                var maiorData = dataAtual;
+                var menorPreco = precoAtual;
+                var menorData = dataAtual;
+
+                for (var i = 0; i < dados.Count(); i++)
+                {
+                    if (i > 1)
+                    {
+                        var preco = dados[i].Valor;
+                        var data = dados[i].Data;
+                        if (preco >= maiorPreco)
+                        {
+                            maiorPreco = preco;
+                            maiorData = data;
+                        }
+
+                        if (preco <= menorPreco)
+                        {
+                            menorPreco = preco;
+                            menorData = data;
+                        }
+                    }
+                }
+
+                melhorDataCompra = menorData;
+                melhorPrecoCompra = menorPreco;
+
+                melhorDataVenda = maiorData;
+                melhorPrecoVenda = maiorPreco;
+
+                decisaoMercadoComprar = melhorDataCompra == ultimaAtt.Data ? "Boa hora para comprar" : $"Boa data para comprar foi em {melhorDataCompra.ToString("dd/MM/yyyy HH:mm")} por {melhorPrecoCompra} pratas";
+                decisaoMercadoVender = melhorDataVenda == ultimaAtt.Data ? "Boa hora para vender" : $"Boa data para vender foi em {melhorDataVenda.ToString("dd/MM/yyyy HH:mm")} por {melhorPrecoVenda} pratas";
+            }
+
+            return new GraficoViewModel
+            {
+                labels = dados.Select(d => d.Data.ToString("dd/MM/yyyy HH:mm")).ToArray(),
+                datasets = new List<Object> {
+                            new {
+                                label = "Preço Médio",
+                                data = dados.Select(d => d.Valor).ToArray(),
+                                backgroundColor = "transparent",
+                                borderColor = "#1DE9B6",
+                                borderWidth = 2,
+                                pointColor = "#fff",
+                                pointBorderColor = "#494C56",
+                                pointBackgroundColor = "#fff",
+                                pointBorderWidth = 3,
+                                pointHoverBorderWidth = 4,
+                                pointRadius = 2
+                            },
+                            new
+                            {
+                                label = "Quantidade Disponível",
+                                data = dados.Select(d => d.QuantidadeDisponivel).ToArray(),
+                                backgroundColor = "transparent",
+                                borderColor = "#F0A748",
+                                borderWidth = 2,
+                                pointColor = "#fff",
+                                pointBorderColor = "#494C56",
+                                pointBackgroundColor = "#fff",
+                                pointBorderWidth = 3,
+                                pointHoverBorderWidth = 4,
+                                pointRadius = 2
+                            }
+                        },
+                crescimentoProcura = crescimentoProcura,
+                crescimentoOferta = crescimentoOferta,
+                crescimentoPreco = crescimentoPreco,
+                melhorDataCompra = melhorDataCompra != DateTime.MinValue ? melhorDataCompra.ToString("dd/MM/yyyy HH:mm") : "",
+                melhorPrecoCompra = melhorPrecoCompra,
+                melhorDataVenda = melhorDataVenda != DateTime.MinValue ? melhorDataVenda.ToString("dd/MM/yyyy HH:mm") : "",
+                melhorPrecoVenda = melhorPrecoVenda,
+                decisaoMercadoComprar = decisaoMercadoComprar,
+                decisaoMercadoVender = decisaoMercadoVender,
+                nomeItem = item.Nome,
+                imagemItem = $"Content/Image?referenciaId={item.ReferenciaId}",
+                precoAtualItem = item.Valor,
+                quantidadeAtualItem = item.QuantidadeDisponivel
+            };
+        }
+
+        public async Task<Tuple<GraficoViewModel, GraficoViewModel>> GerarGraficoMercado(string receitaReferenciaId)
+        {
+            var receitaResultados = await _itemRepository.ListarReceitaResultados(receitaReferenciaId);
+            GraficoViewModel resultadoNormal = null;
+            GraficoViewModel resultadoRaro = null;
+
+            if(receitaResultados != null)
+            {
+                var itemNormal = receitaResultados.SingleOrDefault(r => r.ProcRaro == false);
+                if(itemNormal != null)
+                {
+                    var dados = itemNormal.Resultado.HistoricoPrecos?.OrderByDescending(h => h.Data)?.ToList();
+                    if(dados != null)
+                    {
+                        resultadoNormal = await ProcessarHistoricoPrecos(itemNormal.Resultado, dados);
+                    }
+                }
+
+                var itemRaro = receitaResultados.SingleOrDefault(r => r.ProcRaro);
+
+                if(itemRaro != null)
+                {
+                    var dados = itemRaro.Resultado.HistoricoPrecos?.OrderByDescending(h => h.Data)?.ToList();
+                    if (dados != null)
+                    {
+                        resultadoRaro = await ProcessarHistoricoPrecos(itemRaro.Resultado, dados);
+                    }
+                }
+            }
+
+            return new Tuple<GraficoViewModel, GraficoViewModel>(resultadoNormal, resultadoRaro);
+        }
+
         public async Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId)
         {
             var data = await _itemRepository.ObterPorReferenciaId(referenciaId);
@@ -91,6 +249,8 @@ namespace BDOLife.Application.Services
                 Data = ObjectMapper.Mapper.Map<List<ItemViewModel>>(data)
             };
         }
+
+
 
         public async Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, int quantidade, decimal procNormal)
         {
@@ -195,7 +355,175 @@ namespace BDOLife.Application.Services
             return await Task.FromResult(result);
         }
 
-        public async Task<IList<NodeViewModel>> TreeView(string referenciaId, int quantidade, decimal procNormal, bool semDetalhes = false)
+
+        public async Task<NodeViewModel> ProcessarNode(Item item, string id, string parentId, long qtdTotal, long qtdPorReceita, long quantidadeProcada, decimal procNormal, decimal procRaro, TipoReceitaEnum tipo, MaestriaCulinaria maestriaCulinaria, MaestriaAlquimia maestriaAlquimia, bool semDetalhes)
+        {
+
+            //if(maestriaCulinaria != null)
+            //{
+            //    procNormal = (decimal)maestriaCulinaria.RegularProc;
+            //    procRaro = (decimal)maestriaCulinaria.RareProc;
+            //}
+            //else if(maestriaAlquimia != null)
+            //{
+            //    procNormal = (decimal)maestriaAlquimia.RegularProc;
+            //    procRaro = (decimal)maestriaAlquimia.RareProc;
+            //}
+
+            return new NodeViewModel
+            {
+                id = id,
+                parent = parentId,
+                text = id == "raiz" ? $" {(!semDetalhes ? $"({qtdTotal})" : "")} {item.Nome}" : $"{qtdPorReceita} {item.Nome} {(!semDetalhes ? $"({quantidadeProcada})" : "")}",
+                icon = !string.IsNullOrEmpty(item.ImagemUrl) ? $"Content/Image?referenciaId={item.ReferenciaId}" : "",
+                state = new { opened = true },
+                nomeItem = item.Nome,
+                quantidade = quantidadeProcada,
+                valor = item.Valor,
+                grupo = item.Grupo,
+                dataAtualizacao = item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                disponivel = item.QuantidadeDisponivel != 0,
+                quantidadeDisponivel = item.QuantidadeDisponivel,
+                vendeNPC = item.ValorNPC != null,
+                localNPC = item.LocalizacaoNPC,
+                valorNPC = item.ValorNPC,
+                tipo = (int)item.Tipo
+            };
+        }
+
+        public async Task<IList<NodeViewModel>> TreeViewRefatorado(string referenciaId, int quantidade, int maestriaId, TipoReceitaEnum tipoReceita, decimal procNormal, decimal procRaro, bool semDetalhes = false)
+        {
+            procNormal = procNormal == 0 ? 2.5m : procNormal;
+
+            MaestriaCulinaria maestriaCulinaria = tipoReceita == TipoReceitaEnum.Culinaria ? await _maestriaCulinariaRepository.GetByIdAsync(maestriaId) : null;
+            MaestriaAlquimia maestriaAlquimia = tipoReceita == TipoReceitaEnum.Alquimia ? await _maestriaAlquimiaRepository.GetByIdAsync(maestriaId) : null;
+
+            var tree = new List<NodeViewModel>();
+
+            var receita = await _itemRepository.ObterPorReferenciaId(referenciaId);
+
+            if (receita != null && receita.Itens != null && receita.Itens.Count > 0 && receita.Excluido == false)
+            {
+                receita.Itens = receita.Itens.OrderBy(i => i.Item.Nome).ToList();
+
+                tree.Add(await ProcessarNode(receita, "raiz", "#", quantidade, 0, 0, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+                foreach (var subReceita in receita.Itens)
+                {
+                    if (subReceita.Visivel && subReceita.Excluido == false)
+                    {
+                        var subReceitaProc = quantidade * subReceita.Quantidade;
+                        var subReceitaId = $"{subReceita.ItemReferenciaId}";
+                        var subReceitaParent = "raiz";
+
+                        tree.Add(await ProcessarNode(subReceita.Item, subReceitaId, subReceitaParent, 0, subReceita.Quantidade, subReceitaProc, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+
+                        if (subReceita.Item.Itens != null && subReceita.Item.Itens.Count > 0)
+                        {
+                            subReceita.Item.Itens = subReceita.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                            foreach (var sub1 in subReceita.Item.Itens)
+                            {
+                                if (sub1.Visivel && sub1.Excluido == false)
+                                {
+                                    var procNormalSub1 = subReceita.Item.ProcNormalExcessao != null ? subReceita.Item.ProcNormalExcessao.Value : EhProcesso(subReceita.Item) ? 2.5m : procNormal;
+                                    var sub1Proc = Math.Ceiling(subReceitaProc / procNormalSub1) * sub1.Quantidade;
+                                    sub1Proc = sub1Proc < 1 && quantidade > 0 ? 1 : sub1Proc;
+
+                                    var sub1Id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}";
+                                    var sub1Parent = $"{subReceita.ItemReferenciaId}";
+
+                                    tree.Add(await ProcessarNode(sub1.Item, sub1Id, sub1Parent, 0, sub1.Quantidade, (long)sub1Proc,  procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+
+                                    if (sub1.Item.Itens != null && sub1.Item.Itens.Count > 0)
+                                    {
+                                        sub1.Item.Itens = sub1.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                        foreach (var sub2 in sub1.Item.Itens)
+                                        {
+                                            if (sub2.Visivel && sub2.Excluido == false)
+                                            {
+                                                var procNormalSub2 = sub1.Item.ProcNormalExcessao != null ? sub1.Item.ProcNormalExcessao.Value : EhProcesso(sub1.Item) ? 2.5m : procNormal;
+                                                var sub2Proc = Math.Ceiling(sub1Proc / procNormalSub2) * sub2.Quantidade;
+                                                sub2Proc = sub2Proc < 1 && quantidade > 0 ? 1 : sub2Proc;
+
+                                                var sub2Id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}";
+                                                var sub2Parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}";
+
+                                                tree.Add(await ProcessarNode(sub2.Item, sub2Id, sub2Parent, 0, sub2.Quantidade, (long)sub2Proc, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+                                                if (sub2.Item.Itens != null && sub2.Item.Itens.Count > 0)
+                                                {
+                                                    sub2.Item.Itens = sub2.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                    foreach (var sub3 in sub2.Item.Itens)
+                                                    {
+                                                        if (sub3.Visivel && sub3.Excluido == false)
+                                                        {
+                                                            var procNormalSub3 = sub2.Item.ProcNormalExcessao != null ? sub2.Item.ProcNormalExcessao.Value : EhProcesso(sub2.Item) ? 2.5m : procNormal;
+                                                            var sub3Proc = Math.Ceiling(sub2Proc / procNormalSub3) * sub3.Quantidade;
+                                                            sub3Proc = sub3Proc < 1 && quantidade > 0 ? 1 : sub3Proc;
+
+                                                            var sub3Id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}";
+                                                            var sub3Parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}";
+
+                                                            tree.Add(await ProcessarNode(sub3.Item, sub3Id, sub3Parent, 0, sub3.Quantidade, (long)sub3Proc, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+                                                            if (sub3.Item.Itens != null && sub3.Item.Itens.Count > 0)
+                                                            {
+                                                                sub3.Item.Itens = sub3.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                                foreach (var sub4 in sub3.Item.Itens)
+                                                                {
+                                                                    if (sub4.Visivel && sub4.Excluido == false)
+                                                                    {
+                                                                        var procNormalSub4 = sub3.Item.ProcNormalExcessao != null ? sub3.Item.ProcNormalExcessao.Value : EhProcesso(sub3.Item) ? 2.5m : procNormal;
+                                                                        var sub4Proc = Math.Ceiling(sub3Proc / procNormalSub4) * sub4.Quantidade;
+                                                                        sub4Proc = sub4Proc < 1 && quantidade > 0 ? 1 : sub4Proc;
+
+                                                                        var sub4Id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}";
+                                                                        var sub4Parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}";
+
+                                                                        tree.Add(await ProcessarNode(sub4.Item, sub4Id, sub4Parent, 0, sub4.Quantidade, (long)sub4Proc, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+
+                                                                        if (sub4.Item.Itens != null && sub4.Item.Itens.Count > 0)
+                                                                        {
+                                                                            sub4.Item.Itens = sub4.Item.Itens.OrderBy(i => i.Item.Nome).ToList();
+                                                                            foreach (var sub5 in sub4.Item.Itens)
+                                                                            {
+                                                                                if (sub5.Visivel && sub5.Excluido == false)
+                                                                                {
+                                                                                    var procNormalSub5 = sub4.Item.ProcNormalExcessao != null ? sub4.Item.ProcNormalExcessao.Value : EhProcesso(sub4.Item) ? 2.5m : procNormal;
+                                                                                    var sub5Proc = Math.Ceiling(sub4Proc / procNormalSub5) * sub5.Quantidade;
+                                                                                    sub5Proc = sub5Proc < 1 && quantidade > 0 ? 1 : sub5Proc;
+
+                                                                                    var sub5Id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}";
+                                                                                    var sub5Parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}";
+
+                                                                                    tree.Add(await ProcessarNode(sub5.Item, sub5Id, sub5Parent, 0, sub4.Quantidade, (long)sub4Proc, procNormal, procRaro, tipoReceita, maestriaCulinaria, maestriaAlquimia, semDetalhes));
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return tree;
+
+        }
+
+
+        public async Task<IList<NodeViewModel>> TreeView(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false)
         {
             procNormal = procNormal == 0 ? 1m : procNormal;
 
@@ -422,7 +750,7 @@ namespace BDOLife.Application.Services
             return tree;
         }
 
-        public async Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, bool semDetalhes = false)
+        public async Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool semDetalhes = false)
         {
             procNormal = procNormal == 0 ? 2.5m : procNormal;
 
@@ -857,6 +1185,44 @@ namespace BDOLife.Application.Services
                 Data = ObjectMapper.Mapper.Map<IList<ItemViewModel>>(data)
             };
         }
+
+        public Task<IList<Item>> ListarReceitaResultados(string receitaReferenciaId)
+        {
+            throw new NotImplementedException();
+        }
+
+        //private long CalcularValorSubReceitaRecursivo(string receitaReferenciaId, ReceitaItem receitaPrincipal, decimal procNormal)
+        //{
+        //    var receita = _context.Itens.SingleOrDefault(r => r.ReferenciaId == receitaReferenciaId && r.Excluido == false);
+
+        //    if (receita.Tipo == TipoEnum.Receita)
+        //    {
+        //        var pilhaReceita = new Stack<CalculoSubReceita>();
+        //        receita.Itens.ForEach(i => pilhaReceita.Push(new CalculoSubReceita { Principal = receitaPrincipal, SubReceita = i }));
+        //        long total = 0;
+        //        while (pilhaReceita.Count > 0)
+        //        {
+        //            var receitaAtual = pilhaReceita.Pop();
+        //            if (receitaAtual.SubReceita.Item != null && receitaAtual.SubReceita.Item.Itens != null && receitaAtual.SubReceita.Item.Itens.Count > 0)
+        //            {
+        //                foreach (var subReceita in receitaAtual.SubReceita.Item.Itens)
+        //                {
+        //                    pilhaReceita.Push(new CalculoSubReceita { Principal = receitaAtual.SubReceita, SubReceita = subReceita });
+        //                }
+        //            }
+        //            else
+        //            {
+        //                var proc = receitaAtual.SubReceita.Receita.ProcNormalExcessao != null ? receitaAtual.SubReceita.Receita.ProcNormalExcessao.Value : EhProcesso(receitaAtual.SubReceita.Receita) ? 2.5m : procNormal;
+        //                total += (long)(Math.Max(Math.Ceiling((receitaAtual.SubReceita.Quantidade * receitaAtual.Principal.Quantidade) / proc), receitaAtual.SubReceita.Quantidade) * receitaAtual.SubReceita.Item.Valor);
+        //            }
+
+        //        }
+
+        //        return total;
+        //    }
+
+        //    return (long)(receita.Valor * receitaPrincipal.Quantidade);
+        //}
     }
 }
 

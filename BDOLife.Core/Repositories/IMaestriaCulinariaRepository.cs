@@ -9,5 +9,6 @@ namespace BDOLife.Core.Repositories
 {
     public interface IMaestriaCulinariaRepository : IRepository<MaestriaCulinaria>
     {
+        Task<MaestriaCulinaria> ObterPorValor(int valor);
     }
 }

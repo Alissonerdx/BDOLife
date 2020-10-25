@@ -57,8 +57,14 @@ i {
     color: black !important;
 }
 
-.nav-link.active.show {
+/*.nav-link[aria-expanded=true] {
     color: #33363F !important;
+}*/
+.nav-link.active {
+    color: #33363F !important;
+    background: #E2E2E1 !important;
+    background-color: #E2E2E1 !important;
+    border-color: #e2e2e1 !important;
 }
 
 .nav-link {
@@ -258,3 +264,49 @@ i.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
     overflow: hidden;
 }
 
+.vakata-context.jstree-contextmenu.jstree-default-contextmenu {
+    color: #33363f !important;
+    background: #e3e3e2 !important;
+    font-family: 'POPPINS' !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    padding: 8px !important;
+}
+
+.vakata-context.jstree-contextmenu.jstree-default-contextmenu > li > a > i {
+    width: 24px !important;
+}
+
+.vakata-context li > a {
+    padding: 0 0.2em 0 2em !important;
+}
+
+ .vakata-context li > a:hover {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: black !important;
+}
+
+.vakata-context .vakata-context-hover > a {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.jstree-default-responsive .jstree-anchor {
+    text-shadow: none !important;
+}
+
+.poppins {
+    color: white !important;
+    text-transform: uppercase !important;
+    font-family: 'Poppins' !important;
+    font-weight: 500 !important;
+}
+
+
+.poppins-porcentagem {
+    color: white !important;
+    text-transform: uppercase !important;
+    font-family: 'Poppins' !important;
+    font-weight: 500 !important;
+}

@@ -29,9 +29,9 @@ $(document).ready(function () {
             title: 'Alterar ingrediente',
             background: '#494C56',
             headerColor: '#33363F',
-            width: '80%',
+            width: '60%',
             radius: 20,
-            top: 50,
+            top: 200,
             closeOnEscape: false,
             overlayClose: false,
             onOpening: function () {
@@ -150,7 +150,7 @@ $(document).ready(function () {
                         type: "GET",
                         data: function (params) {
                             var query = {
-                                //search: params.term,
+                                search: parseInt(params.term),
                                 //page: params.page || 1,
                                 tipo: tipoReceita
                             };
@@ -175,8 +175,8 @@ $(document).ready(function () {
         $('#maestriaSelect').on('change', function () {
             let selecionado = $(this).select2('data')[0];
             if (selecionado !== undefined) {
-                $('#proc-normal').inputmask("setvalue", selecionado.procNormal);
-                $('#proc-raro').inputmask("setvalue", selecionado.procRaro);
+                $('#proc-normal').inputmask("setvalue", $(selecionado.element).attr('data-proc-normal'));
+                $('#proc-raro').inputmask("setvalue", $(selecionado.element).attr('data-proc-raro'));
                 $('#proc-normal').focus();
                 $('#proc-raro').focus();
             }
@@ -189,6 +189,7 @@ $(document).ready(function () {
             $("#resultadosGrid").jsGrid("loadData");
             $("#resultadosImperialGrid").jsGrid("loadData");
             $('#treeViewContent').jstree(true).refresh();
+            CarregarGraficos();
         });
     }
 
@@ -205,31 +206,39 @@ $(document).ready(function () {
             escapeMarkup: function (m) { return m; },
         });
 
-        $('#maestriaSelect').select2({
-            placeholder: placeholderMaestria,
-            language: "pt-BR",
-            width: '100%',
-            templateResult: formatState,
-            templateSelection: formatState,
-            allowClear: true,
-            ajax: {
-                url: '/Maestria/SelectMaestrias',
-                type: "GET",
-                data: function (params) {
-                    var query = {
-                        //search: params.term,
-                        //page: params.page || 1,
-                        tipo: tipoReceita
-                    };
 
-                    return query;
-                },
-                processResults: function (data) {
-                    return data;
-                },
+        $.get(`/Maestria/SelectMaestrias?tipo=${tipoReceita}`, function (data) {
+            $('#maestriaSelect').append('<option>Selecione a maestria</option>');
+            data.results.forEach(function (value, index) {
+                $('#maestriaSelect').append(`<option data-proc-normal='${value.procNormal}' data-proc-raro='${value.procRaro}' data-regularmpc='${value.regularMaxProcChance}' data-rarempc='${value.rareMaxProcChance}' value='${value.id}'>${value.text}</option>`);
+            })
 
-            }
+            $('#maestriaSelect').select2({
+                placeholder: placeholderMaestria,
+                language: "pt-BR",
+                width: '100%',
+                templateResult: formatState,
+                templateSelection: formatState,
+                allowClear: true,
+            });
         });
+        //url: '/Maestria/SelectMaestrias',
+        //    type: "GET",
+        //        data: function (params) {
+        //            var query = {
+        //                //page: params.page || 1,
+        //                tipo: tipoReceita
+        //            };
+
+        //            return query;
+        //        },
+        //processResults: function (data) {
+        //    return data;
+        //},
+
+        //}
+
+
 
 
     }
@@ -255,7 +264,10 @@ $(document).ready(function () {
                         "data": {
                             receitaReferenciaId: $('#receitaSelect').val(),
                             quantidade: parseInt($('#quantidade').inputmask('unmaskedvalue')),
-                            procNormal: $('#proc-normal').val()
+                            procNormal: $('#proc-normal').val(),
+                            procRaro: $('#proc-raro').val(),
+                            tipo: tipoReceita,
+                            maestriaId: $('#maestriaSelect').val()
                         },
                         "success": function (data) {
                             cb(data);
@@ -267,8 +279,8 @@ $(document).ready(function () {
             "types": {
             },
             "plugins": [
-                "contextmenu", /*"conditionalselect",*/ "search",
-                /*"state"*//*, "types", "wholerow", "checkbox"*/
+                "contextmenu", /*"conditionalselect",*/ "search", "sort",
+            /*"state"*//*, "types", "wholerow",*/ /*"checkbox"*/
             ],
             "search": {
                 "case_insensitive": true,
@@ -278,6 +290,11 @@ $(document).ready(function () {
                 //    return !($("#treeViewContent").jstree("is_closed", node));
                 //}
             },
+            //"checkbox": {
+            //    "keep_selected_style": false,
+            //    "cascade_to_disabled": true,
+            //    "cascade": 'down'
+            //},
             "contextmenu": {
                 "items": function ($node) {
                     let grupo = $node.original.grupo;
@@ -420,7 +437,10 @@ $(document).ready(function () {
                         vendeNPC: node.vendeNPC,
                         localNPC: node.localNPC,
                         valorNPC: node.valorNPC,
-                        ignorar: false
+                        ignorar: false,
+                        //custoProducao: node.custoProducao,
+                        //custoCompra: node.custoCompra,
+                        //produzirOuComprar: node.produzirOuComprar
                     });
                 }
                 else {
@@ -601,6 +621,7 @@ $(document).ready(function () {
                         return value;
                     }
                 },
+              
                 //{ name: "comprarOuFazer", title: "Comprar/Fazer", type: "text", width: 120, editing: false, inserting: false },
                 {
                     name: "quantidadeTotal", type: "prataField", title: "Quantidade Necessária", width: 180,
@@ -620,6 +641,23 @@ $(document).ready(function () {
                         return Inputmask.format(`${value}`, { alias: "prata" });
                     }
                 },
+                //{
+                //    name: "custoProducao", type: "prataField", title: "Custo de Produção", width: 150, align: "left", editing: false, inserting: false,
+                //    itemTemplate: function (value, item) {
+                //        //let quantidadeIngredientes = parseInt(item.quantidade);
+                //        //let precoMercado = parseInt(Inputmask.unmask("" + item.precoMarket, { alias: "prata" }));
+                //        //let totalPorReceita = quantidadeIngredientes * precoMercado;
+                //        return Inputmask.format(`${value}`, { alias: "prata" });
+                //    }
+                //},
+                //{
+                //    name: "produzirOuComprar", title: "Produzir/Comprar", type: "select", width: 150, align: "center", editing: true, inserting: false, items: [
+                //        { text: "Comprar", value: "COMPRAR" },
+                //        { text: "Produzir", value: "PRODUZIR" }
+                //    ],
+                //    valueField: "value",
+                //    textField: "text"
+                //},
                 {
                     name: "precoTotal", type: "prataField", title: "Custo Total", width: 120, editing: false, inserting: false,
                     itemTemplate: function (value, item) {
@@ -673,7 +711,8 @@ $(document).ready(function () {
                         data: {
                             receitaReferenciaId: $('#receitaSelect').val(),
                             quantidade: parseInt($('#quantidade').inputmask('unmaskedvalue')),
-                            procNormal: $('#proc-normal').val()
+                            procNormal: $('#proc-normal').val(),
+                            procRaro: $('#proc-raro').val()
                         },
                         dataType: "json"
                     }).done(function (response) {
@@ -1034,6 +1073,9 @@ function AdicionarQuantidade(node) {
             localNPC: nodeTemp.localNPC,
             valorNPC: nodeTemp.valorNPC,
             ignorar: false,
+            //custoProducao: nodeTemp.custoProducao,
+            //custoCompra: nodeTemp.custoCompra,
+            //produzirOuComprar: nodeTemp.produzirOuComprar
         });
     }
     else {
@@ -1043,53 +1085,59 @@ function AdicionarQuantidade(node) {
 }
 
 function AlterarIngrediente() {
+
     if (ingredienteNodeSelecionado !== null) {
 
         let novoIngrediente = $('#trocarIngrediente').find('#ingredienteAlternativo').select2('data')[0];
         let quantidade = $('#trocarIngrediente').find('#quantidadeIngrediente').val();
         let precoUnitario = $('#trocarIngrediente').find('#precoUnitario').val();
 
-        let parentId = ingredienteNodeSelecionado.parent;
-        let parentNode = $("#treeViewContent").jstree("get_node", parentId);
-        let quantidadeTotalParent = parentNode.original.quantidade;
+        if (quantidade !== "" && precoUnitario !== "" && quantidade !== 0 && precoUnitario !== 0) {
 
-        let ingredienteSelecionado = BuscarIngredientePorId(ingredienteNodeSelecionado.id);
-        if (ingredienteSelecionado !== undefined && ingredienteSelecionado !== null) {
-            console.log(ingredienteSelecionado);
-            SubtrairTrocaItem(ingredienteSelecionado);
-        }
-        //console.log(ingredienteNodeSelecionado);
-        //if (parentNode.id === "raiz") {
 
-        let novaQuantidadeTotal = parseInt(quantidadeTotalParent) * parseInt(quantidade);
+            let parentId = ingredienteNodeSelecionado.parent;
+            let parentNode = $("#treeViewContent").jstree("get_node", parentId);
+            let quantidadeTotalParent = parentNode.original.quantidade;
 
-        BuscarTreeView(ingredienteNodeSelecionado.parent, novoIngrediente.id, $('#proc-normal').val(), novaQuantidadeTotal, parseInt(quantidade)).then(function (data) {
-            let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
+            let ingredienteSelecionadoIds = ingredienteNodeSelecionado.original.id.split('-');
+            let ingredienteSelecionadoId = ingredienteSelecionadoIds[ingredienteSelecionadoIds.length - 1];
 
-            childrens.each(function (index, value) {
-                SubtrairTrocaItem(value);
-            })
+            let ingredienteSelecionado = BuscarIngredientePorId(ingredienteSelecionadoId);
+            if (ingredienteSelecionado !== undefined && ingredienteSelecionado !== null) {
+                SubtrairTrocaItem(ingredienteNodeSelecionado.original.id);
+            }
+            //console.log(ingredienteNodeSelecionado);
+            //if (parentNode.id === "raiz") {
 
-            $('#treeViewContent').jstree("delete_node", `#${ingredienteNodeSelecionado.id}`);
+            let novaQuantidadeTotal = parseInt(quantidadeTotalParent) * parseInt(quantidade);
 
-            data.forEach(function (value, index) {
-                if (index === 0) {
-                    value.valor = parseInt(Inputmask.unmask(`${precoUnitario}`, { alias: "prata" }));
-                }
+            BuscarTreeView(ingredienteNodeSelecionado.parent, novoIngrediente.id, $('#proc-normal').val(), $('#proc-raro').val(), novaQuantidadeTotal, parseInt(quantidade)).then(function (data) {
+                let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
 
-                $('#treeViewContent').jstree("create_node", (value.parent === "#" ? "raiz" : value.parent), value, "inside");
+                childrens.each(function (index, value) {
+                    SubtrairTrocaItem(value);
+                })
 
-                if (value.tipo === 1 || value.tipo === 2) {
-                    AdicionarQuantidade(value);
-                }
+                $('#treeViewContent').jstree("delete_node", `#${ingredienteNodeSelecionado.id}`);
+
+                data.forEach(function (value, index) {
+                    if (index === 0) {
+                        value.valor = parseInt(Inputmask.unmask(`${precoUnitario}`, { alias: "prata" }));
+                    }
+
+                    $('#treeViewContent').jstree("create_node", (value.parent === "#" ? "raiz" : value.parent), value, "inside");
+
+                    if (value.tipo === 1 || value.tipo === 2) {
+                        AdicionarQuantidade(value);
+                    }
+                });
             });
-        });
-
-        $('#trocarIngrediente').iziModal('close');
+            $('#trocarIngrediente').iziModal('close');
+        }
     }
 }
 
-function BuscarTreeView(raiz, referenciaId, proc, quantidade, quantidadePorReceita) {
+function BuscarTreeView(raiz, referenciaId, proc, procRaro, quantidade, quantidadePorReceita) {
     BlockElement('#treeView');
     return $.ajax({
         "type": "POST",
@@ -1099,7 +1147,9 @@ function BuscarTreeView(raiz, referenciaId, proc, quantidade, quantidadePorRecei
             receitaReferenciaId: referenciaId,
             quantidadePorReceita: quantidadePorReceita,
             quantidade: quantidade,
-            procNormal: proc
+            procNormal: proc,
+            procRaro: procRaro,
+            
         },
         "success": function (data) {
             UnblockElement('#treeView');

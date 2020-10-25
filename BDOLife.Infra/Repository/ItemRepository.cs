@@ -45,5 +45,15 @@ namespace BDOLife.Infra.Repository
         {
             return await _dbContext.Itens.Where(i => referenciasIds.Contains(i.ReferenciaId) && !i.Excluido).ToListAsync();
         }
+
+        public async Task<IList<ReceitaResultado>> ListarReceitaResultados(string receitaReferenciaId)
+        {
+            var receita = await _dbContext.Itens
+                .Include(i => i.Resultados)
+                .ThenInclude(i => i.Resultado.HistoricoPrecos)
+                .SingleOrDefaultAsync(i => i.ReferenciaId == receitaReferenciaId);
+
+            return receita?.Resultados;
+        }
     }
 }

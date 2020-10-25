@@ -19,7 +19,7 @@ namespace BDOLife.Web.Controllers
         [HttpGet]
         public async Task<JsonResult> SelectMaestrias(TipoReceitaEnum tipo)
         {
-            if(tipo == TipoReceitaEnum.Alquimia)
+            if (tipo == TipoReceitaEnum.Alquimia)
             {
                 var response = await _maestriaService.ListarMaestriasAlquimia();
                 return Json(new

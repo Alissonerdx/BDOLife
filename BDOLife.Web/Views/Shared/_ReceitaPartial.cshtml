@@ -1,6 +1,6 @@
-﻿@model string 
+﻿@model string
 
-@{ 
+@{
     Layout = null;
     var receitas = ViewBag.ReceitasCulinaria as List<ItemViewModel>;
 }
@@ -39,7 +39,6 @@
                         <div class="form-group">
                             <label for="maestria" class="font-label-poppins">Maestria <a href="#" onclick="ConfigurarMaestriaImperial()"><img style="vertical-align: baseline !important" id="configuracaoMaestriaIcone" src="~/imagens/icones/config-icon.svg" width="16" /></a></label>
                             <select class="form-control" id="maestriaSelect">
-                                <option>Selecione a maestria</option>
                             </select>
                         </div>
                     </div>
@@ -166,17 +165,6 @@
                                 </div>
                                 <br />
                             </div>
-                            @*<div class="tab-pane" id="estatisticas" aria-labelledby="tab-estatisticas">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>*@
-
                             @*<div class="tab-pane" id="usado-em" aria-labelledby="tab-usado-em">
                                     <div class="form-body">
                                         <div class="row">
@@ -195,7 +183,10 @@
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active show background-e2e2e1" id="tab-resultados" data-toggle="tab" aria-controls="resultados" href="#resultados" aria-expanded="true">Resultados</a>
+                                <a class="nav-link active show" id="tab-resultados" data-toggle="tab" aria-controls="resultados" href="#resultados" aria-expanded="true">Resultados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-analiseMercado" data-toggle="tab" aria-controls="analiseMercado" href="#analiseMercado" aria-expanded="false">Análise do Mercado</a>
                             </li>
                         </ul>
                         <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
@@ -207,8 +198,124 @@
                                         </div>
                                     </div>
                                 </div>
-                                <br />
                             </div>
+                            <div class="tab-pane" id="analiseMercado" aria-labelledby="tab-analiseMercado">
+                                <div class="form-body">
+                                    <div class="row" id="graficoItemNormal" style="display: none">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        @*<img id="imagemResultadoNormal" class="float-left" style="max-width: 44px; background-color: white;" src="" />*@
+                                                                        <span class="text-muted poppins  mt-3" id="nomeResultadoNormal"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO DEMANDA</span>
+                                                                        <span class="danger float-right"><i class="ft-arrow-up danger" id="porcentagemCrescimentoDemandaNormalSeta"></i> <span id="porcentagemCrescimentoDemandaNormal"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoDemandaNormalBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO OFERTA</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoOfertaNormalSeta"></i> <span id="porcentagemCrescimentoOfertaNormal"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoOfertaNormalBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO PREÇO</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoPrecoNormalSeta"></i><span id="porcentagemCrescimentoPrecoNormal"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoPrecoNormalBar"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="height-400 col-md-12">
+                                            <canvas id="grafico-resultado-1" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="graficoItemRaro" style="display: none">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        @*<img id="imagemResultadoRaro" class="float-left" style="max-width: 44px; background-color: white;" src="" />*@
+                                                                        <span class="text-muted poppins mt-3" id="nomeResultadoRaro"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO DEMANDA</span>
+                                                                        <span class="danger float-right"><i class="ft-arrow-up danger" id="porcentagemCrescimentoDemandaRaroSeta"></i> <span id="porcentagemCrescimentoDemandaRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoDemandaRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO OFERTA</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoOfertaRaroSeta"></i> <span id="porcentagemCrescimentoOfertaRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoOfertaRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO PREÇO</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoPrecoRaroSeta"></i><span id="porcentagemCrescimentoPrecoRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoPrecoRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="height-400 col-md-12">
+                                            <canvas id="grafico-resultado-2" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
                         </div>
                     </div>
                 </div>
@@ -228,12 +335,13 @@
                     <button type="button" class="btn font-sm-label-poppins" style="border-radius: 20px;" onclick="$('#treeViewContent').trigger('agrupar');">Agrupar Tudo</button>
                     <button type="button" class="btn font-sm-label-poppins" style="border-radius: 20px;" onclick="$('#treeViewContent').trigger('expandir');">Expandir Tudo</button>
                 </div>
-                <div class="col-md-12" id="treeViewContent">
+                <div class="col-md-12" id="treeViewContent" style="right: 25px !important;">
                 </div>
             </div>
 
         </div>
     </div>
+
 </div>
 
 <div id="trocarIngrediente" style="display: none;">
