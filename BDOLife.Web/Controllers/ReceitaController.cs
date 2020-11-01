@@ -22,6 +22,33 @@ namespace BDOLife.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> SubReceitas(string receitaReferenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita)
+        {
+            var result = await _itemService.SubReceitasDiretas(receitaReferenciaId, quantidade, procNormal, procRaro, maestriaId, tipoReceita);
+
+            return Json(result
+                .OrderBy(i => i.Item1.Nome)
+                .Select(i => new
+                {
+                    Id = i.Item1.ReferenciaId,
+                    Item = i.Item1.Nome,
+                    QuantidadeTotal = i.Item2,
+                    PrecoMarket = i.Item1.Valor,
+                    PrecoTotal = (i.Item1.Valor * i.Item2),
+                    CustoProducao = i.Item3,
+                    ProduzirOuComprar = i.Item3 < i.Item1.Valor ? "PRODUZIR" : "COMPRAR",
+                    Img = !string.IsNullOrEmpty(i.Item1.ImagemUrl) ? $"Content/Image?referenciaId={i.Item1.ReferenciaId}" : "",
+                    QuantidadeDisponivel = i.Item1.QuantidadeDisponivel,
+                    DataAtualizacao = i.Item1.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                    Disponivel = i.Item1.QuantidadeDisponivel != 0,
+                    Ignorar = false,
+                    VendeNPC = i.Item1.ValorNPC != null,
+                    LocalNPC = i.Item1.LocalizacaoNPC,
+                    ValorNPC = i.Item1.ValorNPC
+                }));
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Ingredientes(string receitaReferenciaId, int quantidade, decimal procNormal)
         {
             var result = await _itemService.Ingredientes(receitaReferenciaId, quantidade, procNormal);
@@ -35,7 +62,7 @@ namespace BDOLife.Web.Controllers
                     QuantidadeTotal = i.Value,
                     PrecoMarket = i.Key.Valor,
                     PrecoTotal = (i.Key.Valor * i.Value),
-                    PrecoProducao = i.Key.Valor,
+                    CustoProducao = i.Key.Valor,
                     Img = !string.IsNullOrEmpty(i.Key.ImagemUrl) ? $"Content/Image?referenciaId={i.Key.ReferenciaId}" : "",
                     QuantidadeDisponivel = i.Key.QuantidadeDisponivel,
                     DataAtualizacao = i.Key.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
@@ -50,14 +77,16 @@ namespace BDOLife.Web.Controllers
         [HttpPost]
         public async Task<JsonResult> TreeView(string receitaReferenciaId, TipoReceitaEnum tipo, int maestriaId, int quantidade, decimal procNormal, decimal procRaro)
         {
-            var result = await _itemService.TreeViewRefatorado(receitaReferenciaId, quantidade, maestriaId, tipo, procNormal, procRaro);
+            //var result = await _itemService.TreeViewRefatorado(receitaReferenciaId, quantidade, maestriaId, tipo, procNormal, procRaro);
+            var result = await _itemService.TreeView(receitaReferenciaId, quantidade, procNormal, procRaro);
+
             return Json(result);
         }
 
         [HttpPost]
-        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro)
+        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro)
         {
-            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, quantidade, quantidadePorReceita, procNormal, procRaro);
+            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, quantidade, quantidadePorReceita, procNormal, procRaro, usarProcRaro);
             return Json(result);
         }
 

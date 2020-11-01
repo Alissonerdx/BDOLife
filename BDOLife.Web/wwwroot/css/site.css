@@ -73,8 +73,8 @@ i {
 }
 
 .search-input {
-   border: 0px !important;
-   border-radius: 0px !important;
+    border: 0px !important;
+    border-radius: 0px !important;
 }
 
 tr.jsgrid-header-row {
@@ -265,32 +265,55 @@ i.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
 }
 
 .vakata-context.jstree-contextmenu.jstree-default-contextmenu {
-    color: #33363f !important;
-    background: #e3e3e2 !important;
+    color: #F0A748 !important;
+    background: #2B2C33 !important;
     font-family: 'POPPINS' !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
-    padding: 8px !important;
+    /*padding: 8px !important;*/
+    /*font-family: 'Poppins' !important;*/
+    /*text-transform: uppercase;*/
+    font-size: 12px;
+    /*font-weight: 600;*/
+}
+
+.vakata-context, .vakata-context ul {
+    border: inherit !important;
+}
+
+.vakata-context {
+    box-shadow: none !important;
 }
 
 .vakata-context.jstree-contextmenu.jstree-default-contextmenu > li > a > i {
     width: 24px !important;
 }
 
-.vakata-context li > a {
-    padding: 0 0.2em 0 2em !important;
+    .vakata-context li > a {
+        text-shadow: none !important;
+        color: #F0A748 !important;
+    }
+
+/*.vakata-context li > a:hover {
+background-color: transparent !important;
+box-shadow: none !important;
+color: black !important;
+}*/
+
+.vakata-context li > a .vakata-contextmenu-sep {
+    display: inline-block !important;
+    width: inherit !important; 
+    height: inherit !important;
+    background: none !important;
+    margin: 0 .5em 0 0 !important;
+    border-left: none !important;
 }
 
- .vakata-context li > a:hover {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    color: black !important;
-}
-
-.vakata-context .vakata-context-hover > a {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
+    .vakata-context .vakata-context-hover > a {
+        color: #2B2C33 !important;
+        background-color: #F0A748 !important;
+        box-shadow: none !important;
+    }
 
 .jstree-default-responsive .jstree-anchor {
     text-shadow: none !important;
@@ -309,4 +332,9 @@ i.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
     text-transform: uppercase !important;
     font-family: 'Poppins' !important;
     font-weight: 500 !important;
+}
+
+.icheckbox_square-red,
+.iradio_square-red {
+    display: inline-block !important;
 }

@@ -22,20 +22,21 @@ namespace BDOLife.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var receitas = await _itemService.ListarPorTipoReceita(TipoReceitaEnum.Alquimia);
-            var maestrias = await _maestriaService.ListarMaestriasAlquimia();
 
             var receitasAlquimiaSimples = await _itemService.ObterPorListaDeReferenciasIds(new List<string> {
                 "R_PAS_1703", //Folha Verde
                 "R_PAS_1942", //Avanço
                 "R_PAS_1704", //Fera
-                "R_PAS_1705" //Gigante
+                "R_PAS_1705", //Gigante
+                "R_PAS_1843", //Barbaridade
+                "R_PAS_2455" //Avanço Gigantesco
             });
 
             var data = receitas.Data.ToList();
             data.AddRange(receitasAlquimiaSimples.Data);
             data.OrderBy(d => d.Nome);
 
-            ViewBag.ReceitasCulinaria = data;
+            ViewBag.Receitas = data;
 
             return View();
         }

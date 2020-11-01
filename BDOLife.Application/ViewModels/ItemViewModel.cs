@@ -1,4 +1,5 @@
 ﻿using BDOLife.Application.Models.Base;
+using BDOLife.Core.Entities;
 using BDOLife.Core.Enums;
 using System;
 using System.Collections.Generic;
@@ -38,5 +39,37 @@ namespace BDOLife.Application.ViewModels
         public AdquiridoEnum Adquirido { get; set; }
         public long? ValorNPC { get; set; }
         public string LocalizacaoNPC { get; set; }
+        public bool MultiResultados { get; set; }
+
+
+        public ItemViewModel Parse(Item item)
+        {
+            return new ItemViewModel
+            {
+                Id = item.Id,
+                Nome = item.Nome,
+                Adquirido = item.Adquirido,
+                AgrupamentoId = item.AgrupamentoId,
+                BdoId = item.BdoId,
+                Categoria = item.Categoria,
+                Excluido = item.Excluido,
+                Experiencia = item.Experiencia,
+                Grau = item.Grau,
+                Grupo = item.Grupo,
+                ImagemUrl = item.ImagemUrl,
+                LocalizacaoNPC = item.LocalizacaoNPC,
+                MultiResultados = item.MultiResultados,
+                Peso = item.Peso,
+                ProcNormalExcessao = item.ProcNormalExcessao,
+                ProcRaroExcessao = item.ProcRaroExcessao,
+                ReferenciaId = item.ReferenciaId,
+                Tipo = item.Tipo,
+                TipoReceita = item.TipoReceita,
+                Valor = item.Valor,
+                ValorNPC = item.ValorNPC,
+                QuantidadeDisponivel = item.QuantidadeDisponivel,
+                DataAtualizacao = item.DataAtualizacao,
+            };
+        }
     }
 }

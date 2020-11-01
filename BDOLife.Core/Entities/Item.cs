@@ -37,5 +37,6 @@ namespace BDOLife.Core.Entities
         public AdquiridoEnum Adquirido { get; set; }
         public long? ValorNPC { get; set; }
         public string LocalizacaoNPC { get; set; }
+        public bool MultiResultados { get; set; }
     }
 }

@@ -19,7 +19,18 @@ namespace BDOLife.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var receitas = await _itemService.ListarPorTipoReceita(TipoReceitaEnum.Culinaria);
-            ViewBag.ReceitasCulinaria = receitas.Data;
+
+            var receitasCulinariaSimples = await _itemService.ObterPorListaDeReferenciasIds(new List<string> {
+                "R_PCS_1700", //Refeição de Frutos do Mar de Cron
+                "R_PCS_1701", //Refeição Simples de Cron
+                "R_PCS_1702", //Refeição de Iguarias de Cron
+            });
+
+            var data = receitas.Data.ToList();
+            data.AddRange(receitasCulinariaSimples.Data);
+            data.OrderBy(d => d.Nome);
+
+            ViewBag.Receitas = data;
 
             return View();
         }

@@ -26,5 +26,13 @@ namespace BDOLife.Application.ViewModels
         public long custoProducao { get; set; }
         public long custoCompra { get; set; }
         public string produzirOuComprar { get; set; }
+        public long quantidadePorReceita { get; set; }
+        public bool usarProcRaro { get; set; }
+        public decimal procNormal { get; set; }
+        public decimal procRaro { get; set; }
+        public string referenciaId { get; set; }
+        public bool possuiProcRaro { get; set; }
+        public int nivelSubReceita { get; set; }
+
     }
 }

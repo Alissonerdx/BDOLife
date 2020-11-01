@@ -1,8 +1,7 @@
 ﻿@{
     Layout = "_Layout";
 
-    var receitas = ViewBag.ReceitasCulinaria as List<ItemViewModel>;
-    //var tiposProcesso = ViewBag.
+    var receitas = ViewBag.ReceitasProcesso as List<ItemViewModel>;
 }
 
 <link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />
@@ -17,16 +16,16 @@
                         <div class="form-group">
                             <label for="receitaSelect" class="font-label-poppins">Receita</label>
                             <select class="form-control" id="tipoProcessoSelect">
-                                <option>Tipo de Processo</option>
-                                @*@if (receitas != null)
+                                <option>Processar</option>
+                                @if (receitas != null)
                                 {
                                     foreach (var receita in receitas)
                                     {
-                                        <option value="@receita.ReferenciaId">
-                                            @receita.Nome
-                                        </option>
+                                <option value="@receita.ReferenciaId">
+                                    @receita.Nome
+                                </option>
                                     }
-                                }*@
+                                }
                             </select>
                         </div>
                     </div>
@@ -254,8 +253,10 @@
 @section Scripts {
     <script src="~/componentes/shepherd/shepherd.js"></script>
     <script src="~/componentes/izimodal/js/iziModal.min.js"></script>
+
+    <script src="~/js/Processo/Processo.js" asp-append-version="true"></script>
     @*<script src="~/js/Culinaria/culinaria.min.js" asp-append-version="true"></script>*@
-    <script src="~/js/Culinaria/Culinaria.js" asp-append-version="true"></script>
+    @*<script src="~/js/Culinaria/Culinaria.js" asp-append-version="true"></script>*@
     @*<script src="~/js/Culinaria/CulinariaEnc.js" asp-append-version="true"></script>*@
-    <script src="~/js/Culinaria/CulinariaTour.js" asp-append-version="true"></script>
+    @*<script src="~/js/Culinaria/CulinariaTour.js" asp-append-version="true"></script>*@
 }

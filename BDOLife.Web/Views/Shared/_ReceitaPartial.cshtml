@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    var receitas = ViewBag.ReceitasCulinaria as List<ItemViewModel>;
+    var receitas = ViewBag.Receitas as List<ItemViewModel>;
 }
 
 
@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="receitaSelect" class="font-label-poppins">@Model</label>
+                            <label for="receitaSelect" class="font-label-poppins">Receita</label>
                             <select class="form-control" id="receitaSelect">
                                 <option>Selecione a receita</option>
                                 @if (receitas != null)
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="quantidade" class="font-label-poppins">Quantidade</label>
+                            <label for="quantidade" class="font-label-poppins">Qtd. de receitas <a href="#" onclick="ConfigurarQuantidades()"><img style="vertical-align: baseline !important" id="configuracaoQuantidadeIcone" src="~/imagens/icones/config-icon.svg" width="16" /></a></label>
                             <input type="text" class="form-control mask-quantidade" id="quantidade" min="0" value="0" style="border-radius: 0;" />
                         </div>
                     </div>
@@ -145,14 +145,11 @@
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active show background-e2e2e1" id="tab-ingredientes" data-toggle="tab" aria-controls="ingredientes" href="#ingredientes" aria-expanded="true">Ingredientes</a>
+                                <a class="nav-link active show" id="tab-ingredientes" data-toggle="tab" aria-controls="ingredientes" href="#ingredientes" aria-expanded="true">Ingredientes</a>
                             </li>
                             @*<li class="nav-item">
-                                    <a class="nav-link" id="tab-usado-em" data-toggle="tab" aria-controls="usado-em" href="#usado-em" aria-expanded="false">Usado Em</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-estatisticas" data-toggle="tab" aria-controls="estatisticas" href="#estatisticas" aria-expanded="false">Estatísticas</a>
-                                </li>*@
+                        <a class="nav-link" id="tab-detalhes" data-toggle="tab" aria-controls="detalhes" href="#detalhes" aria-expanded="false">Detalhes</a>
+                    </li>*@
                         </ul>
                         <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
                             <div role="tabpanel" class="tab-pane active show" id="ingredientes" aria-expanded="true" aria-labelledby="tab-ingredientes">
@@ -165,16 +162,16 @@
                                 </div>
                                 <br />
                             </div>
-                            @*<div class="tab-pane" id="usado-em" aria-labelledby="tab-usado-em">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="culinariaItensReceitaTbMicro"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>*@
+                            @*<div class="tab-pane" id="detalhes" aria-labelledby="detalhes">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="detalhesReceitaGrid"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>*@
                         </div>
                     </div>
                 </div>
@@ -186,6 +183,9 @@
                                 <a class="nav-link active show" id="tab-resultados" data-toggle="tab" aria-controls="resultados" href="#resultados" aria-expanded="true">Resultados</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="tab-usadoEm" data-toggle="tab" aria-controls="usadoEm" href="#usadoEm" aria-expanded="false">Usado Em</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" id="tab-analiseMercado" data-toggle="tab" aria-controls="analiseMercado" href="#analiseMercado" aria-expanded="false">Análise do Mercado</a>
                             </li>
                         </ul>
@@ -195,6 +195,21 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="resultadosGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="usadoEm" aria-expanded="false" aria-labelledby="tab-usadoEm">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="dependenciaDiretaTb"></div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="dependenciaIndiretaTb"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -315,7 +330,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <br />
+
                         </div>
                     </div>
                 </div>
@@ -337,6 +352,18 @@
                 </div>
                 <div class="col-md-12" id="treeViewContent" style="right: 25px !important;">
                 </div>
+                <br />
+                <br />
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- BdoLife - 336x280 -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:336px;height:280px"
+                     data-ad-client="ca-pub-8791502008730828"
+                     data-ad-slot="2525216716"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+
             </div>
 
         </div>
@@ -353,7 +380,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="ingredienteAlternativo" class="font-label-poppins">Ingrediente</label>
+                    <label for="ingredienteAlternativo" class="font-sm-label-poppins">Ingrediente</label>
                     <select class="form-control" id="ingredienteAlternativo">
                         <option>Selecione o ingrediente</option>
                     </select>
@@ -361,13 +388,13 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="ingredienteAlternativo" class="font-label-poppins">Preço UN.</label>
+                    <label for="ingredienteAlternativo" class="font-sm-label-poppins">Preço UN.</label>
                     <input class="form-control mask-prata" id="precoUnitario" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="quantidadeIngrediente" class="font-label-poppins">Quantidade por receita</label>
+                    <label for="quantidadeIngrediente" class="font-sm-label-poppins">Quantidade por receita</label>
                     <input class="form-control mask-quantidade" id="quantidadeIngrediente" />
                 </div>
             </div>
@@ -387,12 +414,58 @@
     </ul>
 </div>
 
+<div id="configurarIngrediente" style="display: none;">
+    <div class="col-md-12" style="padding: 20px;">
+        <input type="hidden" class="form-control" id="itemSelecionado" />
+        @*<input type="hidden" class="form-control" id="grupoItemTrocaSelecionado" />*@
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="maestriaConfIngrediente" class="font-sm-label-poppins">Maestria</label>
+                    <select class="form-control" id="maestriaConfIngrediente">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="procNormalConfIngrediente" class="font-sm-label-poppins">Proc. Norm.</label>
+                    <input type="text" class="form-control mask-proc" id="procNormalConfIngrediente" min="0" value="2.5" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="procRaroConfigurarIngrediente" class="font-sm-label-poppins">Proc. Raro</label>
+                    <input type="text" class="form-control mask-proc" id="procRaroConfIngrediente" min="0" value="0.3" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="usarProcRaroConfIngrediente">&nbsp;</label>
+                    <fieldset>
+                        <label for="usarProcRaroConfIngrediente" class="checkbox font-sm-label-poppins">
+                            <input type="checkbox" class="cbx" id="usarProcRaroConfIngrediente" />
+                            Usar procs raros
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="btnSalvarConfiguracao">&nbsp;</label>
+                <button type="button" onclick="AlterarConfiguracao()" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnSalvarConfiguracao">Salvar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div id="configuracaoMaestria" style="display: none;">
     <div class="col-md-12" style="padding: 20px;">
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">
-                    <label for="maestria" class="font-label-poppins">Maestria para entrega Imperial</label>
+                    <label for="maestria" class="font-sm-label-poppins">Maestria para entrega Imperial</label>
                     <select class="form-control" id="maestriaImperialSelect">
                         <option></option>
                     </select>
@@ -403,7 +476,50 @@
                 <button type="button" onclick="SalvarMaestriaImperial()" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnSalvarMaestriaImperial">Salvar</button>
             </div>
         </div>
-
     </div>
-
 </div>
+
+<div id="configuracaoQuantidade" style="display: none;">
+    <div class="col-md-12" style="padding: 20px;">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeProdutosCalculadora" class="font-sm-label-poppins">Produzir</label>
+                    <input type="text" class="form-control mask-quantidade" id="quantidadeProdutosCalculadora" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeDiasCalculadora" class="font-sm-label-poppins">Dias</label>
+                    <input type="text" class="form-control mask-quantidade" id="quantidadeDiasCalculadora" value="1" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="totalProdutosCalculadora" class="font-sm-label-poppins">Total Prod.</label>
+                    <input type="text" class="form-control mask-quantidade" readonly id="totalProdutosCalculadora" value="0" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="procNormalCalculadora" class="font-sm-label-poppins">Proc Normal</label>
+                    <input type="text" class="form-control mask-proc" id="procNormalCalculadora" value="2.50" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeReceitasCalculadora" class="font-sm-label-poppins">Receitas</label>
+                    <input type="text" class="form-control mask-quantidade" readonly id="quantidadeReceitasCalculadora" value="0" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="btnSalvarQtdReceitaCalculadora">&nbsp;</label>
+                <button type="button" onclick="SalvarQtdReceita()" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnSalvarQtdReceitaCalculadora">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}  

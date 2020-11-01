@@ -707,7 +707,8 @@ function BlockElement(element) {
             border: 0,
             padding: 0,
             backgroundColor: 'transparent'
-        }
+        },
+        ignoreIfBlocked: true
     });
 }
 
@@ -742,6 +743,7 @@ $('.mask-prata').inputmask({
 
 $('.mask-proc').inputmask({
     mask: "9[,99]",
+    radixPoint: ",",
     greedy: false,
     clearIncomplete: true,
     showMaskOnHover: false,

@@ -1,0 +1,30 @@
+﻿@{ 
+    var receitas = ViewBag.Receitas as List<ItemViewModel>;
+}
+
+<div class="card">
+    <div class="card-body">
+        <form class="form" id="consultarForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="receitaSelect" class="font-label-poppins">@Model</label>
+                        <select class="form-control" id="receitaSelect">
+                            <option>Selecione a receita</option>
+                            @if (receitas != null)
+                            {
+                                foreach (var receita in receitas)
+                                {
+                                    <option value="@receita.ReferenciaId">
+                                        @receita.Nome
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -41,6 +41,16 @@ namespace BDOLife.Infra.Repository
                 .SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId) && !i.Excluido);
         }
 
+        public async Task<Item> ObterComReceitasPorReferenciaId(string referenciaId)
+        {
+            return await _dbContext.Itens
+                .Include(i => i.Receitas)
+                .ThenInclude(i => i.Receita.Receitas)
+                .ThenInclude(i => i.Item.Receitas)
+                .ThenInclude(i => i.Receita)
+                .SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId) && !i.Excluido);
+        }
+
         public async Task<IList<Item>> ObterPorListaReferenciasIds(List<string> referenciasIds)
         {
             return await _dbContext.Itens.Where(i => referenciasIds.Contains(i.ReferenciaId) && !i.Excluido).ToListAsync();
@@ -54,6 +64,11 @@ namespace BDOLife.Infra.Repository
                 .SingleOrDefaultAsync(i => i.ReferenciaId == receitaReferenciaId);
 
             return receita?.Resultados;
+        }
+
+        public async Task<IList<Item>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos)
+        {
+            return await _dbContext.Itens.Where(i => i.TipoReceita != null && tipos.Contains(i.TipoReceita.Value) && i.Excluido == false).OrderBy(i => i.Nome).ToListAsync();
         }
     }
 }

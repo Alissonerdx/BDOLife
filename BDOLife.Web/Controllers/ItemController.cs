@@ -26,11 +26,13 @@ namespace BDOLife.Web.Controllers
 
             var result = await _itemService.ListarPorGrupo(grupo);
             var response = result.Data;
+
             return Json(response.Select(r => new
             {
                 id = r.ReferenciaId,
                 text = $"{r.Nome} ({(r.Tipo == TipoEnum.Receita ? "Receita" : r.Tipo == TipoEnum.Item || r.Tipo == TipoEnum.Material ? "Item" : "")})",
                 valor = r.Valor,
+                tipo = (int)r.Tipo,
                 Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"Content/Image?referenciaId={r.ReferenciaId}" : ""
             }));
         }
@@ -40,22 +42,27 @@ namespace BDOLife.Web.Controllers
         {
             var result = await _itemService.ListarPorTipoReceita(tipo);
             var response = result.Data;
-            //return Json(new
-            //{
-            //    results = response.Select(r => new
-            //    {
-            //        id = r.ReferenciaId,
-            //        text = r.Nome,
-            //        Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"/imagens/itens/{r.ReferenciaId}.png" : ""
-            //    })
-            //});
-            //$"Content/Image?referenciaId={r.ReferenciaId}"
+
             return Json(response.Select(r => new
             {
                 id = r.ReferenciaId,
                 text = r.Nome,
                 Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"Content/Image?referenciaId={r.ReferenciaId}" : ""
             }));
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DependenciasDiretas(string referenciaId)
+        {
+            var result = await _itemService.ListarDependenciasDiretas(referenciaId);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DependenciasIndiretas(string referenciaId)
+        {
+            var result = await _itemService.ListarDependenciasIndiretas(referenciaId);
+            return Json(result);
         }
     }
 }
