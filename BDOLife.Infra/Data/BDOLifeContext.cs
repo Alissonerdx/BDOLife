@@ -33,8 +33,8 @@ namespace BDOLife.Infra.Data
         public DbSet<NivelProfissao> NiveisProfissoes { get; set; }
         public DbSet<MaestriaCulinaria> MaestriasCulinaria { get; set; }
         public DbSet<MaestriaAlquimia> MaestriasAlquimia { get; set; }
-
-
+        public DbSet<Colheita> Colheitas { get; set; }
+        public DbSet<Node> Nodes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -51,11 +51,12 @@ namespace BDOLife.Infra.Data
             builder.Entity<RankingCulinaria>(ConfigureRankingCulinaria);
             builder.Entity<Imperial>(ConfigureImperial);
             builder.Entity<ImperialReceita>(ConfigureImperialReceita);
+            builder.Entity<Colheita>(ConfigureColheita);
         }
-
 
         private static void ConfigureItem(EntityTypeBuilder<Item> builder)
         {
+
             builder.HasMany(m => m.Itens)
                       .WithOne(t => t.Receita)
                       .HasPrincipalKey(t => t.ReferenciaId)
@@ -97,6 +98,7 @@ namespace BDOLife.Infra.Data
             builder.Property(e => e.AumentoChanceEspecial).IsRequired(false);
             builder.Property(e => e.AumentoChanceRaro).IsRequired(false);
         }
+
         private static void ConfigureReceitaResultado(EntityTypeBuilder<ReceitaResultado> builder)
         {
             builder.HasOne(m => m.Resultado)
@@ -168,6 +170,52 @@ namespace BDOLife.Infra.Data
                       .HasForeignKey(m => m.ItemReferenciaId)
                       .OnDelete(DeleteBehavior.Restrict);
         }
+
+        private static void ConfigureColheita(EntityTypeBuilder<Colheita> builder)
+        {
+            builder.Property(e => e.PlantaReferenciaId).IsRequired();
+            builder.Property(e => e.FrutaReferenciaId).IsRequired();
+            builder.Property(e => e.Baixa).IsRequired();
+            builder.Property(e => e.Perfeita).IsRequired();
+            builder.Property(e => e.Alta);
+
+            builder.HasOne(m => m.Fruta)
+                   .WithOne()
+                   .HasPrincipalKey<Item>(i => i.ReferenciaId)
+                   .HasForeignKey<Colheita>(c => c.FrutaReferenciaId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(m => m.Planta)
+                    .WithOne()
+                    .HasPrincipalKey<Item>(i => i.ReferenciaId)
+                    .HasForeignKey<Colheita>(c => c.PlantaReferenciaId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(m => m.PlantaEspecial)
+                  .WithOne()
+                  .HasPrincipalKey<Item>(i => i.ReferenciaId)
+                  .HasForeignKey<Colheita>(c => c.PlantaEspecialReferenciaId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(m => m.PlantaAltaQualidade)
+                  .WithOne()
+                  .HasPrincipalKey<Item>(i => i.ReferenciaId)
+                  .HasForeignKey<Colheita>(c => c.PlantaAltaQualidadeReferenciaId)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            var index1 = builder.HasIndex(u => u.FrutaReferenciaId).Metadata;
+            builder.Metadata.RemoveIndex(index1.Properties);
+
+            //var index2 = builder.HasIndex(u => u.Planta).Metadata;
+            //builder.Metadata.RemoveIndex(index2.Properties);
+
+            var index3 = builder.HasIndex(u => u.PlantaEspecialReferenciaId).Metadata;
+            builder.Metadata.RemoveIndex(index3.Properties);
+
+            var index4 = builder.HasIndex(u => u.PlantaAltaQualidadeReferenciaId).Metadata;
+            builder.Metadata.RemoveIndex(index4.Properties);
+        }
+
     }
 
 }

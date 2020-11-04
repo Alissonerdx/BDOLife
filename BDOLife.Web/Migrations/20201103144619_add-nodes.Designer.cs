@@ -4,14 +4,16 @@ using BDOLife.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BDOLife.Web.Migrations
 {
     [DbContext(typeof(BDOLifeContext))]
-    partial class BDOLifeContextModelSnapshot : ModelSnapshot
+    [Migration("20201103144619_add-nodes")]
+    partial class addnodes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +81,6 @@ namespace BDOLife.Web.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FrutaReferenciaId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Perfeita")
@@ -115,8 +116,7 @@ namespace BDOLife.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FrutaReferenciaId")
-                        .IsUnique();
+                    b.HasIndex("FrutaReferenciaId");
 
                     b.HasIndex("PlantaAltaQualidadeReferenciaId")
                         .IsUnique()
@@ -929,8 +929,7 @@ namespace BDOLife.Web.Migrations
                         .WithOne()
                         .HasForeignKey("BDOLife.Core.Entities.Colheita", "FrutaReferenciaId")
                         .HasPrincipalKey("BDOLife.Core.Entities.Item", "ReferenciaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BDOLife.Core.Entities.Item", "PlantaAltaQualidade")
                         .WithOne()

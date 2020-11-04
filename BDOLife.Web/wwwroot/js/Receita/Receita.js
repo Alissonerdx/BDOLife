@@ -469,7 +469,6 @@ $(document).ready(function () {
                             maestriaId: $('#maestriaSelect').val()
                         },
                         "success": function (data) {
-                            console.log(data)
                             cb(data);
                             UnblockElement('#treeView');
                         }
@@ -1658,8 +1657,6 @@ function AlterarConfiguracao() {
             }
 
             ConfigurarIngredienteTreeView(parentId, id, $('#configurarIngrediente').find('#procNormalConfIngrediente').val(), $('#configurarIngrediente').find('#procRaroConfIngrediente').val(), quantidadeTotal, quantidadePorReceita, usarProcRaro).then(function (data) {
-
-                console.log(data)
 
                 let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
 

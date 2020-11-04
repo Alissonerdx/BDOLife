@@ -252,11 +252,11 @@ namespace BDOLife.Application.Services
 
         
         //Item, QuantidadeTotal, CustoProducao
-        public async Task<List<Tuple<ItemViewModel, long, long>>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita)
+        public async Task<Dictionary<ItemViewModel, long>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita)
         {
             var receita = await _itemRepository.ObterPorReferenciaId(referenciaId);
 
-            var subreceitas = new List<Tuple<ItemViewModel, long, long>>();
+            var subreceitas = new Dictionary<ItemViewModel, long>();
 
             if (receita != null && receita.Itens != null && receita.Itens.Count > 0)
             {
@@ -265,7 +265,34 @@ namespace BDOLife.Application.Services
                     if (ingrediente.Excluido == false && ingrediente.Item.Excluido == false)
                     {
                         var custoProducaoPorUnidade = CalcularValorSubReceitaRecursivo(ingrediente.Item, procNormal, procRaro);
-                        subreceitas.Add(new Tuple<ItemViewModel, long, long>(new ItemViewModel().Parse(ingrediente.Item), quantidade * ingrediente.Quantidade, custoProducaoPorUnidade == 0 ? ingrediente.Item.Valor : custoProducaoPorUnidade));
+                        var item = new ItemViewModel
+                        {
+                            Id = ingrediente.Item.Id,
+                            Nome = ingrediente.Item.Nome,
+                            Adquirido = ingrediente.Item.Adquirido,
+                            AgrupamentoId = ingrediente.Item.AgrupamentoId,
+                            BdoId = ingrediente.Item.BdoId,
+                            Categoria = ingrediente.Item.Categoria,
+                            Excluido = ingrediente.Item.Excluido,
+                            Experiencia = ingrediente.Item.Experiencia,
+                            Grau = ingrediente.Item.Grau,
+                            Grupo = ingrediente.Item.Grupo,
+                            ImagemUrl = ingrediente.Item.ImagemUrl,
+                            LocalizacaoNPC = ingrediente.Item.LocalizacaoNPC,
+                            MultiResultados = ingrediente.Item.MultiResultados,
+                            Peso = ingrediente.Item.Peso,
+                            ProcNormalExcessao = ingrediente.Item.ProcNormalExcessao,
+                            ProcRaroExcessao = ingrediente.Item.ProcRaroExcessao,
+                            ReferenciaId = ingrediente.Item.ReferenciaId,
+                            Tipo = ingrediente.Item.Tipo,
+                            TipoReceita = ingrediente.Item.TipoReceita,
+                            Valor = ingrediente.Item.Valor,
+                            ValorNPC = ingrediente.Item.ValorNPC,
+                            QuantidadeDisponivel = ingrediente.Item.QuantidadeDisponivel,
+                            DataAtualizacao = ingrediente.Item.DataAtualizacao,
+                            CustoProducao = custoProducaoPorUnidade == 0 ? ingrediente.Item.Valor : custoProducaoPorUnidade
+                        };
+                        subreceitas.Add(item, quantidade * ingrediente.Quantidade);
                     }
                 }
             }

@@ -4,14 +4,16 @@ using BDOLife.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BDOLife.Web.Migrations
 {
     [DbContext(typeof(BDOLifeContext))]
-    partial class BDOLifeContextModelSnapshot : ModelSnapshot
+    [Migration("20201104042234_adicionado-fruta-required")]
+    partial class adicionadofrutarequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,8 +117,7 @@ namespace BDOLife.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FrutaReferenciaId")
-                        .IsUnique();
+                    b.HasIndex("FrutaReferenciaId");
 
                     b.HasIndex("PlantaAltaQualidadeReferenciaId")
                         .IsUnique()

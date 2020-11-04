@@ -26,6 +26,6 @@ namespace BDOLife.Application.Interfaces
         Task<ServiceResponse<IList<ItemViewModel>>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos);
         Task<List<DependenciaViewModel>> ListarDependenciasDiretas(string referenciaId);
         Task<List<DependenciaViewModel>> ListarDependenciasIndiretas(string referenciaId);
-        Task<List<Tuple<ItemViewModel, long, long>>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita);
+        Task<Dictionary<ItemViewModel, long>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita);
     }
 }

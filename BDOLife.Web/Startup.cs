@@ -146,7 +146,8 @@ namespace BDOLife.Web
             services.AddScoped<IImperialService, ImperialService>();
             services.AddScoped<ITipoProcessoService, TipoProcessoService>();
             services.AddScoped<ITipoProcessoExperienciaService, TipoProcessoExperienciaService>();
-
+            services.AddScoped<ICultivoService, CultivoService>();
+            services.AddScoped<IUtilService, UtilService>();
 
 
             // Add Repository Layer
@@ -157,8 +158,8 @@ namespace BDOLife.Web
             services.AddScoped<ITipoProcessoExperienciaRepository, TipoProcessoExperienciaRepository>();
             services.AddScoped<IMaestriaCulinariaRepository, MaestriaCulinariaRepository>();
             services.AddScoped<IMaestriaAlquimiaRepository, MaestriaAlquimiaRepository>();
-
-
+            services.AddScoped<ICultivoRepository, CultivoRepository>();
+            services.AddScoped<INodeRepository, NodeRepository>();
 
         }
 

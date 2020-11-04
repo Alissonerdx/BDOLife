@@ -34,6 +34,7 @@ namespace BDOLife.Infra.Repository
                 .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item.Itens)
+                .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item)
                 .Include(i => i.Resultados)
                 .ThenInclude(i => i.Resultado.ImperiaisReceitas)

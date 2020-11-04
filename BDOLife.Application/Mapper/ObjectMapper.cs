@@ -47,6 +47,8 @@ namespace BDOLife.Application.Mapper
                 cfg.CreateMap<MaestriaCulinariaViewModel, MaestriaCulinaria>();
                 cfg.CreateMap<MaestriaAlquimiaViewModel, MaestriaAlquimia>();
                 cfg.CreateMap<MaestriaAlquimia, MaestriaAlquimiaViewModel>();
+                cfg.CreateMap<Colheita, ColheitaViewModel>();
+                cfg.CreateMap<ColheitaViewModel,Colheita>();
 
             });
         }

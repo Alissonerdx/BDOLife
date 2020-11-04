@@ -1,0 +1,6394 @@
+﻿[
+  {
+    "BdoId": 1746,
+    "Nome": "Ninho do Corvo",
+    "Regiao": "Oceano",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1745,
+    "Nome": "Inferno Imortal",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1744,
+    "Nome": "Lâmina Estreita",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1743,
+    "Nome": "Montanha Particionada",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1742,
+    "Nome": "Fazenda Delimor",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1741,
+    "Nome": "Lago de Salanar",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1740,
+    "Nome": "Montanha Apagada",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1739,
+    "Nome": "Papuacrini",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1738,
+    "Nome": "Grandiha",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1737,
+    "Nome": "Oficina de Luva Negra de Shiro",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1736,
+    "Nome": "Oficina de Estátua de Proa de Shiro",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1735,
+    "Nome": "Oficina de Vela de Shiro",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1734,
+    "Nome": "Oficina de Canhão de Shiro",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1727,
+    "Nome": "Olho do Okilua",
+    "Regiao": "Oceano",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1720,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1719,
+    "Nome": "Porto de Abastecimento do Posto Avançado",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1718,
+    "Nome": "Fazenda Brellin",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1717,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1716,
+    "Nome": "Escavação",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1715,
+    "Nome": "Cortar Lenha",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1714,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1713,
+    "Nome": "Produção de Frango",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1712,
+    "Nome": "Cortar Lenha",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1711,
+    "Nome": "Mineração",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1710,
+    "Nome": "Mineração",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1709,
+    "Nome": "Escavação",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1708,
+    "Nome": "Cultivo de Batata",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1707,
+    "Nome": "Cultivo de Uva",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1706,
+    "Nome": "Montanhas Negras",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1705,
+    "Nome": "Posto Avançado Noroeste de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1704,
+    "Nome": "Túmulo da Estrela",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1703,
+    "Nome": "Cachoeira de Olun",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1702,
+    "Nome": "Santuário Bahit",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1701,
+    "Nome": "Fronteira de Salun",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1700,
+    "Nome": "Tunkta",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1699,
+    "Nome": "Castelo Espinhoso",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1698,
+    "Nome": "Porto da Noite Profunda",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1697,
+    "Nome": "Laodell",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1696,
+    "Nome": "Corda de Talibar",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1695,
+    "Nome": "Naxion",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1694,
+    "Nome": "Túmulo do Pensamento Adormecido",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1693,
+    "Nome": "Floresta Espinhosa",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1692,
+    "Nome": "Castelo Odillita",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1691,
+    "Nome": "Odraxia",
+    "Regiao": "Odillita",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1690,
+    "Nome": "Banco de investimento",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1689,
+    "Nome": "Banco de investimento",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1688,
+    "Nome": "Escavação",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1687,
+    "Nome": "Escavação",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1686,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1685,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1684,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1683,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1682,
+    "Nome": "Mineração",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1681,
+    "Nome": "Mineração",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1680,
+    "Nome": "Mineração",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1679,
+    "Nome": "Mineração",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1678,
+    "Nome": "Coleta",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1677,
+    "Nome": "Coleta",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1676,
+    "Nome": "Coleta",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1675,
+    "Nome": "Coleta",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1674,
+    "Nome": "Cultivo",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1673,
+    "Nome": "Cultivo",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1672,
+    "Nome": "Cultivo",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1671,
+    "Nome": "Cultivo",
+    "Regiao": "Drieghan",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1670,
+    "Nome": "Fazenda de Marak",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1669,
+    "Nome": "Aldeia do Lobo Vermelho",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1668,
+    "Nome": "Ruína de Tshira",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1667,
+    "Nome": "Portal Esquecido",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1666,
+    "Nome": "Campo de Madeira de Himut",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1665,
+    "Nome": "Campo de Madeira de Dorman",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1664,
+    "Nome": "Montanhas Gervish",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1663,
+    "Nome": "Fonte da Origem",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1662,
+    "Nome": "Altar de Gayak",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1661,
+    "Nome": "Posto Avançado de Marcha",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1660,
+    "Nome": "Cume Pluma de Vento",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1659,
+    "Nome": "Posto de Corvo Noturno",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1658,
+    "Nome": "Posto Névoa de Madrugada",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1657,
+    "Nome": "Abrigo da Decadência",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1656,
+    "Nome": "Ninho de Garmoth",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1655,
+    "Nome": "Masoléu de Sherekhan",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1654,
+    "Nome": "Cânion de Khalk",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1653,
+    "Nome": "Montanha Rochosa de Akum",
+    "Regiao": "Drieghan",
+    "Temperatura": 20,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1652,
+    "Nome": "Região de Disputa de Ahib",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1651,
+    "Nome": "Duvencrune",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1650,
+    "Nome": "Terras Agrícolas de Duvencrune",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1649,
+    "Nome": "Duvencrune",
+    "Regiao": "Drieghan",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1648,
+    "Nome": "Mina de enxofre Roud",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1647,
+    "Nome": "Acampamento Acher do Sul",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1646,
+    "Nome": "Acampamento Acher do Oeste",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1645,
+    "Nome": "Mineração",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1644,
+    "Nome": "Administrador de bens",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1643,
+    "Nome": "Administrador de bens",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1642,
+    "Nome": "Mineração",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1641,
+    "Nome": "Cultivar Cogumelos",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1640,
+    "Nome": "Cultivar Cogumelos",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1639,
+    "Nome": "Coleta",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1638,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1637,
+    "Nome": "Escavação",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1636,
+    "Nome": "Mineração",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1635,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1634,
+    "Nome": "Especialidade (?)",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1633,
+    "Nome": "Cultivo",
+    "Regiao": "Kamasylvia",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1632,
+    "Nome": "Rio Okiara",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1631,
+    "Nome": "Campo de Yianaros",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1630,
+    "Nome": "Floresta Cinzenta",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1629,
+    "Nome": "Cabana de Weenie",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1628,
+    "Nome": "Cabana de Looney",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1627,
+    "Nome": "Rastro de Krogdalo",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1626,
+    "Nome": "Templo de Gyfin Rhasia",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1625,
+    "Nome": "Sul de Kamasylvia",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1624,
+    "Nome": "Floresta de Polly",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1623,
+    "Nome": "Grana",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1622,
+    "Nome": "Lago Flondor",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1621,
+    "Nome": "Floresta da Árvore Branca",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1620,
+    "Nome": "Cabana das Fadas dos Dentes",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1619,
+    "Nome": "Floresta das Fadas dos Dentes",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1618,
+    "Nome": "Floresta de Árvores-Anel",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1617,
+    "Nome": "Posto de Guarda de Acher",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1616,
+    "Nome": "Montanhas do Oeste de Valtarra",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1615,
+    "Nome": "Sudoeste de Kamasylvia",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1614,
+    "Nome": "Almenara de Lemoria",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1613,
+    "Nome": "Ruínas do Antigo Mirumok",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1612,
+    "Nome": "Valtarra - Altar de Treinamento",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1611,
+    "Nome": "Montanhas de Valtarra",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1610,
+    "Nome": "Cabana de Viv Foretta",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1609,
+    "Nome": "Floresta Holo",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1608,
+    "Nome": "Floresta Manshaum",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1607,
+    "Nome": "Acampamento Central de Lemoria",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1606,
+    "Nome": "Pradaria Navarn",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1605,
+    "Nome": "Floresta da Árvore da Sombra",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1604,
+    "Nome": "Antiga Árvore da Sabedoria",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1603,
+    "Nome": "Floresta Kaduile",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1602,
+    "Nome": "Lagoa de Atanis",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1601,
+    "Nome": "Posto de Guarda de Lemoria",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1600,
+    "Nome": "Entrada de Kamasylvia",
+    "Regiao": "Kamasylvia",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1566,
+    "Nome": "Escavação",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1565,
+    "Nome": "Produção",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1564,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1563,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1562,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1561,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1560,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1559,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1558,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1557,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1556,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1555,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1554,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1553,
+    "Nome": "Escavação",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1552,
+    "Nome": "Banco de Investimento Zahad",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1551,
+    "Nome": "Banco de Investimento Yisar Kunjamin",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1550,
+    "Nome": "Banco de Investimento Valgon",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1549,
+    "Nome": "Banco de Investimento Taphtar",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1548,
+    "Nome": "Banco de Investimento Godul Lateman",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1547,
+    "Nome": "Banco de Investimento Atui Balacs",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1546,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1545,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1544,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1543,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1542,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1541,
+    "Nome": "Especialidades",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1540,
+    "Nome": "Cultivo de Tefe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1539,
+    "Nome": "Cultivo de Tefe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1538,
+    "Nome": "Cultivo de Freekeh",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1537,
+    "Nome": "Cultivo de Tamareira",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1536,
+    "Nome": "Cultivo de Pistache",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1535,
+    "Nome": "Cultivo de Tamareira",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1534,
+    "Nome": "Cultivo de Pistache",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1533,
+    "Nome": "Cultivo de Tefe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1532,
+    "Nome": "Cultivo de Tefe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1531,
+    "Nome": "Cultivo de Anise Estrelar",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1530,
+    "Nome": "Cultivo de Figo",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1529,
+    "Nome": "Cultivo de Figo",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1528,
+    "Nome": "Cultivo de Tefe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1527,
+    "Nome": "Cultivo de Noz-Moscada",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1526,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1525,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1524,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1523,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1522,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1521,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1520,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1519,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1518,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1517,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1516,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1515,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1514,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1513,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1512,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1510,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1509,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1508,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1507,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1506,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1505,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1504,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1503,
+    "Nome": "Mineração",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1502,
+    "Nome": "Cortar Lenha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1501,
+    "Nome": "Coleta",
+    "Regiao": "Reino de Valência",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1452,
+    "Nome": "Margória (Área de Vell)",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1451,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "Oceano",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1450,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "Oceano",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1449,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1448,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1447,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1446,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1445,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1444,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1443,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1442,
+    "Nome": "Vadabin",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1441,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1440,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1439,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1438,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1437,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1436,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1435,
+    "Nome": "Mar de Juur",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1434,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1433,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1432,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1431,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1430,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1429,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1428,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1427,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1426,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1425,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1424,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1423,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1422,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1421,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1420,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1419,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1418,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1417,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1416,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1415,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1414,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 25,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1413,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1412,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1411,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1410,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1409,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1408,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1407,
+    "Nome": "Margória",
+    "Regiao": "Oceano",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 1406,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1405,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1404,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1403,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1402,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1401,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1400,
+    "Nome": "Mar de Ross",
+    "Regiao": "Oceano",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1399,
+    "Nome": "Ilha de Nada",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1398,
+    "Nome": "Ilha de Mariul",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1397,
+    "Nome": "Ilha de Zagam",
+    "Regiao": "Oceano",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1396,
+    "Nome": "Reino de Haso",
+    "Regiao": "Oceano",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1395,
+    "Nome": "Porto Ratt",
+    "Regiao": "Oceano",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1394,
+    "Nome": "Ilha de Hakoven",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1393,
+    "Nome": "Montanha Rochosa Dona",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1392,
+    "Nome": "Penhasco Ivero",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1391,
+    "Nome": "Terra Devastada de Marfim",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1390,
+    "Nome": "Oficina da Mina de Enxofre",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1389,
+    "Nome": "Penhasco Costeiro de Gavinya",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1388,
+    "Nome": "Cratera Grande de Gavinya",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 0,
+    "Agua": 10
+  },
+  {
+    "BdoId": 1387,
+    "Nome": "Zona Vulcânica de Gavinya",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1385,
+    "Nome": "Monte de Areia do Norte",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1384,
+    "Nome": "Prisão Pila Kan",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1383,
+    "Nome": "Deserto Cantusa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1382,
+    "Nome": "Região Central da Cantusa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1381,
+    "Nome": "Muiquun",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1380,
+    "Nome": "Arehaza",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1379,
+    "Nome": "Floresta de Palmeiras Areha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1378,
+    "Nome": "Campo de Batalha Vermelho",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1377,
+    "Nome": "Balsa Abandonada em Shakatu",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1376,
+    "Nome": "Ilha de Derko",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1375,
+    "Nome": "Litoral de Ancado",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1374,
+    "Nome": "Zona do Castelo de Valência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1373,
+    "Nome": "Penhasco Kisleev",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 8,
+    "Agua": 13
+  },
+  {
+    "BdoId": 1372,
+    "Nome": "Ilha de Boa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1371,
+    "Nome": "Ilha de Orisha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1370,
+    "Nome": "Ilha de Kashuma",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1369,
+    "Nome": "Ilha de Halmad",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1368,
+    "Nome": "Ilha de Shirna",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1367,
+    "Nome": "Ilha de Tigris",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1366,
+    "Nome": "Ilha de Esfah",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1365,
+    "Nome": "Ilha de Riyed",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1364,
+    "Nome": "Ilha de Sokota",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1356,
+    "Nome": "Fazenda Fohalam",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1355,
+    "Nome": "Plantação de Valência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1354,
+    "Nome": "Fazenda Erdal",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1353,
+    "Nome": "Terras Agrícolas de Altas",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1352,
+    "Nome": "Terras Agrícolas de Shakatu",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1351,
+    "Nome": "Terras Agrícolas do Bazar",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1350,
+    "Nome": "Planalto Oeste de Valência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1347,
+    "Nome": "Vale Titium",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1346,
+    "Nome": "Montanhas Lua Crescente",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 8,
+    "Agua": 13
+  },
+  {
+    "BdoId": 1345,
+    "Nome": "Santuário Lua Crescente",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 8,
+    "Agua": 13
+  },
+  {
+    "BdoId": 1344,
+    "Nome": "Aakman",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1343,
+    "Nome": "Porto Interior de Ancado",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1342,
+    "Nome": "Castelo de Valência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 70,
+    "Umidade": 5,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1340,
+    "Nome": "Câmara de Pedra de Areia Vermelha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 65,
+    "Umidade": 18,
+    "Agua": 25
+  },
+  {
+    "BdoId": 1339,
+    "Nome": "Observatório de Rakshan",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1338,
+    "Nome": "Santuário do Peregrino - Jejum",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1337,
+    "Nome": "Santuário do Peregrino - Castidade",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1336,
+    "Nome": "Santuário do Peregrino - Humildade",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1335,
+    "Nome": "Santuário do Peregrino - Honestidade",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1334,
+    "Nome": "Santuário do Peregrino - Partilha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1333,
+    "Nome": "Santuário do Peregrino - Abstinência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1332,
+    "Nome": "Santuário do Peregrino - Obediência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1331,
+    "Nome": "Oásis Ibellab",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1330,
+    "Nome": "Ravina Kmach",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1329,
+    "Nome": "Ravina Iris",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1328,
+    "Nome": "Vale de Bambu",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1327,
+    "Nome": "Caverna do Bandido Gahaz",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1326,
+    "Nome": "Balsa Esperançosa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1325,
+    "Nome": "Abrigo do Peregrino",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 85,
+    "Umidade": 2,
+    "Agua": 8
+  },
+  {
+    "BdoId": 1324,
+    "Nome": "Pila Fe",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1322,
+    "Nome": "Templo Naga do Deserto",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1321,
+    "Nome": "Ravina Yalt",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1319,
+    "Nome": "Grão de Areia Bazaar",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1318,
+    "Nome": "Capotia",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1317,
+    "Nome": "Portal de Barhan",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1316,
+    "Nome": "Covil do Basilisco",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1315,
+    "Nome": "Planície Taphtar",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1314,
+    "Nome": "Shakatu",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1313,
+    "Nome": "Intersecção do Portal Runa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1312,
+    "Nome": "Cidade Arruinada de Runa",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1311,
+    "Nome": "Ninho de Waragon",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1310,
+    "Nome": "Acampamento de Bashim",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1309,
+    "Nome": "Ravina Pujiya",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1308,
+    "Nome": "Cachoeira de Leical",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 60,
+    "Umidade": 12,
+    "Agua": 18
+  },
+  {
+    "BdoId": 1307,
+    "Nome": "Abrigo do Kunid",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1306,
+    "Nome": "Ruínas Cadry",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1305,
+    "Nome": "Ravina do Veterano",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1304,
+    "Nome": "Região Rochosa Gorgo",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1303,
+    "Nome": "Posto de Sentinela da Rocha",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1302,
+    "Nome": "Portal de Altinova",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1301,
+    "Nome": "Capital da Valência",
+    "Regiao": "Reino de Valência",
+    "Temperatura": 62,
+    "Umidade": 15,
+    "Agua": 15
+  },
+  {
+    "BdoId": 1221,
+    "Nome": "Cultivo de Linho",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1220,
+    "Nome": "Escavação",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1219,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1218,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1217,
+    "Nome": "Coleta",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1216,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1215,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1214,
+    "Nome": "Coleta",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1213,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1212,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1211,
+    "Nome": "Coleta",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1210,
+    "Nome": "Coleta",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1209,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1208,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1207,
+    "Nome": "Cultivo de Canela",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1206,
+    "Nome": "Cultivo de Algodão",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1205,
+    "Nome": "Cultivo de Batata Doce",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1204,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1203,
+    "Nome": "Mineração",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1202,
+    "Nome": "Cultivo de Aloés",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1201,
+    "Nome": "Cultivo de Algodão",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1200,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1199,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1198,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1197,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1196,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1195,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1194,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1193,
+    "Nome": "Especialidades",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1192,
+    "Nome": "Banco de Investimento Neruda Shen",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1191,
+    "Nome": "Banco de Investimento Quina",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1190,
+    "Nome": "Banco de Investimento Gulabi",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1189,
+    "Nome": "Banco de Investimento Zigmund",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1172,
+    "Nome": "Penhasco de Hasrah",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1171,
+    "Nome": "Floresta Tungrad",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1170,
+    "Nome": "Sino Despertador",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1169,
+    "Nome": "Entrada da Mina de Ferro Abandonada",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1168,
+    "Nome": "Mina de Ferro Abandonada do Distrito de Saunil",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1167,
+    "Nome": "Mina de Ferro Abandonada do Distrito de Rhutum",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1166,
+    "Nome": "Cais do Acampamento de Sausan",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1165,
+    "Nome": "Vila Tamboril",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1164,
+    "Nome": "Intersecção de Planalto",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1163,
+    "Nome": "Litoral de Mediah",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1162,
+    "Nome": "Fissura Ancestral",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1161,
+    "Nome": "Fazenda Kasula",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1160,
+    "Nome": "Fazenda Shuri",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1159,
+    "Nome": "Fazenda Ahto",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1158,
+    "Nome": "Rancho de Cavalo de Cauda de Pedra",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1157,
+    "Nome": "Acampamento dos Elmos",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1156,
+    "Nome": "Local de Escavação das Ruínas Antigas",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1155,
+    "Nome": "Santuário Elric",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1154,
+    "Nome": "Ravina da Corrupção",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1153,
+    "Nome": "Kusha",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1152,
+    "Nome": "Castelo de Mediah",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1151,
+    "Nome": "Posto Avançado de Sarma",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1150,
+    "Nome": "O Mausoléu",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1149,
+    "Nome": "Caverna de Lava Omar",
+    "Regiao": "República de Mediah",
+    "Temperatura": 85,
+    "Umidade": 0,
+    "Agua": 10
+  },
+  {
+    "BdoId": 1148,
+    "Nome": "Sepultura de Soldados",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1147,
+    "Nome": "Litoral do Bico de Pedra",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1146,
+    "Nome": "2º Laboratório de Marni",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1145,
+    "Nome": "Abun",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1144,
+    "Nome": "Mina de Ferro Abandonada",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1143,
+    "Nome": "Vale Rochoso Alumn",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1141,
+    "Nome": "Tarif",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1140,
+    "Nome": "Entrada de Altinova",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1139,
+    "Nome": "Acampamento dos Bandidos Viajantes",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1138,
+    "Nome": "Planalto Asula",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1137,
+    "Nome": "Esconderijo dos Moicans",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 20,
+    "Agua": 22
+  },
+  {
+    "BdoId": 1136,
+    "Nome": "Templo Kamasylvia",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1135,
+    "Nome": "Terra Retumbante",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1134,
+    "Nome": "Planalto Norte de Mediah",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1133,
+    "Nome": "Deserto Cauda de Pedra",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1132,
+    "Nome": "Acampamento de Sausan",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1131,
+    "Nome": "Portal Norte de Mediah",
+    "Regiao": "República de Mediah",
+    "Temperatura": 50,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 1101,
+    "Nome": "Altinova",
+    "Regiao": "República de Mediah",
+    "Temperatura": 60,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 1100,
+    "Nome": "Ilha de Lerao",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1099,
+    "Nome": "Ilha de Tinberra",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1098,
+    "Nome": "Ilha de Portanen",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1097,
+    "Nome": "Ilha de Rosevan",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1096,
+    "Nome": "Ilha de Shasha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1095,
+    "Nome": "Ilha de Arita",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1094,
+    "Nome": "Ilha de Teste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1093,
+    "Nome": "Ilha de Padix",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1092,
+    "Nome": "Ilha de Almai",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1091,
+    "Nome": "Ilhas de Kuit",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1090,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1089,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1088,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1087,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1086,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1085,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1084,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1083,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1082,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1081,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1080,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1079,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1078,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1077,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1076,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1075,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1074,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1073,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1072,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1071,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1070,
+    "Nome": "Ilha de Netnume",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1069,
+    "Nome": "Ilha de Ginburrey",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1068,
+    "Nome": "Ilha de Rameda",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1067,
+    "Nome": "Ilha de Teyamal",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1066,
+    "Nome": "Ilha de Theonil",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1065,
+    "Nome": "Ilha de Modric",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1064,
+    "Nome": "Ilha de Baeza",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1063,
+    "Nome": "Ilha de Serca",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1062,
+    "Nome": "Ilha de Randis",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1061,
+    "Nome": "Ilha de Barater",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1060,
+    "Nome": "Ilha de Dunde",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1059,
+    "Nome": "Ilha de Daton",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1058,
+    "Nome": "Ilha de Oben",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1057,
+    "Nome": "Ilha de Eberdeen",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1056,
+    "Nome": "Ilha de Albresser",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 60,
+    "Agua": 30
+  },
+  {
+    "BdoId": 1055,
+    "Nome": "Ilha de Narvo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1054,
+    "Nome": "Ilha de Lisz",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1053,
+    "Nome": "Ilha de Staren",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1052,
+    "Nome": "Ilha de Louruve",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1051,
+    "Nome": "Ilha de Marka",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1050,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1049,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1048,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1047,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1046,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1045,
+    "Nome": "Área para Desidratação de Peixe 3",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1044,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1043,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1042,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1041,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1040,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1039,
+    "Nome": "Ilha de Runa de Ephde",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1038,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1037,
+    "Nome": "Área para Desidratação de Peixe",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1036,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1035,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1034,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1033,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1032,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1031,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Mediah",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1030,
+    "Nome": "Área para Desidratação de Peixe 2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1029,
+    "Nome": "Área para Desidratação de Peixe 1",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 1028,
+    "Nome": "Ilha de Tashu",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1027,
+    "Nome": "Ilha de Angie",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1026,
+    "Nome": "Ilha de Invernen",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1024,
+    "Nome": "Ilha de Marlene",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1023,
+    "Nome": "Ilha de Balvege",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1022,
+    "Nome": "Ilha de Eveto",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1021,
+    "Nome": "Ilha de Paratama",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1020,
+    "Nome": "Ilha de Mariveno",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1019,
+    "Nome": "Ilha de Duch",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1018,
+    "Nome": "Ilha de Luivano",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1017,
+    "Nome": "Ilha de Tulu",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1016,
+    "Nome": "Ilha de Orffs",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 1015,
+    "Nome": "Ilha de Kanvera",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1014,
+    "Nome": "Ilha de Arakil",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1013,
+    "Nome": "Ilha de Ostra",
+    "Regiao": "República de Mediah",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1012,
+    "Nome": "Ilha de Taramura",
+    "Regiao": "República de Mediah",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1011,
+    "Nome": "Ilha de Beiruwa",
+    "Regiao": "República de Mediah",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1010,
+    "Nome": "Ilha de Weita",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1009,
+    "Nome": "Ilha de Baremi",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1008,
+    "Nome": "Ilha de Racid",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1007,
+    "Nome": "Ilha de Al-Naha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1006,
+    "Nome": "Ilha de Ajir",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1005,
+    "Nome": "Ilha de Pujara",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1004,
+    "Nome": "Ilha de Delinghart",
+    "Regiao": "República de Mediah",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1003,
+    "Nome": "Ilha de Pilava",
+    "Regiao": "República de Mediah",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1002,
+    "Nome": "Ilha de Iliya",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 55,
+    "Umidade": 60,
+    "Agua": 75
+  },
+  {
+    "BdoId": 1001,
+    "Nome": "Ilha de Lema",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 45,
+    "Agua": 60
+  },
+  {
+    "BdoId": 964,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 963,
+    "Nome": "Área de Comércio da Academia Sagrade de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 962,
+    "Nome": "Área de Comércio do Mercado de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 961,
+    "Nome": "Área Comercial da Favela de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 960,
+    "Nome": "Parede de Pedra de Hexe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 959,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 958,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 957,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 956,
+    "Nome": "Colina de Keplan",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 955,
+    "Nome": "Pedreira em Ruínas",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 954,
+    "Nome": "Pedreira Abandonada",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 953,
+    "Nome": "Passagem de Oze",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 952,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 951,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 950,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 915,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 914,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 913,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 912,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 911,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 910,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 909,
+    "Nome": "Monastério Abandonado",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 908,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 907,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 906,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 905,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 904,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 903,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 902,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 901,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 858,
+    "Nome": "Plantação de Trigo do Norte",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 857,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 856,
+    "Nome": "Antigo Dente-de-Leão",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 855,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 854,
+    "Nome": "Cultivo de Pimentão",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 853,
+    "Nome": "Cultivo de Cevada",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 852,
+    "Nome": "Cultivo de Trigo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 850,
+    "Nome": "Cume Karanda",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 849,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 844,
+    "Nome": "Caverna de Khuruto",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 843,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 842,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 841,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 840,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 835,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 834,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 832,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 831,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 810,
+    "Nome": "Banco de Investimento de Christine Cessory",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 809,
+    "Nome": "Banco de Investimento de Marco Faust",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 807,
+    "Nome": "Florin_3",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 806,
+    "Nome": "Florin_2",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 805,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 801,
+    "Nome": "Centro de Comércio de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 727,
+    "Nome": "Lago de Kaia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 726,
+    "Nome": "Topo da Montanha Norte de Kaia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 10,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 725,
+    "Nome": "Entrada da Cabine do Phoniel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 10,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 724,
+    "Nome": "Santuário de Hexe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 723,
+    "Nome": "Jusante do Rio Behr",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 722,
+    "Nome": "Cabine do Phoniel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 10,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 721,
+    "Nome": "Capela da Bruxa",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 720,
+    "Nome": "Floresta de Árvore de Folha Longa",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 719,
+    "Nome": "Posto de Sentinela da Árvore Folha Longa",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 718,
+    "Nome": "Área de Descanso do Lenhador",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 717,
+    "Nome": "Cabine do Tobare",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 716,
+    "Nome": "Caverna Marie",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 715,
+    "Nome": "Floresta Mansha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 714,
+    "Nome": "Floresta Oeste da Zona do Castelo de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 713,
+    "Nome": "Acampamento dos Homens-Bagre",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 712,
+    "Nome": "Fazenda Gabino",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 10,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 711,
+    "Nome": "Balsa Sul de Kaia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 710,
+    "Nome": "Toco da Árvore Rhua",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 709,
+    "Nome": "Crio",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 708,
+    "Nome": "Monastério Abandonado",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 707,
+    "Nome": "Posto de Sentinela dos Rhutums",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 706,
+    "Nome": "Acampamento Rhutum",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 705,
+    "Nome": "Origem do Rio Behr",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 704,
+    "Nome": "Balsa Norte de Kaia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 703,
+    "Nome": "Floresta de Treant",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 702,
+    "Nome": "Castelo de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 701,
+    "Nome": "Zona do Castelo de Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 42,
+    "Agua": 35
+  },
+  {
+    "BdoId": 677,
+    "Nome": "Intersecção de Rocha de Tarte",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 676,
+    "Nome": "Cânion Dane",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 675,
+    "Nome": "Casa do Oze",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 674,
+    "Nome": "Pedreira de Keplan",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 673,
+    "Nome": "Atalho da Pedreira",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 672,
+    "Nome": "Caverna de Glutoni",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 671,
+    "Nome": "Portal do Oeste de Serendia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 670,
+    "Nome": "Fazenda Gianin",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 669,
+    "Nome": "Arredores de Keplan",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 668,
+    "Nome": "Planície Gehaku",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 667,
+    "Nome": "Pedreira em Ruínas",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 666,
+    "Nome": "Posto de Entrada da Baliza do Fogo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 665,
+    "Nome": "Fazenda Oberen",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 664,
+    "Nome": "Pedreira Abandonada",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 663,
+    "Nome": "Terras Agrícolas Bain",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 662,
+    "Nome": "Parede de Pedra de Hexe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 661,
+    "Nome": "Fazenda de Gado Falres",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 660,
+    "Nome": "Laboratório de Marni",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 659,
+    "Nome": "Baliza de Fogo da Trina",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 658,
+    "Nome": "Forte da Trina",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 657,
+    "Nome": "Campo de Batalha de Saunil",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 656,
+    "Nome": "Acampamento dos Gigantes",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 10,
+    "Agua": 20
+  },
+  {
+    "BdoId": 655,
+    "Nome": "Acampamento de Saunil",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 654,
+    "Nome": "Colina de Keplan",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 653,
+    "Nome": "Ruínas da Fazenda de Marni",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 652,
+    "Nome": "Passagem de Oze",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 651,
+    "Nome": "Caminho da Caverna de Marni",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 638,
+    "Nome": "Fazenda Bernianto",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 637,
+    "Nome": "Posto da Ponte do Idoso",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 636,
+    "Nome": "Fazenda Cohen",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 635,
+    "Nome": "Vale de Ephéria",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 38,
+    "Agua": 30
+  },
+  {
+    "BdoId": 634,
+    "Nome": "Posto de Sentinela de Ephéria",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 38,
+    "Agua": 30
+  },
+  {
+    "BdoId": 633,
+    "Nome": "Fazenda Dias",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 632,
+    "Nome": "Posto de Sentinela Isolado",
+    "Regiao": "",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 631,
+    "Nome": "Caverna de Caphras",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 630,
+    "Nome": "Fazenda Contaminada",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 629,
+    "Nome": "Antigo Dente-de-Leão",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 628,
+    "Nome": "Plantação de Trigo do Norte",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 627,
+    "Nome": "Cume Karanda",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 626,
+    "Nome": "Posto Avançado de Delphe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 625,
+    "Nome": "Caverna de Khuruto",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 624,
+    "Nome": "Ruínas da Árvore Bree",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 623,
+    "Nome": "Fortificação Anti-Troll",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 622,
+    "Nome": "Colina de Quint",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 621,
+    "Nome": "Terra Abandonada",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 619,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 618,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 617,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 616,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 615,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 614,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 613,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 612,
+    "Nome": "Banco de Investimento de Valentine",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 611,
+    "Nome": "Banco de Investimento de Norma Leight",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 610,
+    "Nome": "Banco de Investimento de Basquean Ljurik",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 609,
+    "Nome": "Behr",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 608,
+    "Nome": "Trent",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 607,
+    "Nome": "Banco de Investimento de Luolo Grebe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 606,
+    "Nome": "Banco de Investimento de Lehard Motenon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 605,
+    "Nome": "Banco de Investimento de Enrique Encarotia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 604,
+    "Nome": "Porto de Ephéria",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 38,
+    "Agua": 30
+  },
+  {
+    "BdoId": 603,
+    "Nome": "Florin",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 602,
+    "Nome": "Keplan",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 25
+  },
+  {
+    "BdoId": 601,
+    "Nome": "Calpheon",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 38,
+    "Umidade": 30,
+    "Agua": 35
+  },
+  {
+    "BdoId": 488,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 487,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 484,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 483,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 480,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 479,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 476,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 475,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 473,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 472,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 471,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 464,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 463,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 459,
+    "Nome": "Produção de Lã",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 455,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 452,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 451,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 443,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 441,
+    "Nome": "Zona de Segurança de Moretti",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 440,
+    "Nome": "Cultivo de Linho",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 439,
+    "Nome": "Cultivo de Trigo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 438,
+    "Nome": "Cultivo de Linho",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 437,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 436,
+    "Nome": "Cultivo de Abóbora",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 435,
+    "Nome": "Cultivo de Trigo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 432,
+    "Nome": "Produção de Mel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 431,
+    "Nome": "Cultivo de Abóbora",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 410,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 409,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 408,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 407,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 406,
+    "Nome": "Banco de Investimento de Larc",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 405,
+    "Nome": "Banco de Investimento de Freharau",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 402,
+    "Nome": "Banco de Investimento de Siuta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 401,
+    "Nome": "Banco de Investimento de Luciano Pietro",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 376,
+    "Nome": "Torre de Vigia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 375,
+    "Nome": "Castelo dos Cavaleiros Delphe",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 20,
+    "Agua": 30
+  },
+  {
+    "BdoId": 374,
+    "Nome": "Acampamento dos Orcs",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 373,
+    "Nome": "Zona Neutra do Sul",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 372,
+    "Nome": "Fortaleza Brady",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 371,
+    "Nome": "Esconderijo Biraghi",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 347,
+    "Nome": "Ruínas da Fazenda Lynch",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 346,
+    "Nome": "Pântano do Norte",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 345,
+    "Nome": "Ruínas de Glish",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 344,
+    "Nome": "Pântano do Sul",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 343,
+    "Nome": "Pântano de Glish",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 341,
+    "Nome": "Planície Norte de Serendia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 328,
+    "Nome": "Rancho Lynch",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 327,
+    "Nome": "Santuário de Serendia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 326,
+    "Nome": "Pedreira Norte do Heidel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 325,
+    "Nome": "Monastério Sangrento",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 324,
+    "Nome": "Ruínas do Castelo",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 323,
+    "Nome": "Plantação Moretti",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 322,
+    "Nome": "Fazenda Costa",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 321,
+    "Nome": "Fazenda Alejandro",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 309,
+    "Nome": "Portal do Leste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 308,
+    "Nome": "Fronteira do Leste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 18,
+    "Umidade": 20,
+    "Agua": 50
+  },
+  {
+    "BdoId": 307,
+    "Nome": "Portal do Sudoeste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 306,
+    "Nome": "Portal do Noroeste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 305,
+    "Nome": "Acampamento de Guarda do Sul",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 304,
+    "Nome": "Acampamento de Guarda Central",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 303,
+    "Nome": "Acamp. de Guarda do Norte",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 302,
+    "Nome": "Glish",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 30,
+    "Umidade": 80,
+    "Agua": 85
+  },
+  {
+    "BdoId": 301,
+    "Nome": "Heidel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 20,
+    "Agua": 40
+  },
+  {
+    "BdoId": 205,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 204,
+    "Nome": "Cultivo de Oliva",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 203,
+    "Nome": "Cultivo de Uva",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 202,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 201,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 188,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 187,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 184,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 183,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 179,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 176,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 175,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 172,
+    "Nome": "Cultivo de Milho",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 171,
+    "Nome": "Cultivo de Milho",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 168,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 167,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 164,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 160,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 159,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 156,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 155,
+    "Nome": "Coleta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 152,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 151,
+    "Nome": "Cultivo de Batata",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 148,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 147,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 144,
+    "Nome": "Escavação",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 142,
+    "Nome": "Cortar Lenha",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 139,
+    "Nome": "Mineração",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 136,
+    "Nome": "Produção de Frango",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 135,
+    "Nome": "Cultivo de Batata",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 134,
+    "Nome": "Ossuário",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 133,
+    "Nome": "Ossuário",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 132,
+    "Nome": "Produção de Frango",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 131,
+    "Nome": "Cultivo de Batata",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 110,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 109,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 108,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 107,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 106,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 105,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 104,
+    "Nome": "Especialidades",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 103,
+    "Nome": "Banco de Investimento de Bahar",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 102,
+    "Nome": "Banco de Investimento de Santo Manzi",
+    "Regiao": "República de Calpheon",
+    "Temperatura": null,
+    "Umidade": null,
+    "Agua": null
+  },
+  {
+    "BdoId": 72,
+    "Nome": "Floresta da Coruja Máscara",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 71,
+    "Nome": "Cume de Ephéria",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 38,
+    "Agua": 20
+  },
+  {
+    "BdoId": 70,
+    "Nome": "Litoral de Olvia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 69,
+    "Nome": "Sopé da Montanha Thermian",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 68,
+    "Nome": "Penhasco Thermian",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 67,
+    "Nome": "Foz do Rio Balenos",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 66,
+    "Nome": "Colina dos Lobos",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 65,
+    "Nome": "Fazenda Wale",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 64,
+    "Nome": "Fazenda Casta",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 63,
+    "Nome": "Ponte do Idoso",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 62,
+    "Nome": "Portal de Florin",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 22,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 61,
+    "Nome": "Olvia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 40
+  },
+  {
+    "BdoId": 49,
+    "Nome": "Penhasco Costeiro",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 48,
+    "Nome": "Floresta de Reclusão",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 47,
+    "Nome": "Altar de Agris",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 46,
+    "Nome": "Caverna Costeira",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 45,
+    "Nome": "Fazenda Toscani",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 44,
+    "Nome": "Floresta de Balenos",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 43,
+    "Nome": "Floresta de Pilhagem",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 42,
+    "Nome": "Colina Ehwaz",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 41,
+    "Nome": "Zona do Castelo Cron",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 27,
+    "Nome": "Fazenda Marino",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 26,
+    "Nome": "Fazenda Loggia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 25,
+    "Nome": "Caverna dos Diabretes",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 24,
+    "Nome": "Câmara de Pedra dos Anciãos",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 23,
+    "Nome": "Caverna de Goblins",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 22,
+    "Nome": "Fazenda Finto",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 21,
+    "Nome": "Fazenda Bartali",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  },
+  {
+    "BdoId": 6,
+    "Nome": "Passagem de Heidel",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 15,
+    "Umidade": 20,
+    "Agua": 28
+  },
+  {
+    "BdoId": 5,
+    "Nome": "Atalho do Esconderijo do Bandido",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 40,
+    "Umidade": 10,
+    "Agua": 35
+  },
+  {
+    "BdoId": 4,
+    "Nome": "Portal do Oeste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 3,
+    "Nome": "Castelo Cron",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 35,
+    "Umidade": 30,
+    "Agua": 25
+  },
+  {
+    "BdoId": 2,
+    "Nome": "Acamp. de Guarda do Oeste",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 30,
+    "Agua": 50
+  },
+  {
+    "BdoId": 1,
+    "Nome": "Velia",
+    "Regiao": "República de Calpheon",
+    "Temperatura": 45,
+    "Umidade": 38,
+    "Agua": 55
+  }
+]

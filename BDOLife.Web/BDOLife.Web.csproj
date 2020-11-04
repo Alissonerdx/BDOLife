@@ -8,6 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201103043832_teste.cs" />
+    <Compile Remove="Migrations\20201103043832_teste.Designer.cs" />
+    <Compile Remove="Migrations\20201104020134_removido-index.cs" />
+    <Compile Remove="Migrations\20201104020134_removido-index.Designer.cs" />
+    <Compile Remove="Migrations\20201104145431_colheita-indexes.cs" />
+    <Compile Remove="Migrations\20201104145431_colheita-indexes.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -33,6 +42,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\imagens\imperial\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Util\JSONs\Nodes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

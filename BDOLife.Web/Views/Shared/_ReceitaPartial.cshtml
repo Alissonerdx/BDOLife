@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="receitaSelect" class="font-label-poppins">Receita</label>
+                            <label for="receitaSelect" class="font-label-poppins">Receita @*<a href="#" onclick="AbrirRankingReceitas()"><img style="vertical-align: baseline !important" id="rankingReceitasIcone" src="~/imagens/icones/config-icon.svg" width="16" /></a>*@</label>
                             <select class="form-control" id="receitaSelect">
                                 <option>Selecione a receita</option>
                                 @if (receitas != null)
@@ -148,8 +148,8 @@
                                 <a class="nav-link active show" id="tab-ingredientes" data-toggle="tab" aria-controls="ingredientes" href="#ingredientes" aria-expanded="true">Ingredientes</a>
                             </li>
                             @*<li class="nav-item">
-                        <a class="nav-link" id="tab-detalhes" data-toggle="tab" aria-controls="detalhes" href="#detalhes" aria-expanded="false">Detalhes</a>
-                    </li>*@
+                                    <a class="nav-link" id="tab-detalhes" data-toggle="tab" aria-controls="detalhes" href="#detalhes" aria-expanded="false">Detalhes</a>
+                                </li>*@
                         </ul>
                         <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
                             <div role="tabpanel" class="tab-pane active show" id="ingredientes" aria-expanded="true" aria-labelledby="tab-ingredientes">
@@ -163,15 +163,15 @@
                                 <br />
                             </div>
                             @*<div class="tab-pane" id="detalhes" aria-labelledby="detalhes">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div id="detalhesReceitaGrid"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                    </div>*@
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="detalhesReceitaGrid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>*@
                         </div>
                     </div>
                 </div>
@@ -518,6 +518,94 @@
                 <button type="button" onclick="SalvarQtdReceita()" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnSalvarQtdReceitaCalculadora">Salvar</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="rankingReceitas" style="display: none;">
+    <div class="col-md-12" style="padding: 20px;">
+        <table id="rankingReceitasGrid" class="table table-striped table-bordered compact">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Receita</th>
+                    <th>Ingredientes</th>
+                    <th>Lucro Bruto</th>
+                    <th>Custo Bruto</th>
+                    <th>Lucro Liquido</th>
+                    <th>Demanda</th>
+                    <th>Oferta</th>
+                </tr>
+            </thead>
+            <tbody style="background-color: white !important;">
+                <tr>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                    <td>X</td>
+                </tr>
+            </tbody>
+        </table>
+        @*<div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeProdutosCalculadora" class="font-sm-label-poppins">Produzir</label>
+                    <input type="text" class="form-control mask-quantidade" id="quantidadeProdutosCalculadora" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeDiasCalculadora" class="font-sm-label-poppins">Dias</label>
+                    <input type="text" class="form-control mask-quantidade" id="quantidadeDiasCalculadora" value="1" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="totalProdutosCalculadora" class="font-sm-label-poppins">Total Prod.</label>
+                    <input type="text" class="form-control mask-quantidade" readonly id="totalProdutosCalculadora" value="0" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="procNormalCalculadora" class="font-sm-label-poppins">Proc Normal</label>
+                    <input type="text" class="form-control mask-proc" id="procNormalCalculadora" value="2.50" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="quantidadeReceitasCalculadora" class="font-sm-label-poppins">Receitas</label>
+                    <input type="text" class="form-control mask-quantidade" readonly id="quantidadeReceitasCalculadora" value="0" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="btnSalvarQtdReceitaCalculadora">&nbsp;</label>
+                <button type="button" onclick="SalvarQtdReceita()" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnSalvarQtdReceitaCalculadora">Salvar</button>
+            </div>*@
+        @*</div>*@
     </div>
 </div>
 

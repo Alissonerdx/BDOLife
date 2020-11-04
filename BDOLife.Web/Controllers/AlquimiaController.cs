@@ -29,7 +29,9 @@ namespace BDOLife.Web.Controllers
                 "R_PAS_1704", //Fera
                 "R_PAS_1705", //Gigante
                 "R_PAS_1843", //Barbaridade
-                "R_PAS_2455" //Avanço Gigantesco
+                "R_PAS_2455", //Avanço Gigantesco
+                "R_PAS_1775" //Elixir do Alvoroço
+
             });
 
             var data = receitas.Data.ToList();
