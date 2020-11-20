@@ -35,5 +35,12 @@ namespace BDOLife.Web.Controllers
             var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{caixa}.png");
             return File(image, "image/png");
         }
+
+        [ResponseCache(CacheProfileName = "Monthly")]
+        public IActionResult Cavalo(string cavalo)
+        {
+            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\cavalos\{cavalo}.png");
+            return File(image, "image/png");
+        }
     }
 }

@@ -11,12 +11,12 @@
         <form class="form" id="consultarForm">
             <div class="form-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="horasOnlineDia" class="font-label-poppins">Horas Online/Dia</label>
                             <select class="form-control" id="horasOnlineDia">
                                 <option value="">Selecione a quantidade de horas</option>
-                                <option value="24">24</option>
+                                <option value="24" selected>24</option>
                                 <option value="23">23</option>
                                 <option value="22">22</option>
                                 <option value="21">21</option>
@@ -45,37 +45,36 @@
                             @*<input type="text" class="form-control mask-quantidade" id="horasOnlineDia" min="0" value="24" max="24" style="border-radius: 0;" />*@
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="ciclosDia" class="font-label-poppins">Máx. de Ciclos/Dia</label>
-                            <input type="text" class="form-control mask-quantidade" id="ciclosDia" min="0" value="0" max="24" style="border-radius: 0;" />
+                            <label for="maxColheitas" class="font-label-poppins">Máx. Colheitas/Dia</label>
+                            <input type="text" class="form-control mask-quantidade" id="maxColheitas" min="0" value="" max="100" style="border-radius: 0;" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="tipoCerca" class="font-label-poppins">Tipo de Cerca</label>
+                            <select class="form-control" id="tipoCerca">
+                                <option value="4">Pequena (4 Slots)</option>
+                                <option value="7">Comum (7 Slots)</option>
+                                <option value="10">Dura (10 Slots)</option>
+                                <option value="10">Lua Minguante (10 Slots)</option>
+                            </select>
+                            @*<input type="text" class="form-control mask-quantidade" id="horasOnlineDia" min="0" value="24" max="24" style="border-radius: 0;" />*@
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="quantidadeCercas" class="font-label-poppins">Qtd. de Cercas</label>
+                            <input type="text" class="form-control mask-quantidade" id="quantidadeCercas" min="0" value="0" max="50" style="border-radius: 0;" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="totalSlots" class="font-label-poppins">Total de Slots</label>
                             <input type="text" class="form-control mask-quantidade" id="totalSlots" min="0" value="0" max="100" style="border-radius: 0;" />
                         </div>
                     </div>
-                    @*<div class="col-md-2">
-                            <div class="form-group">
-                                <label for="maestria" class="font-label-poppins">Maestria <a href="#" onclick="ConfigurarMaestriaImperial()"><img style="vertical-align: baseline !important" id="configuracaoMaestriaIcone" src="~/imagens/icones/config-icon.svg" width="16" /></a></label>
-                                <select class="form-control" id="maestriaSelect">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="proc" class="font-label-poppins">Proc Normal</label>
-                                <input type="text" class="form-control mask-proc" id="proc-normal" min="0" value="2.5" style="border-radius: 0;" />
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="proc-especial" class="font-label-poppins">Proc Raro</label>
-                                <input type="text" class="form-control mask-proc" id="proc-raro" min="0" value="0.30" style="border-radius: 0;" />
-                            </div>
-                        </div>*@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="calcular">&nbsp;</label>
@@ -163,8 +162,22 @@
     <div class="row ">
         <div class="card col-md-12 div-custom-color">
             <div class="card-body">
-                <p class="font-label-poppins" style="color: white !important;">É possível navegar entre as colunas da tabela pressionando Shift + Rotacionar Scroll do mouse.</p>
-
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="font-label-poppins" style="color: white !important;">É possível navegar entre as colunas da tabela pressionando Shift + Rotacionar Scroll do mouse.</p>
+                    </div>
+                    <div class="col-md-8" style="text-align: center">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- BdoLife - 728X90 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-8791502008730828"
+                             data-ad-slot="5181475696"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs">
@@ -189,18 +202,25 @@
                             <div class="tab-pane" id="detalhes" aria-labelledby="tab-detalhes">
                                 <div class="form-body">
                                     <div class="row">
-                                        <div class="col-md-12" style="padding: 20px;">
-                                            <h4 class="font-label-poppins">Os cálculos foram baseados na planilha <a href="https://docs.google.com/spreadsheets/d/15_GdYRdKj-ocUyypo5WLT5fThDiKa5bzOfSoH3lhwPg/edit" target="_blank"><b>Magical Seeds Farming Profit by Summer#8727</b></a></h4>
+                                        <div class="col-md-12" style="padding: 35px;">
+                                            @*style="text-decoration: none; color: #FFC67C;"*@
+                                            <h4 class="font-label-poppins">Os cálculos apresentados foram baseados na planilha <a href="https://docs.google.com/spreadsheets/d/15_GdYRdKj-ocUyypo5WLT5fThDiKa5bzOfSoH3lhwPg/edit" target="_blank"><b>Magical Seeds Farming Profit by Summer#8727</b></a></h4>
                                             <hr />
-                                            <p><b>Quando o objetivo é reprodução (Sementes Mágicas) focar nas colunas com N (NPC) da tabela, ou seja N quando sempre coletar apertando F5 - Criação de Plantas</b></p>
-                                            <p><b>Quando o objetivo é colheita (Especiais)  focar nas colunas com M (Mercado) da tabela, ou seja M quando coletar apertando R - Colheita e F5 para o replantio</b></p>
-                                            <p><b>Tempo de Crescimento:</b> Tempo de crescimento base + bonus por utilizar o fertilizante + bonus de temperatura perfeita</p>
-                                            <p><b>1 Ciclo:</b> Colheita de todos os slots</p>
-                                            <p><b>Lucro Mercado:</b> (Venda da colheita (Ex.: Alho Especial) no mercado + Forragem (Mercado) + Frutos (Mercado)) * Total de Ciclos</p>
-                                            <p><b>Lucro NPC:</b> (Venda das sementes mágicas extras (NPC) + Forragem (Mercado) + Frutos (Mercado)) * Total de Ciclos</p>
-                                            <p><u>Já esta descontada a taxa do mercado</u></p>
+                                            <p><u>TODOS OS VALORES SÃO MÉDIAS</u></p>
+                                            <p><b>Quando o objetivo é reprodução (Sementes Mágicas) focar nas colunas com N (NPC) da tabela, ou seja N quando todos os slots são coletados apertando F5 - Criação de Plantas</b></p>
+                                            <p><b>Quando o objetivo é colheita (Especiais)  focar nas colunas com M (Mercado) da tabela, ou seja M quando coletar alternando entre R - Colheita (Especial) e F5 para coletar para replantio (Semente Mágica)</b></p>
+                                            <p><b>Crescimento:</b> Tempo de crescimento base + bonus por utilizar o fertilizante + bonus de temperatura perfeita</p>
+                                            <p><b>Especiais:</b> Quantidade de especiais colhidos (Ex. Alho Especial) por dia que são considerados no Lucro Mercado</p>
+                                            <p><b>Mágicas:</b> Quantidade de sementes mágicas extras por dia que são consideradas no cálculo Lucro NPC</p>
+                                            <p><b>Frutos (M):</b> Quantidade de frutos colhidos (Ex. Fruto da Natureza) por dia que são considerados no Lucro Mercado</p>
+                                            <p><b>Frutos (N):</b> Quantidade de frutos colhidos (Ex. Fruto da Natureza) por dia que são considerados no Lucro NPC</p>
+                                            <p><b>Forragem (M):</b> Quantidade de forragens produzidas por dia que são consideradas no Lucro Mercado</p>
+                                            <p><b>Forragem (N):</b> Quantidade de forragens produzidas por dia que são consideradas no Lucro NPC</p>
+                                            <p><b>Lucro Mercado:</b> (Venda da colheita (Ex.: Alho Especial) no mercado + Forragem (Mercado) + Frutos (Mercado)) * Total de Colheitas</p>
+                                            <p><b>Lucro NPC:</b> (Venda das sementes mágicas extras (NPC) + Forragem (Mercado) + Frutos (Mercado)) * Total de Colheitas</p>
+                                            <p><u>Os cálculos já incluem a taxa do mercado</u></p>
                                             <hr />
-                                            <h4 class="font-label-poppins">Sementes Misteriosas vs Sementes Mágicas</h4>
+                                            <h4 class="font-label-poppins">Sementes Mágicas vs Sementes Misteriosas</h4>
                                             <p class="font-label-poppins">Sementes Mágicas:</p>
                                             <ul>
                                                 <li>Requer nível de cultivo mínimo artesão 1</li>

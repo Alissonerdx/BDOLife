@@ -17,5 +17,6 @@ namespace BDOLife.Core.Repositories
         Task<IList<ReceitaResultado>> ListarReceitaResultados(string receitaReferenciaId);
         Task<IList<Item>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos);
         Task<Item> ObterComReceitasPorReferenciaId(string referenciaId);
+        Task<IList<Item>> ListarReceitasPorTiposComResultado(List<TipoReceitaEnum> tipos);
     }
 }

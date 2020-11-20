@@ -21,9 +21,9 @@ namespace BDOLife.Web.Controllers
             return View();
         }
 
-        public IActionResult ImportarNodes()
+        public async Task<IActionResult> ImportarNodes()
         {
-            //_utilService.ImportarNodes();
+            await _utilService.ImportarNodes();
             return View();
         }
     }

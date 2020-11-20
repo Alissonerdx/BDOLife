@@ -138,7 +138,6 @@ $(document).ready(function () {
 
         prataField.prototype = new jsGrid.Field({
             sorter: function (num1, num2) {
-                console.log(num1, num2)
                 return num1 - num2;
             },
             itemTemplate: function (value) {

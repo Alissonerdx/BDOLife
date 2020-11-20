@@ -84,9 +84,9 @@ namespace BDOLife.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro)
+        public async Task<JsonResult> TreeViewSubReceita(string raiz, string receitaReferenciaId, int nivel, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool otimizar)
         {
-            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, quantidade, quantidadePorReceita, procNormal, procRaro, usarProcRaro);
+            var result = await _itemService.TreeViewSubReceita(raiz, receitaReferenciaId, nivel, quantidade, quantidadePorReceita, procNormal, procRaro, usarProcRaro: usarProcRaro, otimizar: otimizar);
             return Json(result);
         }
 

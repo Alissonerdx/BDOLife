@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDOLife.Application", "BDOLife.Application\BDOLife.Application.csproj", "{52239040-57D2-4BBF-B24E-89886B957EA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDOLife.Application", "BDOLife.Application\BDOLife.Application.csproj", "{52239040-57D2-4BBF-B24E-89886B957EA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDOLife.Core", "BDOLife.Core\BDOLife.Core.csproj", "{DC19BC74-DA36-444F-AA41-7ACD6FE2EE21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDOLife.Core", "BDOLife.Core\BDOLife.Core.csproj", "{DC19BC74-DA36-444F-AA41-7ACD6FE2EE21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDOLife.Infra", "BDOLife.Infra\BDOLife.Infra.csproj", "{D7D9CA8E-3626-4A45-8EBC-A33173FEFFC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDOLife.Infra", "BDOLife.Infra\BDOLife.Infra.csproj", "{D7D9CA8E-3626-4A45-8EBC-A33173FEFFC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDOLife.Web", "BDOLife.Web\BDOLife.Web.csproj", "{E2EF5DE4-4D4C-48C5-8DF9-7BAA3E5F06B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDOLife.Web", "BDOLife.Web\BDOLife.Web.csproj", "{E2EF5DE4-4D4C-48C5-8DF9-7BAA3E5F06B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BDOLife.Api", "BDOLife.Api\BDOLife.Api.csproj", "{EEDB521A-8E30-4319-81CA-559372621143}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E2EF5DE4-4D4C-48C5-8DF9-7BAA3E5F06B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2EF5DE4-4D4C-48C5-8DF9-7BAA3E5F06B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2EF5DE4-4D4C-48C5-8DF9-7BAA3E5F06B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDB521A-8E30-4319-81CA-559372621143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDB521A-8E30-4319-81CA-559372621143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDB521A-8E30-4319-81CA-559372621143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDB521A-8E30-4319-81CA-559372621143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

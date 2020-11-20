@@ -41,5 +41,7 @@ namespace BDOLife.Application.ViewModels
         public string LocalizacaoNPC { get; set; }
         public bool MultiResultados { get; set; }
         public long CustoProducao { get; set; }
+        public long CustoProducaoProcNormalERaro { get; set; }
+
     }
 }

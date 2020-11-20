@@ -15,9 +15,9 @@ namespace BDOLife.Application.Interfaces
         Task<ServiceResponse<IList<ItemViewModel>>> ListarPorTipoReceita(TipoReceitaEnum tipo);
         Task<ServiceResponse<IList<ItemViewModel>>> ListarPorGrupo(string grupo);
         Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId);
-        Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, int quantidade, decimal procNormal);
-        Task<IList<NodeViewModel>> TreeView(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false);
-        Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool semDetalhes = false);
+        Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, long quantidade, decimal procNormal);
+        Task<IList<NodeViewModel>> TreeView(string referenciaId, long quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false, bool otimizar = false);
+        Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int nivel, long quantidade, long quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool semDetalhes = false, bool otimizar = false);
         Task<IList<NodeViewModel>> TreeViewRefatorado(string referenciaId, int quantidade, int maestriaId, TipoReceitaEnum tipoReceita, decimal procNormal, decimal procRaro, bool semDetalhes = false);
         Task<IList<ResultadoCalculadoViewModel>> Resultados(TipoReceitaEnum tipo, string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestria, int maestriaImperial);
         Task<IList<ImperialReceitaViewModel>> Imperial(string referenciaId);
@@ -27,5 +27,6 @@ namespace BDOLife.Application.Interfaces
         Task<List<DependenciaViewModel>> ListarDependenciasDiretas(string referenciaId);
         Task<List<DependenciaViewModel>> ListarDependenciasIndiretas(string referenciaId);
         Task<Dictionary<ItemViewModel, long>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita);
+        Task<GraficoViewModel> ProcessarHistoricoPrecos(Item item, List<HistoricoPreco> dados);
     }
 }

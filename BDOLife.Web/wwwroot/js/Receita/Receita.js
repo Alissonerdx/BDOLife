@@ -3,6 +3,7 @@ var ingredienteNodeSelecionado = null;
 var pagina = window.location.pathname;
 var placeholderMaestria = "";
 var tipoReceita = 0;
+var receitaSelecionada = "";
 
 $(document).ready(function () {
     Inicializar();
@@ -32,7 +33,23 @@ $(document).ready(function () {
         $('.custo-producao-tooltip').popover({
             title: 'Custo de Produção',
             html: true,
-            content: `<p>É a soma dos custos de compras dos ingredientes da receita dividido pelo proc.</p> <p>Quando a receita possui o proc raro o mesmo é considerado no cálculo, Ex: proc normal: 2.5, proc raro: 0.3, proc considerado = 2.8 (2.5 + 0.3).</p>`,
+            content: `<p>É a soma dos custos de compras dos ingredientes da subreceita dividido pelo proc.</p> <p>Quando a subreceita é configurada para considerar o proc raro o mesmo é utilizado no cálculo, Ex: proc normal: 2.5, proc raro: 0.3, proc considerado = 2.8 (2.5 + 0.3).</p><p>Para considerar o uso do proc raro de uma subreceita é só clicar com o botão direito na subreceita na árvore lateral (direita) e ir em CONFIGURAR e marcar o campo de USAR PROCS RAROS.</p>`,
+            trigger: 'hover',
+            placement: 'right'
+        });
+
+        $('.produzir-comprar-tooltip').popover({
+            title: 'Produzir ou Comprar',
+            html: true,
+            content: `<p>Está coluna fornece a abordagem mais indicada (comprar ou produzir) a se fazer com a subreceita com base na comparação entre o campo Custo de Compra e Custo de Produção, se o Custo de Produção for menor que o Custo de Compra a coluna virá com a opção PRODUZIR selecionada, caso contrário com COMPRAR.</p><p>Se o campo estiver como PRODUZIR a subreceita na árvore a direita deve ser expandida indicando que a mesma será produzida, caso contrário deverá continuar minimizada indicando a COMPRA da subreceita.</p>`,
+            trigger: 'hover',
+            placement: 'right'
+        });
+
+        $('.ignorar-tooltip').popover({
+            title: 'Ignorar',
+            html: true,
+            content: `<p>Está opção deve ser manipulada com CUIDADO, não é porque o recurso foi coletado/produzido que deve ser ignorado (tudo possui um valor). Ex: 1000 Carne de Lobo (Coletado), mesmo que eu tenha coletado a carne de lobo ela possui um valor atrelado, poderia vender no mercado ao invés de usar na receita e por esse motivo não deve ser ignorada!</p>`,
             trigger: 'hover',
             placement: 'right'
         });
@@ -327,7 +344,7 @@ $(document).ready(function () {
                         procNormal = 0.0;
 
                     let totalProdutos = quantidadeProdutos * quantidadeDias;
-                    
+
                     $('#totalProdutosCalculadora').val(totalProdutos)
                     $('#quantidadeReceitasCalculadora').val(Math.ceil(totalProdutos / procNormal))
                 })
@@ -386,7 +403,10 @@ $(document).ready(function () {
             $('#dependenciaDiretaTb').jsGrid("loadData");
             $('#dependenciaIndiretaTb').jsGrid("loadData");
             $("#resultadosImperialGrid").jsGrid("loadData");
+
             $('#treeViewContent').jstree(true).refresh();
+
+            receitaSelecionada = $('#receitaSelect').val();
             CarregarGraficos();
         });
 
@@ -479,7 +499,7 @@ $(document).ready(function () {
             },
             "plugins": [
                 "contextmenu", /*"conditionalselect",*/ "search", "sort",
-                /*"state"*//*, "types", "wholerow",*/ /*"checkbox"*/
+                "state"/*, "types", "wholerow",*/ /*"checkbox"*/
             ],
             "search": {
                 "case_insensitive": true,
@@ -635,9 +655,14 @@ $(document).ready(function () {
 
                 let stack = [];
 
-                childrens.each(function (index, value) {
-                    stack.push($("#treeViewContent").jstree("get_node", value));
-                })
+                console.log(childrens)
+
+                if (typeof (childrens) === typeof([])) {
+                    childrens.each(function (index, value) {
+                        stack.push($("#treeViewContent").jstree("get_node", value));
+                    })
+                }
+               
 
                 while (stack.length > 0) {
                     let nodeChild = stack.pop();
@@ -1019,7 +1044,7 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    name: "custoProducao", type: "prataField", title: "Custo de Produção/UN", width: 180, editing: false, inserting: false,
+                    name: "custoProducao", type: "prataField", title: "Custo de Produção/UN (?)", width: 185, editing: false, inserting: false,
                     itemTemplate: function (value, item) {
                         if (item.IsTotal)
                             return "";
@@ -1033,12 +1058,15 @@ $(document).ready(function () {
                     },
                 },
                 {
-                    name: "produzirOuComprar", title: "Produzir/Comprar", type: "select", width: 150, align: "center", editing: true, inserting: false, items: [
+                    name: "produzirOuComprar", title: "Produzir/Comprar (?)", type: "select", width: 155, align: "center", editing: true, inserting: false, items: [
                         { text: "Comprar", value: "COMPRAR" },
                         { text: "Produzir", value: "PRODUZIR" }
                     ],
                     valueField: "value",
-                    textField: "text"
+                    textField: "text",
+                    headerTemplate: function () {
+                        return $(`<th class="produzir-comprar-tooltip">${this.title}</th>`);
+                    },
                 },
                 {
                     name: "precoTotal", type: "prataField", title: "Custo Total", width: 120, editing: false, inserting: false,
@@ -1056,13 +1084,16 @@ $(document).ready(function () {
                     }
                 },
                 {
-                    name: "ignorar", type: "checkbox", title: "Ignorar", width: 120,
+                    name: "ignorar", type: "checkbox", title: "Ignorar (?)", width: 120,
                     itemTemplate: function (value, item) {
                         if (item.IsTotal)
                             return "";
 
                         return $('<input>').prop('type', 'checkbox').attr('checked', value).attr('disabled', true);
-                    }
+                    },
+                    headerTemplate: function () {
+                        return $(`<th class="ignorar-tooltip">${this.title}</th>`);
+                    },
                     //itemTemplate: function (value, item) {
                     //    return $("<input>").attr("type", "checkbox")
                     //        .attr("checked", value || item.ignorar)
@@ -1499,7 +1530,14 @@ function CalcularTotais(itens, resultados) {
         for (let i = 0; i < itens.length; i++) {
             if (itens[i].ignorar === false) {
                 let quantidadeTotal = parseInt(Inputmask.unmask(`${itens[i].quantidadeTotal}`, { alias: "prata" }));
-                let preco = parseInt(Inputmask.unmask(`${itens[i].precoMarket}`, { alias: "prata" }));
+                let preco = 0;
+                if (itens[i].produzirOuComprar === "PRODUZIR") {
+                    preco = parseInt(Inputmask.unmask(`${itens[i].custoProducao}`, { alias: "prata" }));
+                }
+                else {
+                    preco = parseInt(Inputmask.unmask(`${itens[i].precoMarket}`, { alias: "prata" }));
+                }
+
                 let custoIngrediente = quantidadeTotal * preco;
                 //if (itens[i].produzirOuComprar === "COMPRAR") {
                 //    custoPorReceita = parseInt(Inputmask.unmask("" + itens[i].custoCompra, { alias: "prata" }));
@@ -1534,8 +1572,8 @@ function CalcularTotais(itens, resultados) {
     }
 
 
-    let lucroComPacoteEconomico = parseInt((lucroBruto * 0.845) - custoTotal);
-    let lucroSemPacoteEconomico = parseInt((lucroBruto * 0.65) - custoTotal);
+    let lucroComPacoteEconomico = EhVendidoNoMercado(receitaSelecionada) ? parseInt((lucroBruto * 0.845) - custoTotal) : parseInt(lucroBruto - custoTotal);
+    let lucroSemPacoteEconomico = EhVendidoNoMercado(receitaSelecionada) ? parseInt((lucroBruto * 0.65) - custoTotal) : parseInt(lucroBruto - custoTotal);
 
     if (lucroComPacoteEconomico < 0) {
         //lucroComPacoteEconomico = parseInt((lucroBruto * 1.155) - custoTotal);
@@ -1643,48 +1681,88 @@ function AlterarConfiguracao() {
 
         if (procNormal !== "" && procRaro !== "" && quantidade !== "" && precoUnitario !== "" && quantidade !== 0 && precoUnitario !== 0) {
 
-            let parentId = ingredienteNodeSelecionado.parent;
-            let parentNode = $("#treeViewContent").jstree("get_node", parentId);
-            let quantidadeTotal = parseInt(ingredienteNodeSelecionado.original.quantidade);
-            let quantidadePorReceita = parseInt(ingredienteNodeSelecionado.original.quantidadePorReceita);
+            //let parentId = ingredienteNodeSelecionado.parent;
+            //let parentNode = $("#treeViewContent").jstree("get_node", parentId);
+            //let quantidadeTotal = parseInt(ingredienteNodeSelecionado.original.quantidade);
+            //let quantidadePorReceita = parseInt(ingredienteNodeSelecionado.original.quantidadePorReceita);
 
-            let ids = ingredienteNodeSelecionado.id.split('-');
-            let id = ids[ids.length - 1];
+            //let ids = ingredienteNodeSelecionado.id.split('-');
+            //let id = ids[ids.length - 1];
 
-            let ingredienteSelecionado = BuscarIngredientePorId(id);
-            if (ingredienteSelecionado !== undefined && ingredienteSelecionado !== null) {
-                SubtrairTrocaItem(ingredienteNodeSelecionado.original.id);
-            }
+            //let ingredienteSelecionado = BuscarIngredientePorId(id);
+            //if (ingredienteSelecionado !== undefined && ingredienteSelecionado !== null) {
+            //    SubtrairTrocaItem(ingredienteNodeSelecionado.original.id);
+            //}
 
-            ConfigurarIngredienteTreeView(parentId, id, $('#configurarIngrediente').find('#procNormalConfIngrediente').val(), $('#configurarIngrediente').find('#procRaroConfIngrediente').val(), quantidadeTotal, quantidadePorReceita, usarProcRaro).then(function (data) {
+            //ConfigurarIngredienteTreeView(parentId, id, $('#configurarIngrediente').find('#procNormalConfIngrediente').val(), $('#configurarIngrediente').find('#procRaroConfIngrediente').val(), quantidadeTotal, quantidadePorReceita, usarProcRaro).then(function (data) {
 
-                let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
+            //    let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
 
-                childrens.each(function (index, value) {
-                    SubtrairTrocaItem(value);
-                })
+            //    childrens.each(function (index, value) {
+            //        SubtrairTrocaItem(value);
+            //    })
 
-                $('#treeViewContent').jstree("delete_node", `#${ingredienteNodeSelecionado.id}`);
+            //    $('#treeViewContent').jstree("delete_node", `#${ingredienteNodeSelecionado.id}`);
 
-                data.forEach(function (value, index) {
-                    if (index === 0) {
-                        value.valor = parseInt(Inputmask.unmask(`${ingredienteNodeSelecionado.original.valor}`, { alias: "prata" }));
-                    }
+            //    data.forEach(function (value, index) {
+            //        if (index === 0) {
+            //            value.valor = parseInt(Inputmask.unmask(`${ingredienteNodeSelecionado.original.valor}`, { alias: "prata" }));
+            //        }
 
-                    $('#treeViewContent').jstree("create_node", (value.parent === "#" ? "raiz" : value.parent), value, "inside");
+            //        $('#treeViewContent').jstree("create_node", (value.parent === "#" ? "raiz" : value.parent), value, "inside");
 
-                    if (value.parent === ingredienteNodeSelecionado.id) {
-                        AdicionarQuantidade(value);
-                    }
-                });
-            });
+            //        if (value.parent === ingredienteNodeSelecionado.id) {
+            //            AdicionarQuantidade(value);
+            //        }
+            //    });
+            //});
+            RecalcularSubReceita(ingredienteNodeSelecionado, procNormal, procRaro, usarProcRaro);
+
             $('#configurarIngrediente').iziModal('close');
         }
 
     }
+}
 
+function RecalcularSubReceita(ingrediente, procNormal, procRaro, usarProcRaro, otimizar = false) {
+    let parentId = ingrediente.parent;
+    let parentNode = $("#treeViewContent").jstree("get_node", parentId);
+    let quantidadeTotal = parseInt(ingrediente.original.quantidade);
+    let quantidadePorReceita = parseInt(ingrediente.original.quantidadePorReceita);
+
+    let ids = ingrediente.id.split('-');
+    let id = ids[ids.length - 1];
+
+    let ingredienteSelecionado = BuscarIngredientePorId(id);
+    if (ingredienteSelecionado !== undefined && ingredienteSelecionado !== null) {
+        SubtrairTrocaItem(ingrediente.original.id);
+    }
+
+    return ConfigurarIngredienteTreeView(parentId, id, procNormal, procRaro, quantidadeTotal, quantidadePorReceita, usarProcRaro, otimizar).then(function (data) {
+
+        let childrens = $("#treeViewContent").jstree("get_children_dom", ingrediente.original);
+
+        childrens.each(function (index, value) {
+            SubtrairTrocaItem(value);
+        })
+
+        $('#treeViewContent').jstree("delete_node", `#${ingrediente.id}`);
+
+        data.forEach(function (value, index) {
+            if (index === 0) {
+                value.valor = parseInt(Inputmask.unmask(`${ingrediente.original.valor}`, { alias: "prata" }));
+            }
+
+            $('#treeViewContent').jstree("create_node", (value.parent === "#" ? "raiz" : value.parent), value, "inside");
+
+            if (value.parent === ingrediente.id) {
+                AdicionarQuantidade(value);
+            }
+        });
+    });
 
 }
+
 
 function AlterarIngrediente() {
 
@@ -1713,7 +1791,7 @@ function AlterarIngrediente() {
 
             let novaQuantidadeTotal = parseInt(quantidadeTotalParent) * parseInt(quantidade);
 
-            BuscarTreeView(ingredienteNodeSelecionado.parent, novoIngrediente.id, $('#proc-normal').val(), $('#proc-raro').val(), novaQuantidadeTotal, parseInt(quantidade)).then(function (data) {
+            BuscarTreeView(ingredienteNodeSelecionado.parent, novoIngrediente.id, $('#proc-normal').val(), $('#proc-raro').val(), novaQuantidadeTotal, parseInt(quantidade), ingredienteNodeSelecionado.original.nivelSubReceita).then(function (data) {
                 let childrens = $("#treeViewContent").jstree("get_children_dom", ingredienteNodeSelecionado.original);
 
                 childrens.each(function (index, value) {
@@ -1739,7 +1817,7 @@ function AlterarIngrediente() {
     }
 }
 
-function BuscarTreeView(raiz, referenciaId, proc, procRaro, quantidade, quantidadePorReceita) {
+function BuscarTreeView(raiz, referenciaId, proc, procRaro, quantidade, quantidadePorReceita, nivel) {
     BlockElement('#treeView');
     return $.ajax({
         "type": "POST",
@@ -1751,7 +1829,7 @@ function BuscarTreeView(raiz, referenciaId, proc, procRaro, quantidade, quantida
             quantidade: quantidade,
             procNormal: proc,
             procRaro: procRaro,
-
+            nivel
         },
         "success": function (data) {
             UnblockElement('#treeView');
@@ -1759,8 +1837,89 @@ function BuscarTreeView(raiz, referenciaId, proc, procRaro, quantidade, quantida
     });
 }
 
+function OtimizarTreeView() {
+    //BlockElement('#treeView');
 
-function ConfigurarIngredienteTreeView(raiz, referenciaId, procNormal, procRaro, quantidade, quantidadePorReceita, usarProcRaro) {
+    let receitaPrincipal = $('#receitaSelect').val();
+
+    if (receitaPrincipal !== undefined && receitaPrincipal !== "" && receitaPrincipal !== null) {
+
+        let receitaPrincipal = $("#treeViewContent").jstree("get_node", "raiz");
+        let childrens = $("#treeViewContent").jstree("get_children_dom", receitaPrincipal);
+
+        if (childrens !== null && childrens.length > 0) {
+            let procNormal = $('#proc-normal').val();
+            let procRaro = $('#proc-raro').val();
+
+            childrens.each(function (index, value) {
+                let child = $("#treeViewContent").jstree("get_node", value);
+                console.log(child)
+                if (child.original.produzirOuComprar === "PRODUZIR" /*&& child.state.opened === false*/) {
+
+                    RecalcularSubReceita(child, procNormal, procRaro, child.original.possuiProcRaro, true).then(function () {
+
+                        //let childrensOfChild = $("#treeViewContent").jstree("get_children_dom", child.id);
+
+
+                        ////if (childrensOfChild.length > 0) {
+                        ////    console.log(childrensOfChild);
+                        ////}
+
+                        //if (childrensOfChild.length > 0) {
+
+                        //    let stack = [];
+
+                        //    childrensOfChild.each(function (i, v) {
+                        //        let node = $("#treeViewContent").jstree("get_node", v);
+                        //        if (node.original.produzirOuComprar === "PRODUZIR" /*&& node.state.opened === false*/) {
+                        //            console.log('ChildrenOfChild', node);
+                        //            stack.push(node);
+                        //        }
+                        //    })
+
+                        //    //let indexStack = 0;
+                        //    //while (stack.length > 0) {
+                        //    //    RecalcularSubReceita(stack[indexStack], procNormal, procRaro, stack[indexStack].original.possuiProcRaro);
+                        //    //    indexStack++;
+                        //    //}
+                        //}
+                    });
+
+
+
+                  
+
+                    //$("#treeViewContent").jstree("open_node", child)
+                }
+            })
+        }
+
+        //let quantidade = $('#quantidade').val();
+        //let procNormal = $('#proc-normal').val();
+        //let procRaro = $('#proc-raro').val();
+
+        //return $.ajax({
+        //    "type": "POST",
+        //    "url": "/Receita/TreeViewSubReceita",
+        //    "data": {
+        //        raiz: "",
+        //        receitaReferenciaId: receitaPrincipal,
+        //        quantidade: quantidade,
+        //        procNormal: procNormal,
+        //        procRaro: procRaro,
+        //        otimizar: true
+        //    },
+        //    "success": function (data) {
+        //        console.log(data);
+
+        //        UnblockElement('#treeView');
+        //    }
+        //});
+    }
+}
+
+
+function ConfigurarIngredienteTreeView(raiz, referenciaId, procNormal, procRaro, quantidade, quantidadePorReceita, usarProcRaro, otimizar = false) {
     BlockElement('#treeView');
     return $.ajax({
         "type": "POST",
@@ -1772,7 +1931,8 @@ function ConfigurarIngredienteTreeView(raiz, referenciaId, procNormal, procRaro,
             quantidade: quantidade,
             procNormal: procNormal,
             procRaro: procRaro,
-            usarProcRaro: usarProcRaro
+            usarProcRaro: usarProcRaro,
+            otimizar
 
         },
         "success": function (data) {
@@ -1814,4 +1974,11 @@ function SubtrairTrocaItem(value) {
     let item = BuscarIngredientePorId(id);
 
     SubtrairQuantidade(id, node.original.quantidade);
+}
+
+function EhVendidoNoMercado(referenciaId) {
+    if (referenciaId === 'R_A_342')
+        return false;
+
+    return true;
 }

@@ -851,6 +851,9 @@ function CalcularTotais(itens, resultados) {
         for (let i = 0; i < itens.length; i++) {
             if (itens[i].ignorar === false) {
                 let quantidadeTotal = parseInt(Inputmask.unmask(`${itens[i].quantidadeTotal}`, { alias: "prata" }));
+
+                let precoProducao = itens[i].custoProducao;
+
                 let preco = parseInt(Inputmask.unmask(`${itens[i].precoMarket}`, { alias: "prata" }));
                 let custoIngrediente = quantidadeTotal * preco;
                 //if (itens[i].produzirOuComprar === "COMPRAR") {

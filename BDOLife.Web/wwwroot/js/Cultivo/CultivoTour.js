@@ -37,9 +37,23 @@
                 ]
             },
             {
-                text: '<p>Ciclos por dia é a quantidade de vezes que TODOS os slots são coletados por dia, ex: 10 cercas de 10 slots = 100 slots, se você coletar os 100 é um ciclo</p>',
+                text: '<p>Este campo só é funcional caso necessite limitar a quantidade de colheitas por dia (24 horas), ex: coleto 2 vezes no dia, então o valor deste campo deve ser 2, caso tenha disponibilidade de coletar a qualquer momento este campo deve ficar vazio!</p>',
                 attachTo: {
-                    element: '#ciclosDia',
+                    element: '#maxColheitas',
+                    on: 'bottom'
+                },
+                classes: 'tour-modal',
+                buttons: [
+                    {
+                        text: 'Próximo',
+                        action: tour.next
+                    }
+                ]
+            },
+            {
+                text: '<p>Neste campo deve ser selecionado qual é o tipo de cerca utilizado na fazenda, cada tipo de cerca fornece uma quantidade específica de slots para o plantio</p>',
+                attachTo: {
+                    element: '#select2-tipoCerca-container',
                     on: 'bottom'
                 },
                 classes: 'tour-modal',
@@ -55,7 +69,26 @@
                 ]
             },
             {
-                text: '<p>Total de slots é a quantidade de espaços disponíveis para o cultivo, ex: 10 cercas de 10 slots = 100 slots</p>',
+                text: '<p>Neste campo deve ser preenchido a quantidade total de cercas para serem utilizadas no plantio das sementes mágicas</p>',
+                attachTo: {
+                    element: '#quantidadeCercas',
+                    on: 'bottom'
+                },
+                classes: 'tour-modal',
+                buttons: [
+                    {
+                        text: 'Anterior',
+                        action: tour.back
+                    },
+                    {
+                        text: 'Próximo',
+                        action: tour.next
+                    }
+                ]
+            },
+            {
+                text: '<p>Este campo é o resultado da multiplicação da quantidade de slots do tipo da cerca selecionada com a quantidade total de cercas para o plantio.</p>' +
+                '<p>Obs.: pode ser alterado para o valor que desejar</p>',
                 attachTo: {
                     element: '#totalSlots',
                     on: 'bottom'

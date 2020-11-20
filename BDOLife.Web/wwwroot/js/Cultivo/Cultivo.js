@@ -14,11 +14,24 @@
             cacheDataSource: [],
             escapeMarkup: function (m) { return m; },
         });
+
+
+        $('#tipoCerca').select2({
+            placeholder: 'Selecione o tipo de cerca',
+            language: "pt-BR",
+            width: '100%',
+            //templateResult: function (d) { return $(d.text); },
+            //templateSelection: function (d) { return $(d.text); },
+            allowClear: false,
+            cacheDataSource: [],
+            escapeMarkup: function (m) { return m; },
+        });
     }
 
     function Eventos() {
         $('#consultarForm').on('submit', function (e) {
             e.preventDefault();
+            $("#cultivosGrid").jsGrid("_resetSorting");
             $("#cultivosGrid").jsGrid("loadData");
 
             //let totalSlots = parseInt($('#totalSlots').val());
@@ -33,10 +46,48 @@
             //let totalForragemPorCicloMercado = taxaForragemSementeMagicaBreed * totalNovasSementesPorCicloMercado;
             //var totalFrutasPorCicloMercado = taxaFrutasSementeMagicaBreed * totalNovasSementesPorCicloMercado;
         });
+
+        $('#tipoCerca').on('change', function () {
+            let tipoCerca = parseInt($(this).val());
+            let quantidadeCercas = parseInt($('#quantidadeCercas').val());
+            let total = tipoCerca * quantidadeCercas;
+            $('#totalSlots').val(total);
+        });
+
+        $('#quantidadeCercas').on('keyup', function () {
+            let tipoCerca = parseInt($('#tipoCerca').val());
+            let quantidadeCercas = parseInt($(this).val());
+            let total = tipoCerca * quantidadeCercas;
+            $('#totalSlots').val(total);
+        })
+
     }
 
 
     function Tabelas() {
+
+        window.db = {};
+
+        //db.frutos = [
+        //    { Nome: "", Id: "" },
+        //    { Nome: "Fruta da Chama Carmesim", Id: "M_5201" },
+        //    { Nome: "Fruta de Encantamento", Id: "M_5209" },
+        //    { Nome: "Fruto da Natureza", Id: "M_5205" },
+        //    { Nome: "Fruto da Abundância", Id: "M_5203" },
+        //    { Nome: "Fruto do Poder Mágico", Id: "M_5211" },
+        //    { Nome: "Fruta do Sol", Id: "M_5207" },
+        //];
+
+        db.frutos = [
+            { Nome: "", Id: "" },
+            { Nome: "Fruta de Chama Carmesim", Id: "Fruta de Chama Carmesim" },
+            { Nome: "Fruta de Encantamento", Id: "Fruta de Encantamento" },
+            { Nome: "Fruto da Natureza", Id: "Fruto da Natureza" },
+            { Nome: "Fruto da Abundância", Id: "Fruto da Abundância" },
+            { Nome: "Fruto do Poder Mágico", Id: "Fruto do Poder Mágico" },
+            { Nome: "Fruta do Sol", Id: "Fruta do Sol" },
+        ];
+
         $('#cultivosGrid').jsGrid({
             width: "100%",
             inserting: false,
@@ -154,13 +205,29 @@
                     }
                 },
                 {
-                    name: "fruta", type: "text", title: "Fruto", width: 100, editing: false, inserting: false, autosearch: true, align: 'center',
+                    name: "fruta", type: "select", items: db.frutos, valueField: "Id", textField: "Nome", title: "Fruto", width: 100, editing: false, inserting: false, autosearch: true, align: 'center',
                 },
                 {
-                    name: "tempoMinimo", type: "text", title: "Crescimento", width: 100, editing: false, inserting: false, filtering: false, align: 'center',
+                    name: "precoSementeMagica", type: "prataField", title: "Valor Semente", width: 115, editing: false, inserting: false, filtering: false, autosearch: true, align: 'center',
                 },
                 {
-                    name: "ciclosPorDia", type: "text", title: "Ciclos", width: 100, editing: false, inserting: false, filtering: false, align: 'center',
+                    name: "tempoMinimoEmMinutos", type: "number", title: "Crescimento", width: 100, editing: false, inserting: false, filtering: false, align: 'center',
+                    itemTemplate: function (value, item) {
+                        let horas = Math.trunc(value / 60);
+                        let minutos = value % 60;
+                        return `${horas}h e ${minutos}m`
+                    },
+
+                },
+                //{
+                //    name: "tempoMinimo", type: "text", title: "Crescimento", width: 100, editing: false, inserting: false, filtering: false, align: 'center', visible: false,
+                //    itemTemplate: function (value, item) {
+                //        return Inputmask.format(`${value}`, { alias: "prata" });
+                //    },
+
+                //},
+                {
+                    name: "ciclosPorDia", type: "number", title: "Colheitas", width: 115, editing: false, inserting: false, filtering: false, align: 'center',
                 },
                 {
                     name: "regiao", type: "text", title: "Região", width: 100, editing: false, inserting: false, autosearch: true, align: 'center',
@@ -217,17 +284,16 @@
                         url: "/Cultivo/Calcular",
                         data: {
                             horasOnlineDia: $('#horasOnlineDia').val() === "" ? 0 : parseInt($('#horasOnlineDia').val()),
-                            maximoColheitaDia: $('#ciclosDia').val(),
+                            maximoColheitaDia: $('#maxColheitas').val() === "" ? 20 : $('#maxColheitas').val(),
                             totalSlots: $('#totalSlots').val(),
-                            filtro: filter
                         },
                         dataType: "json"
                     }).done(function (response) {
                         for (var prop in filter) {
-                            if (filter[prop].length > 0) {
+                            if (typeof (filter[prop]) === "string" && filter[prop].length > 0) {
                                 response = $.grep(response, function (item) {
                                     var regexp = new RegExp(filter[prop], 'gi');
-                                    if (item[prop].match(regexp)) {
+                                    if (typeof (item[prop]) === "string" && item[prop].match(regexp)) {
                                         return item;
                                     }
                                 });

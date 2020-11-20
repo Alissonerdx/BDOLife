@@ -285,29 +285,29 @@ i.jstree-icon.jstree-themeicon.jstree-themeicon-custom {
     box-shadow: none !important;
 }
 
-.vakata-context.jstree-contextmenu.jstree-default-contextmenu > li > a > i {
-    width: 24px !important;
-}
+    .vakata-context.jstree-contextmenu.jstree-default-contextmenu > li > a > i {
+        width: 24px !important;
+    }
 
     .vakata-context li > a {
         text-shadow: none !important;
         color: #F0A748 !important;
     }
 
-/*.vakata-context li > a:hover {
+        /*.vakata-context li > a:hover {
 background-color: transparent !important;
 box-shadow: none !important;
 color: black !important;
 }*/
 
-.vakata-context li > a .vakata-contextmenu-sep {
-    display: inline-block !important;
-    width: inherit !important; 
-    height: inherit !important;
-    background: none !important;
-    margin: 0 .5em 0 0 !important;
-    border-left: none !important;
-}
+        .vakata-context li > a .vakata-contextmenu-sep {
+            display: inline-block !important;
+            width: inherit !important;
+            height: inherit !important;
+            background: none !important;
+            margin: 0 .5em 0 0 !important;
+            border-left: none !important;
+        }
 
     .vakata-context .vakata-context-hover > a {
         color: #2B2C33 !important;
@@ -338,3 +338,31 @@ color: black !important;
 .iradio_square-red {
     display: inline-block !important;
 }
+
+#rotacoesMapa {
+    width: 100%;
+    height: 1000px;
+    margin: 0;
+    padding: 0;
+}
+
+
+table.dataTable thead td {
+    background-color: #2B2C33 !important;
+    color: #E2E2E1 !important;
+    font-family: 'Poppins' !important;
+}
+
+table.dataTable tbody tr {
+    background-color: #ffffff !important;
+}
+
+
+    table.dataTable tbody tr td.child {
+        color: #E2E2E1 !important;
+        background-color: #ffffff !important;
+    }
+
+        table.dataTable tbody tr td.child ul li span {
+            color: #212529 !important;
+        }

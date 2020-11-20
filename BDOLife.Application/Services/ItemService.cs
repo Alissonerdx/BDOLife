@@ -87,29 +87,76 @@ namespace BDOLife.Application.Services
             var melhorDataCompra = DateTime.MinValue;
             var melhorDataVenda = DateTime.MinValue;
 
-            if (dados.Count >= 2)
+            if (dados.Count > 2)
             {
                 var dadosTemp = dados.Take(120).ToList();
 
-                var ultimaAtt = dadosTemp[0];
-                double mediaProcura = 0.0;
-                double mediaOferta = 0.0;
-                double mediaPreco = 0.0;
+                var dadosAgrupadosPorDia = dadosTemp.GroupBy(d => $"{d.Data.Day}_{d.Data.Month}");
 
-                for (int i = 1; i < dadosTemp.Count; i++)
+                var demandaMediasDia = new Dictionary<string, MediaItemViewModel>();
+                var dataProcessamento = DateTime.Now;
+                var dataAnterior = DateTime.Now.AddDays(-1);
+
+                double mediaDemandaTodosDias = 0.0;
+                double mediaOfertaTodosDias = 0.0;
+                double mediaPrecoTodosDias = 0.0;
+
+                var index = 0;
+                foreach (var grupo in dadosAgrupadosPorDia)
                 {
-                    mediaProcura += dadosTemp[i].QuantidadeTotalVenda;
-                    mediaOferta += dadosTemp[i].QuantidadeDisponivel;
-                    mediaPreco += dadosTemp[i].Valor;
+                    demandaMediasDia.Add(grupo.Key, new MediaItemViewModel { MediaDemanda = 0, MediaOferta = 0, MediaPreco = 0 });
+                    foreach (var demanda in grupo)
+                    {
+                        demandaMediasDia[grupo.Key].MediaDemanda += demanda.QuantidadeTotalVenda;
+                        demandaMediasDia[grupo.Key].MediaOferta += demanda.QuantidadeDisponivel;
+                        demandaMediasDia[grupo.Key].MediaPreco += demanda.Valor;
+                    }
+
+                    demandaMediasDia[grupo.Key].MediaDemanda /= grupo.Count();
+                    demandaMediasDia[grupo.Key].MediaOferta /= grupo.Count();
+                    demandaMediasDia[grupo.Key].MediaPreco /= grupo.Count();
+
+
+                    if (index > 1)
+                    {
+                        mediaDemandaTodosDias += demandaMediasDia[grupo.Key].MediaDemanda;
+                        mediaOfertaTodosDias += demandaMediasDia[grupo.Key].MediaOferta;
+                        mediaPrecoTodosDias += demandaMediasDia[grupo.Key].MediaPreco;
+                    }
+
+                    index++;
                 }
 
-                mediaProcura /= (dadosTemp.Count - 1);
-                mediaOferta /= (dadosTemp.Count - 1);
-                mediaPreco /= (dadosTemp.Count - 1);
+                mediaDemandaTodosDias /= (dadosAgrupadosPorDia.Count() - 2);
+                mediaOfertaTodosDias /= (dadosAgrupadosPorDia.Count() - 2);
+                mediaPrecoTodosDias /= (dadosAgrupadosPorDia.Count() - 2);
 
-                crescimentoProcura = ((double)(ultimaAtt.QuantidadeTotalVenda - mediaProcura) / (mediaProcura == 0 ? 1 : mediaProcura)) * 100.0;
-                crescimentoOferta = ((double)(ultimaAtt.QuantidadeDisponivel - mediaOferta) / (mediaOferta == 0 ? 1 : mediaOferta)) * 100.0;
-                crescimentoPreco = ((double)(ultimaAtt.Valor - mediaPreco) / (mediaPreco == 0 ? 1 : mediaPreco)) * 100.0;
+
+                var ultimaAtt = dadosTemp[0];
+                var ultimaMediaDia = demandaMediasDia.ElementAt(1);
+
+
+
+                //for(int i = 1; i < dadosTemp.Count; i++)
+                //{
+                //    mediaProcura += dadosTemp[i].QuantidadeTotalVenda;
+                //    mediaOferta += dadosTemp[i].QuantidadeDisponivel;
+                //    mediaPreco += dadosTemp[i].Valor;
+                //}
+
+                //mediaProcura /= (dadosTemp.Count - 1);
+                //mediaOferta /= (dadosTemp.Count - 1);
+                //mediaPreco /= (dadosTemp.Count - 1);
+
+                //crescimentoProcura = ((double)((ultimaAtt.QuantidadeTotalVenda - penultimaAtt.QuantidadeTotalVenda) - mediaProcura) / (mediaProcura == 0 ? 1 : mediaProcura)) * 100.0;
+                //crescimentoProcura = ((double)(ultimaAtt.QuantidadeTotalVenda - mediaProcura) / (mediaProcura == 0 ? 1 : mediaProcura)) * 100.0;
+                //crescimentoOferta = ((double)(ultimaAtt.QuantidadeDisponivel - mediaOferta) / (mediaOferta == 0 ? 1 : mediaOferta)) * 100.0;
+                //crescimentoPreco = ((double)(ultimaAtt.Valor - mediaPreco) / (mediaPreco == 0 ? 1 : mediaPreco)) * 100.0;
+
+                crescimentoProcura = ((double)(ultimaMediaDia.Value.MediaDemanda - mediaDemandaTodosDias) / (mediaDemandaTodosDias == 0 ? 1 : mediaDemandaTodosDias)) * 100.0;
+                crescimentoOferta = ((double)(ultimaMediaDia.Value.MediaOferta - mediaOfertaTodosDias) / (mediaOfertaTodosDias == 0 ? 1 : mediaOfertaTodosDias)) * 100.0;
+                crescimentoPreco = ((double)(ultimaMediaDia.Value.MediaPreco - mediaPrecoTodosDias) / (mediaPrecoTodosDias == 0 ? 1 : mediaPrecoTodosDias)) * 100.0;
+
 
                 dados = dados.Take(120).ToList();
                 dados = dados.OrderBy(h => h.Data).ToList();
@@ -250,7 +297,7 @@ namespace BDOLife.Application.Services
             };
         }
 
-        
+
         //Item, QuantidadeTotal, CustoProducao
         public async Task<Dictionary<ItemViewModel, long>> SubReceitasDiretas(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, int maestriaId, TipoReceitaEnum tipoReceita)
         {
@@ -264,7 +311,9 @@ namespace BDOLife.Application.Services
                 {
                     if (ingrediente.Excluido == false && ingrediente.Item.Excluido == false)
                     {
-                        var custoProducaoPorUnidade = CalcularValorSubReceitaRecursivo(ingrediente.Item, procNormal, procRaro);
+                        var custoProducaoPorUnidadeProcNormal = CalcularValorSubReceitaRecursivo(ingrediente.Item, procNormal, 0);
+                        var custoProducaoPorUnidadeProcNormalERaro = CalcularValorSubReceitaRecursivo(ingrediente.Item, procNormal, procRaro);
+
                         var item = new ItemViewModel
                         {
                             Id = ingrediente.Item.Id,
@@ -290,7 +339,8 @@ namespace BDOLife.Application.Services
                             ValorNPC = ingrediente.Item.ValorNPC,
                             QuantidadeDisponivel = ingrediente.Item.QuantidadeDisponivel,
                             DataAtualizacao = ingrediente.Item.DataAtualizacao,
-                            CustoProducao = custoProducaoPorUnidade == 0 ? ingrediente.Item.Valor : custoProducaoPorUnidade
+                            CustoProducao = custoProducaoPorUnidadeProcNormal == 0 ? ingrediente.Item.Valor : custoProducaoPorUnidadeProcNormal,
+                            CustoProducaoProcNormalERaro = custoProducaoPorUnidadeProcNormalERaro == 0 ? ingrediente.Item.Valor : custoProducaoPorUnidadeProcNormalERaro
                         };
                         subreceitas.Add(item, quantidade * ingrediente.Quantidade);
                     }
@@ -300,7 +350,7 @@ namespace BDOLife.Application.Services
             return subreceitas;
         }
 
-        public async Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, int quantidade, decimal procNormal)
+        public async Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, long quantidade, decimal procNormal)
         {
             var receita = await _itemRepository.ObterPorReferenciaId(referenciaId);
 
@@ -571,7 +621,7 @@ namespace BDOLife.Application.Services
         }
 
 
-        public async Task<IList<NodeViewModel>> TreeView(string referenciaId, int quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false)
+        public async Task<IList<NodeViewModel>> TreeView(string referenciaId, long quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false, bool otimizar = false)
         {
             //Se maximizar tem que descomentar os codigos no open_node, close_node Receita.js
             var maximizado = false;
@@ -620,14 +670,15 @@ namespace BDOLife.Application.Services
                     if (subReceita.Visivel && subReceita.Excluido == false)
                     {
                         var subReceitaProc = quantidade * subReceita.Quantidade;
-                        var custoProducaoSubReceita = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormal, procRaro);
+                        var custoProducaoSubReceitaProcNormal = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormal, 0);
+                        var custoProducaoSubReceitaProcNormalERaro = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormal, procRaro);
                         tree.Add(new NodeViewModel
                         {
                             id = $"{subReceita.ItemReferenciaId}",
                             parent = "raiz",
                             text = $"{subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)subReceitaProc})" : "")}",
                             icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
-                            state = new { opened = maximizado },
+                            state = new { opened = otimizar ? custoProducaoSubReceitaProcNormal < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
                             quantidade = (long)subReceitaProc,
                             valor = subReceita.Item.Valor,
@@ -646,8 +697,9 @@ namespace BDOLife.Application.Services
                             possuiProcRaro = subReceita.Item.MultiResultados,
                             nivelSubReceita = 1,
                             custoCompra = subReceita.Item.Valor,
-                            custoProducao = custoProducaoSubReceita == 0 ? subReceita.Item.Valor : custoProducaoSubReceita,
-                            produzirOuComprar = custoProducaoSubReceita < subReceita.Item.Valor ? "PRODUZIR" : "COMPRAR"
+                            custoProducao = custoProducaoSubReceitaProcNormal == 0 ? subReceita.Item.Valor : custoProducaoSubReceitaProcNormal,
+                            custoProducaoProcNormalERaro = custoProducaoSubReceitaProcNormalERaro == 0 ? subReceita.Item.Valor : custoProducaoSubReceitaProcNormalERaro,
+                            produzirOuComprar = custoProducaoSubReceitaProcNormal < subReceita.Item.Valor ? "PRODUZIR" : "COMPRAR"
                         });
 
                         if (subReceita.Item.Itens != null && subReceita.Item.Itens.Count > 0)
@@ -661,7 +713,9 @@ namespace BDOLife.Application.Services
                                     var sub1Proc = Math.Ceiling(subReceitaProc / procNormalSub1) * sub1.Quantidade;
                                     sub1Proc = sub1Proc < 1 && quantidade > 0 ? 1 : sub1Proc;
 
-                                    var custoProducaoSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, procRaro);
+                                    var custoProducaoProcNormalERaroSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, procRaro);
+                                    var custoProducaoProcNormalSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, 0);
+
 
                                     tree.Add(new NodeViewModel
                                     {
@@ -669,7 +723,7 @@ namespace BDOLife.Application.Services
                                         parent = $"{subReceita.ItemReferenciaId}",
                                         text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
                                         icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
-                                        state = new { opened = maximizado },
+                                        state = new { opened = otimizar ? custoProducaoProcNormalSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
                                         quantidade = (long)sub1Proc,
                                         valor = sub1.Item.Valor,
@@ -688,8 +742,9 @@ namespace BDOLife.Application.Services
                                         possuiProcRaro = sub1.Item.MultiResultados,
                                         nivelSubReceita = 2,
                                         custoCompra = sub1.Item.Valor,
-                                        custoProducao = custoProducaoSub1 == 0 ? sub1.Item.Valor : custoProducaoSub1,
-                                        produzirOuComprar = custoProducaoSub1 < sub1.Item.Valor ? "PRODUZIR" : "COMPRAR",
+                                        custoProducao = custoProducaoProcNormalSub1 == 0 ? sub1.Item.Valor : custoProducaoProcNormalSub1,
+                                        custoProducaoProcNormalERaro = custoProducaoProcNormalERaroSub1 == 0 ? sub1.Item.Valor : custoProducaoProcNormalERaroSub1,
+                                        produzirOuComprar = custoProducaoProcNormalSub1 < sub1.Item.Valor ? "PRODUZIR" : "COMPRAR",
                                     });
 
                                     if (sub1.Item.Itens != null && sub1.Item.Itens.Count > 0)
@@ -703,7 +758,9 @@ namespace BDOLife.Application.Services
                                                 var sub2Proc = Math.Ceiling(sub1Proc / procNormalSub2) * sub2.Quantidade;
                                                 sub2Proc = sub2Proc < 1 && quantidade > 0 ? 1 : sub2Proc;
 
-                                                var custoProducaoSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, procRaro);
+                                                var custoProducaoProcNormalERaroSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, procRaro);
+                                                var custoProducaoProcNormalSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, 0);
+
 
                                                 tree.Add(new NodeViewModel
                                                 {
@@ -711,7 +768,7 @@ namespace BDOLife.Application.Services
                                                     parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                                     text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
                                                     icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
-                                                    state = new { opened = maximizado },
+                                                    state = new { opened = otimizar ? custoProducaoProcNormalSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
                                                     quantidade = (long)sub2Proc,
                                                     valor = sub2.Item.Valor,
@@ -730,8 +787,9 @@ namespace BDOLife.Application.Services
                                                     possuiProcRaro = sub2.Item.MultiResultados,
                                                     nivelSubReceita = 3,
                                                     custoCompra = sub2.Item.Valor,
-                                                    custoProducao = custoProducaoSub2 == 0 ? sub2.Item.Valor : custoProducaoSub2,
-                                                    produzirOuComprar = custoProducaoSub2 < sub2.Item.Valor ? "PRODUZIR" : "COMPRAR"
+                                                    custoProducao = custoProducaoProcNormalSub2 == 0 ? sub2.Item.Valor : custoProducaoProcNormalSub2,
+                                                    custoProducaoProcNormalERaro = custoProducaoProcNormalERaroSub2 == 0 ? sub2.Item.Valor : custoProducaoProcNormalERaroSub2,
+                                                    produzirOuComprar = custoProducaoProcNormalSub2 < sub2.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                 });
 
                                                 if (sub2.Item.Itens != null && sub2.Item.Itens.Count > 0)
@@ -745,7 +803,8 @@ namespace BDOLife.Application.Services
                                                             var sub3Proc = Math.Ceiling(sub2Proc / procNormalSub3) * sub3.Quantidade;
                                                             sub3Proc = sub3Proc < 1 && quantidade > 0 ? 1 : sub3Proc;
 
-                                                            var custoProducaoSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, procRaro);
+                                                            var custoProducaoProcNormalERaroSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, procRaro);
+                                                            var custoProducaoProcNormalSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, 0);
 
                                                             tree.Add(new NodeViewModel
                                                             {
@@ -753,7 +812,7 @@ namespace BDOLife.Application.Services
                                                                 parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                                 text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
                                                                 icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
-                                                                state = new { opened = maximizado },
+                                                                state = new { opened = otimizar ? custoProducaoProcNormalSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
                                                                 quantidade = (long)sub3Proc,
                                                                 valor = sub3.Item.Valor,
@@ -772,8 +831,9 @@ namespace BDOLife.Application.Services
                                                                 possuiProcRaro = sub3.Item.MultiResultados,
                                                                 nivelSubReceita = 4,
                                                                 custoCompra = sub3.Item.Valor,
-                                                                custoProducao = custoProducaoSub3 == 0 ? sub3.Item.Valor : custoProducaoSub3,
-                                                                produzirOuComprar = custoProducaoSub3 < sub3.Item.Valor ? "PRODUZIR" : "COMPRAR"
+                                                                custoProducao = custoProducaoProcNormalSub3 == 0 ? sub3.Item.Valor : custoProducaoProcNormalSub3,
+                                                                custoProducaoProcNormalERaro = custoProducaoProcNormalERaroSub3 == 0 ? sub3.Item.Valor : custoProducaoProcNormalERaroSub3,
+                                                                produzirOuComprar = custoProducaoProcNormalSub3 < sub3.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                             });
 
                                                             if (sub3.Item.Itens != null && sub3.Item.Itens.Count > 0)
@@ -787,7 +847,8 @@ namespace BDOLife.Application.Services
                                                                         var sub4Proc = Math.Ceiling(sub3Proc / procNormalSub4) * sub4.Quantidade;
                                                                         sub4Proc = sub4Proc < 1 && quantidade > 0 ? 1 : sub4Proc;
 
-                                                                        var custoProducaoSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, procRaro);
+                                                                        var custoProducaoProcNormalERaroSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, procRaro);
+                                                                        var custoProducaoProcNormalSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, 0);
 
                                                                         tree.Add(new NodeViewModel
                                                                         {
@@ -795,7 +856,7 @@ namespace BDOLife.Application.Services
                                                                             parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                             text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
                                                                             icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
-                                                                            state = new { opened = maximizado },
+                                                                            state = new { opened = otimizar ? custoProducaoProcNormalSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
                                                                             quantidade = (long)sub4Proc,
                                                                             valor = sub4.Item.Valor,
@@ -814,8 +875,9 @@ namespace BDOLife.Application.Services
                                                                             possuiProcRaro = sub4.Item.MultiResultados,
                                                                             nivelSubReceita = 5,
                                                                             custoCompra = sub4.Item.Valor,
-                                                                            custoProducao = custoProducaoSub4 == 0 ? sub4.Item.Valor : custoProducaoSub4,
-                                                                            produzirOuComprar = custoProducaoSub4 < sub4.Item.Valor ? "PRODUZIR" : "COMPRAR"
+                                                                            custoProducao = custoProducaoProcNormalSub4 == 0 ? sub4.Item.Valor : custoProducaoProcNormalSub4,
+                                                                            custoProducaoProcNormalERaro = custoProducaoProcNormalERaroSub4 == 0 ? sub4.Item.Valor : custoProducaoProcNormalERaroSub4,
+                                                                            produzirOuComprar = custoProducaoProcNormalSub4 < sub4.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                                         });
 
                                                                         if (sub4.Item.Itens != null && sub4.Item.Itens.Count > 0)
@@ -829,7 +891,9 @@ namespace BDOLife.Application.Services
                                                                                     var sub5Proc = Math.Ceiling(sub4Proc / procNormalSub5) * sub5.Quantidade;
                                                                                     sub5Proc = sub5Proc < 1 && quantidade > 0 ? 1 : sub5Proc;
 
-                                                                                    var custoProducaoSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, procRaro);
+                                                                                    var custoProducaoProcNormalERaroSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, procRaro);
+                                                                                    var custoProducaoProcNormalSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, 0);
+
 
                                                                                     tree.Add(new NodeViewModel
                                                                                     {
@@ -837,7 +901,7 @@ namespace BDOLife.Application.Services
                                                                                         parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                                         text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
                                                                                         icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
-                                                                                        state = new { opened = maximizado },
+                                                                                        state = new { opened = otimizar ? custoProducaoProcNormalSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
                                                                                         quantidade = (long)sub5Proc,
                                                                                         valor = sub5.Item.Valor,
@@ -856,8 +920,9 @@ namespace BDOLife.Application.Services
                                                                                         possuiProcRaro = sub5.Item.MultiResultados,
                                                                                         nivelSubReceita = 6,
                                                                                         custoCompra = sub5.Item.Valor,
-                                                                                        custoProducao = custoProducaoSub5 == 0 ? sub5.Item.Valor : custoProducaoSub5,
-                                                                                        produzirOuComprar = custoProducaoSub5 < sub5.Item.Valor ? "PRODUZIR" : "COMPRAR"
+                                                                                        custoProducao = custoProducaoProcNormalSub5 == 0 ? sub5.Item.Valor : custoProducaoProcNormalSub5,
+                                                                                        custoProducaoProcNormalERaro = custoProducaoProcNormalERaroSub5 == 0 ? sub5.Item.Valor : custoProducaoProcNormalERaroSub5,
+                                                                                        produzirOuComprar = custoProducaoProcNormalSub5 < sub5.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                                                     });
                                                                                 }
                                                                             }
@@ -881,7 +946,7 @@ namespace BDOLife.Application.Services
             return tree;
         }
 
-        public async Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int quantidade, int quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool semDetalhes = false)
+        public async Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int nivel, long quantidade, long quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool semDetalhes = false, bool otimizar = false)
         {
             //Se maximizar tem que descomentar os codigos no open_node, close_node Receita.js
             var maximizado = false;
@@ -895,11 +960,13 @@ namespace BDOLife.Application.Services
 
             if (receita != null && receita.Excluido == false)
             {
-                var procNormalInicio = receita.ProcNormalExcessao != null ? receita.ProcNormalExcessao.Value : EhProcesso(receita) ? 2.5m : procNormal;
-                var receitaProcInicio = Math.Ceiling(quantidade / procNormalInicio);
-                receitaProcInicio = receitaProcInicio < 1 && quantidade > 0 ? 1 : receitaProcInicio;
+                var proc = receita.ProcNormalExcessao != null ? receita.ProcNormalExcessao.Value : EhProcesso(receita) ? 2.5m : procNormal;
+                var procReal = usarProcRaro ? procNormal + procRaro : proc;
 
-                var custoProducaoReceita = CalcularValorSubReceitaRecursivo(receita, procNormalInicio, procRaro);
+                var custoProducao = CalcularValorSubReceitaRecursivo(receita, proc, 0);
+                var custoProducaoUsandoProcRaro = CalcularValorSubReceitaRecursivo(receita, proc, procRaro);
+
+                var custoProducaoReceita = custoProducaoUsandoProcRaro == 0 && custoProducao == 0 ? receita.Valor : usarProcRaro ? custoProducaoUsandoProcRaro : custoProducao;
 
                 receita.Itens = receita.Itens.OrderBy(i => i.Item.Nome).ToList();
                 tree.Add(new NodeViewModel
@@ -908,7 +975,7 @@ namespace BDOLife.Application.Services
                     parent = raiz,
                     text = $"{quantidadePorReceita} {receita.Nome} {(!semDetalhes ? $"({quantidade})" : "")} {(usarProcRaro ? "*" : "")}",
                     icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"Content/Image?referenciaId={receita.ReferenciaId}" : "",
-                    state = new { opened = true },
+                    state = new { opened = otimizar ? custoProducaoReceita < receita.Valor : true },
                     nomeItem = receita.Nome,
                     quantidade = quantidade,
                     valor = receita.Valor,
@@ -928,7 +995,7 @@ namespace BDOLife.Application.Services
                     possuiProcRaro = receita.MultiResultados,
                     nivelSubReceita = 0,
                     custoCompra = receita.Valor,
-                    custoProducao = custoProducaoReceita == 0 ? receita.Valor : custoProducaoReceita,
+                    custoProducao = custoProducaoReceita,
                     produzirOuComprar = custoProducaoReceita < receita.Valor ? "PRODUZIR" : "COMPRAR"
                 });
 
@@ -936,11 +1003,15 @@ namespace BDOLife.Application.Services
                 {
                     if (subReceita.Visivel && subReceita.Excluido == false)
                     {
-                        var procNormalReceita = receita.ProcNormalExcessao != null ? receita.ProcNormalExcessao.Value : EhProcesso(receita) ? 2.5m : usarProcRaro ? procNormal + procRaro : procNormal;
-                        var receitaProc = Math.Ceiling(quantidade / procNormalReceita) * subReceita.Quantidade;
+                        var procNormalReceita = receita.ProcNormalExcessao != null ? receita.ProcNormalExcessao.Value : EhProcesso(receita) ? 2.5m : procNormal;
+                        var procRealSubReceita = usarProcRaro ? procNormal + procRaro : procNormalReceita;
+                        var receitaProc = Math.Ceiling(quantidade / procRealSubReceita) * subReceita.Quantidade;
                         receitaProc = receitaProc < 1 && quantidade > 0 ? 1 : receitaProc;
 
-                        var custoProducaoSubReceita = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormalReceita, procRaro);
+                        var custoProducaoProcNormalERaroSubReceita = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormalReceita, procRaro);
+                        var custoProducaoProcNormalSubReceita = CalcularValorSubReceitaRecursivo(subReceita.Item, procNormalReceita, 0);
+
+                        var custoProducaoSubReceita = custoProducaoProcNormalSubReceita == 0 ? subReceita.Item.Valor : custoProducaoProcNormalSubReceita;
 
                         tree.Add(new NodeViewModel
                         {
@@ -948,7 +1019,7 @@ namespace BDOLife.Application.Services
                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}",
                             text = $" {subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)receitaProc})" : "")}",
                             icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
-                            state = new { opened = maximizado },
+                            state = new { opened = otimizar ? custoProducaoSubReceita < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
                             quantidade = (long)receitaProc,
                             valor = subReceita.Item.Valor,
@@ -967,7 +1038,7 @@ namespace BDOLife.Application.Services
                             possuiProcRaro = subReceita.Item.MultiResultados,
                             nivelSubReceita = 1,
                             custoCompra = subReceita.Item.Valor,
-                            custoProducao = custoProducaoSubReceita == 0 ? subReceita.Item.Valor : custoProducaoSubReceita,
+                            custoProducao = custoProducaoSubReceita,
                             produzirOuComprar = custoProducaoSubReceita < subReceita.Item.Valor ? "PRODUZIR" : "COMPRAR"
                         });
 
@@ -982,7 +1053,10 @@ namespace BDOLife.Application.Services
                                     var sub1Proc = Math.Ceiling(receitaProc / procNormalSub1) * sub1.Quantidade;
                                     sub1Proc = sub1Proc < 1 && quantidade > 0 ? 1 : sub1Proc;
 
-                                    var custoProducaoSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, procRaro);
+                                    //var custoProducaoProcNormalERaroSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, procRaro);
+                                    var custoProducaoProcNormalSub1 = CalcularValorSubReceitaRecursivo(sub1.Item, procNormalSub1, 0);
+
+                                    var custoProducaoSub1 = custoProducaoProcNormalSub1 == 0 ? sub1.Item.Valor : custoProducaoProcNormalSub1;
 
                                     tree.Add(new NodeViewModel
                                     {
@@ -990,7 +1064,7 @@ namespace BDOLife.Application.Services
                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}",
                                         text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
                                         icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
-                                        state = new { opened = maximizado },
+                                        state = new { opened = otimizar ? custoProducaoSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
                                         quantidade = (long)sub1Proc,
                                         valor = sub1.Item.Valor,
@@ -1009,7 +1083,7 @@ namespace BDOLife.Application.Services
                                         possuiProcRaro = sub1.Item.MultiResultados,
                                         nivelSubReceita = 2,
                                         custoCompra = sub1.Item.Valor,
-                                        custoProducao = custoProducaoSub1 == 0 ? sub1.Item.Valor : custoProducaoSub1,
+                                        custoProducao = custoProducaoSub1,
                                         produzirOuComprar = custoProducaoSub1 < sub1.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                     });
 
@@ -1024,7 +1098,10 @@ namespace BDOLife.Application.Services
                                                 var sub2Proc = Math.Ceiling(sub1Proc / procNormalSub2) * sub2.Quantidade;
                                                 sub2Proc = sub2Proc < 1 && quantidade > 0 ? 1 : sub2Proc;
 
-                                                var custoProducaoSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, procRaro);
+                                                //var custoProducaoProcNormalERaroSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, procRaro);
+                                                var custoProducaoProcNormalSub2 = CalcularValorSubReceitaRecursivo(sub2.Item, procNormalSub2, 0);
+
+                                                var custoProducaoSub2 = custoProducaoProcNormalSub2 == 0 ? sub2.Item.Valor : custoProducaoProcNormalSub2;
 
                                                 tree.Add(new NodeViewModel
                                                 {
@@ -1032,7 +1109,7 @@ namespace BDOLife.Application.Services
                                                     parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                                     text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
                                                     icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
-                                                    state = new { opened = maximizado },
+                                                    state = new { opened = otimizar ? custoProducaoSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
                                                     quantidade = (long)sub2Proc,
                                                     valor = sub2.Item.Valor,
@@ -1051,7 +1128,7 @@ namespace BDOLife.Application.Services
                                                     possuiProcRaro = sub2.Item.MultiResultados,
                                                     nivelSubReceita = 3,
                                                     custoCompra = sub2.Item.Valor,
-                                                    custoProducao = custoProducaoSub2 == 0 ? sub2.Item.Valor : custoProducaoSub2,
+                                                    custoProducao = custoProducaoSub2,
                                                     produzirOuComprar = custoProducaoSub2 < sub2.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                 });
 
@@ -1066,7 +1143,10 @@ namespace BDOLife.Application.Services
                                                             var sub3Proc = Math.Ceiling(sub2Proc / procNormalSub3) * sub3.Quantidade;
                                                             sub3Proc = sub3Proc < 1 && quantidade > 0 ? 1 : sub3Proc;
 
-                                                            var custoProducaoSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, procRaro);
+                                                            //var custoProducaoProcNormalERaroSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, procRaro);
+                                                            var custoProducaoProcNormalSub3 = CalcularValorSubReceitaRecursivo(sub3.Item, procNormalSub3, 0);
+
+                                                            var custoProducaoSub3 = custoProducaoProcNormalSub3 == 0 ? sub3.Item.Valor : custoProducaoProcNormalSub3;
 
                                                             tree.Add(new NodeViewModel
                                                             {
@@ -1074,7 +1154,7 @@ namespace BDOLife.Application.Services
                                                                 parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                                 text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
                                                                 icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
-                                                                state = new { opened = maximizado },
+                                                                state = new { opened = otimizar ? custoProducaoSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
                                                                 quantidade = (long)sub3Proc,
                                                                 valor = sub3.Item.Valor,
@@ -1093,7 +1173,7 @@ namespace BDOLife.Application.Services
                                                                 possuiProcRaro = sub3.Item.MultiResultados,
                                                                 nivelSubReceita = 4,
                                                                 custoCompra = sub3.Item.Valor,
-                                                                custoProducao = custoProducaoSub3 == 0 ? sub3.Item.Valor : custoProducaoSub3,
+                                                                custoProducao = custoProducaoSub3,
                                                                 produzirOuComprar = custoProducaoSub3 < sub3.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                             });
 
@@ -1108,7 +1188,10 @@ namespace BDOLife.Application.Services
                                                                         var sub4Proc = Math.Ceiling(sub3Proc / procNormalSub4) * sub4.Quantidade;
                                                                         sub4Proc = sub4Proc < 1 && quantidade > 0 ? 1 : sub4Proc;
 
-                                                                        var custoProducaoSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, procRaro);
+                                                                        //var custoProducaoProcNormalERaroSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, procRaro);
+                                                                        var custoProducaoProcNormalSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, 0);
+
+                                                                        var custoProducaoSub4 = custoProducaoProcNormalSub4 == 0 ? sub4.Item.Valor :  custoProducaoProcNormalSub3;
 
                                                                         tree.Add(new NodeViewModel
                                                                         {
@@ -1116,7 +1199,7 @@ namespace BDOLife.Application.Services
                                                                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                             text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
                                                                             icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
-                                                                            state = new { opened = maximizado },
+                                                                            state = new { opened = otimizar ? custoProducaoSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
                                                                             quantidade = (long)sub4Proc,
                                                                             valor = sub4.Item.Valor,
@@ -1135,7 +1218,7 @@ namespace BDOLife.Application.Services
                                                                             possuiProcRaro = sub4.Item.MultiResultados,
                                                                             nivelSubReceita = 5,
                                                                             custoCompra = sub4.Item.Valor,
-                                                                            custoProducao = custoProducaoSub4 == 0 ? sub4.Item.Valor : custoProducaoSub4,
+                                                                            custoProducao = custoProducaoSub4,
                                                                             produzirOuComprar = custoProducaoSub4 < sub4.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                                         });
 
@@ -1150,7 +1233,10 @@ namespace BDOLife.Application.Services
                                                                                     var sub5Proc = Math.Ceiling(sub4Proc / procNormalSub5) * sub5.Quantidade;
                                                                                     sub5Proc = sub5Proc < 1 && quantidade > 0 ? 1 : sub5Proc;
 
-                                                                                    var custoProducaoSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, procRaro);
+                                                                                    //var custoProducaoProcNormalERaroSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, procRaro);
+                                                                                    var custoProducaoProcNormalSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, 0);
+
+                                                                                    var custoProducaoSub5 =  custoProducaoProcNormalSub5 == 0 ? sub5.Item.Valor : custoProducaoProcNormalSub5;
 
                                                                                     tree.Add(new NodeViewModel
                                                                                     {
@@ -1158,7 +1244,7 @@ namespace BDOLife.Application.Services
                                                                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                                         text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
                                                                                         icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
-                                                                                        state = new { opened = maximizado },
+                                                                                        state = new { opened = otimizar ? custoProducaoSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
                                                                                         quantidade = (long)sub5Proc,
                                                                                         valor = sub5.Item.Valor,
@@ -1177,7 +1263,7 @@ namespace BDOLife.Application.Services
                                                                                         possuiProcRaro = sub5.Item.MultiResultados,
                                                                                         nivelSubReceita = 6,
                                                                                         custoCompra = sub5.Item.Valor,
-                                                                                        custoProducao = custoProducaoSub5 == 0 ? sub5.Item.Valor : custoProducaoSub5,
+                                                                                        custoProducao = custoProducaoSub5,
                                                                                         produzirOuComprar = custoProducaoSub5 < sub5.Item.Valor ? "PRODUZIR" : "COMPRAR"
                                                                                     });
                                                                                 }
@@ -1317,6 +1403,22 @@ namespace BDOLife.Application.Services
             }
 
             return Math.Round(procRaro, 2);
+        }
+
+        private bool ProcPorMaterialEhDiferente(Item receita)
+        {
+
+            var referenciasIds = new List<string>
+            {
+                //Delotia
+                "M_5538",
+                //Delotia de Luxo
+                "M_5536",
+                //Delotia Especial
+                "M_5537"
+            };
+
+            return referenciasIds.Contains(receita.ReferenciaId);
         }
 
         private async Task<IList<ResultadoCalculadoViewModel>> ProcessarResultado(TipoReceitaEnum tipo, Item receita, int quantidade, decimal procNormal, decimal procRaro, int maestria, int maestriaImperial)
@@ -1520,11 +1622,19 @@ namespace BDOLife.Application.Services
             long total = 0;
             if (receita.Tipo == TipoEnum.Receita)
             {
-               
-                foreach(var ingrediente in receita.Itens)
+
+                foreach (var ingrediente in receita.Itens)
                 {
-                    total += (long) (ingrediente.Quantidade * ingrediente.Item.Valor);
+                    total += (long)(ingrediente.Quantidade * ingrediente.Item.Valor);
                 }
+
+                var procNormalExcessao = receita.ProcNormalExcessao;
+                var procRaroExcessao = receita.ProcRaroExcessao;
+
+                if (procNormalExcessao != null && procRaroExcessao != null)
+                    return (long)(total / (receita.MultiResultados ? procNormalExcessao.Value + procRaroExcessao.Value : procNormalExcessao.Value));
+                else if (procNormalExcessao != null)
+                    return (long)(total / (receita.MultiResultados ? procNormalExcessao.Value + procRaro : procNormalExcessao.Value));
 
                 return (long)(total / (EhProcesso(receita) ? 2.5m : receita.MultiResultados ? procNormal + procRaro : procNormal));
             }

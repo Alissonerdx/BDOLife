@@ -148,6 +148,8 @@ namespace BDOLife.Web
             services.AddScoped<ITipoProcessoExperienciaService, TipoProcessoExperienciaService>();
             services.AddScoped<ICultivoService, CultivoService>();
             services.AddScoped<IUtilService, UtilService>();
+            services.AddScoped<IRankingService, RankingService>();
+
 
 
             // Add Repository Layer

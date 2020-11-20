@@ -4,6 +4,7 @@ using BDOLife.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace BDOLife.Application.Services
 {
@@ -16,14 +17,14 @@ namespace BDOLife.Application.Services
             _nodeRepository = nodeRepository;
         }
 
-        public bool ImportarNodes()
+        public async Task<bool> ImportarNodes()
         {
             var result = System.IO.File.ReadAllText(@".\Util\JSONs\Nodes.json");
             var nodes = JsonSerializer.Deserialize<List<Node>>(result);
 
             foreach(var node in nodes)
             {
-                _nodeRepository.AddAsync(node);
+                await _nodeRepository.Salvar(node);
             }
 
             return true;

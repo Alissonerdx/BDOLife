@@ -11,6 +11,7 @@ namespace BDOLife.Application.ViewModels
         public string Colheita { get; set; }
         public string ImgFruta { get; set; }
         public string Fruta { get; set; }
+        public double TempoMinimoEmMinutos { get; set; }
         public string TempoMinimo { get; set; }
         public double CiclosPorDia { get; set; }
         public string Regiao { get; set; }
@@ -22,6 +23,7 @@ namespace BDOLife.Application.ViewModels
         public double QuantidadeForragensNPC { get; set; }
         public long QuantidadeSementesMagicas { get; set; }
         public long QuantidadePlantaEspecial { get; set; }
+        public long PrecoSementeMagica { get; set; }
 
     }
 }

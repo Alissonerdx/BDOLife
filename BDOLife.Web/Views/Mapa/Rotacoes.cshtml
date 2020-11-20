@@ -1,0 +1,162 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@*<link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />*@
+<link href="~/lib/leaflet/leaflet.css" rel="stylesheet" />
+<link href="~/js/Mapa/l.control.mouseposition.min.css" rel="stylesheet" />
+
+<div class="card div-custom-color">
+    <div class="card-body">
+        <form class="form" id="consultarForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="nivelProfissao" class="font-label-poppins">Coletar</label>
+                            <select class="form-control" id="coletar">
+                                <option value="0">Selecione o item a coletar</option>
+                                <option value="1">Lobo</option>
+                                <option value="2">Ovelha</option>
+                                <option value="3">Cervo</option>
+
+                                @*<option value="@((int)TipoReceitaEnum.Alquimia)">Alquimia</option>
+                                    <option value="@((int)TipoReceitaEnum.Culinaria)">Culinária</option>*@
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="col-md-2">
+                            <div class="form-group">
+                                <label for="nivelProfissao" class="font-label-poppins">Nível da Profissão</label>
+                                <select class="form-control" id="nivelProfissao">
+                                    <option>Selecione o nível da profissão</option>
+                                    <option value="@NivelHabilidadeEnum.Aprendiz">Aprendiz</option>
+                                    <option value="@NivelHabilidadeEnum.Proeficiente">Proeficiente</option>
+                                    <option value="@NivelHabilidadeEnum.Profissional">Profissional</option>
+                                    <option value="@NivelHabilidadeEnum.Artesao">Artesão</option>
+                                    <option value="@NivelHabilidadeEnum.Mestre">Mestre</option>
+                                    <option value="@NivelHabilidadeEnum.Guru">Guru</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="maestria" class="font-label-poppins">Maestria</label>
+                                <select class="form-control" id="maestriaSelect">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="quantidade" class="font-label-poppins">Contribuição</label>
+                                <input type="text" class="form-control mask-quantidade" id="pontosContribuicao" min="0" value="0" style="border-radius: 0;" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="quantidadeEntregas" class="font-label-poppins">Entregas / Dia</label>
+                                <input type="text" class="form-control mask-quantidade" id="quantidadeEntregas" min="0" value="0" style="border-radius: 0;" readonly />
+                            </div>
+                        </div>*@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="btnFiltrar">&nbsp;</label>
+                            <button type="submit" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnFiltrar">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@*<div class="row">
+        <div class="col-xl-3 col-lg-6 col-12">
+            <div class="card div-custom-color">
+                <div class="card-content">
+                    <div class="card-body" id="lucroBruto-card">
+                        <div class="media d-flex">
+                            <div class="align-self-center">
+                                <img src="~/imagens/icones/bruto-icon.svg" class="float-left" width="72" height="72" />
+                            </div>
+                            <div class="media-body text-right">
+                                <h3 class="font-label-poppins" id="maisLucrativa">0</h3>
+                                <span>Mais Lucrativa (Item)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12">
+            <div class="card div-custom-color">
+                <div class="card-content">
+                    <div class="card-body" id="custoTotal-card">
+                        <div class="media d-flex">
+                            <div class="align-self-center">
+                                <img src="~/imagens/icones/ingredientes-icon.svg" class="float-left" width="72" height="72" />
+                            </div>
+                            <div class="media-body text-right">
+                                <h3 class="font-label-poppins" id="custoTotal">0</h3>
+                                <span>Mais Lucrativa (Subitens)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12">
+            <div class="card div-custom-color">
+                <div class="card-content">
+                    <div class="card-body" id="lucroComPctEconomico-card">
+                        <div class="media d-flex">
+
+                            <div class="align-self-center">
+                                <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
+                            </div>
+                            <div class="media-body text-right">
+                                <h3 class="font-label-poppins" id="lucroComPctEconomico">0</h3>
+                                <span>Lucro Liq. C/Pct. Eco. (84.5%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12">
+            <div class="card div-custom-color">
+                <div class="card-content">
+                    <div class="card-body" id="lucroSemPctEconomico-card">
+                        <div class="media d-flex">
+                            <div class="align-self-center">
+                                <img src="~/imagens/icones/sem-pacote-icon.svg" class="float-left" width="72" height="72" />
+                            </div>
+                            <div class="media-body text-right">
+                                <h3 class="font-label-poppins" id="lucroSemPctEconomico">0</h3>
+                                <span>Lucro Liq. S/Pct. Eco. (65%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="col-md-12">
+    <div class="row ">
+        <div class="card col-md-12 div-custom-color">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="rotacoesMapa"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/leaflet/leaflet.js"></script>
+    <script src="~/js/Mapa/l.control.mouseposition.min.js"></script>
+    <script src="~/js/Mapa/rotacoes.js" asp-append-version="true"></script>
+}

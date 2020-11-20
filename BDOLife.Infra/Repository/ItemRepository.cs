@@ -34,7 +34,7 @@ namespace BDOLife.Infra.Repository
                 .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item.Itens)
-                .ThenInclude(i => i.Item.Itens)
+                //.ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item)
                 .Include(i => i.Resultados)
                 .ThenInclude(i => i.Resultado.ImperiaisReceitas)
@@ -70,6 +70,14 @@ namespace BDOLife.Infra.Repository
         public async Task<IList<Item>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos)
         {
             return await _dbContext.Itens.Where(i => i.TipoReceita != null && tipos.Contains(i.TipoReceita.Value) && i.Excluido == false).OrderBy(i => i.Nome).ToListAsync();
+        }
+
+        public async Task<IList<Item>> ListarReceitasPorTiposComResultado(List<TipoReceitaEnum> tipos)
+        {
+            return await _dbContext.Itens
+                .Include(i => i.Resultados)
+                .ThenInclude(i => i.Resultado.HistoricoPrecos)
+                .Where(i => i.TipoReceita != null && tipos.Contains(i.TipoReceita.Value) && i.Excluido == false && i.Resultados != null && i.Resultados.Count > 0).OrderBy(i => i.Nome).ToListAsync();
         }
     }
 }
