@@ -1,4 +1,4 @@
-/* Tabulator v4.6.0 (c) Oliver Folkerd */
+/* Tabulator v4.9.1 (c) Oliver Folkerd */
 
 var Page = function Page(table) {
 
@@ -17,6 +17,9 @@ var Page = function Page(table) {
 	this.initialLoad = true;
 
 	this.pageSizes = [];
+
+	this.dataReceivedNames = {};
+	this.dataSentNames = {};
 
 	this.createElements();
 };
@@ -90,7 +93,14 @@ Page.prototype.generatePageSizeSelectList = function () {
 		}pageSizes.forEach(function (item) {
 			var itemEl = document.createElement("option");
 			itemEl.value = item;
-			itemEl.innerHTML = item;
+
+			if (item === true) {
+				_this.table.modules.localize.bind("pagination|all", function (value) {
+					itemEl.innerHTML = value;
+				});
+			} else {
+				itemEl.innerHTML = item;
+			}
 
 			_this.pageSizeSelect.appendChild(itemEl);
 		});
@@ -102,16 +112,16 @@ Page.prototype.generatePageSizeSelectList = function () {
 //setup pageination
 Page.prototype.initialize = function (hidden) {
 	var self = this,
-	    pageSelectLabel;
+	    pageSelectLabel,
+	    testElRow,
+	    testElCell;
 
 	//update param names
-	for (var key in self.table.options.paginationDataSent) {
-		self.paginationDataSentNames[key] = self.table.options.paginationDataSent[key];
-	}
+	this.dataSentNames = Object.assign({}, this.paginationDataSentNames);
+	this.dataSentNames = Object.assign(this.dataSentNames, this.table.options.paginationDataSent);
 
-	for (var _key in self.table.options.paginationDataReceived) {
-		self.paginationDataReceivedNames[_key] = self.table.options.paginationDataReceived[_key];
-	}
+	this.dataReceivedNames = Object.assign({}, this.paginationDataReceivedNames);
+	this.dataReceivedNames = Object.assign(this.dataReceivedNames, this.table.options.paginationDataReceived);
 
 	//build pagination element
 
@@ -154,11 +164,11 @@ Page.prototype.initialize = function (hidden) {
 
 	//click bindings
 	self.firstBut.addEventListener("click", function () {
-		self.setPage(1);
+		self.setPage(1).then(function () {}).catch(function () {});
 	});
 
 	self.prevBut.addEventListener("click", function () {
-		self.previousPage();
+		self.previousPage().then(function () {}).catch(function () {});
 	});
 
 	self.nextBut.addEventListener("click", function () {
@@ -166,7 +176,7 @@ Page.prototype.initialize = function (hidden) {
 	});
 
 	self.lastBut.addEventListener("click", function () {
-		self.setPage(self.max);
+		self.setPage(self.max).then(function () {}).catch(function () {});
 	});
 
 	if (self.table.options.paginationElement) {
@@ -186,7 +196,7 @@ Page.prototype.initialize = function (hidden) {
 		self.element.appendChild(self.pageSizeSelect);
 
 		self.pageSizeSelect.addEventListener("change", function (e) {
-			self.setPageSize(self.pageSizeSelect.value);
+			self.setPageSize(self.pageSizeSelect.value == "true" ? true : self.pageSizeSelect.value);
 			self.setPage(1).then(function () {}).catch(function () {});
 		});
 	}
@@ -205,7 +215,26 @@ Page.prototype.initialize = function (hidden) {
 	//set default values
 	self.mode = self.table.options.pagination;
 
-	self.size = self.table.options.paginationSize || Math.floor(self.table.rowManager.getElement().clientHeight / 24);
+	if (self.table.options.paginationSize) {
+		self.size = self.table.options.paginationSize;
+	} else {
+		testElRow = document.createElement("div");
+		testElRow.classList.add("tabulator-row");
+		testElRow.style.visibility = hidden;
+
+		testElCell = document.createElement("div");
+		testElCell.classList.add("tabulator-cell");
+		testElCell.innerHTML = "Page Row Test";
+
+		testElRow.appendChild(testElCell);
+
+		self.table.rowManager.getTableElement().appendChild(testElRow);
+
+		self.size = Math.floor(self.table.rowManager.getElement().clientHeight / testElRow.offsetHeight);
+
+		self.table.rowManager.getTableElement().removeChild(testElRow);
+	}
+
 	// self.page = self.table.options.paginationInitialPage || 1;
 	self.count = self.table.options.paginationButtonCount;
 
@@ -231,7 +260,7 @@ Page.prototype.setMaxRows = function (rowCount) {
 	if (!rowCount) {
 		this.max = 1;
 	} else {
-		this.max = Math.ceil(rowCount / this.size);
+		this.max = this.size === true ? 1 : Math.ceil(rowCount / this.size);
 	}
 
 	if (this.page > this.max) {
@@ -271,6 +300,24 @@ Page.prototype.setPage = function (page) {
 
 	var self = this;
 
+	switch (page) {
+		case "first":
+			return this.setPage(1);
+			break;
+
+		case "prev":
+			return this.previousPage();
+			break;
+
+		case "next":
+			return this.nextPage();
+			break;
+
+		case "last":
+			return this.setPage(this.max);
+			break;
+	}
+
 	return new Promise(function (resolve, reject) {
 
 		page = parseInt(page);
@@ -302,7 +349,7 @@ Page.prototype.setPageToRow = function (row) {
 		var index = rows.indexOf(row);
 
 		if (index > -1) {
-			var page = Math.ceil((index + 1) / _this3.size);
+			var page = _this3.size === true ? 1 : Math.ceil((index + 1) / _this3.size);
 
 			_this3.setPage(page).then(function () {
 				resolve();
@@ -317,7 +364,9 @@ Page.prototype.setPageToRow = function (row) {
 };
 
 Page.prototype.setPageSize = function (size) {
-	size = parseInt(size);
+	if (size !== true) {
+		size = parseInt(size);
+	}
 
 	if (size > 0) {
 		this.size = size;
@@ -380,13 +429,17 @@ Page.prototype._generatePageButton = function (page) {
 
 	button.setAttribute("type", "button");
 	button.setAttribute("role", "button");
-	button.setAttribute("aria-label", "Show Page " + page);
-	button.setAttribute("title", "Show Page " + page);
+
+	self.table.modules.localize.bind("pagination|page_title", function (value) {
+		button.setAttribute("aria-label", value + " " + page);
+		button.setAttribute("title", value + " " + page);
+	});
+
 	button.setAttribute("data-page", page);
 	button.textContent = page;
 
 	button.addEventListener("click", function (e) {
-		self.setPage(page);
+		self.setPage(page).then(function () {}).catch(function () {});
 	});
 
 	return button;
@@ -464,8 +517,14 @@ Page.prototype.getRows = function (data) {
 
 	if (this.mode == "local") {
 		output = [];
-		start = this.size * (this.page - 1);
-		end = start + parseInt(this.size);
+
+		if (this.size === true) {
+			start = 0;
+			end = data.length;
+		} else {
+			start = this.size * (this.page - 1);
+			end = start + parseInt(this.size);
+		}
 
 		this._setPageButtons();
 
@@ -538,11 +597,11 @@ Page.prototype._getRemotePage = function () {
 		pageParams = self.table.modules.ajax.getParams();
 
 		//configure request params
-		pageParams[_this7.paginationDataSentNames.page] = self.page;
+		pageParams[_this7.dataSentNames.page] = self.page;
 
 		//set page size if defined
 		if (_this7.size) {
-			pageParams[_this7.paginationDataSentNames.size] = _this7.size;
+			pageParams[_this7.dataSentNames.size] = _this7.size;
 		}
 
 		//set sort data if defined
@@ -553,13 +612,13 @@ Page.prototype._getRemotePage = function () {
 				delete item.column;
 			});
 
-			pageParams[_this7.paginationDataSentNames.sorters] = sorters;
+			pageParams[_this7.dataSentNames.sorters] = sorters;
 		}
 
 		//set filter data if defined
 		if (_this7.table.options.ajaxFiltering && _this7.table.modExists("filter")) {
 			var filters = self.table.modules.filter.getFilters(true, true);
-			pageParams[_this7.paginationDataSentNames.filters] = filters;
+			pageParams[_this7.dataSentNames.filters] = filters;
 		}
 
 		self.table.modules.ajax.setParams(pageParams);
@@ -581,21 +640,21 @@ Page.prototype._parseRemoteData = function (data) {
 	    data,
 	    margin;
 
-	if (typeof data[this.paginationDataReceivedNames.last_page] === "undefined") {
-		console.warn("Remote Pagination Error - Server response missing '" + this.paginationDataReceivedNames.last_page + "' property");
+	if (typeof data[this.dataReceivedNames.last_page] === "undefined") {
+		console.warn("Remote Pagination Error - Server response missing '" + this.dataReceivedNames.last_page + "' property");
 	}
 
-	if (data[this.paginationDataReceivedNames.data]) {
-		this.max = parseInt(data[this.paginationDataReceivedNames.last_page]) || 1;
+	if (data[this.dataReceivedNames.data]) {
+		this.max = parseInt(data[this.dataReceivedNames.last_page]) || 1;
 
 		if (this.progressiveLoad) {
 			switch (this.mode) {
 				case "progressive_load":
 
 					if (this.page == 1) {
-						this.table.rowManager.setData(data[this.paginationDataReceivedNames.data], false, this.initialLoad && this.page == 1);
+						this.table.rowManager.setData(data[this.dataReceivedNames.data], false, this.initialLoad && this.page == 1);
 					} else {
-						this.table.rowManager.addRows(data[this.paginationDataReceivedNames.data]);
+						this.table.rowManager.addRows(data[this.dataReceivedNames.data]);
 					}
 
 					if (this.page < this.max) {
@@ -606,7 +665,7 @@ Page.prototype._parseRemoteData = function (data) {
 					break;
 
 				case "progressive_scroll":
-					data = this.table.rowManager.getData().concat(data[this.paginationDataReceivedNames.data]);
+					data = this.table.rowManager.getData().concat(data[this.dataReceivedNames.data]);
 
 					this.table.rowManager.setData(data, true, this.initialLoad && this.page == 1);
 
@@ -620,7 +679,7 @@ Page.prototype._parseRemoteData = function (data) {
 		} else {
 			left = this.table.rowManager.scrollLeft;
 
-			this.table.rowManager.setData(data[this.paginationDataReceivedNames.data], false, this.initialLoad && this.page == 1);
+			this.table.rowManager.setData(data[this.dataReceivedNames.data], false, this.initialLoad && this.page == 1);
 
 			this.table.rowManager.scrollHorizontal(left);
 
@@ -631,7 +690,7 @@ Page.prototype._parseRemoteData = function (data) {
 
 		this.initialLoad = false;
 	} else {
-		console.warn("Remote Pagination Error - Server response missing '" + this.paginationDataReceivedNames.data + "' property");
+		console.warn("Remote Pagination Error - Server response missing '" + this.dataReceivedNames.data + "' property");
 	}
 };
 

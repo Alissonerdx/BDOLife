@@ -23,7 +23,7 @@ namespace BDOLife.Application.Services
         public async Task<List<CultivoResultadoViewModel>> Calcular(int horasOnlineDia, int maximoColheitaDia, int totalSlots)
         {
             var colheitas = await _cultivoRepository.Listar();
-            var frutos = await _itemRepository.ObterPorListaReferenciasIds(new List<string>
+            var frutos = await _itemRepository.ObterPorReferenciasIds(new List<string>
             {
                 "M_5201",
                 "M_5203",

@@ -28,30 +28,68 @@ namespace BDOLife.Web.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> CaixasCulinaria(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
         {
             var imperiaisResultados = await _imperialService.ListarImperiaisCulinaria(nivel, maestriaId, contribuicao);
+            ImperialResultadoViewModel maisLucrativaItem = null;
+            long maiorLucroLiquidoItem = int.MinValue;
 
-            foreach(var imperial in imperiaisResultados)
-            {
-                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", imperial.ItensQuantidadesNecessarias);
-                imperial.ItensQuantidadesNecessarias = null;
-            }
 
-            return Json(imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria));
-        }
-
-        public async Task<IActionResult> CaixasAlquimia(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
-        {
-            var imperiaisResultados = await _imperialService.ListarImperiaisAlquimia(nivel, maestriaId, contribuicao);
+            ImperialResultadoViewModel maisLucrativaSubitens = null;
+            long maiorLucroLiquidoSubitens = int.MinValue;
 
             foreach (var imperial in imperiaisResultados)
             {
                 imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", imperial.ItensQuantidadesNecessarias);
                 imperial.ItensQuantidadesNecessarias = null;
+                if (imperial.LucroLiquidoPrimaria > maiorLucroLiquidoItem && imperial.DisponibilidadePrimaria == 100)
+                {
+                    maisLucrativaItem = imperial;
+                    maiorLucroLiquidoItem = imperial.LucroLiquidoPrimaria;
+                }
+
+                if (imperial.LucroLiquidoSecundaria > maiorLucroLiquidoSubitens && imperial.LucroLiquidoSecundaria != 0)
+                {
+                    maisLucrativaSubitens = imperial;
+                    maiorLucroLiquidoSubitens = imperial.LucroLiquidoSecundaria;
+                }
             }
 
-            return Json(imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria));
+            return Json(new { data = imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria), maisLucrativaItem, maisLucrativaSubitens });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CaixasAlquimia(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
+        {
+            var imperiaisResultados = await _imperialService.ListarImperiaisAlquimia(nivel, maestriaId, contribuicao);
+
+            ImperialResultadoViewModel maisLucrativaItem = null;
+            long maiorLucroLiquidoItem = int.MinValue;
+
+            ImperialResultadoViewModel maisLucrativaSubitens = null;
+            long maiorLucroLiquidoSubitens = int.MinValue;
+
+            foreach (var imperial in imperiaisResultados)
+            {
+                imperial.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", imperial.ItensQuantidadesNecessarias);
+                imperial.ItensQuantidadesNecessarias = null;
+
+                imperial.ItensQuantidadesNecessarias = null;
+                if (imperial.LucroLiquidoPrimaria > maiorLucroLiquidoItem && imperial.DisponibilidadePrimaria == 100)
+                {
+                    maisLucrativaItem = imperial;
+                    maiorLucroLiquidoItem = imperial.LucroLiquidoPrimaria;
+                }
+
+                if (imperial.LucroLiquidoSecundaria > maiorLucroLiquidoSubitens && imperial.LucroLiquidoSecundaria != 0)
+                {
+                    maisLucrativaSubitens = imperial;
+                    maiorLucroLiquidoSubitens = imperial.LucroLiquidoSecundaria;
+                }
+            }
+
+            return Json(new { data = imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria), maisLucrativaItem, maisLucrativaSubitens });
         }
     }
 }

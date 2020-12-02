@@ -25,22 +25,37 @@ namespace BDOLife.Web.Controllers
         [ResponseCache(CacheProfileName = "Monthly")]
         public IActionResult Image(string referenciaId) 
         {
-            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\itens\{referenciaId}.png");
-            return File(image, "image/png");
+            if(System.IO.File.Exists($@"{_hostingEnvironment.WebRootPath}\imagens\itens\{referenciaId}.png"))
+            {
+                var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\itens\{referenciaId}.png");
+                return File(image, "image/png");
+            }
+
+            return File("", "image/png");
         }
 
         [ResponseCache(CacheProfileName = "Monthly")]
         public IActionResult Imperial(string caixa)
         {
-            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{caixa}.png");
-            return File(image, "image/png");
+            if (System.IO.File.Exists($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{caixa}.png"))
+            {
+                var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\imperial\{caixa}.png");
+                return File(image, "image/png");
+            }
+
+            return File("", "image/png");
         }
 
         [ResponseCache(CacheProfileName = "Monthly")]
         public IActionResult Cavalo(string cavalo)
         {
-            var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\cavalos\{cavalo}.png");
-            return File(image, "image/png");
+            if (System.IO.File.Exists($@"{_hostingEnvironment.WebRootPath}\imagens\cavalos\{cavalo}.png"))
+            {
+                var image = System.IO.File.OpenRead($@"{_hostingEnvironment.WebRootPath}\imagens\cavalos\{cavalo}.png");
+                return File(image, "image/png");
+            }
+
+            return File("", "image/png");
         }
     }
 }

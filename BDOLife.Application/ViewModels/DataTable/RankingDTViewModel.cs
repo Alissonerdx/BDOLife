@@ -17,5 +17,9 @@ namespace BDOLife.Application.ViewModels.DataTable
         public double Valorizacao { get; set; }
         public long Lucro { get; set; }
         public string Ingredientes { get; set; }
+        public double DisponibilidadePrimaria { get; set; }
+        public double DisponibilidadesSecundarias { get; set; }
+        public List<Tuple<ItemViewModel, long, bool, long>> ItensQuantidadesNecessarias { get; set; }
+        public string SubItensInline { get; set; }
     }
 }

@@ -1058,6 +1058,9 @@ $(document).ready(function () {
                     },
                 },
                 {
+                    name: "usarProcRaro", title: "Usar Proc Raro (?)", type: "text", width: 155, align: "center", editing: false, inserting: false, 
+                },
+                {
                     name: "produzirOuComprar", title: "Produzir/Comprar (?)", type: "select", width: 155, align: "center", editing: true, inserting: false, items: [
                         { text: "Comprar", value: "COMPRAR" },
                         { text: "Produzir", value: "PRODUZIR" }

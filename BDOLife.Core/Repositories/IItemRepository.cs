@@ -13,10 +13,14 @@ namespace BDOLife.Core.Repositories
         Task<IList<Item>> ListarPorTipoReceita(TipoReceitaEnum tipo);
         Task<Item> ObterPorReferenciaId(string referenciaId);
         Task<IList<Item>> ListarPorGrupo(string grupo);
-        Task<IList<Item>> ObterPorListaReferenciasIds(List<string> referenciasIds);
+        Task<IList<Item>> ObterPorReferenciasIds(List<string> referenciasIds);
+        Task<IList<ReceitaItem>> ListarReceitaItens(string receitaReferenciaId);
         Task<IList<ReceitaResultado>> ListarReceitaResultados(string receitaReferenciaId);
         Task<IList<Item>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos);
         Task<Item> ObterComReceitasPorReferenciaId(string referenciaId);
         Task<IList<Item>> ListarReceitasPorTiposComResultado(List<TipoReceitaEnum> tipos);
+        Task<IList<Item>> Listar();
+        Task<IList<Item>> BuscarPorNome(string nome);
+
     }
 }

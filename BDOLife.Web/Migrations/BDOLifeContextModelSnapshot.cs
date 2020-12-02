@@ -666,6 +666,60 @@ namespace BDOLife.Web.Migrations
                     b.ToTable("ReceitasResultados");
                 });
 
+            modelBuilder.Entity("BDOLife.Core.Entities.Spot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BdoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nivel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PARecomendando")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Regiao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Spots");
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.SpotDrop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("ChanceDropAprimorado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ItemReferenciaId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("SpotId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemReferenciaId")
+                        .IsUnique()
+                        .HasFilter("[ItemReferenciaId] IS NOT NULL");
+
+                    b.HasIndex("SpotId");
+
+                    b.ToTable("SpotsDrops");
+                });
+
             modelBuilder.Entity("BDOLife.Core.Entities.TipoProcesso", b =>
                 {
                     b.Property<int>("Id")
@@ -1016,6 +1070,21 @@ namespace BDOLife.Web.Migrations
                         .HasForeignKey("ResultadoReferenciaId")
                         .HasPrincipalKey("ReferenciaId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("BDOLife.Core.Entities.SpotDrop", b =>
+                {
+                    b.HasOne("BDOLife.Core.Entities.Item", "Item")
+                        .WithOne()
+                        .HasForeignKey("BDOLife.Core.Entities.SpotDrop", "ItemReferenciaId")
+                        .HasPrincipalKey("BDOLife.Core.Entities.Item", "ReferenciaId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("BDOLife.Core.Entities.Spot", "Spot")
+                        .WithMany("Drops")
+                        .HasForeignKey("SpotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -16,8 +16,9 @@ namespace BDOLife.Web.Controllers
             _itemService = itemService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nomeReceita)
         {
+            ViewBag.ReceitaSelecionada = nomeReceita;
             var receitas = await _itemService.ListarPorTipoReceita(TipoReceitaEnum.Culinaria);
 
             var receitasCulinariaSimples = await _itemService.ObterPorListaDeReferenciasIds(new List<string> {

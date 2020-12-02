@@ -64,5 +64,12 @@ namespace BDOLife.Web.Controllers
             var result = await _itemService.ListarDependenciasIndiretas(referenciaId);
             return Json(result);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> BuscarPorNome(string nome)
+        {
+            var result = await _itemService.BuscarPorNome(nome);
+            return Json(result);
+        }
     }
 }

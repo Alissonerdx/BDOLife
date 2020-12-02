@@ -1,9 +1,11 @@
 ﻿using BDOLife.Application.Interfaces;
 using BDOLife.Application.Mapper;
 using BDOLife.Application.ViewModels;
+using BDOLife.Application.ViewModels.DataTable;
 using BDOLife.Application.ViewModels.Grafico;
 using BDOLife.Core.Entities;
 using BDOLife.Core.Enums;
+using BDOLife.Core.Helper;
 using BDOLife.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -240,7 +242,7 @@ namespace BDOLife.Application.Services
                 decisaoMercadoComprar = decisaoMercadoComprar,
                 decisaoMercadoVender = decisaoMercadoVender,
                 nomeItem = item.Nome,
-                imagemItem = $"Content/Image?referenciaId={item.ReferenciaId}",
+                imagemItem = $"/Content/Image?referenciaId={item.ReferenciaId}",
                 precoAtualItem = item.Valor,
                 quantidadeAtualItem = item.QuantidadeDisponivel
             };
@@ -290,7 +292,7 @@ namespace BDOLife.Application.Services
 
         public async Task<ServiceResponse<List<ItemViewModel>>> ObterPorListaDeReferenciasIds(List<string> referenciasIds)
         {
-            var data = await _itemRepository.ObterPorListaReferenciasIds(referenciasIds);
+            var data = await _itemRepository.ObterPorReferenciasIds(referenciasIds);
             return new ServiceResponse<List<ItemViewModel>>
             {
                 Data = ObjectMapper.Mapper.Map<List<ItemViewModel>>(data)
@@ -454,6 +456,7 @@ namespace BDOLife.Application.Services
         }
 
 
+
         public async Task<NodeViewModel> ProcessarNode(Item item, string id, string parentId, long qtdTotal, long qtdPorReceita, long quantidadeProcada, decimal procNormal, decimal procRaro, TipoReceitaEnum tipo, MaestriaCulinaria maestriaCulinaria, MaestriaAlquimia maestriaAlquimia, bool semDetalhes)
         {
 
@@ -473,7 +476,7 @@ namespace BDOLife.Application.Services
                 id = id,
                 parent = parentId,
                 text = id == "raiz" ? $" {(!semDetalhes ? $"({qtdTotal})" : "")} {item.Nome}" : $"{qtdPorReceita} {item.Nome} {(!semDetalhes ? $"({quantidadeProcada})" : "")}",
-                icon = !string.IsNullOrEmpty(item.ImagemUrl) ? $"Content/Image?referenciaId={item.ReferenciaId}" : "",
+                icon = !string.IsNullOrEmpty(item.ImagemUrl) ? $"/Content/Image?referenciaId={item.ReferenciaId}" : "",
                 state = new { opened = true },
                 nomeItem = item.Nome,
                 quantidade = quantidadeProcada,
@@ -641,7 +644,7 @@ namespace BDOLife.Application.Services
                     id = "raiz",
                     parent = "#",
                     text = $" {(!semDetalhes ? $"({quantidade})" : "")} {receita.Nome}",
-                    icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"Content/Image?referenciaId={receita.ReferenciaId}" : "",
+                    icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"/Content/Image?referenciaId={receita.ReferenciaId}" : "",
                     state = new { opened = true },
                     nomeItem = receita.Nome,
                     quantidade = quantidade,
@@ -677,7 +680,7 @@ namespace BDOLife.Application.Services
                             id = $"{subReceita.ItemReferenciaId}",
                             parent = "raiz",
                             text = $"{subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)subReceitaProc})" : "")}",
-                            icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
+                            icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"/Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
                             state = new { opened = otimizar ? custoProducaoSubReceitaProcNormal < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
                             quantidade = (long)subReceitaProc,
@@ -722,7 +725,7 @@ namespace BDOLife.Application.Services
                                         id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                         parent = $"{subReceita.ItemReferenciaId}",
                                         text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
-                                        icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
+                                        icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
                                         state = new { opened = otimizar ? custoProducaoProcNormalSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
                                         quantidade = (long)sub1Proc,
@@ -767,7 +770,7 @@ namespace BDOLife.Application.Services
                                                     id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                     parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                                     text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
-                                                    icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
+                                                    icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
                                                     state = new { opened = otimizar ? custoProducaoProcNormalSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
                                                     quantidade = (long)sub2Proc,
@@ -811,7 +814,7 @@ namespace BDOLife.Application.Services
                                                                 id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                 parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                                 text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
-                                                                icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
+                                                                icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
                                                                 state = new { opened = otimizar ? custoProducaoProcNormalSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
                                                                 quantidade = (long)sub3Proc,
@@ -855,7 +858,7 @@ namespace BDOLife.Application.Services
                                                                             id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                             parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                             text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
-                                                                            icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
+                                                                            icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
                                                                             state = new { opened = otimizar ? custoProducaoProcNormalSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
                                                                             quantidade = (long)sub4Proc,
@@ -900,7 +903,7 @@ namespace BDOLife.Application.Services
                                                                                         id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}",
                                                                                         parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                                         text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
-                                                                                        icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
+                                                                                        icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
                                                                                         state = new { opened = otimizar ? custoProducaoProcNormalSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
                                                                                         quantidade = (long)sub5Proc,
@@ -974,7 +977,7 @@ namespace BDOLife.Application.Services
                     id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}",
                     parent = raiz,
                     text = $"{quantidadePorReceita} {receita.Nome} {(!semDetalhes ? $"({quantidade})" : "")} {(usarProcRaro ? "*" : "")}",
-                    icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"Content/Image?referenciaId={receita.ReferenciaId}" : "",
+                    icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"/Content/Image?referenciaId={receita.ReferenciaId}" : "",
                     state = new { opened = otimizar ? custoProducaoReceita < receita.Valor : true },
                     nomeItem = receita.Nome,
                     quantidade = quantidade,
@@ -1018,7 +1021,7 @@ namespace BDOLife.Application.Services
                             id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}",
                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}",
                             text = $" {subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)receitaProc})" : "")}",
-                            icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
+                            icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"/Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
                             state = new { opened = otimizar ? custoProducaoSubReceita < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
                             quantidade = (long)receitaProc,
@@ -1063,7 +1066,7 @@ namespace BDOLife.Application.Services
                                         id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}",
                                         text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
-                                        icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
+                                        icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
                                         state = new { opened = otimizar ? custoProducaoSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
                                         quantidade = (long)sub1Proc,
@@ -1108,7 +1111,7 @@ namespace BDOLife.Application.Services
                                                     id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                     parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                                     text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
-                                                    icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
+                                                    icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
                                                     state = new { opened = otimizar ? custoProducaoSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
                                                     quantidade = (long)sub2Proc,
@@ -1153,7 +1156,7 @@ namespace BDOLife.Application.Services
                                                                 id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                 parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                                 text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
-                                                                icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
+                                                                icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
                                                                 state = new { opened = otimizar ? custoProducaoSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
                                                                 quantidade = (long)sub3Proc,
@@ -1191,14 +1194,14 @@ namespace BDOLife.Application.Services
                                                                         //var custoProducaoProcNormalERaroSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, procRaro);
                                                                         var custoProducaoProcNormalSub4 = CalcularValorSubReceitaRecursivo(sub4.Item, procNormalSub4, 0);
 
-                                                                        var custoProducaoSub4 = custoProducaoProcNormalSub4 == 0 ? sub4.Item.Valor :  custoProducaoProcNormalSub3;
+                                                                        var custoProducaoSub4 = custoProducaoProcNormalSub4 == 0 ? sub4.Item.Valor : custoProducaoProcNormalSub3;
 
                                                                         tree.Add(new NodeViewModel
                                                                         {
                                                                             id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                             text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
-                                                                            icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
+                                                                            icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
                                                                             state = new { opened = otimizar ? custoProducaoSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
                                                                             quantidade = (long)sub4Proc,
@@ -1236,14 +1239,14 @@ namespace BDOLife.Application.Services
                                                                                     //var custoProducaoProcNormalERaroSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, procRaro);
                                                                                     var custoProducaoProcNormalSub5 = CalcularValorSubReceitaRecursivo(sub5.Item, procNormalSub5, 0);
 
-                                                                                    var custoProducaoSub5 =  custoProducaoProcNormalSub5 == 0 ? sub5.Item.Valor : custoProducaoProcNormalSub5;
+                                                                                    var custoProducaoSub5 = custoProducaoProcNormalSub5 == 0 ? sub5.Item.Valor : custoProducaoProcNormalSub5;
 
                                                                                     tree.Add(new NodeViewModel
                                                                                     {
                                                                                         id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}",
                                                                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                                         text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
-                                                                                        icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
+                                                                                        icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
                                                                                         state = new { opened = otimizar ? custoProducaoSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
                                                                                         quantidade = (long)sub5Proc,
@@ -1460,7 +1463,7 @@ namespace BDOLife.Application.Services
                       Preco = i.Resultado.Valor,
                       Quantidade = i.ProcRaro ? (long)(quantidade * (maestriaAlquimia != null ? procRaroAlquimia : procRaroCulinaria)) : (long)(quantidade * (maestriaAlquimia != null ? procNormalAlquimia : procNormalCulinaria)),
                       Total = i.ProcRaro ? (long)(quantidade * (maestriaAlquimia != null ? procRaroAlquimia : procRaroCulinaria)) * i.Resultado.Valor : (long)(quantidade * (maestriaAlquimia != null ? procNormalAlquimia : procNormalCulinaria)) * i.Resultado.Valor,
-                      Img = !string.IsNullOrEmpty(i.Resultado.ImagemUrl) ? $"Content/Image?referenciaId={i.Resultado.ReferenciaId}" : "",
+                      Img = !string.IsNullOrEmpty(i.Resultado.ImagemUrl) ? $"/Content/Image?referenciaId={i.Resultado.ReferenciaId}" : "",
                       QuantidadePorCaixa = QuantidadePorCaixa(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
                       QuantidadeImperial = QuantidadeImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault(), i.ProcRaro ? (long)(quantidade * (maestriaAlquimia != null ? procRaroAlquimia : procRaroCulinaria)) : (long)(quantidade * (maestriaAlquimia != null ? procNormalAlquimia : procNormalCulinaria))),
                       CaixaImperial = NomeCaixaImperial(i.Resultado?.ImperiaisReceitas?.FirstOrDefault()),
@@ -1532,7 +1535,7 @@ namespace BDOLife.Application.Services
                     Id = r.ReferenciaId,
                     Nome = r.Nome,
                     Direta = true,
-                    Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"Content/Image?referenciaId={r.ReferenciaId}" : "",
+                    Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"/Content/Image?referenciaId={r.ReferenciaId}" : "",
                     Preco = r.Valor,
                     QuantidadeDisponivel = r.QuantidadeDisponivel
                 }).ToList();
@@ -1569,7 +1572,7 @@ namespace BDOLife.Application.Services
                         Id = r.ReferenciaId,
                         Nome = r.Nome,
                         Direta = false,
-                        Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"Content/Image?referenciaId={r.ReferenciaId}" : "",
+                        Img = !string.IsNullOrEmpty(r.ImagemUrl) ? $"/Content/Image?referenciaId={r.ReferenciaId}" : "",
                         Preco = r.Valor,
                         QuantidadeDisponivel = r.QuantidadeDisponivel
                     }).ToList();
@@ -1640,6 +1643,50 @@ namespace BDOLife.Application.Services
             }
 
             return (long)receita.Valor;
+        }
+
+        public async Task<IList<ItemViewModel>> Listar()
+        {
+            return ObjectMapper.Mapper.Map<List<ItemViewModel>>(await _itemRepository.Listar());
+        }
+
+
+        public async Task<IList<ItemDTViewModel>> ListarDataTable()
+        {
+            var lista = await Listar();
+            return lista.Select(i => new ItemDTViewModel
+            {
+                Img = !string.IsNullOrEmpty(i.ImagemUrl) ? $"//Content/Image?referenciaId={i.ReferenciaId}" : "",
+                ReferenciaId = i.ReferenciaId,
+                Nome = i.Nome,
+                Valor = i.Valor,
+                Grupo = i.Grupo,
+                DataAtualizacao = i.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                Tipo = i.Tipo.GetDescription(),
+                TipoReceita = i.TipoReceita != null ? i.TipoReceita.Value.GetDescription() : "",
+                ProcNormalExcessao = i.ProcNormalExcessao,
+                ProcRaroExcessao = i.ProcRaroExcessao
+            }).ToList();
+        }
+
+
+        public async Task<IList<ReceitaItemViewModel>> ListarIngredientes(string referenciaId)
+        {
+            var ingredientes = await _itemRepository.ListarReceitaItens(referenciaId);
+            return ObjectMapper.Mapper.Map<IList<ReceitaItemViewModel>>(ingredientes);
+        }
+
+        public async Task<IList<ReceitaResultadoViewModel>> ListarResultados(string referenciaId)
+        {
+            var resultados = await _itemRepository.ListarReceitaResultados(referenciaId);
+            return ObjectMapper.Mapper.Map<IList<ReceitaResultadoViewModel>>(resultados);
+
+        }
+
+        public async Task<IList<ItemViewModel>> BuscarPorNome(string nome)
+        {
+            var resultados = await _itemRepository.BuscarPorNome(nome);
+            return ObjectMapper.Mapper.Map<IList<ItemViewModel>>(resultados);
         }
     }
 }

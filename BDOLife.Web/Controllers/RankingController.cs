@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using BDOLife.Application.Interfaces;
+using BDOLife.Web.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BDOLife.Web.Controllers
@@ -53,6 +54,12 @@ namespace BDOLife.Web.Controllers
 
 
             var lista = await _rankingService.Processar(maestriaId);
+
+            foreach (var receita in lista)
+            {
+                receita.SubItensInline = await this.RenderViewToStringAsync("_ReceitaInlinePartial", receita.ItensQuantidadesNecessarias);
+                receita.ItensQuantidadesNecessarias = null;
+            }
 
             return Json(new { data = lista });
         }

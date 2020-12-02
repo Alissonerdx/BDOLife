@@ -1,0 +1,212 @@
+﻿@model ItemViewModel
+
+<link href="~/lib/tabulator/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet" />
+<link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
+<link href="~/componentes/izitoast/css/iziToast.css" rel="stylesheet" />
+
+
+<div class="card">
+    <div class="card-body">
+        <p class="font-label-poppins" style="color: white !important;">Dados</p>
+        <hr style="background-color: white;" />
+        <form class="form" id="editarItemForm">
+            <input type="hidden" id="referenciaId" value="@Model.ReferenciaId" />
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Tipo">Tipo</label>
+                    <select class="form-control" name="Tipo">
+                        <option>Selecione o tipo</option>
+                        <!option value="@((int)TipoEnum.Item)" @(Model.Tipo == TipoEnum.Item ? "selected" : "")>I - Item</!option>
+                        <!option value="@((int)TipoEnum.Material)" @(Model.Tipo == TipoEnum.Material ? "selected" : "")>M - Material</!option>
+                        <!option value="@((int)TipoEnum.Receita)" @(Model.Tipo == TipoEnum.Receita ? "selected" : "")>R - Receita</!option>
+                        <!option value="@((int)TipoEnum.None)" @(Model.Tipo == TipoEnum.None ? "selected" : "")>N - None</!option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="TipoReceita">Tipo de Receita</label>
+                    <select class="form-control" name="TipoReceita">
+                        <option>Selecione o tipo de receita</option>
+                        <!option value="@((int)TipoReceitaEnum.Alquimia)" @(Model.TipoReceita == TipoReceitaEnum.Alquimia ? "selected" : "")>
+                            @TipoReceitaEnum.Alquimia.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.Culinaria)" @(Model.TipoReceita == TipoReceitaEnum.Culinaria ? "selected" : "")>
+                            @TipoReceitaEnum.Culinaria.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoAlquimiaImperial)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAlquimiaImperial ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoAlquimiaImperial.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoAlquimiaSimples)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAlquimiaSimples ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoAlquimiaSimples.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoAquecimento)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAquecimento ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoAquecimento.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoChacoalhar)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoChacoalhar ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoChacoalhar.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoCorte)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCorte ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoCorte.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoCozinhaSimples)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCozinhaSimples ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoCozinhaSimples.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoCulinariaImperial)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCulinariaImperial ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoCulinariaImperial.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoDesidratacao)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoDesidratacao ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoDesidratacao.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoFabrica)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFabrica ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoFabrica.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoFabricaGuilda)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFabricaGuilda ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoFabricaGuilda.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoFiltragem)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFiltragem ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoFiltragem.GetDescription()
+                        </!option>
+                        <!option value="@((int)TipoReceitaEnum.ProcessoMoagem)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoMoagem ? "selected" : "")>
+                            @TipoReceitaEnum.ProcessoMoagem.GetDescription()
+                        </!option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="ReferenciaId">Referencia Id</label>
+                    <input type="text" class="form-control" name="ReferenciaId" value="@Model.ReferenciaId" readonly />
+                </div>
+                <div class="col-md-3">
+                    <label for="Nome">Nome</label>
+                    <input type="text" class="form-control" name="Nome" value="@Model.Nome" />
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Nome">Valor</label>
+                    <input type="text" class="form-control" name="Valor" value="@Model.Valor" />
+                </div>
+                <div class="col-md-3">
+                    <label for="Peso">Peso</label>
+                    <input type="text" class="form-control" name="Peso" value="@Model.Peso" />
+                </div>
+                <div class="col-md-3">
+                    <label for="ImagemUrl">Imagem URL</label>
+                    <input type="text" class="form-control" name="ImagemUrl" value="@Model.ImagemUrl" />
+                </div>
+                <div class="col-md-3">
+                    <label for="QuantidadeDisponivel">Quantidade Disp.</label>
+                    <input type="text" class="form-control" name="QuantidadeDisponivel" value="@Model.QuantidadeDisponivel" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Grau">Grau</label>
+                    <select class="form-control" name="Grau">
+                        <option>Selecione o grau</option>
+                        <!option value="@((int)GrauEnum.Branco)" @(Model.Grau == GrauEnum.Branco ? "selected" : "")>Branco</!option>
+                        <!option value="@((int)GrauEnum.Verde)" @(Model.Grau == GrauEnum.Verde ? "selected" : "")>Verde</!option>
+                        <!option value="@((int)GrauEnum.Azul)" @(Model.Grau == GrauEnum.Azul ? "selected" : "")>Azul</!option>
+                        <!option value="@((int)GrauEnum.Ouro)" @(Model.Grau == GrauEnum.Ouro ? "selected" : "")>Ouro</!option>
+                        <!option value="@((int)GrauEnum.Laranja)" @(Model.Grau == GrauEnum.Laranja ? "selected" : "")>Laranja</!option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="ProcNormalExcessao">Proc Normal Excessão</label>
+                    <input type="text" class="form-control" name="ProcNormalExcessao" value="@Model.ProcNormalExcessao" />
+                </div>
+                <div class="col-md-3">
+                    <label for="ProcRaroExcessao">Proc Raro Excessão</label>
+                    <input type="text" class="form-control" name="ProcRaroExcessao" value="@Model.ProcRaroExcessao" />
+                </div>
+                <div class="col-md-3">
+                    <label for="Grupo">Grupo</label>
+                    <input type="text" class="form-control" name="Grupo" value="@Model.Grupo" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Adquirido">Adquirido</label>
+                    <select class="form-control" name="Adquirido">
+                        <option>Selecione a forma de adquirir</option>
+                        <!option value="@((int)AdquiridoEnum.Mercado)" @(Model.Adquirido == AdquiridoEnum.Mercado ? "selected" : "")>Mercado</!option>
+                        <!option value="@((int)AdquiridoEnum.NPC)" @(Model.Adquirido == AdquiridoEnum.NPC ? "selected" : "")>NPC</!option>
+                        <!option value="@((int)AdquiridoEnum.MercadoENPC)" @(Model.Adquirido == AdquiridoEnum.MercadoENPC ? "selected" : "")>Mercado/NPC</!option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="LocalizacaoNPC">Localização NPC</label>
+                    <input type="text" class="form-control" name="LocalizacaoNPC" value="@Model.LocalizacaoNPC" />
+                </div>
+                <div class="col-md-3">
+                    <label for="ValorNPC">Valor NPC</label>
+                    <input type="text" class="form-control" name="ValorNPC" value="@Model.ValorNPC" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p class="font-label-poppins" style="color: white !important;">Ingredientes</p>
+        <div>
+            <button id="add-ingrediente" class="btn">Adicionar</button>
+            <button id="remover-ingrediente" class="btn">Remover</button>
+        </div>
+        <div id="ingredientesGrid"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p class="font-label-poppins" style="color: white !important;">Resultados</p>
+        <div>
+            <button id="add-resultado" class="btn">Adicionar</button>
+            <button id="remover-resultado" class="btn">Remover</button>
+        </div>
+        <div id="resultadosGrid"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="col-md-12" style="display: flex;justify-content: flex-end;">
+            <button id="salvar" class="btn">Salvar</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="add-ingrediente-modal" style="display: none;">
+    <div class="col-md-12" style="padding: 20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="AddIngrediente" class="font-sm-label-poppins">Ingrediente</label>
+                    <input type="text" class="form-control" name="AddIngrediente" value="" />
+                    <div id="sugestao-ingrediente"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="QtdIngrediente" class="font-sm-label-poppins">Quantidade</label>
+                    <input type="text" class="form-control" name="QtdIngrediente" value="" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="btnAdicionarIngrediente">&nbsp;</label>
+                <button type="button" onclick="" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnAdicionarIngrediente">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
+    <script src="~/componentes/izimodal/js/iziModal.min.js"></script>
+    <script src="~/componentes/izitoast/js/iziToast.js"></script>
+    <script src="~/js/Admin/EditarItem.js" asp-append-version="true"></script>
+}

@@ -3,6 +3,7 @@
 @{
     Layout = null;
     var receitas = ViewBag.Receitas as List<ItemViewModel>;
+    var receitaSelecionada = ViewBag.ReceitaSelecionada as string;
 }
 
 
@@ -20,9 +21,9 @@
                                 {
                                     foreach (var receita in receitas)
                                     {
-                                        <option value="@receita.ReferenciaId">
+                                        <!option value="@receita.ReferenciaId" @(receita.Nome.Equals(receitaSelecionada) ? "selected" : "")>
                                             @receita.Nome
-                                        </option>
+                                        </!option>
                                     }
                                 }
                             </select>

@@ -4,7 +4,7 @@
 
 @*<link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />*@
 <link href="~/lib/datatablejs/datatables.css" rel="stylesheet" />
-
+<link href="~/lib/datatablejs/Responsive-2.2.6/css/responsive.bootstrap.css" rel="stylesheet" />
 
 <div class="card div-custom-color">
     <div class="card-body">
@@ -163,44 +163,44 @@
                         </thead>
                         <tbody>
                             @*<tr>
-                            <td><img src="/Content/Image?referenciaId=I_9609" class="receita-item" data-empacotar="2988" data-valor="25700" data-disponivel="85252" data-nome="Refeição Valência" data-atualizado="19/11/2020 16:13" style="max-width: 44px; " data-original-title="" title=""></td>
-                            <td>Refeição de Valencia</td>
-                            <td>10.000</td>
-                            <td>+10%</td>
-                            <td>-15%</td>
-                            <td>5.000</td>
-                            <td>
-                                <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="3760" data-empacotar="1793" data-disponivel="52758" data-nome="Reagente Líquido Limpo" data-atualizado="19/11/2020 16:08" data-referencia="" data-original-title="" title="">
-                                    <a href="#" class="qtooltip" data-id="R_A_47">
-                                        <div class="icone-wrapper">
+                                    <td><img src="/Content/Image?referenciaId=I_9609" class="receita-item" data-empacotar="2988" data-valor="25700" data-disponivel="85252" data-nome="Refeição Valência" data-atualizado="19/11/2020 16:13" style="max-width: 44px; " data-original-title="" title=""></td>
+                                    <td>Refeição de Valencia</td>
+                                    <td>10.000</td>
+                                    <td>+10%</td>
+                                    <td>-15%</td>
+                                    <td>5.000</td>
+                                    <td>
+                                        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="3760" data-empacotar="1793" data-disponivel="52758" data-nome="Reagente Líquido Limpo" data-atualizado="19/11/2020 16:08" data-referencia="" data-original-title="" title="">
+                                            <a href="#" class="qtooltip" data-id="R_A_47">
+                                                <div class="icone-wrapper">
 
-                                            <img src="/Content/Image?referenciaId=R_A_47" alt="icon" class="icone-medio" style="">
+                                                    <img src="/Content/Image?referenciaId=R_A_47" alt="icon" class="icone-medio" style="">
+                                                </div>
+                                                <div class="quantidade-pequeno nowrap">1</div>
+                                            </a>
                                         </div>
-                                        <div class="quantidade-pequeno nowrap">1</div>
-                                    </a>
-                                </div>
-                                <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="830" data-empacotar="5379" data-disponivel="0" data-nome="Cogumelo Nuvem" data-atualizado="19/11/2020 16:03" data-referencia="" data-original-title="" title="">
-                                    <a href="#" class="qtooltip" data-id="M_5410">
-                                        <div class="icone-wrapper">
+                                        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="830" data-empacotar="5379" data-disponivel="0" data-nome="Cogumelo Nuvem" data-atualizado="19/11/2020 16:03" data-referencia="" data-original-title="" title="">
+                                            <a href="#" class="qtooltip" data-id="M_5410">
+                                                <div class="icone-wrapper">
 
-                                            <img src="/Content/Image?referenciaId=M_5410" alt="icon" class="icone-medio" style="filter: grayscale(100%); opacity: 40%;">
+                                                    <img src="/Content/Image?referenciaId=M_5410" alt="icon" class="icone-medio" style="filter: grayscale(100%); opacity: 40%;">
+                                                </div>
+                                                <div class="quantidade-pequeno nowrap">3</div>
+                                            </a>
                                         </div>
-                                        <div class="quantidade-pequeno nowrap">3</div>
-                                    </a>
-                                </div>
-                                <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="830" data-empacotar="5379" data-disponivel="0" data-nome="Cogumelo Nuvem" data-atualizado="19/11/2020 16:03" data-referencia="" data-original-title="" title="">
-                                    <a href="#" class="qtooltip" data-id="M_5410">
-                                        <div class="icone-wrapper">
+                                        <div class="iconset_wrapper_medium inlinediv receita-item" data-valor="830" data-empacotar="5379" data-disponivel="0" data-nome="Cogumelo Nuvem" data-atualizado="19/11/2020 16:03" data-referencia="" data-original-title="" title="">
+                                            <a href="#" class="qtooltip" data-id="M_5410">
+                                                <div class="icone-wrapper">
 
-                                            <img src="/Content/Image?referenciaId=M_5410" alt="icon" class="icone-medio" style="filter: grayscale(100%); opacity: 40%;">
+                                                    <img src="/Content/Image?referenciaId=M_5410" alt="icon" class="icone-medio" style="filter: grayscale(100%); opacity: 40%;">
+                                                </div>
+                                                <div class="quantidade-pequeno nowrap">3</div>
+                                            </a>
                                         </div>
-                                        <div class="quantidade-pequeno nowrap">3</div>
-                                    </a>
-                                </div>
 
 
-                            </td>
-                        </tr>*@
+                                    </td>
+                                </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -210,7 +210,7 @@
 </div>
 
 @section Scripts {
-    @*<script src="~/lib/datatablejs/datatables.js"></script>*@
     <script src="~/lib/datatablejs/jquery.dataTables.js"></script>
-    <script src="~/js/Ranking/Ranking.js"></script>
+    <link href="~/lib/datatablejs/Responsive-2.2.6/js/responsive.bootstrap.js" rel="stylesheet" />
+    <script src="~/js/Ranking/Ranking.js" asp-append-version="true"></script>
 }

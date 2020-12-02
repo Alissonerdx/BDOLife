@@ -52,7 +52,7 @@ namespace BDOLife.Infra.Repository
                 .SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId) && !i.Excluido);
         }
 
-        public async Task<IList<Item>> ObterPorListaReferenciasIds(List<string> referenciasIds)
+        public async Task<IList<Item>> ObterPorReferenciasIds(List<string> referenciasIds)
         {
             return await _dbContext.Itens.Where(i => referenciasIds.Contains(i.ReferenciaId) && !i.Excluido).ToListAsync();
         }
@@ -67,6 +67,16 @@ namespace BDOLife.Infra.Repository
             return receita?.Resultados;
         }
 
+        public async Task<IList<ReceitaItem>> ListarReceitaItens(string receitaReferenciaId)
+        {
+            var receita = await _dbContext.Itens
+                .Include(i => i.Itens)
+                .ThenInclude(i => i.Item)
+                .SingleOrDefaultAsync(i => i.ReferenciaId == receitaReferenciaId);
+
+            return receita?.Itens;
+        }
+
         public async Task<IList<Item>> ListarReceitasPorTipos(List<TipoReceitaEnum> tipos)
         {
             return await _dbContext.Itens.Where(i => i.TipoReceita != null && tipos.Contains(i.TipoReceita.Value) && i.Excluido == false).OrderBy(i => i.Nome).ToListAsync();
@@ -75,9 +85,21 @@ namespace BDOLife.Infra.Repository
         public async Task<IList<Item>> ListarReceitasPorTiposComResultado(List<TipoReceitaEnum> tipos)
         {
             return await _dbContext.Itens
+                .Include(i => i.Itens)
+                .ThenInclude(i => i.Item)
                 .Include(i => i.Resultados)
                 .ThenInclude(i => i.Resultado.HistoricoPrecos)
                 .Where(i => i.TipoReceita != null && tipos.Contains(i.TipoReceita.Value) && i.Excluido == false && i.Resultados != null && i.Resultados.Count > 0).OrderBy(i => i.Nome).ToListAsync();
+        }
+
+        public async Task<IList<Item>> Listar()
+        {
+            return await _dbContext.Itens.ToListAsync();
+        }
+
+        public async Task<IList<Item>> BuscarPorNome(string nome)
+        {
+            return await _dbContext.Itens.Where(i => i.Nome.Contains(nome)).ToListAsync();
         }
     }
 }

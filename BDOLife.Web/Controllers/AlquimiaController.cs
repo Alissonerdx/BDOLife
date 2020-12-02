@@ -19,8 +19,10 @@ namespace BDOLife.Web.Controllers
             _maestriaService = maestriaService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nomeReceita)
         {
+            ViewBag.ReceitaSelecionada = nomeReceita;
+
             var receitas = await _itemService.ListarPorTipoReceita(TipoReceitaEnum.Alquimia);
 
             var receitasAlquimiaSimples = await _itemService.ObterPorListaDeReferenciasIds(new List<string> {

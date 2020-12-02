@@ -235,7 +235,7 @@ $(document).ready(function () {
             wheelPxPerZoomLevel: 100
         });
 
-        L.tileLayer('https://localhost:5001/imagens/mapa/{z}/{x}_{y}.jpg', {
+        L.tileLayer('/imagens/mapa/{z}/{x}_{y}.jpg', {
             crs: L.CRS.Simple,
             minZoom: 1,
             maxZoom: 7 + 1,

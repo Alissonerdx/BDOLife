@@ -11,6 +11,7 @@ namespace BDOLife.Application.ViewModels
         public int Id { get; set; }
         public string Img { get; set; }
         public string Caixa { get; set; }
+        public string TipoReceita { get; set; }
         public long Valor { get; set; }
         public long QuantidadePorCaixa { get; set; }
         public string Item { get; set; }

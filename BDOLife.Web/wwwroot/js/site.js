@@ -14,6 +14,8 @@ const GRAU = {
     Laranja: 4
 };
 
+
+
 function formatState(state) {
     var $state;
     if (state.img !== null && state.img !== undefined && state.img !== "") {

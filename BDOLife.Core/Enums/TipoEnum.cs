@@ -7,13 +7,13 @@ namespace BDOLife.Core.Enums
 {
     public enum TipoEnum
     {
-        [Description("N")]
+        [Description("None")]
         None = 0,
-        [Description("I")]
+        [Description("Item")]
         Item = 1,
-        [Description("M")]
+        [Description("Material")]
         Material = 2,
-        [Description("R")]
+        [Description("Receita")]
         Receita = 3
     }
 }

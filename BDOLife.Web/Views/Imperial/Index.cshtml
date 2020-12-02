@@ -3,6 +3,11 @@
 }
 
 <link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />
+<link href="~/lib/tabulator/css/bootstrap/tabulator_bootstrap4.css" rel="stylesheet" />
+<link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
+<link href="~/componentes/izitoast/css/iziToast.css" rel="stylesheet" />
+@*<link href="~/lib/tabulator/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet" />*@
+
 
 <div class="card div-custom-color">
     <div class="card-body">
@@ -22,7 +27,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="nivelProfissao" class="font-label-poppins">Nível da Profissão</label>
+                            <label for="nivelProfissao" class="font-label-poppins">Nível</label>
                             <select class="form-control" id="nivelProfissao">
                                 <option>Selecione o nível da profissão</option>
                                 <option value="@NivelHabilidadeEnum.Aprendiz">Aprendiz</option>
@@ -64,118 +69,54 @@
         </form>
     </div>
 </div>
-@*<div class="row">
-        <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card div-custom-color">
-                <div class="card-content">
-                    <div class="card-body" id="lucroBruto-card">
-                        <div class="media d-flex">
-                            <div class="align-self-center">
-                                <img src="~/imagens/icones/bruto-icon.svg" class="float-left" width="72" height="72" />
-                            </div>
-                            <div class="media-body text-right">
-                                <h3 class="font-label-poppins" id="maisLucrativa">0</h3>
-                                <span>Mais Lucrativa (Item)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card div-custom-color">
-                <div class="card-content">
-                    <div class="card-body" id="custoTotal-card">
-                        <div class="media d-flex">
-                            <div class="align-self-center">
-                                <img src="~/imagens/icones/ingredientes-icon.svg" class="float-left" width="72" height="72" />
-                            </div>
-                            <div class="media-body text-right">
-                                <h3 class="font-label-poppins" id="custoTotal">0</h3>
-                                <span>Mais Lucrativa (Subitens)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card div-custom-color">
-                <div class="card-content">
-                    <div class="card-body" id="lucroComPctEconomico-card">
-                        <div class="media d-flex">
 
-                            <div class="align-self-center">
-                                <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
-                            </div>
-                            <div class="media-body text-right">
-                                <h3 class="font-label-poppins" id="lucroComPctEconomico">0</h3>
-                                <span>Lucro Liq. C/Pct. Eco. (84.5%)</span>
-                            </div>
+<div class="row">
+    <div class="col-xl-4 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="mais-lucrativa-item-card">
+                    <div class="media d-flex">
+                        <div class="align-self-center" id="mais-lucrativa-item-img">
+                            @*<img src="" class="float-left"  width="72" height="72" />*@
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 class="font-sm-label-poppins" id="mais-lucrativa-item"></h3>
+                            <span>Mais Lucrativa Disponível (Item)</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card div-custom-color">
-                <div class="card-content">
-                    <div class="card-body" id="lucroSemPctEconomico-card">
-                        <div class="media d-flex">
-                            <div class="align-self-center">
-                                <img src="~/imagens/icones/sem-pacote-icon.svg" class="float-left" width="72" height="72" />
-                            </div>
-                            <div class="media-body text-right">
-                                <h3 class="font-label-poppins" id="lucroSemPctEconomico">0</h3>
-                                <span>Lucro Liq. S/Pct. Eco. (65%)</span>
-                            </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="mais-lucrativa-subitem-card">
+                    <div class="media d-flex">
+                        <div class="align-self-center" id="mais-lucrativa-subitem-img">
+                            @*<img src="" class="float-left"  width="72" height="72" />*@
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 class="font-sm-label-poppins" id="mais-lucrativa-subitem"></h3>
+                            <span>Mais Lucrativa (Subitens)</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>*@
-
-<div class="col-md-12">
-    <div class="row ">
-        <div class="card col-md-12 div-custom-color">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <select id="ordenarPor" class="form-control">
-                                <option></option>
-                                <option value="item">Nome do Item</option>
-                                <option value="imgItem">Disponibilidade de compra (Item)</option>
-                                <option value="subItensInline">Disponibilidade de compra (Subitens)</option>
-                                <option value="lucroLiquidoPrimaria">Lucro Líquido (Item)</option>
-                                <option value="lucroLiquidoSecundaria">Lucro Líquido (Subitens)</option>
-                                <option value="lucroBrutoPorDia">Lucro Bruto</option>
-                            </select>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="peso-disponivel-necessario-card">
+                    <div class="media d-flex">
+                        @*<div class="align-self-center">
+                            <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
+                        </div>*@
+                        <div class="media-body text-right">
+                            <h3 class="font-sm-label-poppins" id="peso-disponivel-necessario"></h3>
+                            <span>Peso Disponível Necessário</span>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label>&nbsp;</label>
-                        <button type="button" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="sort">Ordenar</button>
-                    </div>
-                    <div class="col-md-7" style="text-align: center">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- BdoLife - 728X90 -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:728px;height:90px"
-                             data-ad-client="ca-pub-8791502008730828"
-                             data-ad-slot="5181475696"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-                <hr />
-                <p class="font-label-poppins" style="color: white !important;">É possível navegar entre as colunas da tabela pressionando Shift + Rotacionar Scroll do mouse.</p>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="imperialGrid"></div>
                     </div>
                 </div>
             </div>
@@ -183,8 +124,55 @@
     </div>
 </div>
 
+<div class="col-md-12">
+    <div class="row ">
+        <div class="card col-md-12 div-custom-color">
+            <div class="card-body">
+                <p class="font-label-poppins" style="color: white !important;">É possível navegar entre as colunas da tabela pressionando Shift + Rotacionar Scroll do mouse.</p>
+                <input id="filtroNome" type="text" class="form-control" placeholder="Filtro">
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="imperialGrid2" class="table-striped table-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="detalhes-receita" style="display: none;">
+    <div class="col-md-12" style="padding: 20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="AddIngrediente" class="font-sm-label-poppins">Ingrediente</label>
+                    <input type="text" class="form-control" name="AddIngrediente" value="" />
+                    <div id="sugestao-ingrediente"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="QtdIngrediente" class="font-sm-label-poppins">Quantidade</label>
+                    <input type="text" class="form-control" name="QtdIngrediente" value="" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="btnAdicionarIngrediente">&nbsp;</label>
+                <button type="button" onclick="" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnAdicionarIngrediente">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     <script src="~/componentes/shepherd/shepherd.js"></script>
-    <script src="~/js/Imperial/Imperial.js" asp-append-version="true"></script>
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
+    <script src="~/componentes/izimodal/js/iziModal.min.js"></script>
+    <script src="~/componentes/izitoast/js/iziToast.js"></script>
+    <script src="~/js/Imperial/ImperialV2.js" asp-append-version="true"></script>
     <script src="~/js/Imperial/ImperialTour.js" asp-append-version="true"></script>
 }

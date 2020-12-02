@@ -1,25 +1,27 @@
 ﻿var tabela;
 
+
+
 $(document).ready(function () {
     Tabelas();
     Eventos();
 
+
+    $.fn.dataTable.ext.type.order["prata-asc"] = function (x, y) {
+        let xv = parseInt(Inputmask.unmask(x, { alias: "prata" }));
+        let yv = parseInt(Inputmask.unmask(y, { alias: "prata" }));
+
+        return ((xv < yv) ? -1 : ((xv > yv) ? 1 : 0));
+    };
+
+    $.fn.dataTable.ext.type.order["prata-desc"] = function (x, y) {
+        let xv = parseInt(Inputmask.unmask(x, { alias: "prata" }));
+        let yv = parseInt(Inputmask.unmask(y, { alias: "prata" }));
+
+        return ((xv < yv) ? 1 : ((xv > yv) ? -1 : 0));
+    };
+
     function Tabelas() {
-
-        $.fn.dataTable.ext.type.order["prata-asc"] = function (x, y) {
-            let xv = parseInt(Inputmask.unmask(x, { alias: "prata" }));
-            let yv = parseInt(Inputmask.unmask(y, { alias: "prata" }));
-
-            return ((xv < yv) ? -1 : ((xv > yv) ? 1 : 0));
-        };
-
-        $.fn.dataTable.ext.type.order["prata-desc"] = function (x, y) {
-            let xv = parseInt(Inputmask.unmask(x, { alias: "prata" }));
-            let yv = parseInt(Inputmask.unmask(y, { alias: "prata" }));
-
-            return ((xv < yv) ? 1 : ((xv > yv) ? -1 : 0));
-        };
-
 
         tabela = $('#ranking').DataTable({
             "paging": false,
@@ -110,7 +112,7 @@ $(document).ready(function () {
                         return Inputmask.format(`${data}`, { alias: "prata" })
                     }
                 },
-                { "data": "ingredientes" }
+                { "data": "subItensInline" }
             ]
         });
 

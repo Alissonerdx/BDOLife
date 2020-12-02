@@ -149,6 +149,7 @@ namespace BDOLife.Web
             services.AddScoped<ICultivoService, CultivoService>();
             services.AddScoped<IUtilService, UtilService>();
             services.AddScoped<IRankingService, RankingService>();
+            services.AddScoped<ISpotService, SpotService>();
 
 
 
@@ -162,6 +163,7 @@ namespace BDOLife.Web
             services.AddScoped<IMaestriaAlquimiaRepository, MaestriaAlquimiaRepository>();
             services.AddScoped<ICultivoRepository, CultivoRepository>();
             services.AddScoped<INodeRepository, NodeRepository>();
+            services.AddScoped<ISpotRepository, SpotRepository>();
 
         }
 

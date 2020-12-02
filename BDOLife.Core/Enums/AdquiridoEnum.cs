@@ -7,6 +7,7 @@ namespace BDOLife.Core.Enums
     public enum AdquiridoEnum
     {
         Mercado,
-        NPC
+        NPC,
+        MercadoENPC
     }
 }

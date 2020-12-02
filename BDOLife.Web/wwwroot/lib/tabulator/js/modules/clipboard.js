@@ -1,6 +1,6 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/* Tabulator v4.6.0 (c) Oliver Folkerd */
+/* Tabulator v4.9.1 (c) Oliver Folkerd */
 
 var Clipboard = function Clipboard(table) {
 	this.table = table;
@@ -22,7 +22,7 @@ Clipboard.prototype.initialize = function () {
 
 	if (this.mode === true || this.mode === "copy") {
 		this.table.element.addEventListener("copy", function (e) {
-			var plain, html;
+			var plain, html, list;
 
 			if (!_this.blocked) {
 				e.preventDefault();
@@ -34,8 +34,11 @@ Clipboard.prototype.initialize = function () {
 						plain = _this.table.options.clipboardCopyFormatter("plain", plain);
 					}
 				} else {
-					html = _this.table.modules.export.getHtml(_this.rowRange, _this.table.options.clipboardCopyStyled, _this.table.options.clipboardCopyConfig, "clipboard");
-					plain = html ? _this.generatePlainContent(html) : "";
+
+					var list = _this.table.modules.export.generateExportList(_this.table.options.clipboardCopyConfig, _this.table.options.clipboardCopyStyled, _this.rowRange, "clipboard");
+
+					html = _this.table.modules.export.genereateHTMLTable(list);
+					plain = html ? _this.generatePlainContent(list) : "";
 
 					if (_this.table.options.clipboardCopyFormatter) {
 						plain = _this.table.options.clipboardCopyFormatter("plain", plain);
@@ -75,33 +78,44 @@ Clipboard.prototype.initialize = function () {
 };
 
 Clipboard.prototype.reset = function () {
-	this.blocked = false;
-	this.originalSelectionText = "";
+	this.blocked = true;
+	this.customSelection = false;
 };
 
-Clipboard.prototype.generatePlainContent = function (html) {
+Clipboard.prototype.generatePlainContent = function (list) {
 	var output = [];
 
-	var holder = document.createElement("div");
-	holder.innerHTML = html;
-
-	var table = holder.getElementsByTagName("table")[0];
-	var rows = Array.prototype.slice.call(table.getElementsByTagName("tr"));
-
-	rows.forEach(function (row) {
+	list.forEach(function (row) {
 		var rowData = [];
 
-		var headers = Array.prototype.slice.call(row.getElementsByTagName("th"));
-		var cells = Array.prototype.slice.call(row.getElementsByTagName("td"));
+		row.columns.forEach(function (col) {
+			var value = "";
 
-		cells = cells.concat(headers);
+			if (col) {
 
-		cells.forEach(function (cell) {
-			var val = cell.innerHTML;
+				if (row.type === "group") {
+					col.value = col.component.getKey();
+				}
 
-			val = val == "&nbsp;" ? "" : val;
+				if (col.value === null) {
+					value = "";
+				} else {
+					switch (_typeof(col.value)) {
+						case "object":
+							value = JSON.stringify(col.value);
+							break;
 
-			rowData.push(val);
+						case "undefined":
+							value = "";
+							break;
+
+						default:
+							value = col.value;
+					}
+				}
+			}
+
+			rowData.push(value);
 		});
 
 		output.push(rowData.join("\t"));

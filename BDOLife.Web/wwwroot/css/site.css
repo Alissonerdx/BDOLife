@@ -366,3 +366,20 @@ table.dataTable tbody tr {
         table.dataTable tbody tr td.child ul li span {
             color: #212529 !important;
         }
+
+.tabulator-row.tabulator-group {
+    color: black !important;
+}
+
+.tabulator-row.tabulator-group span {
+    color: black !important;
+}
+
+.tabulator-row.tabulator-selected {
+    background-color: #FFC67C !important;
+}
+
+.tabulator-row .tabulator-cell {
+    height: 44px !important;
+}
+

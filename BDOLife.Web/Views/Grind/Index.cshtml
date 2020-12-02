@@ -1,0 +1,363 @@
+﻿
+@{
+    var spots = ViewBag.Spots as List<SpotViewModel>;
+}
+
+
+@*<link href="~/lib/tabulator/css/tabulator.min.css" rel="stylesheet" />*@
+<link href="~/lib/tabulator/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet" />
+
+<div class="card div-custom-color">
+    <div class="card-body">
+        <form class="form" id="consultarForm">
+            <div class="form-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="receitaSelect" class="font-label-poppins">Região</label>
+                            <select class="form-control" id="regiaoSelect">
+                                <option>Selecione a região</option>
+                                @if (spots != null)
+                                {
+                                    foreach (var spot in spots)
+                                    {
+                                        <option value="@spot.Id">
+                                            @spot.Nome
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="fama" class="font-label-poppins">Fama de Familia</label>
+                            <select class="form-control" id="famaSelect">
+                                <option value="0">Selecione a fama</option>
+                                <option value="0.5">1000 - 3999</option>
+                                <option value="1">4000 - 6999</option>
+                                <option value="1.5">>= 7000</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="horaInicio" class="font-label-poppins">Horário Inicio</label>
+                            <input type="text" class="form-control mask-quantidade" id="horaInicio" min="0" value="0" style="border-radius: 0;" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="horaFim" class="font-label-poppins">Horário Fim</label>
+                            <input type="text" class="form-control mask-quantidade" id="horaFim" min="0" value="0" style="border-radius: 0;" />
+                        </div>
+                    </div>
+                    @*<div class="col-md-2">
+                            <div class="form-group">
+                                <label for="maestria" class="font-label-poppins">Maestria <a href="#" onclick="ConfigurarMaestriaImperial()"><img style="vertical-align: baseline !important" id="configuracaoMaestriaIcone" src="~/imagens/icones/config-icon.svg" width="16" /></a></label>
+                                <select class="form-control" id="maestriaSelect">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="proc" class="font-label-poppins">Proc Normal</label>
+                                <input type="text" class="form-control mask-proc" id="proc-normal" min="0" value="2.5" style="border-radius: 0;" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="proc-especial" class="font-label-poppins">Proc Raro</label>
+                                <input type="text" class="form-control mask-proc" id="proc-raro" min="0" value="0.30" style="border-radius: 0;" />
+                            </div>
+                        </div>*@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="calcular">&nbsp;</label>
+                            <button type="submit" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnCalcular">Calcular</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="lucroBruto-card">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <img src="~/imagens/icones/bruto-icon.svg" class="float-left" width="72" height="72" />
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 class="font-label-poppins" id="lucroBruto">0</h3>
+                            <span>Lucro Bruto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="col-xl-3 col-lg-6 col-12">
+            <div class="card div-custom-color">
+                <div class="card-content">
+                    <div class="card-body" id="custoTotal-card">
+                        <div class="media d-flex">
+                            <div class="align-self-center">
+                                <img src="~/imagens/icones/ingredientes-icon.svg" class="float-left" width="72" height="72" />
+                            </div>
+                            <div class="media-body text-right">
+                                <h3 class="font-label-poppins" id="custoTotal">0</h3>
+                                <span>Custo Total dos Ingredientes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="lucroComPctEconomico-card">
+                    <div class="media d-flex">
+
+                        <div class="align-self-center">
+                            <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 class="font-label-poppins" id="lucroComPctEconomico">0</h3>
+                            <span>Lucro Liq. C/Pct. Eco. (84.5%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+        <div class="card div-custom-color">
+            <div class="card-content">
+                <div class="card-body" id="lucroSemPctEconomico-card">
+                    <div class="media d-flex">
+                        <div class="align-self-center">
+                            <img src="~/imagens/icones/sem-pacote-icon.svg" class="float-left" width="72" height="72" />
+                        </div>
+                        <div class="media-body text-right">
+                            <h3 class="font-label-poppins" id="lucroSemPctEconomico">0</h3>
+                            <span>Lucro Liq. S/Pct. Eco. (65%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="row ">
+        <div class="card col-md-12 div-custom-color">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="tab-drops" data-toggle="tab" aria-controls="drops" href="#drops" aria-expanded="true">Drops</a>
+                            </li>
+                            @*<li class="nav-item">
+                                    <a class="nav-link" id="tab-detalhes" data-toggle="tab" aria-controls="detalhes" href="#detalhes" aria-expanded="false">Detalhes</a>
+                                </li>*@
+                        </ul>
+                        <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
+                            <div role="tabpanel" class="tab-pane active show" id="drops" aria-expanded="true" aria-labelledby="tab-drops">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="dropsGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                            @*<div class="tab-pane" id="detalhes" aria-labelledby="detalhes">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="detalhesReceitaGrid"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+                <!--<br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="tab-resultados" data-toggle="tab" aria-controls="resultados" href="#resultados" aria-expanded="true">Resultados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-usadoEm" data-toggle="tab" aria-controls="usadoEm" href="#usadoEm" aria-expanded="false">Usado Em</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-analiseMercado" data-toggle="tab" aria-controls="analiseMercado" href="#analiseMercado" aria-expanded="false">Análise do Mercado</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
+                            <div role="tabpanel" class="tab-pane active show" id="resultados" aria-expanded="true" aria-labelledby="tab-resultados">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="resultadosGrid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="usadoEm" aria-expanded="false" aria-labelledby="tab-usadoEm">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="dependenciaDiretaTb"></div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="dependenciaIndiretaTb"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="analiseMercado" aria-labelledby="tab-analiseMercado">
+                                <div class="form-body">
+                                    <div class="row" id="graficoItemNormal" style="display: none">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">-->
+                @*<img id="imagemResultadoNormal" class="float-left" style="max-width: 44px; background-color: white;" src="" />*@
+                <!--<span class="text-muted poppins  mt-3" id="nomeResultadoNormal"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                            <div class="pb-1">
+                                                <div class="clearfix">
+                                                    <span class="text-muted poppins">CRESCIMENTO DEMANDA</span>
+                                                    <span class="danger float-right"><i class="ft-arrow-up danger" id="porcentagemCrescimentoDemandaNormalSeta"></i> <span id="porcentagemCrescimentoDemandaNormal"></span></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress mb-0" style="height: 7px;">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoDemandaNormalBar"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                            <div class="pb-1">
+                                                <div class="clearfix">
+                                                    <span class="text-muted poppins">CRESCIMENTO OFERTA</span>
+                                                    <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoOfertaNormalSeta"></i> <span id="porcentagemCrescimentoOfertaNormal"></span></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress mb-0" style="height: 7px;">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoOfertaNormalBar"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-sm-12">
+                                            <div class="pb-1">
+                                                <div class="clearfix">
+                                                    <span class="text-muted poppins">CRESCIMENTO PREÇO</span>
+                                                    <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoPrecoNormalSeta"></i><span id="porcentagemCrescimentoPrecoNormal"></span></span>
+                                                </div>
+                                            </div>
+                                            <div class="progress mb-0" style="height: 7px;">
+                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoPrecoNormalBar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="height-400 col-md-12">
+                        <canvas id="grafico-resultado-1" height="400"></canvas>
+                    </div>
+                </div>
+                <div class="row" id="graficoItemRaro" style="display: none">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                            <div class="pb-1">
+                                                <div class="clearfix">-->
+                @*<img id="imagemResultadoRaro" class="float-left" style="max-width: 44px; background-color: white;" src="" />*@
+                <!--<span class="text-muted poppins mt-3" id="nomeResultadoRaro"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO DEMANDA</span>
+                                                                        <span class="danger float-right"><i class="ft-arrow-up danger" id="porcentagemCrescimentoDemandaRaroSeta"></i> <span id="porcentagemCrescimentoDemandaRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoDemandaRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12 border-right-blue-grey border-right-lighten-5">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO OFERTA</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoOfertaRaroSeta"></i> <span id="porcentagemCrescimentoOfertaRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoOfertaRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-sm-12">
+                                                                <div class="pb-1">
+                                                                    <div class="clearfix">
+                                                                        <span class="text-muted poppins">CRESCIMENTO PREÇO</span>
+                                                                        <span class="success float-right"><i class="ft-arrow-up success" id="porcentagemCrescimentoPrecoRaroSeta"></i><span id="porcentagemCrescimentoPrecoRaro"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="progress mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="porcentagemCrescimentoPrecoRaroBar"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="height-400 col-md-12">
+                                            <canvas id="grafico-resultado-2" height="400"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
+    <script src="~/js/Grid/Grind.js" asp-append-version="true"></script>
+}

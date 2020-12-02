@@ -35,7 +35,8 @@ namespace BDOLife.Infra.Data
         public DbSet<MaestriaAlquimia> MaestriasAlquimia { get; set; }
         public DbSet<Colheita> Colheitas { get; set; }
         public DbSet<Node> Nodes { get; set; }
-
+        public DbSet<Spot> Spots { get; set; }
+        public DbSet<SpotDrop> SpotsDrops { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -52,6 +53,7 @@ namespace BDOLife.Infra.Data
             builder.Entity<Imperial>(ConfigureImperial);
             builder.Entity<ImperialReceita>(ConfigureImperialReceita);
             builder.Entity<Colheita>(ConfigureColheita);
+            builder.Entity<SpotDrop>(ConfigureSpotsDrops);
         }
 
         private static void ConfigureItem(EntityTypeBuilder<Item> builder)
@@ -214,6 +216,21 @@ namespace BDOLife.Infra.Data
 
             var index4 = builder.HasIndex(u => u.PlantaAltaQualidadeReferenciaId).Metadata;
             builder.Metadata.RemoveIndex(index4.Properties);
+        }
+
+        private static void ConfigureSpotsDrops(EntityTypeBuilder<SpotDrop> builder)
+        {
+            builder.HasOne(m => m.Item)
+                   .WithOne()
+                   .HasPrincipalKey<Item>(i => i.ReferenciaId)
+                   .HasForeignKey<SpotDrop>(c => c.ItemReferenciaId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            var index1 = builder.HasIndex(u => u.ItemReferenciaId).Metadata;
+            builder.Metadata.RemoveIndex(index1.Properties);
+
+            var index2 = builder.HasIndex(u => u.SpotId).Metadata;
+            builder.Metadata.RemoveIndex(index2.Properties);
         }
 
     }

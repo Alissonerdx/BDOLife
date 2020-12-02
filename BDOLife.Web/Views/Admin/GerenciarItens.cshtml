@@ -1,0 +1,17 @@
+﻿<link href="~/lib/tabulator/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet" />
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <input id="filtroNome" type="text" class="form-control" placeholder="Filtro">
+                <div id="itensGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
+    <script src="~/js/Admin/GerenciarItem.js" asp-append-version="true"></script>
+}

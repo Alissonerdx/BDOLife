@@ -87,7 +87,7 @@ namespace BDOLife.Application.Services
             return total;
         }
 
-        public double DisponibilidadePrimaria(Item item, long quantidadeNecessaria)
+        public async Task<double> DisponibilidadePrimaria(Item item, long quantidadeNecessaria)
         {
             var disponibilidade = 100.0;
 
@@ -98,7 +98,7 @@ namespace BDOLife.Application.Services
         }
 
         //Item, Quantidade Disponivel, Disponivel (True, False), Quantidade
-        public Tuple<double, List<Tuple<Item, long, bool, long>>> DisponibilidadesSecundarias(Item item, long quantidadeNecessaria)
+        public async Task<Tuple<double, List<Tuple<Item, long, bool, long>>>> DisponibilidadesSecundarias(Item item, long quantidadeNecessaria)
         {
             var disponibilidade = 100.0;
             var itensQuantidades = new List<Tuple<Item, long, bool, long>>();
@@ -109,7 +109,7 @@ namespace BDOLife.Application.Services
                 var receita = item.ResultadosEm.FirstOrDefault();
 
                 if (receita.ProcRaro)
-                    return new Tuple<double, List<Tuple<Item, long, bool, long>>>(disponibilidade, new List<Tuple<Item, long, bool, long>>());
+                    return new Tuple<double, List<Tuple<Item, long, bool, long>>>(receita.Resultado.QuantidadeDisponivel > quantidadeNecessaria ? 100 : 0, new List<Tuple<Item, long, bool, long>>());
 
                 var porcentagemIndividualIngrediente = 100.0 / receita.Receita.Itens.Count();
 
@@ -164,7 +164,7 @@ namespace BDOLife.Application.Services
             return null;
         }
 
-        private async Task<List<ImperialResultadoViewModel>> ProcessarCaixasImperial(int contribuicao, IList<ImperialReceita> imperiaisReceitas, MaestriaCulinaria maestriaCulinaria, MaestriaAlquimia maestriaAlquimia)
+        private async Task<List<ImperialResultadoViewModel>> ProcessarCaixasImperial(int contribuicao, IList<ImperialReceita> imperiaisReceitas, MaestriaCulinaria maestriaCulinaria, MaestriaAlquimia maestriaAlquimia, TipoReceitaEnum? tipoReceita = null)
         {
 
             double regularProc = maestriaCulinaria != null ? maestriaCulinaria.RegularProc : maestriaAlquimia != null ? maestriaAlquimia.RegularProc : 0.0;
@@ -181,8 +181,8 @@ namespace BDOLife.Application.Services
                 var custoComprandoPrimaria = (long)(imperialReceita.Item.Valor * QuantidadePorCaixa(imperialReceita) * quantidadeCaixasPorDia);
                 var custoComprandoSecundarias = CalcularTotalSecundarias(imperialReceita.Item) * (long)Math.Ceiling((quantidadeCaixasPorDia * quantidadeCaixa) / regularProc);
                 var quantidadeTotalPrimaria = quantidadeCaixasPorDia * quantidadeCaixa;
-                var disponibilidadePrimaria = DisponibilidadePrimaria(imperialReceita.Item, quantidadeTotalPrimaria);
-                var disponibilidadesSecundarias = DisponibilidadesSecundarias(imperialReceita.Item, (long)Math.Ceiling((quantidadeCaixasPorDia * quantidadeCaixa) / regularProc));
+                var disponibilidadePrimaria = await DisponibilidadePrimaria(imperialReceita.Item, quantidadeTotalPrimaria);
+                var disponibilidadesSecundarias = await DisponibilidadesSecundarias(imperialReceita.Item, (long)Math.Ceiling((quantidadeCaixasPorDia * quantidadeCaixa) / regularProc));
                 var lucroBrutoPorDia = quantidadeCaixasPorDia * valorPorCaixa;
 
                 var itensQuantidadesNecessarias = ObjectMapper.Mapper.Map<List<Tuple<ItemViewModel, long, bool, long>>>(disponibilidadesSecundarias.Item2);
@@ -191,12 +191,13 @@ namespace BDOLife.Application.Services
                 lista.Add(new ImperialResultadoViewModel
                 {
                     Id = imperialReceita.Id,
+                    TipoReceita = tipoReceita != null ? $"{(int)tipoReceita.Value}" : "",
                     Img = !string.IsNullOrEmpty(imperialReceita.Item.ImagemUrl) ? $"/Content/Imperial?caixa={(maestriaAlquimia != null ? "CAI_" : maestriaCulinaria != null ? "CCI_" : "")}{(int)imperialReceita.Imperial.Habilidade}" : "",
                     Caixa = NomeCaixaImperial(imperialReceita),
                     Valor = valorPorCaixa,
                     QuantidadePorCaixa = quantidadeCaixa,
                     Item = imperialReceita.Item.Nome,
-                    ImgItem = $"<img src='{$"/Content/Image?referenciaId={imperialReceita.Item.ReferenciaId}"}' class='receita-item' data-empacotar='{quantidadeTotalPrimaria}' data-valor='{imperialReceita.Item.Valor}' data-disponivel='{imperialReceita.Item.QuantidadeDisponivel}' data-nome='{imperialReceita.Item.Nome}' data-atualizado='{imperialReceita.Item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")}' style='max-width: 44px; {(disponibilidadePrimaria == 0 ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)}'/>",
+                    ImgItem = $"<img src='{$"/Content/Image?referenciaId={imperialReceita.Item.ReferenciaId}"}' class='receita-item' data-empacotar='{quantidadeTotalPrimaria}' data-valor='{imperialReceita.Item.Valor}' data-disponivel='{imperialReceita.Item.QuantidadeDisponivel}' data-nome='{imperialReceita.Item.Nome}' data-atualizado='{imperialReceita.Item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")}' style='max-width: 32px; {(disponibilidadePrimaria == 0 ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)}'/>",
                     CustoComprandoPrimaria = custoComprandoPrimaria,
                     CustoComprandoSecundarias = custoComprandoSecundarias,
                     DisponibilidadePrimaria = disponibilidadePrimaria,
@@ -204,7 +205,7 @@ namespace BDOLife.Application.Services
                     ItensQuantidadesNecessarias = itensQuantidadesNecessarias,
                     LucroBrutoPorDia = lucroBrutoPorDia,
                     LucroLiquidoPrimaria = lucroBrutoPorDia - custoComprandoPrimaria,
-                    LucroLiquidoSecundaria = lucroBrutoPorDia - custoComprandoSecundarias,
+                    LucroLiquidoSecundaria = disponibilidadesSecundarias.Item2 == null || disponibilidadesSecundarias.Item2.Count == 0 ? 0 : lucroBrutoPorDia - custoComprandoSecundarias,
                     PossuiSubItens = disponibilidadesSecundarias.Item2.Count > 0,
                 });
             }
@@ -218,7 +219,7 @@ namespace BDOLife.Application.Services
 
             var imperiais = await _imperialRepository.ListarReceitasImperiaisAlquimia(nivel);
 
-            return await ProcessarCaixasImperial(contribuicao, imperiais, null, maestria);
+            return await ProcessarCaixasImperial(contribuicao, imperiais, null, maestria, TipoReceitaEnum.Alquimia);
         }
 
         public async Task<IList<ImperialResultadoViewModel>> ListarImperiaisCulinaria(NivelHabilidadeEnum? nivel, int maestriaId, int contribuicao)
@@ -227,7 +228,7 @@ namespace BDOLife.Application.Services
 
             var imperiais = await _imperialRepository.ListarReceitasImperiaisCulinaria(nivel);
 
-            return await ProcessarCaixasImperial(contribuicao, imperiais, maestria, null);
+            return await ProcessarCaixasImperial(contribuicao, imperiais, maestria, null, TipoReceitaEnum.Culinaria);
         }
 
         public async Task<IList<ImperialReceitaViewModel>> ListarImperiaisPorReceitaReferenciaId(string referenciaId)
