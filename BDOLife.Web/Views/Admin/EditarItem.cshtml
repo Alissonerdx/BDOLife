@@ -4,13 +4,15 @@
 <link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
 <link href="~/componentes/izitoast/css/iziToast.css" rel="stylesheet" />
 
+<form class="form" id="editarItemForm">
 
-<div class="card">
-    <div class="card-body">
-        <p class="font-label-poppins" style="color: white !important;">Dados</p>
-        <hr style="background-color: white;" />
-        <form class="form" id="editarItemForm">
-            <input type="hidden" id="referenciaId" value="@Model.ReferenciaId" />
+    <div class="card">
+        <div class="card-body">
+            <p class="font-label-poppins" style="color: white !important;">Dados - @Model.Nome</p>
+            <hr style="background-color: white;" />
+            <input type="hidden" id="referenciaId" name="ReferenciaIdOriginal" value="@Model.ReferenciaId" />
+            <input type="hidden" id="bdoId" value="@Model.BdoId" />
+            <input type="hidden" name="Id" value="@Model.Id" />
             <div class="row">
                 <div class="col-md-3">
                     <label for="Tipo">Tipo</label>
@@ -25,7 +27,7 @@
                 <div class="col-md-3">
                     <label for="TipoReceita">Tipo de Receita</label>
                     <select class="form-control" name="TipoReceita">
-                        <option>Selecione o tipo de receita</option>
+                        <option value="">Selecione o tipo de receita</option>
                         <!option value="@((int)TipoReceitaEnum.Alquimia)" @(Model.TipoReceita == TipoReceitaEnum.Alquimia ? "selected" : "")>
                             @TipoReceitaEnum.Alquimia.GetDescription()
                         </!option>
@@ -143,66 +145,102 @@
                     <label for="ValorNPC">Valor NPC</label>
                     <input type="text" class="form-control" name="ValorNPC" value="@Model.ValorNPC" />
                 </div>
-            </div>
-
-        </form>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <p class="font-label-poppins" style="color: white !important;">Ingredientes</p>
-        <div>
-            <button id="add-ingrediente" class="btn">Adicionar</button>
-            <button id="remover-ingrediente" class="btn">Remover</button>
-        </div>
-        <div id="ingredientesGrid"></div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <p class="font-label-poppins" style="color: white !important;">Resultados</p>
-        <div>
-            <button id="add-resultado" class="btn">Adicionar</button>
-            <button id="remover-resultado" class="btn">Remover</button>
-        </div>
-        <div id="resultadosGrid"></div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <div class="col-md-12" style="display: flex;justify-content: flex-end;">
-            <button id="salvar" class="btn">Salvar</button>
-        </div>
-    </div>
-</div>
-
-
-<div id="add-ingrediente-modal" style="display: none;">
-    <div class="col-md-12" style="padding: 20px;">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="AddIngrediente" class="font-sm-label-poppins">Ingrediente</label>
-                    <input type="text" class="form-control" name="AddIngrediente" value="" />
-                    <div id="sugestao-ingrediente"></div>
+                <div class="col-md-3">
+                    <label for="Grau">Excluido</label>
+                    <select class="form-control" name="Excluido">
+                        <!option value="false" @(Model.Excluido == false ? "selected" : "")>Não</!option>
+                        <!option value="true" @(Model.Excluido == true ? "selected" : "")>Sim</!option>
+                    </select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="QtdIngrediente" class="font-sm-label-poppins">Quantidade</label>
-                    <input type="text" class="form-control" name="QtdIngrediente" value="" />
-                </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <p class="font-label-poppins" style="color: white !important;">Ingredientes</p>
+            <div>
+                <button type="button" id="add-ingrediente" class="btn">Adicionar</button>
+                <button type="button" id="remover-ingrediente" class="btn">Remover</button>
             </div>
-            <div class="col-md-4">
-                <label for="btnAdicionarIngrediente">&nbsp;</label>
-                <button type="button" onclick="" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnAdicionarIngrediente">Adicionar</button>
+            <div id="ingredientesGrid"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <p class="font-label-poppins" style="color: white !important;">Resultados</p>
+            <div>
+                <button type="button" id="add-resultado" class="btn">Adicionar</button>
+                <button type="button" id="remover-resultado" class="btn">Remover</button>
+            </div>
+            <div id="resultadosGrid"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-12" style="display: flex;justify-content: flex-end;">
+                <button type="submit" id="salvar" class="btn">Salvar</button>
             </div>
         </div>
     </div>
-</div>
+
+
+    <div id="add-ingrediente-modal" style="display: none;">
+        <div class="col-md-12" style="padding: 20px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="AddIngrediente" class="font-sm-label-poppins">Ingrediente</label>
+                        <select class="form-control" name="AddIngrediente">
+                            <option value="">Selecione o ingrediente</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="QtdIngrediente" class="font-sm-label-poppins">Quantidade</label>
+                        <input type="text" class="form-control" name="QtdIngrediente" value="" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="btnAdicionarIngrediente">&nbsp;</label>
+                    <button type="button" data-izimodal-close="" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnAdicionarIngrediente">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-resultado-modal" style="display: none;">
+        <div class="col-md-12" style="padding: 20px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="AddResultado" class="font-sm-label-poppins">Resultado</label>
+                        <select class="form-control" name="AddResultado">
+                            <option value="">Selecione o resultado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="ProcRaroResultado" class="font-sm-label-poppins">Proc Raro</label>
+                        <select class="form-control" name="ProcRaroResultado">
+                            <option value="SIM">SIM</option>
+                            <option value="NÃO" selected>NÃO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="btnAdicionarResultado">&nbsp;</label>
+                    <button type="button" data-izimodal-close="" class="btn square font-label-poppins" style="width: 100% !important; border-radius: 20px;" id="btnAdicionarResultado">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 @section Scripts {
     <script src="~/lib/tabulator/js/tabulator.min.js"></script>

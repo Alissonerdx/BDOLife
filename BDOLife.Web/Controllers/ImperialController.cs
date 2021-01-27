@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BDOLife.Application.Interfaces;
 using BDOLife.Application.ViewModels;
@@ -45,16 +46,22 @@ namespace BDOLife.Web.Controllers
                 imperial.ItensQuantidadesNecessarias = null;
                 if (imperial.LucroLiquidoPrimaria > maiorLucroLiquidoItem && imperial.DisponibilidadePrimaria == 100)
                 {
-                    maisLucrativaItem = imperial;
+                    maisLucrativaItem = new ImperialResultadoViewModel(imperial);
                     maiorLucroLiquidoItem = imperial.LucroLiquidoPrimaria;
                 }
 
                 if (imperial.LucroLiquidoSecundaria > maiorLucroLiquidoSubitens && imperial.LucroLiquidoSecundaria != 0)
                 {
-                    maisLucrativaSubitens = imperial;
+                    maisLucrativaSubitens = new ImperialResultadoViewModel(imperial);
                     maiorLucroLiquidoSubitens = imperial.LucroLiquidoSecundaria;
                 }
             }
+
+            if (maisLucrativaItem != null)
+                maisLucrativaItem.Item = Regex.Replace(maisLucrativaItem.Item, @"\(\d+\)", "");
+
+            if (maisLucrativaSubitens != null)
+                maisLucrativaSubitens.Item = Regex.Replace(maisLucrativaSubitens.Item, @"\(\d+\)", "");
 
             return Json(new { data = imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria), maisLucrativaItem, maisLucrativaSubitens });
         }
@@ -78,16 +85,22 @@ namespace BDOLife.Web.Controllers
                 imperial.ItensQuantidadesNecessarias = null;
                 if (imperial.LucroLiquidoPrimaria > maiorLucroLiquidoItem && imperial.DisponibilidadePrimaria == 100)
                 {
-                    maisLucrativaItem = imperial;
+                    maisLucrativaItem = new ImperialResultadoViewModel(imperial);
                     maiorLucroLiquidoItem = imperial.LucroLiquidoPrimaria;
                 }
 
                 if (imperial.LucroLiquidoSecundaria > maiorLucroLiquidoSubitens && imperial.LucroLiquidoSecundaria != 0)
                 {
-                    maisLucrativaSubitens = imperial;
+                    maisLucrativaSubitens = new ImperialResultadoViewModel(imperial);
                     maiorLucroLiquidoSubitens = imperial.LucroLiquidoSecundaria;
                 }
             }
+
+            if (maisLucrativaItem != null)
+                maisLucrativaItem.Item = Regex.Replace(maisLucrativaItem.Item, @"\(\d+\)", "");
+
+            if (maisLucrativaSubitens != null)
+                maisLucrativaSubitens.Item = Regex.Replace(maisLucrativaSubitens.Item, @"\(\d+\)", "");
 
             return Json(new { data = imperiaisResultados.OrderByDescending(i => i.LucroLiquidoPrimaria), maisLucrativaItem, maisLucrativaSubitens });
         }

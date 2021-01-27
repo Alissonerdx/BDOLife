@@ -371,15 +371,106 @@ table.dataTable tbody tr {
     color: black !important;
 }
 
-.tabulator-row.tabulator-group span {
-    color: black !important;
-}
+    .tabulator-row.tabulator-group span {
+        color: black !important;
+    }
 
 .tabulator-row.tabulator-selected {
     background-color: #FFC67C !important;
 }
 
+.tabulator-row.tabulator-selectable:hover {
+    background-color: #FFC67C !important;
+}
+
 .tabulator-row .tabulator-cell {
     height: 44px !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .config-sidenav {
+        width: 65%;
+        right: -65%;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .config-sidenav {
+        width: 30%;
+        right: -30%;
+    }
+}
+
+.config-sidenav {
+    padding: 0;
+    background-color: #494C56;
+    z-index: 5000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    display: block;
+    border-left: 1px solid #F0A748;
+    transition: right .4s cubic-bezier(.05,.74,.2,.99);
+}
+
+    .config-sidenav.open {
+        right: 0;
+    }
+
+.config-sidenav-toggle {
+    position: absolute;
+    top: 40%;
+    width: 54px;
+    height: 50px;
+    left: -54px;
+    text-align: center;
+    line-height: 56px;
+    cursor: pointer;
+    background-color: #F0A748;
+    border-radius: 15px 0 0 15px;
+    font-size: 1.3rem;
+}
+
+.config-sidenav-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 7px;
+    width: auto;
+    z-index: 10;
+    font-size: 1.3rem;
+}
+
+    .config-sidenav-close > i {
+        color: #F0A748 !important;
+    }
+
+
+.config-sidenav-content {
+    position: relative;
+    height: 100%;
+    padding: 1.5rem;
+}
+
+.config-sidenav-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: right;
+}
+
+
+.select2-container--open {
+    z-index: 9999999
+}
+
+
+.sugestao > li:hover {
+    background-color: yellow;
 }
 

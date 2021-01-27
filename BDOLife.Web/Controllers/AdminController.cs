@@ -66,7 +66,7 @@ namespace BDOLife.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarItem(string referenciaId)
         {
-            var item = await _itemService.ObterPorReferenciaId(referenciaId);
+            var item = await _itemService.ObterPorReferenciaId(referenciaId, true);
             return View(item.Data);
         }
 

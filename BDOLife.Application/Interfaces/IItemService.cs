@@ -15,7 +15,7 @@ namespace BDOLife.Application.Interfaces
     {
         Task<ServiceResponse<IList<ItemViewModel>>> ListarPorTipoReceita(TipoReceitaEnum tipo);
         Task<ServiceResponse<IList<ItemViewModel>>> ListarPorGrupo(string grupo);
-        Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId);
+        Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId, bool excluidos = false);
         Task<Dictionary<ItemViewModel, long>> Ingredientes(string referenciaId, long quantidade, decimal procNormal);
         Task<IList<NodeViewModel>> TreeView(string referenciaId, long quantidade, decimal procNormal, decimal procRaro, bool semDetalhes = false, bool otimizar = false);
         Task<IList<NodeViewModel>> TreeViewSubReceita(string raiz, string referenciaId, int nivel, long quantidade, long quantidadePorReceita, decimal procNormal, decimal procRaro, bool usarProcRaro, bool semDetalhes = false, bool otimizar = false);
@@ -34,6 +34,7 @@ namespace BDOLife.Application.Interfaces
         Task<IList<ItemDTViewModel>> ListarDataTable();
         Task<IList<ReceitaItemViewModel>> ListarIngredientes(string referenciaId);
         Task<IList<ItemViewModel>> BuscarPorNome(string nome);
+        Task<bool> Atualizar(string referenciaId, ItemViewModel item, string path = "");
 
     }
 }

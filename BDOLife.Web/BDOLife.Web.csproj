@@ -46,6 +46,7 @@
     <Folder Include="wwwroot\imagens\imperial\" />
     <Folder Include="wwwroot\imagens\cavalos\" />
     <Folder Include="wwwroot\imagens\mapa\" />
+    <Folder Include="wwwroot\imagens\processo\" />
     <Folder Include="wwwroot\lib\leaflet\" />
   </ItemGroup>
 

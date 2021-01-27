@@ -3,7 +3,10 @@
 }
 
 <link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />
-<link href="~/lib/tabulator/css/bootstrap/tabulator_bootstrap4.css" rel="stylesheet" />
+@*<link href="~/lib/tabulator/css/tabulator_midnight.css" rel="stylesheet" />*@
+<link href="~/lib/tabulator/css/tabulator_simple.css" rel="stylesheet" />
+@*<link href="~/lib/tabulator/css/tabulator_modern.css" rel="stylesheet" />*@
+@*<link href="~/lib/tabulator/css/bootstrap/tabulator_bootstrap4.css" rel="stylesheet" />*@
 <link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
 <link href="~/componentes/izitoast/css/iziToast.css" rel="stylesheet" />
 @*<link href="~/lib/tabulator/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet" />*@
@@ -70,6 +73,12 @@
     </div>
 </div>
 
+@*<div class="row">
+    <div class="col-12">
+        <span>Mais Lucrativa Disponível (Item)</span>
+    </div>
+</div>*@
+
 <div class="row">
     <div class="col-xl-4 col-lg-6 col-12">
         <div class="card div-custom-color">
@@ -111,8 +120,8 @@
                 <div class="card-body" id="peso-disponivel-necessario-card">
                     <div class="media d-flex">
                         @*<div class="align-self-center">
-                            <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
-                        </div>*@
+                                <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
+                            </div>*@
                         <div class="media-body text-right">
                             <h3 class="font-sm-label-poppins" id="peso-disponivel-necessario"></h3>
                             <span>Peso Disponível Necessário</span>

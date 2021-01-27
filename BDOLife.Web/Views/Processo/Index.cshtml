@@ -1,51 +1,41 @@
 ﻿@{
     Layout = "_Layout";
-
-    var receitas = ViewBag.ReceitasProcesso as List<ItemViewModel>;
+    var maestrias = ViewBag.Maestrias as List<MaestriaProcessoViewModel>;
 }
 
 <link href="~/componentes/shepherd/shepherd.css" rel="stylesheet" />
 <link href="~/componentes/izimodal/css/iziModal.min.css" rel="stylesheet" />
+<link href="~/lib/tabulator/css/tabulator_simple.css" rel="stylesheet" />
+
 
 <div class="card div-custom-color">
     <div class="card-body">
         <form class="form" id="consultarForm">
             <div class="form-body">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="receitaSelect" class="font-label-poppins">Receita</label>
+                            <label for="tipoProcessoSelect" class="font-label-poppins">Tipo</label>
                             <select class="form-control" id="tipoProcessoSelect">
-                                <option>Processar</option>
-                                @if (receitas != null)
-                                {
-                                    foreach (var receita in receitas)
-                                    {
-                                <option value="@receita.ReferenciaId">
-                                    @receita.Nome
-                                </option>
-                                    }
-                                }
+                                <option>Selecione o tipo de processo</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoAquecimento)">Aquecimento</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoChacoalhar)">Chacoalhar</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoMoagem)">Moagem</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoCorte)">Corte</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoDesidratacao)">Desidratação</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoFabrica)">Fabrica</option>
+                                <option value="@((int)TipoReceitaEnum.ProcessoFiltragem)">Filtragem</option>
                             </select>
                         </div>
                     </div>
-                    @*<div class="col-md-2">
-                            <div class="form-group">
-                                <label for="receitaSelect" class="font-label-poppins">Receita</label>
-                                <select class="form-control" id="receitaSelect">
-                                    <option>Processar</option>
-                                    @if (receitas != null)
-                                    {
-                                        foreach (var receita in receitas)
-                                        {
-                                            <option value="@receita.ReferenciaId">
-                                                @receita.Nome
-                                            </option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                        </div>*@
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="receitaSelect" class="font-label-poppins">Receita</label>
+                            <select class="form-control" id="receitaSelect">
+                                <option value="">Selecione a receita</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="quantidade" class="font-label-poppins">Quantidade</label>
@@ -54,23 +44,73 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="maestria" class="font-label-poppins">Maestria</label>
-                            <select class="form-control" id="maestriaSelect">
+                            <label for="nivelProcesso" class="font-label-poppins">Nível (Processo)</label>
+                            <select class="form-control" id="nivelProcesso">
+                                <option>Selecione o nível</option>
+                                @for (int i = 1; i <= 10; i++)
+                                {
+                                    <option value="@i">Iniciante @i</option>
+                                }
+                                @for (int i = 11; i <= 20; i++)
+                                {
+                                    <option value="@i">Aprendiz @(i - 10)</option>
+                                }
+                                @for (int i = 21; i <= 30; i++)
+                                {
+                                    <option value="@i">Proficiente  @(i - 20)</option>
+                                }
+                                @for (int i = 31; i <= 40; i++)
+                                {
+                                    <option value="@i">Profissional @(i - 30)</option>
+                                }
+                                @for (int i = 41; i <= 50; i++)
+                                {
+                                    <option value="@i">Artesão @(i - 40)</option>
+                                }
+                                @for (int i = 51; i <= 80; i++)
+                                {
+                                    <option value="@i">Mestre @(i - 50)</option>
+                                }
+                                @for (int i = 81; i <= 100; i++)
+                                {
+                                    <option value="@i">Guru @(i - 80)</option>
+                                }
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="proc" class="font-label-poppins">Proc Normal</label>
-                            <input type="text" class="form-control mask-proc" id="proc-normal" min="0" value="2.5" style="border-radius: 0;" />
+                    @*<div class="col-md-2">
+                            <div class="form-group">
+                                <label for="maestria" class="font-label-poppins">Maestria (Processo)</label>
+                                <select class="form-control" id="maestriaProcessoSelect">
+                                    <option value="0">Selecione a maestria</option>
+                                    @if (maestrias != null)
+                                    {
+                                        foreach (var maestria in maestrias)
+                                        {
+                                            <option value="@maestria.Batch">@maestria.Mastery</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>*@
+                    @*<div class="col-md-2">
+                            <div class="form-group">
+                                <label for="loteProcesso" class="font-label-poppins">Lote (Processo)</label>
+                                <input type="text" class="form-control" readonly id="loteProcesso" min="0" value="0" style="border-radius: 0;" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="proc-especial" class="font-label-poppins">Proc Raro</label>
-                            <input type="text" class="form-control mask-proc" id="proc-raro" min="0" value="0.30" style="border-radius: 0;" />
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="proc" class="font-label-poppins">Proc Normal (Processo)</label>
+                                <input type="text" class="form-control mask-proc" id="proc-normal" min="0" value="2.5" style="border-radius: 0;" />
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="proc-especial" class="font-label-poppins">Proc Raro (Processo)</label>
+                                <input type="text" class="form-control mask-proc" id="proc-raro" min="0" value="0.05" style="border-radius: 0;" />
+                            </div>
+                        </div>*@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="calcular">&nbsp;</label>
@@ -88,9 +128,9 @@
             <div class="card-content">
                 <div class="card-body" id="lucroBruto-card">
                     <div class="media d-flex">
-                        <div class="align-self-center">
-                            <img src="~/imagens/icones/bruto-icon.svg" class="float-left" width="72" height="72" />
-                        </div>
+                        @*<div class="align-self-center">
+                                <img src="~/imagens/icones/bruto-icon.svg" class="float-left" width="72" height="72" />
+                            </div>*@
                         <div class="media-body text-right">
                             <h3 class="font-label-poppins" id="lucroBruto">0</h3>
                             <span>Lucro Bruto</span>
@@ -105,9 +145,9 @@
             <div class="card-content">
                 <div class="card-body" id="custoTotal-card">
                     <div class="media d-flex">
-                        <div class="align-self-center">
-                            <img src="~/imagens/icones/ingredientes-icon.svg" class="float-left" width="72" height="72" />
-                        </div>
+                        @*<div class="align-self-center">
+                                <img src="~/imagens/icones/ingredientes-icon.svg" class="float-left" width="72" height="72" />
+                            </div>*@
                         <div class="media-body text-right">
                             <h3 class="font-label-poppins" id="custoTotal">0</h3>
                             <span>Custo Total dos Ingredientes</span>
@@ -122,10 +162,9 @@
             <div class="card-content">
                 <div class="card-body" id="lucroComPctEconomico-card">
                     <div class="media d-flex">
-
-                        <div class="align-self-center">
-                            <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
-                        </div>
+                        @*<div class="align-self-center">
+                                <img src="~/imagens/icones/pacote-icon.svg" class="float-left" width="72" height="72" />
+                            </div>*@
                         <div class="media-body text-right">
                             <h3 class="font-label-poppins" id="lucroComPctEconomico">0</h3>
                             <span>Lucro Liq. C/Pct. Eco. (84.5%)</span>
@@ -140,9 +179,9 @@
             <div class="card-content">
                 <div class="card-body" id="lucroSemPctEconomico-card">
                     <div class="media d-flex">
-                        <div class="align-self-center">
-                            <img src="~/imagens/icones/sem-pacote-icon.svg" class="float-left" width="72" height="72" />
-                        </div>
+                        @*<div class="align-self-center">
+                                <img src="~/imagens/icones/sem-pacote-icon.svg" class="float-left" width="72" height="72" />
+                            </div>*@
                         <div class="media-body text-right">
                             <h3 class="font-label-poppins" id="lucroSemPctEconomico">0</h3>
                             <span>Lucro Liq. S/Pct. Eco. (65%)</span>
@@ -250,13 +289,122 @@
 
 <div id="detalhesItem"></div>
 
+<div class="config-sidenav">
+    <a class="config-sidenav-close">
+        <i class="ft-x"></i>
+    </a>
+    <a class="config-sidenav-toggle">
+        <i class="ft-settings spinner"></i>
+    </a>
+    <div class="config-sidenav-content">
+        <h3 class="font-label-poppins">CONFIGURAÇÕES</h3>
+        <hr />
+        <div class="form-group">
+            <label for="maestria-agitacao-select" class="font-sm-label-poppins">Maestria (Agitação)</label>
+            <select class="form-control maestria" id="maestria-agitacao-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-moagem-select" class="font-sm-label-poppins">Maestria (Moagem)</label>
+            <select class="form-control maestria" id="maestria-moagem-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-corte-select" class="font-sm-label-poppins">Maestria (Corte)</label>
+            <select class="form-control maestria" id="maestria-corte-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-desidratacao-select" class="font-sm-label-poppins">Maestria (Desidratação)</label>
+            <select class="form-control maestria" id="maestria-desidratacao-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-filtragem-select" class="font-sm-label-poppins">Maestria (Filtragem)</label>
+            <select class="form-control maestria" id="maestria-filtragem-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-aquecimento-select" class="font-sm-label-poppins">Maestria (Aquecimento)</label>
+            <select class="form-control maestria" id="maestria-aquecimento-select">
+                <option value="0">Selecione a maestria</option>
+                @if (maestrias != null)
+                {
+                    foreach (var maestria in maestrias)
+                    {
+                        <option value="@maestria.Batch">@maestria.Mastery</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="maestria-alquimia-select" class="font-sm-label-poppins">Maestria (Alquimia)</label>
+            <select class="form-control maestria" id="maestria-alquimia-select">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="proc-normal-alquimia" class="font-label-poppins">Proc Normal (Alquimia)</label>
+            <input type="text" class="form-control mask-proc" id="proc-normal-alquimia" min="0" value="2.5" style="border-radius: 0;" />
+        </div>
+        <div class="form-group">
+            <label for="proc-raro-alquimia" class="font-label-poppins">Proc Raro (Alquimia)</label>
+            <input type="text" class="form-control mask-proc" id="proc-raro-alquimia" min="0" value="0.3" style="border-radius: 0;" />
+        </div>
+        <div class="config-sidenav-footer">
+            <button type="button" class="btn button-custom-color square font-label-poppins" style="border-radius: 20px;" id="btnSalvarConfiguracao">Salvar</button>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script src="~/componentes/shepherd/shepherd.js"></script>
     <script src="~/componentes/izimodal/js/iziModal.min.js"></script>
-
+    <script src="~/lib/tabulator/js/tabulator.min.js"></script>
     <script src="~/js/Processo/Processo.js" asp-append-version="true"></script>
-    @*<script src="~/js/Culinaria/culinaria.min.js" asp-append-version="true"></script>*@
-    @*<script src="~/js/Culinaria/Culinaria.js" asp-append-version="true"></script>*@
-    @*<script src="~/js/Culinaria/CulinariaEnc.js" asp-append-version="true"></script>*@
-    @*<script src="~/js/Culinaria/CulinariaTour.js" asp-append-version="true"></script>*@
 }

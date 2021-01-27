@@ -53,9 +53,14 @@ namespace BDOLife.Application.Services
             return receita.Quantidade;
         }
 
+        private string NomeItemImperial(ImperialReceita receita)
+        {
+            return receita.Imperial != null ? receita.Item.Nome + $" ({receita.Quantidade})" : string.Empty;
+        }
         private string NomeCaixaImperial(ImperialReceita receita)
         {
-            return receita.Imperial != null ? receita.Imperial.Nome + $" ({receita.Quantidade})" : string.Empty;
+            var nomeCaixa = receita.Imperial.Nome.Replace("Caixa de Culinária do ", "").Replace("Caixa de Remédios do ", "");
+            return receita.Imperial != null ? nomeCaixa : string.Empty;
         }
 
         public long CalcularTotalSecundarias(Item item)
@@ -191,17 +196,17 @@ namespace BDOLife.Application.Services
                 lista.Add(new ImperialResultadoViewModel
                 {
                     Id = imperialReceita.Id,
+                    Item = NomeItemImperial(imperialReceita),
+                    DisponibilidadePrimaria = disponibilidadePrimaria,
+                    DisponibilidadesSecundarias = disponibilidadesSecundarias.Item1,
                     TipoReceita = tipoReceita != null ? $"{(int)tipoReceita.Value}" : "",
                     Img = !string.IsNullOrEmpty(imperialReceita.Item.ImagemUrl) ? $"/Content/Imperial?caixa={(maestriaAlquimia != null ? "CAI_" : maestriaCulinaria != null ? "CCI_" : "")}{(int)imperialReceita.Imperial.Habilidade}" : "",
                     Caixa = NomeCaixaImperial(imperialReceita),
                     Valor = valorPorCaixa,
                     QuantidadePorCaixa = quantidadeCaixa,
-                    Item = imperialReceita.Item.Nome,
                     ImgItem = $"<img src='{$"/Content/Image?referenciaId={imperialReceita.Item.ReferenciaId}"}' class='receita-item' data-empacotar='{quantidadeTotalPrimaria}' data-valor='{imperialReceita.Item.Valor}' data-disponivel='{imperialReceita.Item.QuantidadeDisponivel}' data-nome='{imperialReceita.Item.Nome}' data-atualizado='{imperialReceita.Item.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")}' style='max-width: 32px; {(disponibilidadePrimaria == 0 ? "filter: grayscale(100%); opacity: 40%;" : string.Empty)}'/>",
                     CustoComprandoPrimaria = custoComprandoPrimaria,
                     CustoComprandoSecundarias = custoComprandoSecundarias,
-                    DisponibilidadePrimaria = disponibilidadePrimaria,
-                    DisponibilidadesSecundarias = disponibilidadesSecundarias.Item1,
                     ItensQuantidadesNecessarias = itensQuantidadesNecessarias,
                     LucroBrutoPorDia = lucroBrutoPorDia,
                     LucroLiquidoPrimaria = lucroBrutoPorDia - custoComprandoPrimaria,

@@ -25,6 +25,8 @@ namespace BDOLife.Web.Controllers
                 "R_PCS_1700", //Refeição de Frutos do Mar de Cron
                 "R_PCS_1701", //Refeição Simples de Cron
                 "R_PCS_1702", //Refeição de Iguarias de Cron
+                "R_PCS_1888", //Ração Bem Nutriente de Brady
+                "R_PCS_1887" //Ração Balanceada
             });
 
             var data = receitas.Data.ToList();

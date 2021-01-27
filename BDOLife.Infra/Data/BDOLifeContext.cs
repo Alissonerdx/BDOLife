@@ -37,6 +37,7 @@ namespace BDOLife.Infra.Data
         public DbSet<Node> Nodes { get; set; }
         public DbSet<Spot> Spots { get; set; }
         public DbSet<SpotDrop> SpotsDrops { get; set; }
+        public DbSet<MaestriaProcesso> MaestriasProcesso { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -8,6 +8,34 @@ namespace BDOLife.Application.ViewModels
 {
     public class ImperialResultadoViewModel
     {
+        public ImperialResultadoViewModel()
+        {
+
+        }
+
+        public ImperialResultadoViewModel(ImperialResultadoViewModel imperial)
+        {
+            this.Id = imperial.Id;
+            this.Img = imperial.Img;
+            this.Caixa = imperial.Caixa;
+            this.TipoReceita = imperial.TipoReceita;
+            this.Valor = imperial.Valor;
+            this.QuantidadePorCaixa = imperial.QuantidadePorCaixa;
+            this.Item = imperial.Item;
+            this.ImgItem = imperial.ImgItem;
+            this.CustoComprandoPrimaria = imperial.CustoComprandoPrimaria;
+            this.CustoComprandoSecundarias = imperial.CustoComprandoSecundarias;
+            this.DisponibilidadePrimaria = imperial.DisponibilidadePrimaria;
+            this.DisponibilidadesSecundarias = imperial.DisponibilidadesSecundarias;
+            this.LucroBrutoPorDia = imperial.LucroBrutoPorDia;
+            this.LucroLiquidoPrimaria = imperial.LucroLiquidoPrimaria;
+            this.LucroLiquidoSecundaria = imperial.LucroLiquidoSecundaria;
+            this.PossuiSubItens = imperial.PossuiSubItens;
+            this.ItensQuantidadesNecessarias = imperial.ItensQuantidadesNecessarias;
+            this.SubItensInline = imperial.SubItensInline;
+    }
+
+
         public int Id { get; set; }
         public string Img { get; set; }
         public string Caixa { get; set; }

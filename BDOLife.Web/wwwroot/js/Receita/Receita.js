@@ -1057,9 +1057,9 @@ $(document).ready(function () {
                         return $(`<th class="custo-producao-tooltip">${this.title}</th>`);
                     },
                 },
-                {
-                    name: "usarProcRaro", title: "Usar Proc Raro (?)", type: "text", width: 155, align: "center", editing: false, inserting: false, 
-                },
+                //{
+                //    name: "usarProcRaro", title: "Usar Proc Raro (?)", type: "text", width: 155, align: "center", editing: false, inserting: false, 
+                //},
                 {
                     name: "produzirOuComprar", title: "Produzir/Comprar (?)", type: "select", width: 155, align: "center", editing: true, inserting: false, items: [
                         { text: "Comprar", value: "COMPRAR" },

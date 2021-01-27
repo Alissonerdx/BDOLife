@@ -461,6 +461,24 @@ namespace BDOLife.Web.Migrations
                     b.ToTable("MaestriasCulinaria");
                 });
 
+            modelBuilder.Entity("BDOLife.Core.Entities.MaestriaProcesso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Batch")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Mastery")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaestriasProcesso");
+                });
+
             modelBuilder.Entity("BDOLife.Core.Entities.NivelProfissao", b =>
                 {
                     b.Property<int>("Id")

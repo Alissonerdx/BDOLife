@@ -35,6 +35,7 @@ namespace BDOLife.Application.ViewModels
         public string referenciaId { get; set; }
         public bool possuiProcRaro { get; set; }
         public int nivelSubReceita { get; set; }
-
+        public decimal peso { get; set; }
+        public decimal pesoTotal { get; set; }
     }
 }

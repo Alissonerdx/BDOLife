@@ -283,22 +283,19 @@ $(document).ready(function () {
                 },
             },
             columns: [
+                //{
+                //    formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false, cellClick: function (e, cell) {
+                //        cell.getRow().toggleSelect();
+                //    }
+                //},
                 {
-                    formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false, cellClick: function (e, cell) {
-                        cell.getRow().toggleSelect();
-                    }
-                },
-                { title: "", field: "id", visible: false },
-                { title: "", field: "tipoReceita", visible: false },
-                {
-                    title: "", field: "img", formatter: "responsiveCollapse", hozAlign: "center", responsive: 3,
+                    title: "Caixa", field: "img", formatter: "responsiveCollapse", hozAlign: "left", responsive: 0, frozen: true, minWidth: 120,
                     formatter: function (cell, formatterParams) {
-                        return `<img src='${cell.getValue()}' style="max-width: 24px;"/>`;
+                        return `<td><img src='${cell.getValue()}' style="max-width: 24px;"/> ${cell.getRow().getData().caixa} </td>`;
                     }
                 },
-                { title: "Caixa", field: "caixa", responsive: 3 },
                 {
-                    title: "Disp. Item", field: "imgItem", hozAlign: "center", responsive: 0,
+                    title: "Disp. Item", field: "imgItem", hozAlign: "center", responsive: 0, frozen: true,
                     formatter: function (cell, formatterParams) {
                         if (cell.getValue() !== null && cell.getValue() !== undefined && cell.getValue() !== "") {
                             return `${cell.getValue()}`;
@@ -314,9 +311,14 @@ $(document).ready(function () {
                         return value2 - value1;
                     },
                 },
-                { title: "Item", field: "item" },
                 {
-                    title: "Disp. Subitens", field: "subItensInline", hozAlign: "center",
+                    title: "Item", field: "item", responsive: 0, frozen: true
+                },
+                { title: "", field: "id", visible: false },
+                { title: "", field: "tipoReceita", visible: false },
+                { title: "Caixa", field: "caixa", responsive: 0, visible: false },
+                {
+                    title: "Disp. Subitens", field: "subItensInline", hozAlign: "center", responsive: 0,
                     formatter: function (cell, formatterParams) {
                         if (cell.getValue() !== null && cell.getValue() !== undefined && cell.getValue() !== "") {
                             return `<td>${cell.getValue()}</td>`;
@@ -364,13 +366,13 @@ $(document).ready(function () {
                     },
                 },
                 {
-                    title: "Valor (+Bonus Maestria)", field: "valor", responsive: 2,
+                    title: "Valor (+Bonus Maestria)", field: "valor", responsive: 0,
                     formatter: function (cell, formatterParams) {
                         return Inputmask.format(`${cell.getValue()}`, { alias: "prata" });
                     }
                 },
                 {
-                    title: "Lucro Bruto/Dia", field: "lucroBrutoPorDia", formatter: function (cell, formatterParams) {
+                    title: "Lucro Bruto/Dia", field: "lucroBrutoPorDia", responsive: 0, formatter: function (cell, formatterParams) {
                         return Inputmask.format(`${cell.getValue()}`, { alias: "prata" });
                     }
                 },
@@ -400,6 +402,9 @@ $(document).ready(function () {
                 {
                     title: "Lucro Liq. (Subitens)", field: "lucroLiquidoSecundaria", responsive: 0,
                     formatter: function (cell, formatterParams) {
+                        if (cell.getValue() === 0)
+                            return "";
+
                         if (cell.getValue() < 0)
                             return `-${Inputmask.format(`${cell.getValue()}`, { alias: "prata" })}`;
 

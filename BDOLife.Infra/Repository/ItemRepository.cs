@@ -26,9 +26,9 @@ namespace BDOLife.Infra.Repository
             return await _dbContext.Itens.Where(i => i.TipoReceita == tipo && i.Excluido == false).OrderBy(i => i.Nome).ToListAsync();
         }
 
-        public async Task<Item> ObterPorReferenciaId(string referenciaId)
+        public async Task<Item> ObterPorReferenciaId(string referenciaId, bool excluidos = false)
         {
-            return await _dbContext.Itens
+            var query = _dbContext.Itens
                 .Include(i => i.Itens)
                 .ThenInclude(i => i.Item.Itens)
                 .ThenInclude(i => i.Item.Itens)
@@ -38,8 +38,12 @@ namespace BDOLife.Infra.Repository
                 .ThenInclude(i => i.Item)
                 .Include(i => i.Resultados)
                 .ThenInclude(i => i.Resultado.ImperiaisReceitas)
-                .ThenInclude(i => i.Imperial)
-                .SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId) && !i.Excluido);
+                .ThenInclude(i => i.Imperial).AsQueryable();
+
+            if (!excluidos)
+                query = query.Where(i => !i.Excluido);
+
+            return await query.SingleOrDefaultAsync(i => i.ReferenciaId.Equals(referenciaId));
         }
 
         public async Task<Item> ObterComReceitasPorReferenciaId(string referenciaId)
@@ -100,6 +104,13 @@ namespace BDOLife.Infra.Repository
         public async Task<IList<Item>> BuscarPorNome(string nome)
         {
             return await _dbContext.Itens.Where(i => i.Nome.Contains(nome)).ToListAsync();
+        }
+
+        public async Task<bool> ExcluirHistoricoPorReferenciaId(string referenciaId)
+        {
+            var historicos = _dbContext.HistoricosPrecos.Where(h => h.ItemReferenciaId == referenciaId).ToList();
+            _dbContext.HistoricosPrecos.RemoveRange(historicos);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

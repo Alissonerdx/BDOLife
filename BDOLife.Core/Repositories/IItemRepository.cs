@@ -11,7 +11,7 @@ namespace BDOLife.Core.Repositories
     public interface IItemRepository : IRepository<Item>
     {
         Task<IList<Item>> ListarPorTipoReceita(TipoReceitaEnum tipo);
-        Task<Item> ObterPorReferenciaId(string referenciaId);
+        Task<Item> ObterPorReferenciaId(string referenciaId, bool excluidos = false);
         Task<IList<Item>> ListarPorGrupo(string grupo);
         Task<IList<Item>> ObterPorReferenciasIds(List<string> referenciasIds);
         Task<IList<ReceitaItem>> ListarReceitaItens(string receitaReferenciaId);
@@ -21,6 +21,7 @@ namespace BDOLife.Core.Repositories
         Task<IList<Item>> ListarReceitasPorTiposComResultado(List<TipoReceitaEnum> tipos);
         Task<IList<Item>> Listar();
         Task<IList<Item>> BuscarPorNome(string nome);
+        Task<bool> ExcluirHistoricoPorReferenciaId(string referenciaId);
 
     }
 }

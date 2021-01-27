@@ -10,6 +10,7 @@ using BDOLife.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,10 +20,14 @@ namespace BDOLife.Application.Services
     {
         private readonly IItemRepository _itemRepository;
         private readonly IMaestriaRepository _maestriaRepository;
-        private readonly IMaestriaCulinariaRepository _maestriaCulinariaRepository;
+        private readonly IReceitaItemRepository _receitaItemRepository;
         private readonly IMaestriaAlquimiaRepository _maestriaAlquimiaRepository;
+        private readonly IReceitaResultadoRepository _receitaResultadoRepository;
+        private readonly IMaestriaCulinariaRepository _maestriaCulinariaRepository;
 
         public ItemService(IItemRepository itemRepository,
+            IReceitaItemRepository receitaItemRepository,
+            IReceitaResultadoRepository receitaResultadoRepository,
             IMaestriaRepository maestriaRepository,
             IMaestriaCulinariaRepository maestriaCulinariaRepository,
             IMaestriaAlquimiaRepository maestriaAlquimiaRepository)
@@ -31,6 +36,8 @@ namespace BDOLife.Application.Services
             _maestriaRepository = maestriaRepository;
             _maestriaAlquimiaRepository = maestriaAlquimiaRepository;
             _maestriaCulinariaRepository = maestriaCulinariaRepository;
+            _receitaItemRepository = receitaItemRepository;
+            _receitaResultadoRepository = receitaResultadoRepository;
         }
 
 
@@ -281,9 +288,9 @@ namespace BDOLife.Application.Services
             return new Tuple<GraficoViewModel, GraficoViewModel>(resultadoNormal, resultadoRaro);
         }
 
-        public async Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId)
+        public async Task<ServiceResponse<ItemViewModel>> ObterPorReferenciaId(string referenciaId, bool excluidos = false)
         {
-            var data = await _itemRepository.ObterPorReferenciaId(referenciaId);
+            var data = await _itemRepository.ObterPorReferenciaId(referenciaId, excluidos);
             return new ServiceResponse<ItemViewModel>
             {
                 Data = ObjectMapper.Mapper.Map<ItemViewModel>(data)
@@ -679,7 +686,7 @@ namespace BDOLife.Application.Services
                         {
                             id = $"{subReceita.ItemReferenciaId}",
                             parent = "raiz",
-                            text = $"{subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)subReceitaProc})" : "")}",
+                            text = $"{subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)subReceitaProc})" : "")} {(!string.IsNullOrEmpty(subReceita.Item.Grupo) ? "(S)" : string.Empty)}",
                             icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"/Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
                             state = new { opened = otimizar ? custoProducaoSubReceitaProcNormal < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
@@ -724,7 +731,7 @@ namespace BDOLife.Application.Services
                                     {
                                         id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                         parent = $"{subReceita.ItemReferenciaId}",
-                                        text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
+                                        text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")} {(!string.IsNullOrEmpty(sub1.Item.Grupo) ? "(S)" : string.Empty)}",
                                         icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
                                         state = new { opened = otimizar ? custoProducaoProcNormalSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
@@ -769,7 +776,7 @@ namespace BDOLife.Application.Services
                                                 {
                                                     id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                     parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
-                                                    text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
+                                                    text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")} {(!string.IsNullOrEmpty(sub2.Item.Grupo) ? "(S)" : string.Empty)}",
                                                     icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
                                                     state = new { opened = otimizar ? custoProducaoProcNormalSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
@@ -813,7 +820,7 @@ namespace BDOLife.Application.Services
                                                             {
                                                                 id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                 parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
-                                                                text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
+                                                                text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")} {(!string.IsNullOrEmpty(sub3.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                 icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
                                                                 state = new { opened = otimizar ? custoProducaoProcNormalSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
@@ -857,7 +864,7 @@ namespace BDOLife.Application.Services
                                                                         {
                                                                             id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                             parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
-                                                                            text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
+                                                                            text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")} {(!string.IsNullOrEmpty(sub4.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                             icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
                                                                             state = new { opened = otimizar ? custoProducaoProcNormalSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
@@ -902,7 +909,7 @@ namespace BDOLife.Application.Services
                                                                                     {
                                                                                         id = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}",
                                                                                         parent = $"{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
-                                                                                        text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
+                                                                                        text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")} {(!string.IsNullOrEmpty(sub5.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                                         icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
                                                                                         state = new { opened = otimizar ? custoProducaoProcNormalSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
@@ -976,7 +983,7 @@ namespace BDOLife.Application.Services
                 {
                     id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}",
                     parent = raiz,
-                    text = $"{quantidadePorReceita} {receita.Nome} {(!semDetalhes ? $"({quantidade})" : "")} {(usarProcRaro ? "*" : "")}",
+                    text = $"{quantidadePorReceita} {receita.Nome} {(!semDetalhes ? $"({quantidade})" : "")} {(!string.IsNullOrEmpty(receita.Grupo) ? "(S)" : string.Empty)} {(usarProcRaro ? "(PR)" : "")}",
                     icon = !string.IsNullOrEmpty(receita.ImagemUrl) ? $"/Content/Image?referenciaId={receita.ReferenciaId}" : "",
                     state = new { opened = otimizar ? custoProducaoReceita < receita.Valor : true },
                     nomeItem = receita.Nome,
@@ -1020,7 +1027,7 @@ namespace BDOLife.Application.Services
                         {
                             id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}",
                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}",
-                            text = $" {subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)receitaProc})" : "")}",
+                            text = $" {subReceita.Quantidade} {subReceita.Item.Nome} {(!semDetalhes ? $"({(long)receitaProc})" : "")} {(!string.IsNullOrEmpty(subReceita.Item.Grupo) ? "(S)" : string.Empty)}",
                             icon = !string.IsNullOrEmpty(subReceita.Item.ImagemUrl) ? $"/Content/Image?referenciaId={subReceita.Item.ReferenciaId}" : "",
                             state = new { opened = otimizar ? custoProducaoSubReceita < subReceita.Item.Valor : maximizado },
                             nomeItem = subReceita.Item.Nome,
@@ -1065,7 +1072,7 @@ namespace BDOLife.Application.Services
                                     {
                                         id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}",
-                                        text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")}",
+                                        text = $" {sub1.Quantidade} {sub1.Item.Nome} {(!semDetalhes ? $"({(long)sub1Proc})" : "")} {(!string.IsNullOrEmpty(sub1.Item.Grupo) ? "(S)" : string.Empty)}",
                                         icon = !string.IsNullOrEmpty(sub1.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub1.Item.ReferenciaId}" : "",
                                         state = new { opened = otimizar ? custoProducaoSub1 < sub1.Item.Valor : maximizado },
                                         nomeItem = sub1.Item.Nome,
@@ -1110,7 +1117,7 @@ namespace BDOLife.Application.Services
                                                 {
                                                     id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
                                                     parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}",
-                                                    text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")}",
+                                                    text = $" {sub2.Quantidade} {sub2.Item.Nome} {(!semDetalhes ? $"({(long)sub2Proc})" : "")} {(!string.IsNullOrEmpty(sub2.Item.Grupo) ? "(S)" : string.Empty)}",
                                                     icon = !string.IsNullOrEmpty(sub2.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub2.Item.ReferenciaId}" : "",
                                                     state = new { opened = otimizar ? custoProducaoSub2 < sub2.Item.Valor : maximizado },
                                                     nomeItem = sub2.Item.Nome,
@@ -1155,7 +1162,7 @@ namespace BDOLife.Application.Services
                                                             {
                                                                 id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
                                                                 parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}",
-                                                                text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")}",
+                                                                text = $" {sub3.Quantidade} {sub3.Item.Nome} {(!semDetalhes ? $"({(long)sub3Proc})" : "")} {(!string.IsNullOrEmpty(sub3.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                 icon = !string.IsNullOrEmpty(sub3.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub3.Item.ReferenciaId}" : "",
                                                                 state = new { opened = otimizar ? custoProducaoSub3 < sub3.Item.Valor : maximizado },
                                                                 nomeItem = sub3.Item.Nome,
@@ -1200,7 +1207,7 @@ namespace BDOLife.Application.Services
                                                                         {
                                                                             id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
                                                                             parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}",
-                                                                            text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")}",
+                                                                            text = $" {sub4.Quantidade} {sub4.Item.Nome} {(!semDetalhes ? $"({(long)sub4Proc})" : "")} {(!string.IsNullOrEmpty(sub4.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                             icon = !string.IsNullOrEmpty(sub4.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub4.Item.ReferenciaId}" : "",
                                                                             state = new { opened = otimizar ? custoProducaoSub4 < sub4.Item.Valor : maximizado },
                                                                             nomeItem = sub4.Item.Nome,
@@ -1245,7 +1252,7 @@ namespace BDOLife.Application.Services
                                                                                     {
                                                                                         id = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}-{sub5.ItemReferenciaId}",
                                                                                         parent = $"{(raiz != "raiz" ? $"{raiz}-" : "")}{receita.ReferenciaId}-{subReceita.ItemReferenciaId}-{sub1.ItemReferenciaId}-{sub2.ItemReferenciaId}-{sub3.ItemReferenciaId}-{sub4.ItemReferenciaId}",
-                                                                                        text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")}",
+                                                                                        text = $" {sub5.Quantidade} {sub5.Item.Nome} {(!semDetalhes ? $"({(long)sub5Proc})" : "")} {(!string.IsNullOrEmpty(sub5.Item.Grupo) ? "(S)" : string.Empty)}",
                                                                                         icon = !string.IsNullOrEmpty(sub5.Item.ImagemUrl) ? $"/Content/Image?referenciaId={sub5.Item.ReferenciaId}" : "",
                                                                                         state = new { opened = otimizar ? custoProducaoSub5 < sub5.Item.Valor : maximizado },
                                                                                         nomeItem = sub5.Item.Nome,
@@ -1656,7 +1663,7 @@ namespace BDOLife.Application.Services
             var lista = await Listar();
             return lista.Select(i => new ItemDTViewModel
             {
-                Img = !string.IsNullOrEmpty(i.ImagemUrl) ? $"//Content/Image?referenciaId={i.ReferenciaId}" : "",
+                Img = !string.IsNullOrEmpty(i.ImagemUrl) ? $"/Content/Image?referenciaId={i.ReferenciaId}" : "",
                 ReferenciaId = i.ReferenciaId,
                 Nome = i.Nome,
                 Valor = i.Valor,
@@ -1687,6 +1694,209 @@ namespace BDOLife.Application.Services
         {
             var resultados = await _itemRepository.BuscarPorNome(nome);
             return ObjectMapper.Mapper.Map<IList<ItemViewModel>>(resultados);
+        }
+
+        private string GerarReferenciaId(Item item)
+        {
+            var referencia = "";
+            switch (item.Tipo)
+            {
+                case TipoEnum.Item:
+                    referencia += "I_";
+                    break;
+                case TipoEnum.Material:
+                    referencia += "M_";
+                    break;
+                case TipoEnum.Receita:
+                    referencia += "R_";
+                    break;
+            }
+
+            switch (item.TipoReceita)
+            {
+                case TipoReceitaEnum.Alquimia:
+                    referencia += "A_";
+                    break;
+                case TipoReceitaEnum.Culinaria:
+                    referencia += "C_";
+                    break;
+                case TipoReceitaEnum.ProcessoAlquimiaSimples:
+                    referencia += "PAS_";
+                    break;
+                case TipoReceitaEnum.ProcessoAlquimiaImperial:
+                    referencia += "PAI_";
+                    break;
+                case TipoReceitaEnum.ProcessoAquecimento:
+                    referencia += "PAQ_";
+                    break;
+                case TipoReceitaEnum.ProcessoChacoalhar:
+                    referencia += "PCH_";
+                    break;
+                case TipoReceitaEnum.ProcessoCorte:
+                    referencia += "PCO_";
+                    break;
+                case TipoReceitaEnum.ProcessoCozinhaSimples:
+                    referencia += "PCS_";
+                    break;
+                case TipoReceitaEnum.ProcessoCulinariaImperial:
+                    referencia += "PCI_";
+                    break;
+                case TipoReceitaEnum.ProcessoDesidratacao:
+                    referencia += "PDE_";
+                    break;
+                case TipoReceitaEnum.ProcessoFabrica:
+                    referencia += "PFA_";
+                    break;
+                case TipoReceitaEnum.ProcessoFabricaGuilda:
+                    referencia += "PFG_";
+                    break;
+                case TipoReceitaEnum.ProcessoFiltragem:
+                    referencia += "PFI_";
+                    break;
+                case TipoReceitaEnum.ProcessoMoagem:
+                    referencia += "PMO_";
+                    break;
+            }
+
+            return referencia += item.BdoId;
+
+        }
+
+        public async Task<bool> Atualizar(string referenciaId, ItemViewModel item, string path = "")
+        {
+            try
+            {
+
+                var itemBD = await _itemRepository.ObterPorReferenciaId(referenciaId, true);
+
+                if (itemBD.ReferenciaId != item.ReferenciaId && (itemBD.ResultadosEm == null || itemBD.ResultadosEm.Count == 0))
+                {
+                    await _itemRepository.ExcluirHistoricoPorReferenciaId(referenciaId);
+                    itemBD.ReferenciaId = item.ReferenciaId;
+                }
+
+                itemBD.Valor = item.Valor;
+                itemBD.Peso = item.Peso;
+                itemBD.Nome = item.Nome;
+                itemBD.ProcNormalExcessao = item.ProcNormalExcessao;
+                itemBD.ProcRaroExcessao = item.ProcRaroExcessao;
+                itemBD.QuantidadeDisponivel = item.QuantidadeDisponivel;
+                itemBD.Tipo = item.Tipo;
+                itemBD.TipoReceita = item.TipoReceita;
+                itemBD.ValorNPC = item.ValorNPC;
+                itemBD.LocalizacaoNPC = item.LocalizacaoNPC;
+                itemBD.Grupo = item.Grupo;
+                itemBD.Grau = item.Grau;
+                itemBD.Experiencia = item.Experiencia;
+                itemBD.Categoria = item.Categoria;
+                itemBD.Adquirido = item.Adquirido;
+                itemBD.Excluido = item.Excluido;
+                itemBD.Experiencia = item.Experiencia;
+
+                if (itemBD.ImagemUrl != item.ImagemUrl && path != "")
+                {
+                    itemBD.ImagemUrl = item.ImagemUrl;
+                    if (!string.IsNullOrEmpty(itemBD.ImagemUrl))
+                    {
+                        using (WebClient webClient = new WebClient())
+                        {
+                            var localFile = $@"{path}\imagens\itens\{GerarReferenciaId(itemBD)}.png";
+                            if (!System.IO.File.Exists(localFile))
+                            {
+                                webClient.DownloadFile(item.ImagemUrl, localFile);
+                            }
+                            else
+                            {
+                                System.IO.File.Delete(localFile);
+                                webClient.DownloadFile(item.ImagemUrl, localFile);
+                            }
+                        }
+                    }
+                }
+
+
+                if (item.Itens != null && item.Itens.Count > 0)
+                {
+                    foreach (var it in item.Itens)
+                    {
+                        if (itemBD.Itens.Exists(i => i.ItemReferenciaId == it.ItemReferenciaId))
+                        {
+                            var itemExistente = itemBD.Itens.SingleOrDefault(i => i.ItemReferenciaId == it.ItemReferenciaId);
+                            if (itemExistente.Quantidade != it.Quantidade)
+                                itemExistente.Quantidade = it.Quantidade;
+                        }
+                        else
+                        {
+                            itemBD.Itens.Add(new ReceitaItem
+                            {
+                                ItemReferenciaId = it.ItemReferenciaId,
+                                Quantidade = it.Quantidade,
+                                Agrupamento = null,
+                                Excluido = false,
+                                ReceitaReferenciaId = itemBD.ReferenciaId,
+                                Visivel = true
+                            });
+                        }
+                    }
+
+
+
+                }
+
+                var removerItem = new List<ReceitaItem>();
+                if (item.Resultados == null)
+                    removerItem = itemBD.Itens.ToList();
+                else
+                    removerItem = itemBD.Itens.Where(i => !item.Itens.Exists(x => x.ItemReferenciaId == i.ItemReferenciaId)).ToList();
+
+                for (var i = 0; i < removerItem.Count; i++)
+                {
+                    await _receitaItemRepository.DeleteAsync(removerItem[i]);
+                }
+
+                if (item.Resultados != null && item.Resultados.Count > 0)
+                {
+                    foreach (var it in item.Resultados)
+                    {
+                        if (itemBD.Resultados.Exists(i => i.ResultadoReferenciaId == it.ResultadoReferenciaId))
+                        {
+                            var itemExistente = itemBD.Resultados.SingleOrDefault(i => i.ResultadoReferenciaId == it.ResultadoReferenciaId);
+                            if (itemExistente.ProcRaro != it.ProcRaro)
+                                itemExistente.ProcRaro = it.ProcRaro;
+                        }
+                        else
+                        {
+                            itemBD.Resultados.Add(new ReceitaResultado
+                            {
+                                ResultadoReferenciaId = it.ResultadoReferenciaId,
+                                ProcRaro = it.ProcRaro,
+                                Excluido = false,
+                                ReceitaReferenciaId = itemBD.ReferenciaId,
+                                Tier = null
+                            });
+                        }
+                    }
+                }
+
+                var removerResultado = new List<ReceitaResultado>();
+                if (item.Resultados == null)
+                    removerResultado = itemBD.Resultados.ToList();
+                else
+                    removerResultado = itemBD.Resultados.Where(i => !item.Resultados.Exists(x => x.ResultadoReferenciaId == i.ResultadoReferenciaId)).ToList();
+
+                for (var i = 0; i < removerResultado.Count; i++)
+                {
+                    await _receitaResultadoRepository.DeleteAsync(removerResultado[i]);
+                }
+
+                await _itemRepository.UpdateAsync(itemBD);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

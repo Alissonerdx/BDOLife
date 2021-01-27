@@ -43,7 +43,7 @@ namespace BDOLife.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            //services.AddCors();
 
             ConfigureBDOLifeServices(services);
 
@@ -79,7 +79,7 @@ namespace BDOLife.Web
                 await next();
             });
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            //app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseResponseCompression();
 
@@ -150,7 +150,8 @@ namespace BDOLife.Web
             services.AddScoped<IUtilService, UtilService>();
             services.AddScoped<IRankingService, RankingService>();
             services.AddScoped<ISpotService, SpotService>();
-
+            services.AddScoped<IProcessoService, ProcessoService>();
+            services.AddScoped<ICalculadoraService, CalculadoraService>();
 
 
             // Add Repository Layer
@@ -161,10 +162,12 @@ namespace BDOLife.Web
             services.AddScoped<ITipoProcessoExperienciaRepository, TipoProcessoExperienciaRepository>();
             services.AddScoped<IMaestriaCulinariaRepository, MaestriaCulinariaRepository>();
             services.AddScoped<IMaestriaAlquimiaRepository, MaestriaAlquimiaRepository>();
+            services.AddScoped<IMaestriaProcessoRepository, MaestriaProcessoRepository>();
             services.AddScoped<ICultivoRepository, CultivoRepository>();
             services.AddScoped<INodeRepository, NodeRepository>();
             services.AddScoped<ISpotRepository, SpotRepository>();
-
+            services.AddScoped<IReceitaItemRepository, ReceitaItemRepository>();
+            services.AddScoped<IReceitaResultadoRepository, ReceitaResultadoRepository>();
         }
 
         public void ConfigureDatabases(IServiceCollection services)

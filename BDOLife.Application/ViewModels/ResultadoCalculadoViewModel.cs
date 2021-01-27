@@ -9,6 +9,8 @@ namespace BDOLife.Application.ViewModels
         public string Id { get; set; }
         public string Item { get; set; }
         public long Preco { get; set; }
+        public decimal Peso { get; set; }
+        public decimal PesoTotal { get; set; }
         public long Quantidade { get; set; }
         public long Total { get; set; }
         public string Img { get; set; }
