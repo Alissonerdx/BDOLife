@@ -429,21 +429,7 @@ $(document).ready(function () {
             responsiveLayout: "collapse",
             //selectable: true,
             //groupBy: "tipo",
-            langs: {
-                "pt-br": {
-                    "pagination": {
-                        "first": "Primeira",
-                        "first_title": "Primeira Página",
-                        "last": "Última",
-                        "last_title": "Última Página",
-                        "prev": "Anterior",
-                        "prev_title": "Página Anterior",
-                        "next": "Próximo",
-                        "next_title": "Próxima Página",
-                        "all": "Todas",
-                    },
-                },
-            },
+            langs: TabulatorLanguage,
             columns: [
                 {
                     formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false, cellClick: function (e, cell) {
@@ -479,21 +465,7 @@ $(document).ready(function () {
             responsiveLayout: "collapse",
             //selectable: true,
             //groupBy: "tipo",
-            langs: {
-                "pt-br": {
-                    "pagination": {
-                        "first": "Primeira",
-                        "first_title": "Primeira Página",
-                        "last": "Última",
-                        "last_title": "Última Página",
-                        "prev": "Anterior",
-                        "prev_title": "Página Anterior",
-                        "next": "Próximo",
-                        "next_title": "Próxima Página",
-                        "all": "Todas",
-                    },
-                },
-            },
+            langs: TabulatorLanguage,
             columns: [
                 {
                     formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false, cellClick: function (e, cell) {

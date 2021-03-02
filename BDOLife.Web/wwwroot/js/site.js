@@ -15,6 +15,26 @@ const GRAU = {
 };
 
 
+const TabulatorLanguage = {
+    "pt-br": {
+        "pagination": {
+            "first": "Primeira",
+            "first_title": "Primeira Página",
+            "last": "Última",
+            "last_title": "Última Página",
+            "prev": "Anterior",
+            "prev_title": "Página Anterior",
+            "next": "Próximo",
+            "next_title": "Próxima Página",
+            "all": "Todas",
+        },
+        "ajax": {
+            "loading": "Carregando", //ajax loader text
+            "error": "Erro", //ajax error text
+        },
+    },
+};
+
 
 function formatState(state) {
     var $state;
@@ -127,6 +147,20 @@ $(document).ready(function () {
             placeholder: "0",
             min: -10000,
             max: 10000,
+            numericInput: true
+        },
+        'mask-porcentagem': {
+            alias: "percentage",
+            digits: "2",
+            rightAlign: false,
+            suffix: "%",
+            integerDigits: 3,
+            digitsOptional: true,
+            allowPlus: true,
+            allowMinus: true,
+            placeholder: "0",
+            min: 0,
+            max: 100,
             numericInput: true
         }
 
@@ -757,6 +791,36 @@ $('.mask-proc').inputmask({
         }
     },
     rightAlign: true
+});
+
+$('.mask-porcentagem').inputmask({
+    alias: "percentage",
+    digits: "2",
+    rightAlign: false,
+    suffix: "%",
+    integerDigits: 3,
+    digitsOptional: true,
+    allowPlus: true,
+    allowMinus: true,
+    placeholder: "0",
+    min: 0,
+    max: 100,
+    numericInput: true
+});
+
+$('.mask-porcentagem-1000').inputmask({
+    alias: "percentage",
+    digits: "2",
+    rightAlign: false,
+    suffix: "%",
+    integerDigits: 4,
+    digitsOptional: true,
+    allowPlus: true,
+    allowMinus: true,
+    placeholder: "0",
+    min: 0,
+    max: 1000,
+    numericInput: true
 });
 
 function resize() {

@@ -421,25 +421,7 @@ $(document).ready(function () {
             resizableRows: true,
             //responsiveLayout: "collapse",
             //rowContextMenu: rowMenu,
-            langs: {
-                "pt-br": {
-                    "pagination": {
-                        "first": "Primeira",
-                        "first_title": "Primeira Página",
-                        "last": "Última",
-                        "last_title": "Última Página",
-                        "prev": "Anterior",
-                        "prev_title": "Página Anterior",
-                        "next": "Próximo",
-                        "next_title": "Próxima Página",
-                        "all": "Todas",
-                    },
-                    "ajax": {
-                        "loading": "Carregando", //ajax loader text
-                        "error": "Erro", //ajax error text
-                    },
-                },
-            },
+            langs: TabulatorLanguage,
             columns: [
                 //{
                 //    formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false, cellClick: function (e, cell) {

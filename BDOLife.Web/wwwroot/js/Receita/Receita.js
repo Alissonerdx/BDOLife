@@ -4,6 +4,7 @@ var pagina = window.location.pathname;
 var placeholderMaestria = "";
 var tipoReceita = 0;
 var receitaSelecionada = "";
+var xpConfigGrid;
 
 $(document).ready(function () {
     Inicializar();
@@ -425,6 +426,17 @@ $(document).ready(function () {
             escapeMarkup: function (m) { return m; },
         });
 
+        $('.nivel').select2({
+            placeholder: 'Selecione o nível',
+            language: "pt-BR",
+            width: '100%',
+            //templateResult: function (d) { return $(d.text); },
+            //templateSelection: function (d) { return $(d.text); },
+            allowClear: true,
+            cacheDataSource: [],
+            escapeMarkup: function (m) { return m; },
+        });
+
 
         $.get(`/Maestria/SelectMaestrias?tipo=${tipoReceita}`, function (data) {
             $('#maestriaSelect').append('<option>Selecione a maestria</option>');
@@ -657,12 +669,12 @@ $(document).ready(function () {
 
                 console.log(childrens)
 
-                if (typeof (childrens) === typeof([])) {
+                if (typeof (childrens) === typeof ([])) {
                     childrens.each(function (index, value) {
                         stack.push($("#treeViewContent").jstree("get_node", value));
                     })
                 }
-               
+
 
                 while (stack.length > 0) {
                     let nodeChild = stack.pop();
@@ -1491,6 +1503,150 @@ $(document).ready(function () {
                 }
             }
         });
+
+        let xpData = [
+            { img: "/imagens/icones/00014007.png", nome: "Traje Bordado de Prata de Cozinheiro", tier: "1", bonus: "10", tipoTier: "traje", ativo: false },
+            { img: "/imagens/icones/00022425.png", nome: "Conjunto Canape", tier: "", bonus: "15", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00009458.png", nome: "Salada de Carne de Baleia Fresca", tier: "", bonus: "15", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00009691.png", nome: "Refeição de Frutos do Mar de Cron", tier: "", bonus: "10", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00009207.png", nome: "Chá Sute", tier: "", bonus: "8", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00000735.png", nome: "Perfume de Rapidez", tier: "", bonus: "20", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00000791.png", nome: "Elixir da Folha Verde", tier: "", bonus: "20", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00000750.png", nome: "Elixir do Tempo", tier: "Tempo", bonus: "10", tipoTier: "elixir", ativo: false },
+            { img: "/imagens/icones/00015993.png", nome: "Desculpa do GM", tier: "1", bonus: "10", tipoTier: "gm", ativo: false },
+            { img: "/imagens/icones/00601201.png", nome: "Livro Secreto Lua Minguante", tier: "", bonus: "50", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00018925.png", nome: "Livro de Vida/Perg. Exp. de Vida", tier: "", bonus: "50", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/product_expup.png", nome: "Buff da Vila", tier: "", bonus: "10", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00017583.png", nome: "Pacote Econômico", tier: "", bonus: "10", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/inhouse_dpfo_birthdaycake_01.png", nome: "Bolo de Aniversário", tier: "", bonus: "100", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00750048.png", nome: "[Evento] Trevo de Seis Folhas", tier: "", bonus: "8", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00750490.png", nome: "[Evento] Chá Preto Quente de Lara", tier: "", bonus: "30", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00750397.png", nome: "[Evento] Suco de Coco Especial", tier: "", bonus: "10", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00750470.png", nome: "[Evento] Perg. de Aum. de Maestria de Vida", tier: "", bonus: "20", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00016295.png", nome: "[Evento] Grelhado de Peru Abundante", tier: "", bonus: "10", typeTier: "", ativo: false },
+            { img: "/imagens/icones/00065087.png", nome: "Buff da Guilda", tier: "", bonus: "20", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/.png", nome: "Buffs Adicionais", tier: "", bonus: "", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00705003.png", nome: "Acessórios de Maestria", tier: "", bonus: "15", tipoTier: "", ativo: false },
+            { img: "/imagens/icones/00018422.png", nome: "Pets", tier: "", bonus: "10", tipoTier: "", ativo: false },
+        ];
+
+        xpConfigGrid = new Tabulator("#xpConfigGrid", {
+            data: xpData,
+            layout: "fitDataStretch",
+            responsiveLayout: "collapse",
+            langs: TabulatorLanguage,
+            //cellHozAlign: "center",
+            headerHozAlign: "center",
+            width: "300px",
+            columns: [
+                {
+                    title: "", field: "img", hozAlign: "center", formatter: "responsiveCollapse",
+                    headerSort: false,
+                    maxWidth: 60,
+                    formatter: function (cell, formatterParams) {
+                        return `<img src='${cell.getValue()}' style="max-width: 24px;"/>`;
+                    }
+                },
+                {
+                    title: "Nome", field: "nome", width: 310,
+                },
+                {
+                    title: "Tier", field: "tier", hozAlign: "center", editor: "select", formatterParams: {
+                        defaultValue: "Selecione",
+                    },
+                    editorParams: (cell) => {
+                        switch (cell.getData().tipoTier) {
+                            case 'traje':
+                                return { values: ["1", "2", "3", "4", "5"] };
+                            case 'elixir':
+                                return { values: ["Tempo Fluente", "Tempo"] };
+                            case 'gm':
+                                return { values: ["1", "2", "3"] };
+                        }
+
+                        return { values: [] };
+                    },
+                    cellEdited: (cell) => {
+                        let row = cell.getRow();
+                        let tipoTier = row.getData().tipoTier;
+                        let tier = row.getData().tier;
+                        let xp = 0;
+
+                        switch (tipoTier) {
+                            case "traje":
+                                switch (tier) {
+                                    case "1":
+                                        xp = 10;
+                                        break;
+                                    case "2":
+                                        xp = 15;
+                                        break;
+                                    case "3":
+                                        xp = 20;
+                                        break;
+                                    case "4":
+                                        xp = 25;
+                                        break;
+                                    case "5":
+                                        xp = 40;
+                                        break;
+                                }
+                                break;
+                            case "elixir":
+                                switch (tier) {
+                                    case "Tempo Fluente":
+                                        xp = 15;
+                                        break;
+                                    case "Tempo":
+                                        xp = 10;
+                                        break;
+                                }
+                                break;
+                            case "gm":
+                                switch (tier) {
+                                    case "1":
+                                        xp = 10;
+                                        break;
+                                    case "2":
+                                        xp = 10;
+                                        break;
+                                    case "3":
+                                        xp = 15;
+                                        break;
+                                }
+                                break;
+                        }
+
+                        row.getCell('bonus').setValue(xp);
+                    }
+                },
+                {
+                    title: "Bonus %", field: "bonus", editor: "number", editorParams: { min: 0, max: 999 }, hozAlign: "center",
+                    cellEdited: (cell) => {
+                        let rows = cell.getTable().getRows();
+                        CalculaXPTotal(rows);
+                    }
+                },
+                {
+                    title: "Ativo", field: "ativo", formatter: "tickCross", editor: true, hozAlign: "center", width: 85,
+                    cellEdited: (cell) => {
+                        let rows = cell.getTable().getRows();
+                        CalculaXPTotal(rows);
+                    }
+                }
+            ]
+
+        });
+    }
+
+    function CalculaXPTotal(rows) {
+        let total = 0.0;
+        rows.forEach((row, index) => {
+            if (!isNaN(parseFloat(row.getData().bonus)) && row.getData().ativo) {
+                total += parseFloat(row.getData().bonus);
+            }
+        })
+        $('#porc-buffs').val(total * 100.0);
     }
 
     function Checkbox() {
@@ -1890,7 +2046,7 @@ function OtimizarTreeView() {
 
 
 
-                  
+
 
                     //$("#treeViewContent").jstree("open_node", child)
                 }

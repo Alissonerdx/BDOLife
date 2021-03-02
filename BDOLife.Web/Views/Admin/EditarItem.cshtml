@@ -29,46 +29,46 @@
                     <select class="form-control" name="TipoReceita">
                         <option value="">Selecione o tipo de receita</option>
                         <!option value="@((int)TipoReceitaEnum.Alquimia)" @(Model.TipoReceita == TipoReceitaEnum.Alquimia ? "selected" : "")>
-                            @TipoReceitaEnum.Alquimia.GetDescription()
+                        @TipoReceitaEnum.Alquimia.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.Culinaria)" @(Model.TipoReceita == TipoReceitaEnum.Culinaria ? "selected" : "")>
-                            @TipoReceitaEnum.Culinaria.GetDescription()
+                        @TipoReceitaEnum.Culinaria.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoAlquimiaImperial)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAlquimiaImperial ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoAlquimiaImperial.GetDescription()
+                        @TipoReceitaEnum.ProcessoAlquimiaImperial.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoAlquimiaSimples)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAlquimiaSimples ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoAlquimiaSimples.GetDescription()
+                        @TipoReceitaEnum.ProcessoAlquimiaSimples.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoAquecimento)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoAquecimento ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoAquecimento.GetDescription()
+                        @TipoReceitaEnum.ProcessoAquecimento.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoChacoalhar)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoChacoalhar ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoChacoalhar.GetDescription()
+                        @TipoReceitaEnum.ProcessoChacoalhar.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoCorte)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCorte ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoCorte.GetDescription()
+                        @TipoReceitaEnum.ProcessoCorte.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoCozinhaSimples)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCozinhaSimples ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoCozinhaSimples.GetDescription()
+                        @TipoReceitaEnum.ProcessoCozinhaSimples.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoCulinariaImperial)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoCulinariaImperial ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoCulinariaImperial.GetDescription()
+                        @TipoReceitaEnum.ProcessoCulinariaImperial.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoDesidratacao)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoDesidratacao ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoDesidratacao.GetDescription()
+                        @TipoReceitaEnum.ProcessoDesidratacao.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoFabrica)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFabrica ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoFabrica.GetDescription()
+                        @TipoReceitaEnum.ProcessoFabrica.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoFabricaGuilda)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFabricaGuilda ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoFabricaGuilda.GetDescription()
+                        @TipoReceitaEnum.ProcessoFabricaGuilda.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoFiltragem)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoFiltragem ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoFiltragem.GetDescription()
+                        @TipoReceitaEnum.ProcessoFiltragem.GetDescription()
                         </!option>
                         <!option value="@((int)TipoReceitaEnum.ProcessoMoagem)" @(Model.TipoReceita == TipoReceitaEnum.ProcessoMoagem ? "selected" : "")>
-                            @TipoReceitaEnum.ProcessoMoagem.GetDescription()
+                        @TipoReceitaEnum.ProcessoMoagem.GetDescription()
                         </!option>
                     </select>
                 </div>
@@ -153,7 +153,12 @@
                     </select>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="Experiencia">Experiencia</label>
+                    <input type="text" name="Experiencia" class="form-control" value="@Model.Experiencia" />
+                </div>
+            </div>
         </div>
     </div>
 

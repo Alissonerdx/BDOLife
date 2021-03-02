@@ -148,9 +148,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active show" id="tab-ingredientes" data-toggle="tab" aria-controls="ingredientes" href="#ingredientes" aria-expanded="true">Ingredientes</a>
                             </li>
-                            @*<li class="nav-item">
-                                    <a class="nav-link" id="tab-detalhes" data-toggle="tab" aria-controls="detalhes" href="#detalhes" aria-expanded="false">Detalhes</a>
-                                </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-xp" data-toggle="tab" aria-controls="xp" href="#xp" aria-expanded="false">XP</a>
+                            </li>
                         </ul>
                         <div class="tab-content px-1 pt-1 border-grey border-lighten-2 border-0-top background-e2e2e1">
                             <div role="tabpanel" class="tab-pane active show" id="ingredientes" aria-expanded="true" aria-labelledby="tab-ingredientes">
@@ -163,16 +163,156 @@
                                 </div>
                                 <br />
                             </div>
-                            @*<div class="tab-pane" id="detalhes" aria-labelledby="detalhes">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="detalhesReceitaGrid"></div>
+                            <div class="tab-pane" id="xp" aria-labelledby="xp">
+                                <div class="form-body" style="padding: 10px;">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="tempo-cozimento" class="font-sm-label-poppins black">Tempo/Receita</label>
+                                                <input type="text" class="form-control mask-proc" id="tempo-cozimento" min="0" value="1" style="border-radius: 0;" />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="nivel-atual" class="font-sm-label-poppins black">Nivel Atual</label>
+                                                <select class="form-control nivel" id="nivel-atual">
+                                                    <option>Selecione o nível</option>
+                                                    @for (int i = 1; i <= 10; i++)
+                                                    {
+                                                        <option value="@i">Iniciante @i</option>
+                                                    }
+                                                    @for (int i = 11; i <= 20; i++)
+                                                    {
+                                                        <option value="@i">Aprendiz @(i - 10)</option>
+                                                    }
+                                                    @for (int i = 21; i <= 30; i++)
+                                                    {
+                                                        <option value="@i">Proficiente  @(i - 20)</option>
+                                                    }
+                                                    @for (int i = 31; i <= 40; i++)
+                                                    {
+                                                        <option value="@i">Profissional @(i - 30)</option>
+                                                    }
+                                                    @for (int i = 41; i <= 50; i++)
+                                                    {
+                                                        <option value="@i">Artesão @(i - 40)</option>
+                                                    }
+                                                    @for (int i = 51; i <= 80; i++)
+                                                    {
+                                                        <option value="@i">Mestre @(i - 50)</option>
+                                                    }
+                                                    @for (int i = 81; i <= 130; i++)
+                                                    {
+                                                        <option value="@i">Guru @(i - 80)</option>
+                                                    }
+                                                </select>
+                                                @*<input type="text" class="form-control mask-proc" id="nivel-atual" min="0" value="1" style="border-radius: 0;" />*@
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="porc-atual" class="font-sm-label-poppins black">% Nivel Atual</label>
+                                                <input type="text" class="form-control mask-porcentagem" id="porc-atual" min="0" value="1.00" style="border-radius: 0;" />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="nivel-meta" class="font-sm-label-poppins black">Nivel Meta</label>
+                                                <select class="form-control nivel" id="nivel-meta">
+                                                    <option>Selecione o nível</option>
+                                                    @for (int i = 1; i <= 10; i++)
+                                                    {
+                                                        <option value="@i">Iniciante @i</option>
+                                                    }
+                                                    @for (int i = 11; i <= 20; i++)
+                                                    {
+                                                        <option value="@i">Aprendiz @(i - 10)</option>
+                                                    }
+                                                    @for (int i = 21; i <= 30; i++)
+                                                    {
+                                                        <option value="@i">Proficiente  @(i - 20)</option>
+                                                    }
+                                                    @for (int i = 31; i <= 40; i++)
+                                                    {
+                                                        <option value="@i">Profissional @(i - 30)</option>
+                                                    }
+                                                    @for (int i = 41; i <= 50; i++)
+                                                    {
+                                                        <option value="@i">Artesão @(i - 40)</option>
+                                                    }
+                                                    @for (int i = 51; i <= 80; i++)
+                                                    {
+                                                        <option value="@i">Mestre @(i - 50)</option>
+                                                    }
+                                                    @for (int i = 81; i <= 130; i++)
+                                                    {
+                                                        <option value="@i">Guru @(i - 80)</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="porc-meta" class="font-sm-label-poppins black">% Nivel Meta</label>
+                                                <input type="text" class="form-control mask-porcentagem" id="porc-meta" min="0" value="1.00" style="border-radius: 0;" />
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="porc-buffs" class="font-sm-label-poppins black">% de buffs</label>
+                                                <input type="text" class="form-control mask-porcentagem-1000" id="porc-buffs" min="0" value="0" style="border-radius: 0;" readonly />
                                             </div>
                                         </div>
                                     </div>
-                                    <br />
-                                </div>*@
+                                    @*<div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>Total de XP necessário:</tr>
+                                                    <tr>Média XP por receita:</tr>
+                                                    <tr>Média XP por utensílio:</tr>
+                                                    <tr>Receitas necessárias para atingir a meta:</tr>
+                                                    <tr>Utensílios necessários para atingir a meta:</tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div id="xpConfigGrid" class="compact"></div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Total de XP necessário</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Média XP por receita</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Média XP por utensílio</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Total receitas até a meta</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Total utensílios até a meta</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <h5 class="list-group-item-heading">0</h5>
+                                                <p class="list-group-item-text">Total horas até a meta</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <br />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -363,7 +503,7 @@
                     <br />
                     <span>Clique direito no ingrediente para acessar as ações.</span>
                 </div>
-             
+
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- BdoLife - 336x280 -->
                 <ins class="adsbygoogle"
